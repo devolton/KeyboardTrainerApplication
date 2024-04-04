@@ -25,31 +25,57 @@
         <materialDesign:DialogHost>
             <StackPanel Orientation="Vertical">
                 <StackPanel
-                Orientation="Horizontal"
+                    Orientation="Horizontal"
                     Margin="10,30,10,30">
                     <Image Width="200" 
-                           Height="70" Source="{StaticResource DevoltonLabsLogo}"
+                           Margin="20 0 0 10"
+                           Height="70"
+                           Source="{StaticResource DevoltonLabsLogo}"
                            />
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Margin="180 10 200 10">
                     <Button
-                         Width="100"
-                        Margin="10"/>
-                    <Button Width="100"
-                            Margin="10"
-                            Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
-                    <Button Width="100"
-                            Margin="10"/>
-
+                        x:Name="TypingTutorMainButton"
+                        Content="Typing tutor"
+                        Style="{StaticResource CustomMainControlButton}"/>
+                    <Button
+                            Content="Typing test"
+                            x:Name="TypingTestMainButton"
+                            Style="{StaticResource CustomMainControlButton}"/>
+                    <Button Content="Learn"
+                            x:Name="LearnMainButton"
+                            Style="{StaticResource CustomMainControlButton}"/>
+                    </StackPanel>
                     <materialDesign:PopupBox
-                    
-                    HorizontalAlignment="Right"
-                    Margin="0 20 20 0"
-                    StaysOpen="True"
-                    Height="25">
+                        x:Name="MainPopupBox"
+                        HorizontalAlignment="Right"
+                        Margin="0 20 20 10"
+                        StaysOpen="True"
+                        Height="50"
+                     >
                         <StackPanel
                        Orientation="Vertical">
-                            <Button x:Name="ExitButton"
-                         Content="Exit">
-                            </Button>
+                            <Button
+                                x:Name="CertificatesButton"
+                                Content="My certificates"
+                                />
+                            <Button
+                                x:Name="CertificationResultButton"
+                                Content="My certirfication results"
+                                    />
+                            <Button 
+                                x:Name="EducationalResultsButton"
+                                Content="My educational results"
+                                />
+                            <Button
+                                x:Name="EditProfileButton"
+                                Content="Edit profile"
+                                />
+                            <Button 
+                                x:Name="ExitButton"
+                             Content="Exit"/>
+                    
                         </StackPanel>
                     </materialDesign:PopupBox>
                 </StackPanel>
