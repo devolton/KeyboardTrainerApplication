@@ -7,6 +7,26 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AppPages\Pages\LearnPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AppPages\Pages\TypingTestPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AppPages\Pages\TypingTutorPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AppPages\Pages\LearnPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="AppPages\Pages\TypingTestPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="AppPages\Pages\TypingTutorPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

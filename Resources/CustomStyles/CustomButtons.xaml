@@ -4,7 +4,7 @@
 >
     <Style x:Key="CustomMainControlButton" TargetType="Button">
         <Style.Setters>
-            <Setter Property="Background" Value="{DynamicResource temp}"/>
+            <Setter Property="Background" Value="{DynamicResource CustomMetal}"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Width" Value="150"/>
@@ -20,11 +20,11 @@
                         <Border
                         CornerRadius="5"
                         BorderThickness="2"
-                        Background="{DynamicResource temp}">
+                        Background="{DynamicResource CustomMetal}">
                             <Border.Effect>
                                 <DropShadowEffect
                                 Direction="300"
-                                Color="Green"
+                                Color="#6c757d"
                                 ShadowDepth="5"
                                 Opacity="0.8"
                                 BlurRadius="15"/>
@@ -45,8 +45,25 @@
                 <BeginStoryboard>
                     <Storyboard Storyboard.TargetProperty="Margin">
                         <ThicknessAnimation From="10 10 10 10"
-                                         Duration="00:00:00.3"
-                                         To="10 10 10 20"/>
+                                            Duration="00:00:00.1"
+                                            To="10 10 10 20"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <!--<BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="Width">
+                        <DoubleAnimation    From="150"
+                                            To="160"
+                                            Duration="00:00:00.75"
+                                            AutoReverse="True"/>
+                    </Storyboard>
+                </BeginStoryboard>-->
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="Height">
+                        <DoubleAnimation From="50"
+                                         To="55"
+                                         Duration="00:00:00.75"
+                                         AutoReverse="True"/>
+
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
@@ -59,6 +76,17 @@
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
+
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CusomPopupBoxButton" TargetType="Button">
+        <Style.Setters>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="{StaticResource CustomCoal}"/>
+        </Style.Setters>
+        <Style.Triggers>
+            
         </Style.Triggers>
     </Style>
 

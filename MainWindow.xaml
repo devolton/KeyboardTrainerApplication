@@ -25,6 +25,7 @@
         <materialDesign:DialogHost>
             <StackPanel Orientation="Vertical">
                 <StackPanel
+                    Height="100"
                     Orientation="Horizontal"
                     Margin="10,30,10,30">
                     <Image Width="200" 
@@ -33,26 +34,32 @@
                            Source="{StaticResource DevoltonLabsLogo}"
                            />
                     <StackPanel
+                        Height="100"
                         Orientation="Horizontal"
-                        Margin="180 10 200 10">
+                        Margin="180 0 200 0">
                     <Button
                         x:Name="TypingTutorMainButton"
                         Content="Typing tutor"
+                        Click="TypingTutorMainButton_Click"
                         Style="{StaticResource CustomMainControlButton}"/>
                     <Button
                             Content="Typing test"
                             x:Name="TypingTestMainButton"
+                            Click="TypingTestMainButton_Click"
                             Style="{StaticResource CustomMainControlButton}"/>
                     <Button Content="Learn"
+                            Click="LearnMainButton_Click"
                             x:Name="LearnMainButton"
                             Style="{StaticResource CustomMainControlButton}"/>
                     </StackPanel>
                     <materialDesign:PopupBox
+                      
                         x:Name="MainPopupBox"
                         HorizontalAlignment="Right"
-                        Margin="0 20 20 10"
+                        Margin="80 20 20 10"
                         StaysOpen="True"
                         Height="50"
+                        
                      >
                         <StackPanel
                        Orientation="Vertical">
@@ -74,13 +81,17 @@
                                 />
                             <Button 
                                 x:Name="ExitButton"
-                             Content="Exit"/>
+                                Content="Exit"
+                                Click="ExitButton_Click"/>
                     
                         </StackPanel>
                     </materialDesign:PopupBox>
+                  
                 </StackPanel>
                 <Frame x:Name="MainFrame"
-                       Height="520"/>
+                       Margin="20"
+                       Height="520"
+                       NavigationUIVisibility="Hidden"/>
             </StackPanel>
         </materialDesign:DialogHost>
     </materialDesign:Card>
