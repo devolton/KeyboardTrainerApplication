@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomBrushes.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomButtons.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomTextBlocks.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BitmapImage x:Key="ApplicationLogo" UriSource="pack://application:,,,/Resources/Images/coding.png"/>
             <BitmapImage x:Key="DevoltonLabsLogo" UriSource="pack://application:,,,/Resources/Images/DevoltonLabsLogo.png"/>

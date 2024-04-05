@@ -6,34 +6,66 @@
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.AppPages.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="LearnPage">
+      Title="LearnPage"
+      Loaded="Page_Loaded">
     <ScrollViewer>
-        <StackPanel>
-
-            <TextBlock Text="Hello i'm Learn page!"
-                   FontSize="42"/>
-            <TextBlock Text="Secon textBlock"
-                   FontSize="42"/>
-            <TextBlock Text="Hello i'm Learn page!"
-         FontSize="42"/>
-            <TextBlock Text="Secon textBlock"
-         FontSize="42"/>
-            <TextBlock Text="Hello i'm Learn page!"
-         FontSize="42"/>
-            <TextBlock Text="Secon textBlock"
-         FontSize="42"/>
-            <TextBlock Text="Hello i'm Learn page!"
-         FontSize="42"/>
-            <TextBlock Text="Secon textBlock"
-         FontSize="42"/>
-            <TextBlock Text="Hello i'm Learn page!"
-         FontSize="42"/>
-            <TextBlock Text="Secon textBlock"
-         FontSize="42"/>
-            <TextBlock Text="Hello i'm Learn page!"
-         FontSize="42"/>
-            <TextBlock Text="Secon textBlock"
-         FontSize="42"/>
+        <StackPanel
+            Orientation="Vertical"
+            Margin="10">
+            <Image
+                x:Name="MainPageImage"
+                Width="80"
+                Height="80"/>
+            <TextBlock x:Name="MainPageTitle"
+                       Text="{Binding MainTitle}"
+                      Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
+            <TextBlock
+                x:Name="MainPageDesc"
+                Text="{Binding MainDescription}"
+                Style="{StaticResource CustomLearnDescriptionTextBlock}"
+                />
+            <Image x:Name="SittingImage"
+                   Width="80"
+                   Height="80"/>
+            <TextBlock 
+                       x:Name="SittingTitle"
+                       Style="{StaticResource CustomLearnTitleTextBlock}"
+                       Text="{Binding TypingPoseTitle}"
+                    />
+            <StackPanel
+                x:Name="SittinStackPanel"
+                Width="500"
+                Height="300"
+                Orientation="Vertical">
+                <TextBlock
+                    FontSize="20"
+                    Text="{Binding TypingPoseRulesList[0]}"/>
+                <TextBlock
+                    Text="{Binding TypingPoseRulesList[1]}"/>
+                <TextBlock
+                    Text="{Binding TypingPoseRulesList[2]}"/>
+                <TextBlock
+                    Text="{Binding TypingPoseRulesList[3]}"/>
+                <TextBlock
+                    Text="{Binding TypingPoseRulesList[4]}"/>
+            </StackPanel>
+            <TextBlock x:Name="StartPosTitle"
+                       Text="{Binding StartPositionTitle}"
+                       Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
+            <StackPanel Width="600"
+                        Height="80"
+                        Orientation="Horizontal">
+                <Image x:Name="StartPosLeftImage"
+                       Width="250"
+                       Margin="20 5 40 5"/>
+                <Image x:Name="StartPosRightImage"
+                       Width="250"
+                       HorizontalAlignment="Right"
+                       Margin="5 5 5 5"/>
+            </StackPanel>
+            <TextBlock x:Name="StartPosDesc"
+                       Text="{Binding StartPositionDescription}"
+                       Style="{StaticResource CustomLearnDescriptionTextBlock}"/>
         </StackPanel>
     </ScrollViewer>
 

@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="CustomLearnTitleTextBlock" TargetType="TextBlock">
+        <Style.Setters>
+            <Setter Property="FontSize" Value="46"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource CustomDeepBlue}"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="Width" Value="600"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="10 10 10 50"/>
+
+        </Style.Setters>
+        <Style.Triggers>
+
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomLearnMainTitleTextBlock" TargetType="TextBlock">
+        <Style.Setters>
+            <Setter Property="FontSize" Value="60"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="700"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Foreground" Value="{StaticResource CustomDeepBlueViolet}"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="10 10 10 50"/>
+
+        </Style.Setters>
+        <Style.Triggers>
+            
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomLearnDescriptionTextBlock" TargetType="TextBlock">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="{StaticResource CustomDeepBlue}"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="580"/>
+            <Setter Property="Height" Value="260"/>
+
+        </Style.Setters>
+        <Style.Triggers>
+            
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

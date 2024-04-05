@@ -20,9 +20,18 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
     /// </summary>
     public partial class LearnPage : Page
     {
+        private LearnPageEnInfoModel _enLocalisation;
         public LearnPage()
         {
             InitializeComponent();
+            _enLocalisation = new LearnPageEnInfoModel();
+            DataContext = _enLocalisation;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+         
+
         }
     }
 }

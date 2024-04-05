@@ -2,4 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="CustomMetal" Color="#6c757d"/>
     <SolidColorBrush x:Key="CustomCoal" Color="#212529"/>
+    <SolidColorBrush x:Key="CustomDeepBlue" Color="#003249"/>
+    <SolidColorBrush x:Key="CustomDeepBlueViolet" Color="#03045e"/>
 </ResourceDictionary>
