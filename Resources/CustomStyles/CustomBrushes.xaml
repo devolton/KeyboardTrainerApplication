@@ -4,4 +4,5 @@
     <SolidColorBrush x:Key="CustomCoal" Color="#212529"/>
     <SolidColorBrush x:Key="CustomDeepBlue" Color="#003249"/>
     <SolidColorBrush x:Key="CustomDeepBlueViolet" Color="#03045e"/>
+    <SolidColorBrush x:Key="CustomLightGray" Color="#e9ecef"/>
 </ResourceDictionary>

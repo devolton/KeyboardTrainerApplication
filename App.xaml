@@ -14,8 +14,13 @@
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomButtons.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomTextBlocks.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <BitmapImage x:Key="KeyboardSchemeEngImage" UriSource="pack://application:,,,/Resources/Images/KeyboardSchemeEng.png"/>
+            <BitmapImage x:Key="StartLeftEngPosition" UriSource="pack://application:,,,/Resources/Images/StartLeftEng.png"/>
+            <BitmapImage x:Key="StartRightEngPosition" UriSource="pack://application:,,,/Resources/Images/StartRightEng.png"/>
             <BitmapImage x:Key="ApplicationLogo" UriSource="pack://application:,,,/Resources/Images/coding.png"/>
             <BitmapImage x:Key="DevoltonLabsLogo" UriSource="pack://application:,,,/Resources/Images/DevoltonLabsLogo.png"/>
+            <BitmapImage x:Key="TempStudyImage" UriSource="pack://application:,,,/Resources/Images/Keyboard.png"/>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

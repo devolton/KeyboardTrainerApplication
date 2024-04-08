@@ -8,12 +8,14 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LearnPage"
       Loaded="Page_Loaded">
-    <ScrollViewer>
+    <ScrollViewer
+        PanningRatio="0.01">
         <StackPanel
             Orientation="Vertical"
             Margin="10">
             <Image
                 x:Name="MainPageImage"
+                Source="{StaticResource TempStudyImage}"
                 Width="80"
                 Height="80"/>
             <TextBlock x:Name="MainPageTitle"
@@ -22,10 +24,11 @@
             <TextBlock
                 x:Name="MainPageDesc"
                 Text="{Binding MainDescription}"
-                Style="{StaticResource CustomLearnDescriptionTextBlock}"
+                Style="{StaticResource CustomLearnMainDescriptionTextBlock}"
                 />
             <Image x:Name="SittingImage"
                    Width="80"
+                   Source="{StaticResource TempStudyImage}"
                    Height="80"/>
             <TextBlock 
                        x:Name="SittingTitle"
@@ -33,39 +36,142 @@
                        Text="{Binding TypingPoseTitle}"
                     />
             <StackPanel
-                x:Name="SittinStackPanel"
-                Width="500"
-                Height="300"
+                x:Name="SittingStackPanel"
+                Width="550"
                 Orientation="Vertical">
                 <TextBlock
-                    FontSize="20"
+                   Style="{StaticResource CustomLearnEnumarationTextBlock}"
                     Text="{Binding TypingPoseRulesList[0]}"/>
                 <TextBlock
+                      Style="{StaticResource CustomLearnEnumarationTextBlock}"
                     Text="{Binding TypingPoseRulesList[1]}"/>
                 <TextBlock
+                      Style="{StaticResource CustomLearnEnumarationTextBlock}"
                     Text="{Binding TypingPoseRulesList[2]}"/>
                 <TextBlock
+                      Style="{StaticResource CustomLearnEnumarationTextBlock}"
                     Text="{Binding TypingPoseRulesList[3]}"/>
                 <TextBlock
+                      Style="{StaticResource CustomLearnEnumarationTextBlock}"
                     Text="{Binding TypingPoseRulesList[4]}"/>
             </StackPanel>
             <TextBlock x:Name="StartPosTitle"
                        Text="{Binding StartPositionTitle}"
-                       Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
-            <StackPanel Width="600"
+                       Style="{StaticResource CustomLearnTitleTextBlock}"/>
+            <Grid Width="600"
                         Height="80"
-                        Orientation="Horizontal">
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
                 <Image x:Name="StartPosLeftImage"
-                       Width="250"
-                       Margin="20 5 40 5"/>
+                       Grid.Column="0"
+                       Source="{StaticResource StartLeftEngPosition}"
+                       Width="170"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="5"/>
                 <Image x:Name="StartPosRightImage"
-                       Width="250"
-                       HorizontalAlignment="Right"
-                       Margin="5 5 5 5"/>
-            </StackPanel>
+                       Grid.Column="1"
+                       Source="{StaticResource StartRightEngPosition}"
+                       Width="170"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="5"/>
+            </Grid>
             <TextBlock x:Name="StartPosDesc"
                        Text="{Binding StartPositionDescription}"
                        Style="{StaticResource CustomLearnDescriptionTextBlock}"/>
+            <TextBlock x:Name="KeyboardSchemeTitle"
+                       Text="{Binding KeyboardSchemeTitle}"
+                       Style="{StaticResource CustomLearnTitleTextBlock}"/>
+                <Image x:Name="KeyboardSchemeImage"
+                       Source="{StaticResource KeyboardSchemeEngImage}"
+                       Width="600"/>
+            <StackPanel
+          x:Name="KeyboardSchemeStackPanel"
+          Width="550"
+          Orientation="Vertical">
+                <TextBlock
+             Style="{StaticResource CustomLearnEnumarationTextBlock}"
+              Text="{Binding KeyboardSchemeRulesList[0]}"/>
+                <TextBlock
+                Style="{StaticResource CustomLearnEnumarationTextBlock}"
+              Text="{Binding KeyboardSchemeRulesList[1]}"/>
+                <TextBlock
+                Style="{StaticResource CustomLearnEnumarationTextBlock}"
+              Text="{Binding KeyboardSchemeRulesList[2]}"/>
+                <TextBlock
+                Style="{StaticResource CustomLearnEnumarationTextBlock}"
+              Text="{Binding KeyboardSchemeRulesList[3]}"/>
+                <TextBlock
+                Style="{StaticResource CustomLearnEnumarationTextBlock}"
+                Text="{Binding KeyboardSchemeRulesList[4]}"/>
+                <TextBlock
+                      Style="{StaticResource CustomLearnEnumarationTextBlock}"
+                      Text="{Binding KeyboardSchemeRulesList[5]}"/>
+            </StackPanel>
+            <TextBlock x:Name="KeyboardSchemeDescription"
+                       Style="{StaticResource CustomLearnDescriptionTextBlock}"
+                       Text="{Binding KeyboardSchemeDescription}"/>
+            <Image x:Name="FingerMovementImage"
+                   Width="80"
+                   Height="80"
+                   Source="{StaticResource TempStudyImage}"/>
+            <TextBlock x:Name="FingerMovementTitleTextBlock"
+                       Text="{Binding FingerMovementTitle}"
+                       Style="{StaticResource CustomLearnTitleTextBlock}"/>
+            <TextBlock x:Name="FingerMovementDescriptionTextBlock"
+                       Style="{StaticResource CustomLearnDescriptionTextBlock}"
+                       Text="{Binding FingerMovementDescription}"
+                />
+            <Image x:Name="TypingSpeedImage"
+                   Width="80"
+                   Height="80"
+                   Source="{StaticResource TempStudyImage}"/>
+            <StackPanel
+                x:Name="TypingSpeedStackPanel"
+                 Width="550"
+                Orientation="Vertical">
+                <TextBlock
+                    Style="{StaticResource CustomLearnEnumarationTextBlock}"
+                    Text="{Binding TypingSpeedRulesList[0]}"/>
+                <TextBlock
+                    Style="{StaticResource CustomLearnEnumarationTextBlock}"
+                    Text="{Binding TypingSpeedRulesList[1]}"/>
+                <TextBlock
+                     Style="{StaticResource CustomLearnEnumarationTextBlock}"
+                      Text="{Binding TypingSpeedRulesList[2]}"/>
+                <TextBlock
+                    Style="{StaticResource CustomLearnEnumarationTextBlock}"
+                    Text="{Binding TypingSpeedRulesList[3]}"/>
+            </StackPanel>
+            <TextBlock x:Name="TrainTimeTitleTextBlock"
+                       Text="{Binding TrainTimeTitle}"
+                       Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
+            <Border CornerRadius="5"
+                    Background="{StaticResource CustomLightGray}"
+                    Width="300"
+                    Height="80">
+            <StackPanel Orientation="Horizontal"
+                        >
+                <Button x:Name="StartLearnButton"
+                        Width="120"
+                        Height="40"
+                        Margin="20 0 0 0"
+                        Background="Yellow"
+                        Content="{Binding TrainTimeStudyButtonText}"/>
+                <Button x:Name="TestSpeedButton"
+                        Width="120"
+                        Height="40"
+                        Margin="20 0 0 0"
+                        Background="Blue"
+                        Content="{Binding TrainTimeTestButtonText}"/>
+            </StackPanel>
+            </Border>
+            
         </StackPanel>
     </ScrollViewer>
 

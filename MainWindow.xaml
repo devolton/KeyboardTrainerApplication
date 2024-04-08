@@ -53,7 +53,7 @@
                             Style="{StaticResource CustomMainControlButton}"/>
                     </StackPanel>
                     <materialDesign:PopupBox
-                      
+                      Style="{StaticResource CustomPopupBoxStyle}"
                         x:Name="MainPopupBox"
                         HorizontalAlignment="Right"
                         Margin="80 20 20 10"

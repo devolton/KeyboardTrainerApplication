@@ -11,6 +11,10 @@
   <ItemGroup>
     <None Remove="Resources\Images\coding.png" />
     <None Remove="Resources\Images\DevoltonLabsLogo.png" />
+    <None Remove="Resources\Images\Keyboard.png" />
+    <None Remove="Resources\Images\KeyboardSchemeEng.png" />
+    <None Remove="Resources\Images\StartLeftEng.png" />
+    <None Remove="Resources\Images\StartRightEng.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +28,10 @@
     <Resource Include="Resources\Images\DevoltonLabsLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\Keyboard.png" />
+    <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
+    <Resource Include="Resources\Images\StartLeftEng.png" />
+    <Resource Include="Resources\Images\StartRightEng.png" />
   </ItemGroup>
   
 
