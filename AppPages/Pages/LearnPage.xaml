@@ -131,6 +131,9 @@
                    Width="80"
                    Height="80"
                    Source="{StaticResource TempStudyImage}"/>
+            <TextBlock x:Name="TypingSpeedTitle"
+                       Text="{Binding TypingSpeedTitle}"
+                       Style="{StaticResource CustomLearnTitleTextBlock}"/>
             <StackPanel
                 x:Name="TypingSpeedStackPanel"
                  Width="550"
@@ -153,23 +156,36 @@
                        Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
             <Border CornerRadius="5"
                     Background="{StaticResource CustomLightGray}"
-                    Width="300"
-                    Height="80">
-            <StackPanel Orientation="Horizontal"
-                        >
+                    Width="400"
+                    Height="120">
+            <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                 <Button x:Name="StartLearnButton"
-                        Width="120"
-                        Height="40"
-                        Margin="20 0 0 0"
-                        Background="Yellow"
+                        Grid.Column="0"
+                        Click="StartLearnButton_Click"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="150"
+                        Height="50"
+                        FontSize="20"
+                        FontWeight="DemiBold"
+                        Background="{StaticResource CustomBlueGreen}"
                         Content="{Binding TrainTimeStudyButtonText}"/>
                 <Button x:Name="TestSpeedButton"
-                        Width="120"
-                        Height="40"
-                        Margin="20 0 0 0"
-                        Background="Blue"
+                        Click="TestSpeedButton_Click"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                          Width="150"
+                          Height="50"
+                          FontSize="20"
+                          FontWeight="DemiBold"
+                        Background="{StaticResource CustomLime}"
                         Content="{Binding TrainTimeTestButtonText}"/>
-            </StackPanel>
+            </Grid>
             </Border>
             
         </StackPanel>

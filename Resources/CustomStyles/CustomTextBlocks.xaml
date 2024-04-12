@@ -29,7 +29,7 @@
 
         </Style.Setters>
         <Style.Triggers>
-            
+
         </Style.Triggers>
     </Style>
     <Style x:Key="CustomLearnDescriptionTextBlock" TargetType="TextBlock">
@@ -45,7 +45,7 @@
 
         </Style.Setters>
         <Style.Triggers>
-            
+
         </Style.Triggers>
     </Style>
     <Style x:Key="CustomLearnMainDescriptionTextBlock" TargetType="TextBlock">
@@ -76,7 +76,7 @@
             <Setter Property="TextAlignment" Value="Left"/>
         </Style.Setters>
         <Style.Triggers>
-            
+
         </Style.Triggers>
     </Style>
     <Style x:Key="CustomPopupBoxStyle" TargetType="materialDesign:PopupBox">
@@ -89,4 +89,7 @@
         <!-- Другие настройки стиля по вашему выбору -->
         <Setter Property="FontSize" Value="20"/>
     </Style>
+
+
+
 </ResourceDictionary>

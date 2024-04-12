@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using CourseProjectKeyboardApplication.AppPages.Pages;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,15 +18,15 @@ namespace CourseProjectKeyboardApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Uri _learnPageUri;
-        private Uri _typingTutorUri;
-        private Uri _typingTestUri;
+        private LearnPage _learnPage;
+        private TypingTestPage _typingTestPage;
+        private TypingTutorPage _typingTutorPage;
         public MainWindow()
         {
             InitializeComponent();
-            _typingTutorUri = new Uri("/AppPages/Pages/TypingTutorPage.xaml", UriKind.Relative);
-            _typingTestUri = new Uri("/AppPages/Pages/TypingTestPage.xaml", UriKind.Relative);
-            _learnPageUri = new Uri("/AppPages/Pages/LearnPage.xaml", UriKind.Relative);
+            _learnPage = new LearnPage(MainFrame);
+            _typingTutorPage = new TypingTutorPage();
+            _typingTestPage = new TypingTestPage();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -36,17 +37,17 @@ namespace CourseProjectKeyboardApplication
 
         private void TypingTutorMainButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(_typingTutorUri);
+            MainFrame.Content = _typingTutorPage;
         }
 
         private void TypingTestMainButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(_typingTestUri);
+            MainFrame.Content = _typingTestPage;
         }
 
         private void LearnMainButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(_learnPageUri);
+            MainFrame.Content = _learnPage;
 
         }
     }

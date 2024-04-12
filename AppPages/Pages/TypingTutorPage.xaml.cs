@@ -18,11 +18,13 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
     /// <summary>
     /// Логика взаимодействия для TypingTutor.xaml
     /// </summary>
-    public partial class TypingTutor : Page
+    public partial class TypingTutorPage : Page
     {
-        public TypingTutor()
+        public TypingTutorPage()
         {
             InitializeComponent();
+           
+
         }
     }
 }

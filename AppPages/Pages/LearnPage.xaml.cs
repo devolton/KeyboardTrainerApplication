@@ -21,16 +21,35 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
     public partial class LearnPage : Page
     {
         private LearnPageEnInfoModel _enLocalisation;
-        public LearnPage()
+        private readonly Uri _typingTutorUri;
+        private readonly Uri _typingTestUri;
+        private Frame _mainFrame;
+        public LearnPage(Frame mainFrame)
         {
             InitializeComponent();
             _enLocalisation = new LearnPageEnInfoModel();
             DataContext = _enLocalisation;
+            _typingTutorUri = new Uri("/AppPages/Pages/TypingTutorPage.xaml", UriKind.Relative);
+            _typingTestUri = new Uri("/AppPages/Pages/TypingTestPage.xaml", UriKind.Relative);
+            _mainFrame = mainFrame;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-         
+    
+
+        }
+
+        private void TestSpeedButton_Click(object sender, RoutedEventArgs e)
+        {
+            _mainFrame.Navigate(_typingTestUri);
+
+
+        }
+
+        private void StartLearnButton_Click(object sender, RoutedEventArgs e)
+        {
+            _mainFrame.Navigate(_typingTutorUri);
 
         }
     }

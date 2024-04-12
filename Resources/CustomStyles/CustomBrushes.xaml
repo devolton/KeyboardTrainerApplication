@@ -5,4 +5,8 @@
     <SolidColorBrush x:Key="CustomDeepBlue" Color="#003249"/>
     <SolidColorBrush x:Key="CustomDeepBlueViolet" Color="#03045e"/>
     <SolidColorBrush x:Key="CustomLightGray" Color="#e9ecef"/>
+    <SolidColorBrush x:Key="CustomLime" Color="#99d98c"/>
+    <SolidColorBrush x:Key="CustomBlueGreen" Color="#34a0a4"/>
+    <SolidColorBrush x:Key="CustomSpringGreen" Color="#70e000"/>
+    <SolidColorBrush x:Key="CustomProgressBarBackBrush" Color="#d8f3dc"/>
 </ResourceDictionary>

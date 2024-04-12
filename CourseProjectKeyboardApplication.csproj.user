@@ -36,6 +36,9 @@
     <Page Update="Resources\CustomStyles\CustomButtons.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\CustomStyles\CustomProgressBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\CustomStyles\CustomTextBlocks.xaml">
       <SubType>Designer</SubType>
     </Page>
