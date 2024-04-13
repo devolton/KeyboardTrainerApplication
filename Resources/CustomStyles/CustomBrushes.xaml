@@ -9,4 +9,5 @@
     <SolidColorBrush x:Key="CustomBlueGreen" Color="#34a0a4"/>
     <SolidColorBrush x:Key="CustomSpringGreen" Color="#70e000"/>
     <SolidColorBrush x:Key="CustomProgressBarBackBrush" Color="#d8f3dc"/>
+    <SolidColorBrush x:Key="CustomKeyboardControlItemBackBrush" Color="#ccdbfd"/>
 </ResourceDictionary>

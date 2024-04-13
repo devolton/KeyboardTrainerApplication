@@ -3,8 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.AppPages.Pages"
-     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
+     
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1300"
       Title="TypingTutor">
@@ -69,14 +71,16 @@
                 />
         </StackPanel>
         <Grid
+            ShowGridLines="True"
             Background="Silver"
-            Width="700"
+            Width="800"
             Height="270">
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -92,8 +96,58 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
 
+            </Grid.ColumnDefinitions>
+            <cc:KeyboardControlItemTextBlock
+                   x:Name="SpaceLabel"
+                   Grid.Row="4"
+                   Grid.Column="5"
+                   Grid.ColumnSpan="5"/>
+            
+            <cc:KeyboardControlItemTextBlock
+                   x:Name="RightShiftLabel"
+                   Grid.Column="13"
+                   Grid.Row="3"
+                   Grid.ColumnSpan="2"
+                   TextValue="Shift"/>
+           
+            <cc:KeyboardControlItemTextBlock
+                   x:Name="TabLabel"
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   TextValue="Tab"/>
+            <cc:KeyboardControlItemTextBlock
+                   x:Name="EraseLabel"
+                   Grid.Column="13"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   TextValue="←"
+                  />
+            <cc:KeyboardControlItemTextBlock
+                x:Name="LeftShiftElement"
+                TextValue="Shift"
+                Grid.Column="0"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"/>
+            <cc:KeyboardControlItemTextBlock
+                x:Name="CapsElement"
+                TextValue="Caps"
+                Grid.Column="0"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+        />
+            <cc:KeyboardControlItemTextBlock
+                x:Name="EnterLabel"
+                TextValue="Enter"
+                Grid.Column="13"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"/>
+            <cc:KeyboardItemTextBlock
+                Grid.Column="4"
+                Grid.Row="1"/>
         </Grid>
     </StackPanel>
 </Page>
