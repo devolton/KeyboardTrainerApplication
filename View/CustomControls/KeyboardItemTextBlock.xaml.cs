@@ -20,9 +20,12 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class KeyboardItemTextBlock : UserControl
     {
+        public string TextValue { get; set; }
+        public SolidColorBrush BackColorValue { get; set; }
         public KeyboardItemTextBlock()
         {
             InitializeComponent();
+            DataContext = this;
         }
     }
 }

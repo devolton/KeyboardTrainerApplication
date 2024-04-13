@@ -9,7 +9,8 @@
     <Border
             Margin="5"
             Background="{StaticResource CustomKeyboardControlItemBackBrush}"
-            BorderThickness="0"
+            BorderThickness="1"
+        BorderBrush="{StaticResource CustomAluminum}"
             CornerRadius="10"
             Padding="5">
         <TextBlock Text="{Binding TextValue}"

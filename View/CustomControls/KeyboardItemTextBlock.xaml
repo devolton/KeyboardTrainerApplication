@@ -9,14 +9,15 @@
 
     <Border
             Margin="5"
-            Background="Green"
-            BorderThickness="0"
+            Background="{Binding BackColorValue}"
+            BorderThickness="1"
+            BorderBrush="{StaticResource CustomAluminum}"
             CornerRadius="10">
-        <TextBlock Text="d"
+        <TextBlock Text="{Binding TextValue}"
                    FontSize="18"
                    TextAlignment="Center"
                    FontWeight="Medium"
-                   Foreground="White"
+                   Foreground="{StaticResource CustomCoal}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    />

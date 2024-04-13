@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="CustomMetal" Color="#6c757d"/>
+    <SolidColorBrush x:Key="CustomAluminum" Color="#e9ecef"/>
     <SolidColorBrush x:Key="CustomCoal" Color="#212529"/>
     <SolidColorBrush x:Key="CustomDeepBlue" Color="#003249"/>
     <SolidColorBrush x:Key="CustomDeepBlueViolet" Color="#03045e"/>
@@ -10,4 +11,13 @@
     <SolidColorBrush x:Key="CustomSpringGreen" Color="#70e000"/>
     <SolidColorBrush x:Key="CustomProgressBarBackBrush" Color="#d8f3dc"/>
     <SolidColorBrush x:Key="CustomKeyboardControlItemBackBrush" Color="#ccdbfd"/>
+    <SolidColorBrush x:Key="CustomLeftPinkyKeyBrush" Color="#468faf"/>
+    <SolidColorBrush x:Key="CustomLeftRingKeyBrush" Color="#6ede8a"/>
+    <SolidColorBrush x:Key="CustomLeftMiddleKeyBrush" Color="#ffb3c1"/>
+    <SolidColorBrush x:Key="CustomLeftIndexKeyBrush" Color="#48bfe3"/>
+    <SolidColorBrush x:Key="CustomRightIndexKeyBrush" Color="#ffe97f"/>
+    <SolidColorBrush x:Key="CustomRightMiddleKeyBrush" Color="#e27396"/>
+    <SolidColorBrush x:Key="CustomRightRingKeyBrush" Color="#ffaa00"/>
+    <SolidColorBrush x:Key="CustomRightPinkyKeyBrush" Color="#99e2b4"/>
+
 </ResourceDictionary>
