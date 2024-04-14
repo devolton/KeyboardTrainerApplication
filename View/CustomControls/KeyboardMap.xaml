@@ -1,0 +1,344 @@
+﻿<UserControl x:Class="CourseProjectKeyboardApplication.View.CustomControls.KeyboardMap"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid
+     
+     Width="750"
+     Height="270">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+
+        </Grid.ColumnDefinitions>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="0"
+         Grid.Row="0"
+         TextValue="`"
+          Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock 
+         Grid.Column="1"
+         Grid.Row="0"
+         TextValue="1"
+         Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock 
+         Grid.Column="2"
+         Grid.Row="0"
+         TextValue="2"
+         Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="3"
+         Grid.Row="0"
+         TextValue="3"
+         Style="{StaticResource CustomLeftRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="4"
+         Grid.Row="0"
+         TextValue="4"
+         Style="{StaticResource CustomLeftMiddleKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="5"
+         Grid.Row="0"
+         TextValue="5"
+         Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="6"
+         Grid.Row="0"
+         TextValue="6"
+         Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="7"
+         Grid.Row="0"
+         TextValue="7"
+         Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="8"
+         Grid.Row="0"
+         TextValue="8"
+         Style="{StaticResource CustomRightMiddleKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="9"
+         Grid.Row="0"
+         TextValue="9"
+         Style="{StaticResource CustomRightRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="10"
+         Grid.Row="0"
+         TextValue="0"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="11"
+         Grid.Row="0"
+         TextValue="-"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="12"
+         Grid.Row="0"
+         TextValue="="
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="2"
+         Grid.Row="1"
+         TextValue="q"
+         Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="3"
+         Grid.Row="1"
+         TextValue="w"
+         Style="{StaticResource CustomLeftRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="4"
+         Grid.Row="1"
+         TextValue="e"
+         Style="{StaticResource CustomLeftMiddleKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="5"
+         Grid.Row="1"
+         TextValue="r"
+        Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="6"
+         Grid.Row="1"
+         TextValue="t"
+         Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="7"
+         Grid.Row="1"
+         TextValue="y"
+         Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="8"
+         Grid.Row="1"
+         TextValue="u"
+         Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="9"
+         Grid.Row="1"
+         TextValue="i"
+         Style="{StaticResource CustomRightMiddleKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="10"
+         Grid.Row="1"
+         TextValue="o"
+         Style="{StaticResource CustomRightRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="11"
+         Grid.Row="1"
+         TextValue="p"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="12"
+         Grid.Row="1"
+         TextValue="["
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="13"
+         Grid.Row="1"
+         TextValue="]"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="2"
+         Grid.Row="2"
+         TextValue="a"
+         Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="3"
+         Grid.Row="2"
+         TextValue="s"
+         Style="{StaticResource CustomLeftRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="4"
+         Grid.Row="2"
+         TextValue="d"
+         Style="{StaticResource CustomLeftMiddleKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="5"
+         Grid.Row="2"
+         TextValue="f"
+        Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="6"
+         Grid.Row="2"
+         TextValue="g"
+         Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock 
+         Grid.Column="7"
+         Grid.Row="2"
+         TextValue="h"
+         Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="8"
+         Grid.Row="2"
+         TextValue="j"
+         Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="9"
+         Grid.Row="2"
+         TextValue="k"
+         Style="{StaticResource CustomRightMiddleKeyboardItemBlock}"
+         />
+        <cc:KeyboardItemTextBlock
+         Grid.Column="10"
+         Grid.Row="2"
+         TextValue="l"
+         Style="{StaticResource CustomRightRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="11"
+         Grid.Row="2"
+         TextValue=";"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="12"
+         Grid.Row="2"
+         TextValue="'"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="13"
+         Grid.Row="2"
+         TextValue="\"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="2"
+         Grid.Row="3"
+         TextValue="z"
+         Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="3"
+         Grid.Row="3"
+         TextValue="x"
+         Style="{StaticResource CustomLeftRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="4"
+         Grid.Row="3"
+         TextValue="c"
+         Style="{StaticResource CustomLeftMiddleKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock   
+         Grid.Column="5"
+         Grid.Row="3"
+         TextValue="v"
+         Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="6"
+         Grid.Row="3"
+         TextValue="b"
+         Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="7"
+         Grid.Row="3"
+         TextValue="n"
+         Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="8"
+         Grid.Row="3"
+         TextValue="m"
+         Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="9"
+         Grid.Row="3"
+         TextValue=","
+         Style="{StaticResource CustomRightMiddleKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="10"
+         Grid.Row="3"
+         TextValue="."
+         Style="{StaticResource CustomRightRingKeyboardItemBlock}"/>
+        <cc:KeyboardItemTextBlock
+         Grid.Column="11"
+         Grid.Row="3"
+         TextValue="/"
+         Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
+        <cc:KeyboardControlItemTextBlock
+            x:Name="SpaceLabel"
+            Grid.Row="4"
+            Grid.Column="4"
+            Grid.ColumnSpan="5"
+            Margin="10 0 0 0"/>
+
+        <cc:KeyboardControlItemTextBlock
+          
+            x:Name="RightShiftLabel"
+            Grid.Column="12"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            TextValue="Shift"/>
+
+        <cc:KeyboardControlItemTextBlock
+            x:Name="TabLabel"
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            TextValue="Tab"/>
+        <cc:KeyboardControlItemTextBlock
+            x:Name="EraseLabel"
+            Grid.Column="13"
+            Grid.Row="0"
+         
+            TextValue="←"
+           />
+        <cc:KeyboardControlItemTextBlock
+         x:Name="LeftShiftElement"
+         TextValue="Shift"
+         Grid.Column="0"
+         Grid.Row="3"
+         Grid.ColumnSpan="2"/>
+        <cc:KeyboardControlItemTextBlock
+        
+         x:Name="CapsElement"
+         TextValue="Caps"
+         Grid.Column="0"
+         Grid.Row="2"
+         Grid.ColumnSpan="2"
+ />
+
+        <Border
+           Margin="3"
+           Grid.Column="3"
+           Grid.Row="4"
+           Background="Red"
+           BorderThickness="2 1 2 6" 
+           BorderBrush="DarkRed"
+           CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.7"
+                                  ShadowDepth="4"
+                                  Color="DarkRed"
+                                  Direction="270"
+                                  BlurRadius="10"
+                                  />
+            </Border.Effect>
+            <TextBlock Text="z"
+                  FontSize="20"
+                  TextAlignment="Center"
+                  FontWeight="Medium"
+                  Foreground="{StaticResource CustomKeyboardControlItemBackBrush}"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  />
+
+        </Border>
+
+    </Grid>
+</UserControl>

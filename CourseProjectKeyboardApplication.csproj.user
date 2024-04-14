@@ -13,6 +13,9 @@
     <Compile Update="View\CustomControls\KeyboardItemTextBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CustomControls\KeyboardMap.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Pages\LearnPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -24,10 +27,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Resources\CustomStyles\CustomKeyboardItemBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\CustomControls\KeyboardControlItemTextBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\KeyboardItemTextBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\KeyboardMap.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\LearnPage.xaml">

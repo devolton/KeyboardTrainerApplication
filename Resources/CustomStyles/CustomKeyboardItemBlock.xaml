@@ -1,0 +1,144 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls">
+    <Style x:Key="CustomLeftPinkeyKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomLeftPinkyKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomLeftPinkyKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsErrorPushedKeyboardItem}" Value="True">
+                <Setter Property="BackColorValue" Value="Red"/>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomLeftRingKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomLeftRingKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomLeftRingKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomLeftMiddleKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomLeftMiddleKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomLeftMiddleKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomLeftIndexKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomLeftIndexKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomLeftIndexKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomRightIndexKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomRightIndexKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomRightIndexKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomRightMiddleKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomRightMiddleKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomRightMiddleKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomRightRingKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomRightRingKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomRightRingKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomRightPinkyKeyboardItemBlock" TargetType="cc:KeyboardItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomRightPinkyKeyBrush}"/>
+            <Setter Property="ForegroundColorValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="BorderBrushValue" Value="{StaticResource CustomRightPinkyKeyBorderBrush}"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSizeValue" Value="18"/>
+            <Setter Property="MarginValue" Value="3"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger>
+
+
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

@@ -19,5 +19,14 @@
     <SolidColorBrush x:Key="CustomRightMiddleKeyBrush" Color="#e27396"/>
     <SolidColorBrush x:Key="CustomRightRingKeyBrush" Color="#ffaa00"/>
     <SolidColorBrush x:Key="CustomRightPinkyKeyBrush" Color="#99e2b4"/>
+    <SolidColorBrush x:Key="CustomLeftPinkyKeyBorderBrush" Color="#126782"/>
+    <SolidColorBrush x:Key="CustomLeftRingKeyBorderBrush" Color="#006d77"/>
+    <SolidColorBrush x:Key="CustomLeftMiddleKeyBorderBrush" Color="#ff8fab"/>
+    <SolidColorBrush x:Key="CustomLeftIndexKeyBorderBrush" Color="#0077b6"/>
+    <SolidColorBrush x:Key="CustomRightIndexKeyBorderBrush" Color="#ffbf00"/>
+    <SolidColorBrush x:Key="CustomRightMiddleKeyBorderBrush" Color="#ac46a1"/>
+    <SolidColorBrush x:Key="CustomRightRingKeyBorderBrush" Color="#f48c06"/>
+    <SolidColorBrush x:Key="CustomRightPinkyKeyBorderBrush" Color="#248277"/>
+
 
 </ResourceDictionary>
