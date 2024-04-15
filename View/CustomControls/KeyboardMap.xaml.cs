@@ -24,5 +24,10 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         {
             InitializeComponent();
         }
+
+        private void TempButton_Click(object sender, RoutedEventArgs e)
+        {
+            TempTextBlock.IsFocusKeyboardItem = !TempTextBlock.IsFocusKeyboardItem;
+        }
     }
 }

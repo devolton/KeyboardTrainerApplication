@@ -19,22 +19,29 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// <summary>
     /// Логика взаимодействия для KeyboardItemLabel.xaml
     /// </summary>
-    public partial class KeyboardItemTextBlock : UserControl, INotifyPropertyChanged
+    public partial class KeyboardItemTextBlock : UserControl
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public FontWeight FontWeightValue { get; set; }
+        public static readonly DependencyProperty FontWeightValueProperty =
+            DependencyProperty.Register("FontWeightValue", typeof(FontWeight), typeof(KeyboardItemTextBlock), new PropertyMetadata(new FontWeight()));
         /// <summary>
         /// Margin 
         /// </summary>
-        public Thickness MarginValue { get; set; }  
-        public static readonly DependencyProperty MarginValueProperty=
-            DependencyProperty.Register("MarginValue",typeof(Thickness),typeof(KeyboardItemTextBlock),new PropertyMetadata(new Thickness(5)));
+        public Thickness MarginValue
+        {
+            get { return (Thickness)GetValue(MarginValueProperty); }
+            set { SetValue(MarginValueProperty, value); }
+        }
+        public static readonly DependencyProperty MarginValueProperty =
+            DependencyProperty.Register("MarginValue", typeof(Thickness), typeof(KeyboardItemTextBlock), new PropertyMetadata(new Thickness(5)));
+
         /// <summary>
         /// Text
         /// </summary>
         public string TextValue
         {
-            get { return (string)GetValue(TextValueProperty);}
-            set { SetValue(TextValueProperty, value);}
+            get { return (string)GetValue(TextValueProperty); }
+            set { SetValue(TextValueProperty, value); }
         }
         public static readonly DependencyProperty TextValueProperty =
             DependencyProperty.Register("TextValue", typeof(string), typeof(KeyboardItemTextBlock), new PropertyMetadata(""));
@@ -65,9 +72,10 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         /// <summary>
         /// FontSize
         /// </summary>
-        public double FontSizeValue {
+        public double FontSizeValue
+        {
             get { return (double)GetValue(FontSizeValueProperty); }
-            set { SetValue(FontSizeValueProperty, value);}
+            set { SetValue(FontSizeValueProperty, value); }
         }
         public static DependencyProperty FontSizeValueProperty =
             DependencyProperty.Register("FontSizeValue", typeof(double), typeof(KeyboardItemTextBlock), new PropertyMetadata((double)18));
@@ -77,19 +85,20 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         /// </summary>
         public SolidColorBrush ForegroundColorValue
         {
-            get { return(SolidColorBrush)GetValue(ForegroundColorValueProperty); }
-            set { SetValue(ForegroundColorValueProperty, value);}
+            get { return (SolidColorBrush)GetValue(ForegroundColorValueProperty); }
+            set { SetValue(ForegroundColorValueProperty, value); }
         }
 
-        public static DependencyProperty ForegroundColorValueProperty=
-            DependencyProperty.Register("ForegroundColorValue",typeof(SolidColorBrush),typeof(KeyboardItemTextBlock),new PropertyMetadata(Brushes.Black));
+        public static DependencyProperty ForegroundColorValueProperty =
+            DependencyProperty.Register("ForegroundColorValue", typeof(SolidColorBrush), typeof(KeyboardItemTextBlock), new PropertyMetadata(Brushes.Black));
 
         /// <summary>
         /// Border brush color
         /// </summary>
-        public SolidColorBrush BorderBrushValue {
+        public SolidColorBrush BorderBrushValue
+        {
             get { return (SolidColorBrush)GetValue(BorderBrushValueProperty); }
-            set { SetValue(BorderBrushValueProperty, value);}
+            set { SetValue(BorderBrushValueProperty, value); }
         }
 
         public static DependencyProperty BorderBrushValueProperty =
@@ -98,7 +107,8 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         /// <summary>
         /// DropShadowEffectOpacicy
         /// </summary>
-        public double ShadowEffectOpacity {
+        public double ShadowEffectOpacity
+        {
             get { return (double)(GetValue(ShadowEffectOpacityProperty)); }
             set
             {
@@ -126,31 +136,24 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         /// <summary>
         /// Property which defines where keyboard item was pushed incorectly
         /// </summary>
-        public bool IsErrorPushedKeyboardItem {
+        public bool IsErrorPushedKeyboardItem
+        {
             get { return (bool)GetValue(IsErrorPushedKeyboardItemProperty); }
             set { SetValue(IsErrorPushedKeyboardItemProperty, value); }
         }
         public static readonly DependencyProperty IsErrorPushedKeyboardItemProperty =
-            DependencyProperty.Register("IsErrorPushedKeyboardItem", typeof(bool), typeof(KeyboardItemTextBlock), new PropertyMetadata(false, OnIsErrorPushedKeyboardItemChanged));
+            DependencyProperty.Register("IsErrorPushedKeyboardItem", typeof(bool), typeof(KeyboardItemTextBlock), new PropertyMetadata(false));
 
- 
-        private static void OnIsErrorPushedKeyboardItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            (d as KeyboardItemTextBlock)?.OnPropertyChanged(nameof(IsErrorPushedKeyboardItem));
-        }
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
 
         public KeyboardItemTextBlock()
         {
             InitializeComponent();
             DataContext = this;
-         
+
         }
-     
-     
+
+
     }
 }

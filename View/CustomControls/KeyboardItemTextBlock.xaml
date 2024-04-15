@@ -24,7 +24,7 @@
         <TextBlock Text="{Binding TextValue}"
                    FontSize="{Binding FontSizeValue}"
                    TextAlignment="Center"
-                   FontWeight="Medium"
+                   FontWeight="{Binding FontWeightValue}"
                    Foreground="{Binding ForegroundColorValue}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"

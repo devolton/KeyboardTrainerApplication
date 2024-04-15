@@ -29,8 +29,8 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
             InitializeComponent();
             _enLocalisation = new LearnPageEnInfoModel();
             DataContext = _enLocalisation;
-            _typingTutorUri = new Uri("/AppPages/Pages/TypingTutorPage.xaml", UriKind.Relative);
-            _typingTestUri = new Uri("/AppPages/Pages/TypingTestPage.xaml", UriKind.Relative);
+            _typingTutorUri = new Uri("/View/Pages/TypingTutorPage.xaml", UriKind.Relative);
+            _typingTestUri = new Uri("/View/Pages/TypingTestPage.xaml", UriKind.Relative);
             _mainFrame = mainFrame;
         }
 

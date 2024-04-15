@@ -275,70 +275,51 @@
             Grid.Row="4"
             Grid.Column="4"
             Grid.ColumnSpan="5"
-            Margin="10 0 0 0"/>
+            Margin="10 0 0 0"
+
+            Style="{StaticResource CustomKeyboardControlItemBlock}"/>
 
         <cc:KeyboardControlItemTextBlock
           
-            x:Name="RightShiftLabel"
+                    x:Name="TempTextBlock"
             Grid.Column="12"
             Grid.Row="3"
             Grid.ColumnSpan="2"
-            TextValue="Shift"/>
+            TextValue="Shift"
+            Style="{StaticResource CustomKeyboardControlItemBlock}"/>
 
         <cc:KeyboardControlItemTextBlock
             x:Name="TabLabel"
             Grid.Column="0"
             Grid.Row="1"
             Grid.ColumnSpan="2"
-            TextValue="Tab"/>
+            TextValue="Tab"
+            Style="{StaticResource CustomKeyboardControlItemBlock}"/>
         <cc:KeyboardControlItemTextBlock
             x:Name="EraseLabel"
             Grid.Column="13"
             Grid.Row="0"
-         
             TextValue="←"
+            Style="{StaticResource CustomKeyboardControlItemBlock}"
            />
         <cc:KeyboardControlItemTextBlock
          x:Name="LeftShiftElement"
          TextValue="Shift"
          Grid.Column="0"
          Grid.Row="3"
-         Grid.ColumnSpan="2"/>
+         Grid.ColumnSpan="2"
+         Style="{StaticResource CustomKeyboardControlItemBlock}"/>
         <cc:KeyboardControlItemTextBlock
-        
          x:Name="CapsElement"
          TextValue="Caps"
          Grid.Column="0"
          Grid.Row="2"
          Grid.ColumnSpan="2"
- />
-
-        <Border
-           Margin="3"
-           Grid.Column="3"
-           Grid.Row="4"
-           Background="Red"
-           BorderThickness="2 1 2 6" 
-           BorderBrush="DarkRed"
-           CornerRadius="10">
-            <Border.Effect>
-                <DropShadowEffect Opacity="0.7"
-                                  ShadowDepth="4"
-                                  Color="DarkRed"
-                                  Direction="270"
-                                  BlurRadius="10"
-                                  />
-            </Border.Effect>
-            <TextBlock Text="z"
-                  FontSize="20"
-                  TextAlignment="Center"
-                  FontWeight="Medium"
-                  Foreground="{StaticResource CustomKeyboardControlItemBackBrush}"
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center"
-                  />
-
-        </Border>
+         Style="{StaticResource CustomKeyboardControlItemBlock}"/>
+        <Button x:Name="TempButton"
+                Grid.Row="4"
+                Grid.Column="2"
+                Click="TempButton_Click"/>
 
     </Grid>
 </UserControl>

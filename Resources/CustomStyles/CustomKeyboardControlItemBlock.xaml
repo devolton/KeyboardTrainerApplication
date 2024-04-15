@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls">
+    <Style x:Key="CustomKeyboardControlItemBlock" TargetType="cc:KeyboardControlItemTextBlock">
+        <Style.Setters>
+            <Setter Property="BackColorValue" Value="{StaticResource CustomKeyboardControlItemBackBrush}"/>
+            <Setter Property="ForegroundValue" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="FontSizeValue" Value="22"/>
+            <Setter Property="BorderThicknessValue" Value="2"/>
+            <Setter Property="BorderBrushValue" Value="#adb5bd"/>
+            <Setter Property="MarginValue" Value="3"/>
+            <Setter Property="ShadowEffectOpacity" Value="0"/>
+
+        </Style.Setters>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=IsErrorPushedKeyboardItem}" Value="True">
+                <Setter Property="BackColorValue" Value="Red"/>
+                <Setter Property="BorderThickness" Value="3 2 3 7"/>
+                <Setter Property="BorderBrushValue" Value="DarkRed"/>
+                <Setter Property="ForegroundValue" Value="{StaticResource CustomKeyboardControlItemBackBrush}"/>
+                <Setter Property="ShadowEffectOpacity" Value="0.7"/>
+                <Setter Property="MarginValue" Value="0"/>
+
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsFocusKeyboardItem}" Value="True">
+                <Setter Property="ShadowEffectOpacity" Value="0.7"/>
+                <Setter Property="MarginValue" Value="0"/>
+                <Setter Property="FontSizeValue" Value="22"/>
+                <Setter Property="BorderThickness" Value="3 2 3 7"/>
+            </DataTrigger>
+            
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

@@ -7,17 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border
-            Margin="5"
-            Background="{StaticResource CustomKeyboardControlItemBackBrush}"
-            BorderThickness="1"
-        BorderBrush="{StaticResource CustomAluminum}"
+            Margin="{Binding MarginValue}"
+            Background="{Binding BackColorValue}"
+            BorderThickness="{Binding BorderThicknessValue}"
+            BorderBrush="{Binding BorderBrushValue}"
             CornerRadius="10"
             Padding="5">
+        <Border.Effect>
+            <DropShadowEffect Opacity="{Binding ShadowEffectOpacity}"
+               ShadowDepth="4"
+               Color="{Binding BorderBrushValue}"
+               Direction="270"
+               BlurRadius="10"
+               />
+        </Border.Effect>
         <TextBlock Text="{Binding TextValue}"
-                   FontSize="20"
+                   FontSize="{Binding FontSizeValue}"
                    TextAlignment="Center"
                    FontWeight="Bold"
-                   Foreground="{StaticResource CustomCoal}"
+                   Foreground="{Binding ForegroundValue}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    />
