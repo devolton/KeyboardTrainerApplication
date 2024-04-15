@@ -16,6 +16,12 @@
     <Compile Update="View\CustomControls\KeyboardMap.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CustomControls\TypingTutorTextDisplayerBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\TypingTestTextDisplayerBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Pages\LearnPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +46,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\KeyboardMap.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\TypingTutorTextDisplayerBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\TypingTestTextDisplayerBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\LearnPage.xaml">

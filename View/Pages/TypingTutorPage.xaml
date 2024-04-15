@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.AppPages.Pages"
       xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
      
@@ -11,46 +11,10 @@
       d:DesignHeight="600" d:DesignWidth="1300"
       Title="TypingTutor">
     <StackPanel x:Name="MainStackPanel">
-        <Border Margin="0 0 0 50"
-                Background="White"
-                Width="1100"
-                Height="70"
-                CornerRadius="10"
-                BorderThickness="1"
-                BorderBrush="Silver">
-            <Border.Effect>
-                <DropShadowEffect Color="Silver" ShadowDepth="5"
-                                  Opacity="0.7"
-                                  BlurRadius="100"/>
-            </Border.Effect>
-            <StackPanel>
-                <TextBlock
-            
-                        Name="WordsTextBox"
-                        Padding="10 20 10 10"
-                        Width="1000"
-                        Height="70"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        FontSize="22px"
-                        FontFamily="Georgia"
-                        Foreground="Gray"
-                        TextWrapping="Wrap"
-                        IsEnabled="False">
-                     <Run Name="LostFocusRun"
-                          Text="Wor"
-                          Foreground="Red"/><InlineUIContainer>
-                          <TextBlock
-                              Name="FocusWordTextBlock">
-                              <Run x:Name="FirstRun" Text="H"/><Run x:Name="SecondRun" Text="e"/>
-                          </TextBlock>
-                        </InlineUIContainer><Run x:Name ="BeforeFocusRun" Text="my"/>
-                </TextBlock>
-            </StackPanel>
-        </Border>
+        <cc:TextDisplayerBlock/>
         <StackPanel Width="300"
                     Margin="0 0 0 40"
-                 Orientation="Horizontal">
+                    Orientation="Horizontal">
             <Button x:Name="RepeatButton"
                     Style="{StaticResource CustomRepeatButton}"
                     Width="30"

@@ -89,6 +89,7 @@
                   
                 </StackPanel>
                 <Frame x:Name="MainFrame"
+                      Loaded="MainFrame_Loaded"
                        Margin="20"
                        Height="520"
                        NavigationUIVisibility="Hidden"/>

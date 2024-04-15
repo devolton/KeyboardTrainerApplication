@@ -78,6 +78,7 @@
          Grid.Column="8"
          Grid.Row="0"
          TextValue="8"
+                        x:Name="TempTextBlock"
          Style="{StaticResource CustomRightMiddleKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="9"
@@ -281,7 +282,7 @@
 
         <cc:KeyboardControlItemTextBlock
           
-                    x:Name="TempTextBlock"
+            x:Name="RightShiftLabel"
             Grid.Column="12"
             Grid.Row="3"
             Grid.ColumnSpan="2"
@@ -316,10 +317,7 @@
          Grid.Row="2"
          Grid.ColumnSpan="2"
          Style="{StaticResource CustomKeyboardControlItemBlock}"/>
-        <Button x:Name="TempButton"
-                Grid.Row="4"
-                Grid.Column="2"
-                Click="TempButton_Click"/>
+  
 
     </Grid>
 </UserControl>

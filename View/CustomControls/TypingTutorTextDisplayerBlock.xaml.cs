@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace CourseProjectKeyboardApplication.View.CustomControls
 {
     /// <summary>
-    /// Логика взаимодействия для KeyboardMap.xaml
+    /// Логика взаимодействия для TextDisplayerBlock.xaml
     /// </summary>
-    public partial class KeyboardMap : UserControl
+    public partial class TextDisplayerBlock : UserControl
     {
-        public KeyboardMap()
+        public TextDisplayerBlock()
         {
             InitializeComponent();
         }
-
     }
 }

@@ -50,5 +50,10 @@ namespace CourseProjectKeyboardApplication
             MainFrame.Content = _learnPage;
 
         }
+
+        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = _typingTestPage;
+        }
     }
 }
