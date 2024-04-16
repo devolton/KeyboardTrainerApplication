@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\CustomControls\CertificateConditionTableBodyItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\CertificateConditionTableHeader.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CustomControls\KeyboardControlItemTextBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +43,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\CustomStyles\CustomKeyboardItemBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\CertificateConditionTableBodyItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\CertificateConditionTableHeader.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\KeyboardControlItemTextBlock.xaml">

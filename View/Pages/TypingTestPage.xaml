@@ -42,8 +42,8 @@
                    FontSize="38"
                    TextAlignment="Center"/>
             <Grid
-                Width="800"
-                Height="200">
+                Width="900"
+                Height="225">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -66,43 +66,29 @@
                                Text="You can take the test as many times as you want! Only the best score will count towards your certification, there’s no need to worry about making a mistake."/>
                 </Grid>
                 <Border Grid.Column="1"
-                        Background="Silver"
+                        Margin="30 10 10 10 "
+                        Background="{StaticResource CustomAluminum}"
                         CornerRadius="10"
-                        Margin="5"
                         Padding="20">
-                    <Grid>
+                    <Grid 
+                        x:Name="CertificateConditionsTableGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.7*"/>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"
-                               Grid.Row="0"
-                               Source="{StaticResource TempStudyImage}"/>
-                        <Image Grid.Column="0"
-                               Grid.Row="1"
-                               Source="{StaticResource TempStudyImage}"/>
-                        <Image Grid.Column="0"
-                               Grid.Row="2"
-                               Source="{StaticResource TempStudyImage}"/>
-                        <Image Grid.Column="0"
-                               Grid.Row="3"
-                               Source="{StaticResource TempStudyImage}"/>
-                        <TextBlock Text="Certificate"
-                                   TextAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   Grid.Column="1"
-                                   Grid.Row="0"/>
+                        <cc:CertificateConditionTableBodyItem 
+                            SpeedLevelText="Platinum"
+                            SpeedValueText="70 wpm"
+                            AccuracyText="99.5 %"
+                        Grid.Row="1"/>
+
+
+
                     </Grid>
-                    
-                    
+
+
                 </Border>
 
 
