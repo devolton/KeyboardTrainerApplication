@@ -8,6 +8,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TypingTestPage">
+    <Page.Resources>
+        <BitmapImage x:Key="CertificateConditionPlatinumMedal" UriSource="pack://application:,,,/Resources/Images/PlatinumMedal.png"/>
+    </Page.Resources>
     <ScrollViewer>
         <StackPanel x:Name="TypingTestMainStackPanel"
                 Orientation="Vertical">
@@ -67,7 +70,7 @@
                 </Grid>
                 <Border Grid.Column="1"
                         Margin="30 10 10 10 "
-                        Background="{StaticResource CustomAluminum}"
+                        Background="{StaticResource CustomLightSilver}"
                         CornerRadius="10"
                         Padding="20">
                     <Grid 
@@ -78,11 +81,26 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <cc:CertificateConditionTableBodyItem 
+                        <cc:CertificateConditionTableHeader
+                            Grid.Row="0"/>
+                            <cc:CertificateConditionTableBodyItem 
                             SpeedLevelText="Platinum"
                             SpeedValueText="70 wpm"
                             AccuracyText="99.5 %"
-                        Grid.Row="1"/>
+                            ImageSource="{StaticResource CertificateConditionPlatinumMedal}"
+                            Grid.Row="1"/>
+                        <cc:CertificateConditionTableBodyItem
+                            SpeedLevelText="Gold"
+                            SpeedValueText="50 wpm"
+                            AccuracyText="98.5 %"
+                            ImageSource="{StaticResource CertificateConditionGoldMedal}"
+                            Grid.Row="2"/>
+                        <cc:CertificateConditionTableBodyItem
+                            SpeedLevelText="Silver"
+                            SpeedValueText="40 wpm"
+                            AccuracyText="96 %"
+                            ImageSource="{StaticResource CertificateConditionSilverMedal}"
+                            Grid.Row="3"/>
 
 
 

@@ -28,7 +28,7 @@
                      HorizontalAlignment="Center"
                      FontSize="22px"
                      FontFamily="Georgia"
-                     Foreground="Gray"
+                     Foreground="{StaticResource CustomLightSilver}"
                      TextWrapping="Wrap"
                      IsEnabled="False"
                      Panel.ZIndex="1">

@@ -9,11 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\BlueVioletStar.png" />
+    <None Remove="Resources\Images\CertificateConditionFlash.png" />
+    <None Remove="Resources\Images\CertificateConditionLightning.png" />
+    <None Remove="Resources\Images\CertificateConditionStar.png" />
+    <None Remove="Resources\Images\CertificateConditionTarget.png" />
     <None Remove="Resources\Images\coding.png" />
     <None Remove="Resources\Images\DevoltonLabsLogo.png" />
+    <None Remove="Resources\Images\GoldMedal.png" />
     <None Remove="Resources\Images\Keyboard.png" />
     <None Remove="Resources\Images\KeyboardSchemeEng.png" />
+    <None Remove="Resources\Images\PlatinumMedal.png" />
     <None Remove="Resources\Images\RepeatIcon.png" />
+    <None Remove="Resources\Images\SilverMedal.png" />
     <None Remove="Resources\Images\StartLeftEng.png" />
     <None Remove="Resources\Images\StartRightEng.png" />
   </ItemGroup>
@@ -23,17 +31,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\CertificateConditionLightning.png" />
+    <Resource Include="Resources\Images\CertificateConditionStar.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\CertificateConditionTarget.png" />
     <Resource Include="Resources\Images\coding.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\DevoltonLabsLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\GoldMedal.png" />
     <Resource Include="Resources\Images\Keyboard.png" />
     <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
+    <Resource Include="Resources\Images\PlatinumMedal.png" />
     <Resource Include="Resources\Images\RepeatIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\SilverMedal.png" />
     <Resource Include="Resources\Images\StartLeftEng.png" />
     <Resource Include="Resources\Images\StartRightEng.png" />
   </ItemGroup>

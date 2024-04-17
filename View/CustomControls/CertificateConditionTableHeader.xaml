@@ -6,18 +6,62 @@
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="CustomConditionBodyItemTextBlock" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Padding" Value="0 5 0 0"/>
+                <Setter Property="Foreground" Value="{StaticResource CustomDeepBlueViolet}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
     <Border BorderBrush="{StaticResource CustomCoal}"
             BorderThickness=" 0 0 0 1">
-        <StackPanel Orientation="Horizontal"
-                    VerticalAlignment="Center">
-            <Image/>
-            <TextBlock/>
-            <Image/>
-            <TextBlock/>
-            <Image/>
-            <TextBlock/>
 
+        <Grid    
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0"
+                   Source="{StaticResource CertificateConditionStar}"
+                   Width="15"
+                   Height="15"
+                   Margin="5 5 5 2"
+                />
+            <TextBlock
+                Style="{StaticResource CustomConditionBodyItemTextBlock}"
+                Grid.Column="1"
+                Text="Certificate"/>
+            <StackPanel Grid.Column="2"
+                     Orientation="Horizontal">
+                <Image 
+                    Width="12"
+                    Height="12"
+                    Margin="5 5 3 0"
+                    Source="{StaticResource CertificateConditionLightning}"/>
+                <TextBlock
+                    Style="{StaticResource CustomConditionBodyItemTextBlock}"
+                    Text="Speed"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3"
+                     Orientation="Horizontal">
+                <Image
+                    Width="12"
+                    Height="12"
+                    Margin="5 5 3 0"
+                    Source="{StaticResource CertificateConditionTarget}"/>
+                <TextBlock
+                    Style="{StaticResource CustomConditionBodyItemTextBlock}"
+                    Text="Accuracy"/>
+            </StackPanel>
 
-        </StackPanel>
+        </Grid>
     </Border>
 </UserControl>

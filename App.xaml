@@ -25,6 +25,12 @@
             <BitmapImage x:Key="RepeateIcon" UriSource="pack://application:,,,/Resources/Images/RepeatIcon.png"/>
             <BitmapImage x:Key="DevoltonLabsLogo" UriSource="pack://application:,,,/Resources/Images/DevoltonLabsLogo.png"/>
             <BitmapImage x:Key="TempStudyImage" UriSource="pack://application:,,,/Resources/Images/Keyboard.png"/>
+            <BitmapImage x:Key="CertificateConditionStar" UriSource="pack://application:,,,/Resources/Images/CertificateConditionStar.png"/>
+            <BitmapImage x:Key="CertificateConditionTarget" UriSource="pack://application:,,,/Resources/Images/CertificateConditionTarget.png"/>
+            <BitmapImage x:Key="CertificateConditionLightning" UriSource="pack://application:,,,/Resources/Images/CertificateConditionLightning.png"/>
+            <BitmapImage x:Key="CertificateConditionPlatinumMedal" UriSource="pack://application:,,,/Resources/Images/PlatinumMedal.png"/>
+            <BitmapImage x:Key="CertificateConditionGoldMedal" UriSource="pack://application:,,,/Resources/Images/GoldMedal.png"/>
+            <BitmapImage x:Key="CertificateConditionSilverMedal" UriSource="pack://application:,,,/Resources/Images/SilverMedal.png"/>
 
         </ResourceDictionary>
     </Application.Resources>

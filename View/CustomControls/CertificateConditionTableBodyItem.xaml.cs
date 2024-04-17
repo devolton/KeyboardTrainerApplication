@@ -39,13 +39,21 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         }
         public static readonly DependencyProperty AccuracyTextProperty =
             DependencyProperty.Register("AccuracyText",typeof(string),typeof(CertificateConditionTableBodyItem),new PropertyMetadata(string.Empty));
-        public string ImageUri { get; set; }
-        public static readonly DependencyProperty ImageUriProperty =
-            DependencyProperty.Register("ImageUri", typeof(string), typeof(CertificateConditionTableBodyItem), new PropertyMetadata(string.Empty));//исправить на дефолтную картинку
+        public ImageSource ImageSource
+        {
+            get { return (ImageSource)GetValue(ImageSourceProperty); }
+            set { SetValue(ImageSourceProperty, value);}
+        }
+        public static readonly DependencyProperty ImageSourceProperty =
+            DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CertificateConditionTableBodyItem), new PropertyMetadata(null));
         public CertificateConditionTableBodyItem()
         {
+            
             InitializeComponent();
             DataContext = this;
+
+            
+          
         }
     }
 }
