@@ -13,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CourseProjectKeyboardApplication.AppPages.Pages
+namespace CourseProjectKeyboardApplication.View.CustomControls
 {
     /// <summary>
-    /// Логика взаимодействия для TypingTestPage.xaml
+    /// Логика взаимодействия для TypingTestInfoBlock.xaml
     /// </summary>
-    public partial class TypingTestPage : Page
+    public partial class TypingTestInfoBlock : UserControl
     {
-        public TypingTestPage()
+        public TypingTestInfoBlock()
         {
             InitializeComponent();
-        }
-
-        private void TakeTestButton_Click(object sender, RoutedEventArgs e)
-        {
-            TypingTestScrollViewer.ScrollToVerticalOffset(20);
-
         }
     }
 }

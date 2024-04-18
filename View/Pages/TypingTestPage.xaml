@@ -8,10 +8,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TypingTestPage">
-    <Page.Resources>
-        <BitmapImage x:Key="CertificateConditionPlatinumMedal" UriSource="pack://application:,,,/Resources/Images/PlatinumMedal.png"/>
-    </Page.Resources>
-    <ScrollViewer>
+    <ScrollViewer
+        x:Name="TypingTestScrollViewer"
+        VerticalScrollBarVisibility="Hidden"
+        PanningRatio="0.02">
         <StackPanel x:Name="TypingTestMainStackPanel"
                 Orientation="Vertical">
             <Grid Width="700"
@@ -25,26 +25,30 @@
                    Margin="10"/>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2.2*"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <TextBlock 
-                    TextAlignment="Left"
                     Grid.Row="0"
-                    FontSize="42"
+                    Style="{StaticResource CustomLearnMainTitleTextBlock}"
+                    TextAlignment="Left"
+                    FontSize="36"
                     Text="Typing Certification Test"/>
                     <TextBlock Grid.Row="1"
-                           FontSize="20"
                            TextAlignment="Left"
+                           Foreground="{StaticResource CustomDeepBlue}"
+                           FontSize="18"
                            Text="Take a 1 min test and clarify your typing speed with English layout"/>
                 </Grid>
             </Grid>
             <cc:TypingTestTextDisplayerBlock/>
-            <TextBlock Width="400"
+            <TextBlock 
+                   Style="{StaticResource CustomLearnMainTitleTextBlock}"
+                   FontSize="40"
                    Text="Get your own certificate"
-                   FontSize="38"
-                   TextAlignment="Center"/>
+                  />
             <Grid
+                Margin="10 40 10 20"
                 Width="900"
                 Height="225">
                 <Grid.ColumnDefinitions>
@@ -57,7 +61,6 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
-                               TextWrapping="Wrap"
                                FontSize="20"
                                TextAlignment="Left"
                                Text="Do you know that you can get certified in keyboarding on any layout? That’s right — whether you’re a QWERTY fan or prefer DVORAK, there’s a certification test for you."/>
@@ -83,7 +86,7 @@
                         </Grid.RowDefinitions>
                         <cc:CertificateConditionTableHeader
                             Grid.Row="0"/>
-                            <cc:CertificateConditionTableBodyItem 
+                        <cc:CertificateConditionTableBodyItem 
                             SpeedLevelText="Platinum"
                             SpeedValueText="70 wpm"
                             AccuracyText="99.5 %"
@@ -102,15 +105,18 @@
                             ImageSource="{StaticResource CertificateConditionSilverMedal}"
                             Grid.Row="3"/>
 
-
-
                     </Grid>
 
-
                 </Border>
-
-
             </Grid>
+            <cc:TypingTestInfoBlock/>
+            <Button
+             Margin="0 0 0 30"
+             x:Name="TakeTestButton"
+             Width="200"
+             Height="50"
+             Content="Take a typing test"
+             Click="TakeTestButton_Click"/>
         </StackPanel>
     </ScrollViewer>
 </Page>

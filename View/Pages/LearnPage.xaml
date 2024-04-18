@@ -9,6 +9,7 @@
       Title="LearnPage"
       Loaded="Page_Loaded">
     <ScrollViewer
+        VerticalScrollBarVisibility="Hidden"
         PanningRatio="0.01">
         <StackPanel
             Orientation="Vertical"

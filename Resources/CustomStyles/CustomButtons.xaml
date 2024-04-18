@@ -1,14 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                  
 >
+    <Style x:Key="CustomApplicationTemplateButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Style.Setters>
+            
+            
+        </Style.Setters>
+        <Style.Triggers>
+            
+        </Style.Triggers>
+    </Style>
     <Style x:Key="CustomMainControlButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
             <Setter Property="Background" Value="{DynamicResource CustomMetal}"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="Tahoma"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Width" Value="150"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Margin" Value="10 10 10 10"/>
@@ -21,8 +30,9 @@
                     <ControlTemplate TargetType="Button">
                         <Border
                         CornerRadius="5"
-                        BorderThickness="2"
-                        Background="{DynamicResource CustomMetal}">
+                        BorderThickness="2 1 1 7"
+                        BorderBrush="DarkGray"
+                        Background="{StaticResource CustomMetal}">
                             <Border.Effect>
                                 <DropShadowEffect
                                 Direction="300"
