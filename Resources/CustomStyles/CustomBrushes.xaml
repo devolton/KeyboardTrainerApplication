@@ -28,6 +28,9 @@
     <SolidColorBrush x:Key="CustomRightMiddleKeyBorderBrush" Color="#ac46a1"/>
     <SolidColorBrush x:Key="CustomRightRingKeyBorderBrush" Color="#f48c06"/>
     <SolidColorBrush x:Key="CustomRightPinkyKeyBorderBrush" Color="#248277"/>
+    <SolidColorBrush x:Key="CustomLightBeigeBrush" Color="#ffe9c2"/>
+    <SolidColorBrush x:Key="CustomWhiteVioletBrush" Color="#f2c2ff"/>
+
 
 
 </ResourceDictionary>

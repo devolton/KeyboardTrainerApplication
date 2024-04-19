@@ -14,9 +14,13 @@
     <None Remove="Resources\Images\CertificateConditionLightning.png" />
     <None Remove="Resources\Images\CertificateConditionStar.png" />
     <None Remove="Resources\Images\CertificateConditionTarget.png" />
+    <None Remove="Resources\Images\CertificateIcon.png" />
+    <None Remove="Resources\Images\CertificateTemp.png" />
     <None Remove="Resources\Images\coding.png" />
     <None Remove="Resources\Images\DevoltonLabsLogo.png" />
+    <None Remove="Resources\Images\GoldLightning.png" />
     <None Remove="Resources\Images\GoldMedal.png" />
+    <None Remove="Resources\Images\GoldTarget.png" />
     <None Remove="Resources\Images\Keyboard.png" />
     <None Remove="Resources\Images\KeyboardSchemeEng.png" />
     <None Remove="Resources\Images\PlatinumMedal.png" />
@@ -36,13 +40,17 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\CertificateConditionTarget.png" />
+    <Resource Include="Resources\Images\CertificateIcon.png" />
+    <Resource Include="Resources\Images\CertificateTemp.png" />
     <Resource Include="Resources\Images\coding.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\DevoltonLabsLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\GoldLightning.png" />
     <Resource Include="Resources\Images\GoldMedal.png" />
+    <Resource Include="Resources\Images\GoldTarget.png" />
     <Resource Include="Resources\Images\Keyboard.png" />
     <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
     <Resource Include="Resources\Images\PlatinumMedal.png" />

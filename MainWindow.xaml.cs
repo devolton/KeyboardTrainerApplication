@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
+using CourseProjectKeyboardApplication.View.Pages;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
@@ -21,12 +22,14 @@ namespace CourseProjectKeyboardApplication
         private LearnPage _learnPage;
         private TypingTestPage _typingTestPage;
         private TypingTutorPage _typingTutorPage;
+        private TypingCertificatesPage _typingCertificatesPage;
         public MainWindow()
         {
             InitializeComponent();
             _learnPage = new LearnPage(MainFrame);
             _typingTutorPage = new TypingTutorPage();
             _typingTestPage = new TypingTestPage();
+            _typingCertificatesPage = new TypingCertificatesPage();  // перенести весь блок в  Window_Loaded
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -54,6 +57,12 @@ namespace CourseProjectKeyboardApplication
         private void MainFrame_Loaded(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = _typingTestPage;
+        }
+
+        private void CertificatesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            MainFrame.Content = _typingCertificatesPage;
         }
     }
 }

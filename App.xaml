@@ -31,6 +31,11 @@
             <BitmapImage x:Key="CertificateConditionPlatinumMedal" UriSource="pack://application:,,,/Resources/Images/PlatinumMedal.png"/>
             <BitmapImage x:Key="CertificateConditionGoldMedal" UriSource="pack://application:,,,/Resources/Images/GoldMedal.png"/>
             <BitmapImage x:Key="CertificateConditionSilverMedal" UriSource="pack://application:,,,/Resources/Images/SilverMedal.png"/>
+            <BitmapImage x:Key="GoldFlash" UriSource="pack://application:,,,/Resources/Images/GoldLightning.png"/>
+            <BitmapImage x:Key="GoldTarget" UriSource="pack://application:,,,/Resources/Images/GoldTarget.png"/>
+            <BitmapImage x:Key="CertificateTemp" UriSource="pack://application:,,,/Resources/Images/CertificateTemp.png"/>
+            <BitmapImage x:Key="CertificateIcon" UriSource="pack://application:,,,/Resources/Images/CertificateIcon.png"/>
+            
 
         </ResourceDictionary>
     </Application.Resources>

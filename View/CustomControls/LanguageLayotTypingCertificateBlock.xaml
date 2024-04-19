@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="CourseProjectKeyboardApplication.View.CustomControls.LanguageLayotTypingCertificateBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="SpeedLanguageLayotStatisticBlock" TargetType="cc:LanguageLayotStatisticBlock">
+            <Style.Setters>
+                <Setter Property="HeaderForeground" Value="{StaticResource CustomLightBeigeBrush}"/>
+                <Setter Property="BodyColor" Value="Orange"/>
+                <Setter Property="HeaderColor" Value="DarkOrange"/>
+
+            </Style.Setters>
+        </Style>
+        <Style x:Key="AccuracyLanguageLayotStatisticBlock" TargetType="cc:LanguageLayotStatisticBlock">
+            <Style.Setters>
+                <Setter Property="HeaderForeground" Value="{StaticResource CustomWhiteVioletBrush}"/>
+                <Setter Property="BodyColor" Value="Violet"/>
+                <Setter Property="HeaderColor" Value="DarkViolet"/>
+
+            </Style.Setters>
+        </Style>
+        <Style x:Key="LanguageHeaderTextBlock" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="{StaticResource CustomDeepBlue}"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="FontSize" Value="36"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontStretch" Value="ExtraCondensed"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Width" Value="620"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center"
+                Margin="0 40 0 0">
+        <TextBlock Text="English layot"
+                   TextDecorations="Underline"
+                   Style="{StaticResource LanguageHeaderTextBlock}"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                        >
+            <cc:LanguageLayotStatisticBlock
+               Style="{StaticResource SpeedLanguageLayotStatisticBlock}"
+                HeaderText="Speed"
+                IconSource="{StaticResource GoldFlash}"
+                StatValue="47"
+                StatUnitValue="wpm"
+                Margin="5 5 30 5"/>
+            <cc:LanguageLayotStatisticBlock
+                Style="{StaticResource AccuracyLanguageLayotStatisticBlock}"
+                HeaderText="Accuracy"
+                IconSource="{StaticResource GoldTarget}"
+                StatValue="99.5"
+                StatUnitValue="%"
+                 Margin="5 5 30 5"/>
+            <Button Content="Button"
+                    Style="{StaticResource CustomMainControlButton}"/>
+
+        </StackPanel>
+        <Image Width="600"
+               Margin="30"
+               Height="400"
+               Source="{StaticResource CertificateTemp}"/>
+
+    </StackPanel>
+</UserControl>

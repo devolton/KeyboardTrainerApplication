@@ -22,6 +22,12 @@
     <Compile Update="View\CustomControls\KeyboardMap.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CustomControls\LanguageLayotStatisticBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\LanguageLayotTypingCertificateBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CustomControls\TypingTestInfoBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -32,6 +38,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\LearnPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\TypingCertificatesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\TypingTestPage.xaml.cs">
@@ -63,6 +72,12 @@
     <Page Update="View\CustomControls\KeyboardMap.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\CustomControls\LanguageLayotStatisticBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\LanguageLayotTypingCertificateBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\CustomControls\TypingTestInfoBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -73,6 +88,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\LearnPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\TypingCertificatesPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\TypingTestPage.xaml">
