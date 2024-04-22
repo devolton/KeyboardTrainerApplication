@@ -25,7 +25,10 @@
     <None Remove="Resources\Images\KeyboardSchemeEng.png" />
     <None Remove="Resources\Images\PlatinumMedal.png" />
     <None Remove="Resources\Images\RepeatIcon.png" />
+    <None Remove="Resources\Images\SilverCalendar.png" />
+    <None Remove="Resources\Images\SilverFlash.png" />
     <None Remove="Resources\Images\SilverMedal.png" />
+    <None Remove="Resources\Images\SilverTarget.png" />
     <None Remove="Resources\Images\StartLeftEng.png" />
     <None Remove="Resources\Images\StartRightEng.png" />
   </ItemGroup>
@@ -57,7 +60,10 @@
     <Resource Include="Resources\Images\RepeatIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\SilverCalendar.png" />
+    <Resource Include="Resources\Images\SilverFlash.png" />
     <Resource Include="Resources\Images\SilverMedal.png" />
+    <Resource Include="Resources\Images\SilverTarget.png" />
     <Resource Include="Resources\Images\StartLeftEng.png" />
     <Resource Include="Resources\Images\StartRightEng.png" />
   </ItemGroup>

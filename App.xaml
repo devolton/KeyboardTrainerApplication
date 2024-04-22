@@ -35,7 +35,10 @@
             <BitmapImage x:Key="GoldTarget" UriSource="pack://application:,,,/Resources/Images/GoldTarget.png"/>
             <BitmapImage x:Key="CertificateTemp" UriSource="pack://application:,,,/Resources/Images/CertificateTemp.png"/>
             <BitmapImage x:Key="CertificateIcon" UriSource="pack://application:,,,/Resources/Images/CertificateIcon.png"/>
-            
+            <BitmapImage x:Key="SilverTarget" UriSource="pack://application:,,,/Resources/Images/SilverTarget.png"/>
+            <BitmapImage x:Key="SilverCalendar" UriSource="pack://application:,,,/Resources/Images/SilverCalendar.png"/>
+            <BitmapImage x:Key="SilverFlash" UriSource="pack://application:,,,/Resources/Images/SilverFlash.png"/>
+
 
         </ResourceDictionary>
     </Application.Resources>

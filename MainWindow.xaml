@@ -71,6 +71,7 @@
                             <Button
                                 x:Name="CertificationResultButton"
                                 Content="My certirfication results"
+                                Click="CertificationResultButton_Click"
                                     />
                             <Button 
                                 x:Name="EducationalResultsButton"
