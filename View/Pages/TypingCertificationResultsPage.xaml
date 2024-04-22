@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-       xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls" 
+      xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls" 
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -16,16 +16,16 @@
             <StackPanel Orientation="Horizontal">
                 <Image Width="70"
                  Height="70"
-                 Margin="30 20 0 0"
-                 Source="{StaticResource CertificateIcon}"/>
-                <TextBlock Text="Typing certificates"
+                 Margin="30 20 0 10"
+                 Source="{StaticResource StatIcon}"/>
+                <TextBlock Text="Certification results"
                  TextAlignment="Left"
                      Padding="30 0 0 0"
              Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
             </StackPanel>
-            <cc:CertificateResultsFilterBlock/>
-            <cc:CertificateResultsStatisticBlock
-                Margin="0 30 0 0"/>
+            <cc:CertificateResultsFilterBlock
+                Margin="0 20 0 30"/>
+            <cc:CertificateResultsStatisticBlock/>
         </StackPanel>
     </ScrollViewer>
 </Page>

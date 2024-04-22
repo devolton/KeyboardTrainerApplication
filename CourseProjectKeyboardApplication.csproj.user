@@ -16,7 +16,7 @@
     <Compile Update="View\CustomControls\CertificateResultsFilterBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\CertificateResultsStatisticBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingCertificateResultsControls\CertificateResultsStatisticBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\CustomControls\KeyboardControlItemTextBlock.xaml.cs">
@@ -34,7 +34,7 @@
     <Compile Update="View\CustomControls\LanguageLayotTypingCertificateBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\TypingStatLine.xaml.cs">
+    <Compile Update="View\CustomControls\TypingCertificateResultsControls\TypingStatLine.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\CustomControls\TypingTestInfoBlock.xaml.cs">
@@ -78,7 +78,7 @@
     <Page Update="View\CustomControls\CertificateResultsFilterBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\CertificateResultsStatisticBlock.xaml">
+    <Page Update="View\CustomControls\TypingCertificateResultsControls\CertificateResultsStatisticBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\KeyboardControlItemTextBlock.xaml">
@@ -96,7 +96,7 @@
     <Page Update="View\CustomControls\LanguageLayotTypingCertificateBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\TypingStatLine.xaml">
+    <Page Update="View\CustomControls\TypingCertificateResultsControls\TypingStatLine.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\TypingTestInfoBlock.xaml">

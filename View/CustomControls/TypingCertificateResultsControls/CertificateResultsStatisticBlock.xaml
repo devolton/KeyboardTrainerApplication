@@ -65,7 +65,26 @@
         </Border>
         <StackPanel Width="590"
                     Orientation="Vertical">
-            <cc:TypingStatLine/>
+            <cc:TypingStatLine
+                SpeedValue="43"
+                SpeedUnitValue="wpm"
+                AccuracyValue="95.5"
+                AccuracyUnitValue="%"
+                DateValue="12 Dec 2024"
+                />
+            <cc:TypingStatLine
+                 SpeedValue="39"
+                 SpeedUnitValue="wpm"
+                 AccuracyValue="90.5"
+                 AccuracyUnitValue="%"
+                 DateValue="11 Feb 2024"/>
+            <cc:TypingStatLine
+                SpeedValue="45"
+                SpeedUnitValue="wpm"
+                AccuracyValue="97"
+                AccuracyUnitValue="%"
+                DateValue="09 Mar 2024"/>
+      
         </StackPanel>
     </StackPanel>
 </UserControl>
