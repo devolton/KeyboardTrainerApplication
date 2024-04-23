@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="CourseProjectKeyboardApplication.View.CustomControls.EducationResults.EducationResultsHeaderBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ccEducationResults="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EducationResults"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="EducationResultsLayoutLanguageNameTextBlock" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="{StaticResource CustomDeepBlue}"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="Margin" Value="5 0 0 0"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="TextDecorations" Value="Underline"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="EducationResultsLessonsCountTextBlock" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="{StaticResource CustomDeepBlueViolet}"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Light"/>
+                <Setter Property="Margin" Value="10 10 0 3"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                
+
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+    
+    <Border
+        Width="800"
+        BorderThickness="0 1 0 0"
+        BorderBrush="Silver"
+        Margin="0 30 0 30">
+        <Grid
+            Width="700"
+            Height="130">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock 
+                Grid.Row="0"
+                Grid.Column="0"
+              Style="{StaticResource EducationResultsLayoutLanguageNameTextBlock}"
+                Text="Engish layot"/>
+            <ComboBox
+                Grid.Row="0"
+                Grid.Column="1"
+                SelectedIndex="0"
+                Height="30"
+                Width="100"
+                VerticalAlignment="Bottom">
+                <ComboBoxItem
+                    Content="English layot"/>
+                <ComboBoxItem
+                    Content="Ukrainial layot"/>
+            </ComboBox>
+            <StackPanel
+                VerticalAlignment="Center"
+                Grid.Row="1"
+                Grid.Column="0">
+                <TextBlock 
+                   Style="{StaticResource EducationResultsLessonsCountTextBlock}"
+                    Text="Lesson 2 from 19"/>
+                <ProgressBar
+                    
+                    Width="500"
+                    Value="29"
+                    HorizontalAlignment="Left"
+                    Height="20"
+                    Style="{StaticResource CustomEducationResultsProgressBar}"/>
+            </StackPanel>
+            <Button 
+                VerticalAlignment="Bottom"
+                Margin="0 0 0 5"
+                Height="35"
+                Width="100"
+                Grid.Column="1"
+                Grid.Row="1"
+                Content="Continue"/>
+
+        </Grid>
+    </Border>
+</UserControl>

@@ -39,7 +39,8 @@
             <BitmapImage x:Key="SilverCalendar" UriSource="pack://application:,,,/Resources/Images/SilverCalendar.png"/>
             <BitmapImage x:Key="SilverFlash" UriSource="pack://application:,,,/Resources/Images/SilverFlash.png"/>
             <BitmapImage x:Key="StatIcon" UriSource="pack://application:,,,/Resources/Images/StatisticIcon.png"/>
-            
+            <BitmapImage x:Key="StudyIcon" UriSource="pack://application:,,,/Resources/Images/StudyIcon.png"/>
+
 
 
         </ResourceDictionary>

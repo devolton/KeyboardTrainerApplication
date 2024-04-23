@@ -76,6 +76,7 @@
                             <Button 
                                 x:Name="EducationalResultsButton"
                                 Content="My educational results"
+                                Click="EducationalResultsButton_Click"
                                 />
                             <Button
                                 x:Name="EditProfileButton"

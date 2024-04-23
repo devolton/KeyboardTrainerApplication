@@ -24,6 +24,7 @@ namespace CourseProjectKeyboardApplication
         private TypingTutorPage _typingTutorPage;
         private TypingCertificatesPage _typingCertificatesPage;
         private TypingCertificationResultsPage _typingCertificationResultsPage;
+        private EducationResultsPage _educationResultsPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace CourseProjectKeyboardApplication
             _typingTestPage = new TypingTestPage();
             _typingCertificatesPage = new TypingCertificatesPage(); // перенести весь блок в  Window_Loaded
             _typingCertificationResultsPage = new TypingCertificationResultsPage();
+            _educationResultsPage = new EducationResultsPage();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +72,11 @@ namespace CourseProjectKeyboardApplication
         private void CertificationResultButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = _typingCertificationResultsPage;
+        }
+
+        private void EducationalResultsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = _educationResultsPage;
         }
     }
 }

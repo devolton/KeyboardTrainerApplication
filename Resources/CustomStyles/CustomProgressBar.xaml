@@ -20,4 +20,24 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="CustomEducationResultsProgressBar" TargetType="ProgressBar">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Border Background="{StaticResource CustomLightGray}"
+             BorderBrush="{TemplateBinding BorderBrush}"
+             BorderThickness="{TemplateBinding BorderThickness}"
+             CornerRadius="15">
+
+                        <Grid x:Name="PART_Track">
+                            <Rectangle x:Name="PART_Indicator"
+                    HorizontalAlignment="Left"
+                    Fill="{StaticResource CustomBlueGreen}"
+                    RadiusX="10" RadiusY="20" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

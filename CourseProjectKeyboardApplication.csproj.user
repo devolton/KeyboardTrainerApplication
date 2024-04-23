@@ -7,43 +7,55 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\CustomControls\CertificateConditionTableBodyItem.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResults\EducationResultsHeaderBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\CertificateConditionTableHeader.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResults\EducationResultsLessonBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\CertificateResultsFilterBlock.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResults\EducationResultsLessonHeader.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\TypingCertificateResultsControls\CertificateResultsStatisticBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingTestControls\CertificateConditionTableBodyItem.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\KeyboardControlItemTextBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingTestControls\CertificateConditionTableHeader.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\KeyboardItemTextBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingCertificationResultsControls\CertificateResultsFilterBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\KeyboardMap.xaml.cs">
+    <Compile Update="View\CustomControls\TypingCertificationResultsControls\CertificateResultsStatisticBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\LanguageLayotStatisticBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingTutorControls\KeyboardControlItemTextBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\LanguageLayotTypingCertificateBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingTutorControls\KeyboardItemTextBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\TypingCertificateResultsControls\TypingStatLine.xaml.cs">
+    <Compile Update="View\CustomControls\TypingTutorControls\KeyboardMap.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\TypingTestInfoBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingCertificatesControls\LanguageLayotStatisticBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\TypingTutorTextDisplayerBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingCertificatesControls\LanguageLayotTypingCertificateBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\TypingTestTextDisplayerBlock.xaml.cs">
+    <Compile Update="View\CustomControls\TypingCertificationResultsControls\TypingStatLine.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\TypingTestControls\TypingTestInfoBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\TypingTutorControls\TypingTutorTextDisplayerBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\TypingTestControls\TypingTestTextDisplayerBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\EducationResultsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\LearnPage.xaml.cs">
@@ -69,43 +81,55 @@
     <Page Update="Resources\CustomStyles\CustomKeyboardItemBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\CertificateConditionTableBodyItem.xaml">
+    <Page Update="View\CustomControls\EducationResults\EducationResultsHeaderBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\CertificateConditionTableHeader.xaml">
+    <Page Update="View\CustomControls\EducationResults\EducationResultsLessonBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\CertificateResultsFilterBlock.xaml">
+    <Page Update="View\CustomControls\EducationResults\EducationResultsLessonHeader.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\TypingCertificateResultsControls\CertificateResultsStatisticBlock.xaml">
+    <Page Update="View\CustomControls\TypingTestControls\CertificateConditionTableBodyItem.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\KeyboardControlItemTextBlock.xaml">
+    <Page Update="View\CustomControls\TypingTestControls\CertificateConditionTableHeader.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\KeyboardItemTextBlock.xaml">
+    <Page Update="View\CustomControls\TypingCertificationResultsControls\CertificateResultsFilterBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\KeyboardMap.xaml">
+    <Page Update="View\CustomControls\TypingCertificationResultsControls\CertificateResultsStatisticBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\LanguageLayotStatisticBlock.xaml">
+    <Page Update="View\CustomControls\TypingTutorControls\KeyboardControlItemTextBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\LanguageLayotTypingCertificateBlock.xaml">
+    <Page Update="View\CustomControls\TypingTutorControls\KeyboardItemTextBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\TypingCertificateResultsControls\TypingStatLine.xaml">
+    <Page Update="View\CustomControls\TypingTutorControls\KeyboardMap.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\TypingTestInfoBlock.xaml">
+    <Page Update="View\CustomControls\TypingCertificatesControls\LanguageLayotStatisticBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\TypingTutorTextDisplayerBlock.xaml">
+    <Page Update="View\CustomControls\TypingCertificatesControls\LanguageLayotTypingCertificateBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\TypingTestTextDisplayerBlock.xaml">
+    <Page Update="View\CustomControls\TypingCertificationResultsControls\TypingStatLine.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\TypingTestControls\TypingTestInfoBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\TypingTutorControls\TypingTutorTextDisplayerBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\TypingTestControls\TypingTestTextDisplayerBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\EducationResultsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\LearnPage.xaml">
