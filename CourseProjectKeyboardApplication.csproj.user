@@ -61,6 +61,9 @@
     <Compile Update="View\CustomControls\TypingTestControls\TypingTestTextDisplayerBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CustomControls\TypingTutorResultControls\AchivementBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Pages\EducationResultsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +83,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\TypingTutorPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\TypingTutorResultPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -147,6 +153,9 @@
     <Page Update="View\CustomControls\TypingTestControls\TypingTestTextDisplayerBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\CustomControls\TypingTutorResultControls\AchivementBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Pages\EducationResultsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -181,6 +190,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\CustomStyles\CustomTextBlocks.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\TypingTutorResultPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
