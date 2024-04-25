@@ -23,6 +23,7 @@
     <None Remove="Resources\Images\GoldTarget.png" />
     <None Remove="Resources\Images\Keyboard.png" />
     <None Remove="Resources\Images\KeyboardSchemeEng.png" />
+    <None Remove="Resources\Images\LessonLockIcon.png" />
     <None Remove="Resources\Images\PlatinumMedal.png" />
     <None Remove="Resources\Images\RepeatIcon.png" />
     <None Remove="Resources\Images\SilverCalendar.png" />
@@ -37,6 +38,7 @@
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +60,7 @@
     <Resource Include="Resources\Images\GoldTarget.png" />
     <Resource Include="Resources\Images\Keyboard.png" />
     <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
+    <Resource Include="Resources\Images\LessonLockIcon.png" />
     <Resource Include="Resources\Images\PlatinumMedal.png" />
     <Resource Include="Resources\Images\RepeatIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

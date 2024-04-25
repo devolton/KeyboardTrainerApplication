@@ -12,34 +12,32 @@
         BorderBrush="Silver"
         Margin="0 30 0 30">
         <StackPanel Orientation="Vertical"
+                    
                     Width="600">
-            <WrapPanel Orientation="Horizontal">
-                <TextBlock
-                    Text="Hello"
-                    Width="100"/>
-                <TextBlock
-        Text="Hello"
-        Width="100"/>
-                <TextBlock
-        Text="Hello"
-        Width="100"/>
-                <TextBlock
-        Text="Hello"
-        Width="100"/>
-                <TextBlock
-        Text="Hello"
-        Width="100"/>
-                <TextBlock
-        Text="Hello"
-        Width="100"/>
-    <TextBlock
-        Text="Hello"
-        Width="100"/>
-                <TextBlock
-        Text="Hello"
-        Width="100"/>
-            </WrapPanel>
+            <ccEducationResults:EducationResultsLessonHeader
+                LessonNumber="Lesson 1"
+                LessonTitle="Home Row Position"
+                Margin="0 30 0 20"/>
 
+            <WrapPanel Orientation="Horizontal"
+                       x:Name="EducationResultsLessonsWrapPanel"
+                       >
+                <ccEducationResults:EducationResultsLessonNumberButton
+                    LessThanTwoTyposCircleBackground="ForestGreen"
+                    WithoutErrorsCircleBackground="Orange"
+                    SpeedCircleBackground="Purple"
+                    LessonNumber="1"/>
+                <ccEducationResults:EducationResultsLessonNumberButton
+                    LessThanTwoTyposCircleBackground="ForestGreen"
+                    SpeedCircleBackground="Purple"
+                    LessonNumber="2"/>
+                <ccEducationResults:EducationResultsLessonNumberButton
+                    LessonNumber="3"/>
+                <ccEducationResults:EducationResultsLockButton
+                    LessonNumber="4"/>
+
+            </WrapPanel>
+         
         </StackPanel>
     </Border>
 </UserControl>

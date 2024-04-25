@@ -6,23 +6,50 @@
              xmlns:ccEducationResults="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EducationResults"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="LessonNumberTextBlock" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="{StaticResource CustomDeepBlue}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Light"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="LessonNameTextBlock" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="{StaticResource CustomDeepBlue}"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style.Setters>
+        </Style>
+      
+    </UserControl.Resources>
     <Border CornerRadius="20"
-            Height="150"
-            Width="700"
+            Height="100"
+            Width="600"
         Background="Silver">
         <Grid
-            Width="650"
-            Height="110">
+            Width="550"
+            Height="90">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.8*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                
+            <StackPanel Grid.Column="0"
+                        VerticalAlignment="Center">
+                <TextBlock
+                    Style="{StaticResource LessonNumberTextBlock}"
+                    Text="{Binding LessonNumber}"
+                    />
+                <TextBlock Text="{Binding LessonTitle}"
+                           Style="{StaticResource LessonNameTextBlock}"/>
+
             </StackPanel>
             <StackPanel Grid.Column="1"
-                        Orientation="Horizontal">
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+        
                 
+
             </StackPanel>
             
         </Grid>

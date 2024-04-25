@@ -16,6 +16,12 @@
     <Compile Update="View\CustomControls\EducationResults\EducationResultsLessonHeader.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CustomControls\EducationResults\EducationResultsLessonNumberButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\EducationResults\EducationResultsLockButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CustomControls\TypingTestControls\CertificateConditionTableBodyItem.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +94,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\EducationResults\EducationResultsLessonHeader.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\EducationResults\EducationResultsLessonNumberButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\EducationResults\EducationResultsLockButton.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\TypingTestControls\CertificateConditionTableBodyItem.xaml">

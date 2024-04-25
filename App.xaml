@@ -40,6 +40,7 @@
             <BitmapImage x:Key="SilverFlash" UriSource="pack://application:,,,/Resources/Images/SilverFlash.png"/>
             <BitmapImage x:Key="StatIcon" UriSource="pack://application:,,,/Resources/Images/StatisticIcon.png"/>
             <BitmapImage x:Key="StudyIcon" UriSource="pack://application:,,,/Resources/Images/StudyIcon.png"/>
+            <BitmapImage x:Key="LessonLockIcon" UriSource="pack://application:,,,/Resources/Images/LessonLockIcon.png"/>
 
 
 

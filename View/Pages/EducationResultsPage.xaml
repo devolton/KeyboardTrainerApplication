@@ -17,14 +17,17 @@
             <StackPanel Orientation="Horizontal">
                 <Image Width="70"
                        Height="70"
-                       Margin="30 20 0 10"
+                       Margin="60 20 0 10"
                        Source="{StaticResource StudyIcon}"/>
-                <TextBlock Text="Education result"
+                <TextBlock Text="Education results"
                            TextAlignment="Left"
                            Padding="30 0 0 0"
                            Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
             </StackPanel>
             <ccEducationResults:EducationResultsHeaderBlock/>
+            <ccEducationResults:EducationResultsLessonBlock/>
+            <ccEducationResults:EducationResultsLessonBlock/>
+            <ccEducationResults:EducationResultsLessonBlock/>
             <ccEducationResults:EducationResultsLessonBlock/>
 
 
