@@ -76,6 +76,9 @@
     <Compile Update="View\Pages\TypingTestPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Pages\TypingTestResultPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Pages\TypingTutorPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -85,6 +88,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\CustomStyles\CustomKeyboardItemBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\CustomStyles\CustomLanguageLayotStatisticBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\EducationResults\EducationResultsHeaderBlock.xaml">
@@ -154,6 +160,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\TypingTestPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\TypingTestResultPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\TypingTutorPage.xaml">

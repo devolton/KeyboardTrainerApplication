@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomProgressBar.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomKeyboardItemBlock.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomKeyboardControlItemBlock.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomLanguageLayotStatisticBlock.xaml"/>
             </ResourceDictionary.MergedDictionaries>
            
             <BitmapImage x:Key="KeyboardSchemeEngImage" UriSource="pack://application:,,,/Resources/Images/KeyboardSchemeEng.png"/>
@@ -41,7 +42,11 @@
             <BitmapImage x:Key="StatIcon" UriSource="pack://application:,,,/Resources/Images/StatisticIcon.png"/>
             <BitmapImage x:Key="StudyIcon" UriSource="pack://application:,,,/Resources/Images/StudyIcon.png"/>
             <BitmapImage x:Key="LessonLockIcon" UriSource="pack://application:,,,/Resources/Images/LessonLockIcon.png"/>
-
+            <BitmapImage x:Key="GoldStar" UriSource="pack://application:,,,/Resources/Images/GoldStar.png"/>
+            <BitmapImage x:Key="LightGrayFlash" UriSource="pack://application:,,,/Resources/Images/LightGrayFlash.png"/>
+            <BitmapImage x:Key="LightGrayStar" UriSource="pack://application:,,,/Resources/Images/LightGrayStar.png"/>
+            <BitmapImage x:Key="LightGrayTarget" UriSource="pack://application:,,,/Resources/Images/LightGrayTarget.png"/>
+            
 
 
         </ResourceDictionary>

@@ -20,10 +20,14 @@
     <None Remove="Resources\Images\DevoltonLabsLogo.png" />
     <None Remove="Resources\Images\GoldLightning.png" />
     <None Remove="Resources\Images\GoldMedal.png" />
+    <None Remove="Resources\Images\GoldStar.png" />
     <None Remove="Resources\Images\GoldTarget.png" />
     <None Remove="Resources\Images\Keyboard.png" />
     <None Remove="Resources\Images\KeyboardSchemeEng.png" />
     <None Remove="Resources\Images\LessonLockIcon.png" />
+    <None Remove="Resources\Images\LightGrayFlash.png" />
+    <None Remove="Resources\Images\LightGrayStar.png" />
+    <None Remove="Resources\Images\LightGrayTarget.png" />
     <None Remove="Resources\Images\PlatinumMedal.png" />
     <None Remove="Resources\Images\RepeatIcon.png" />
     <None Remove="Resources\Images\SilverCalendar.png" />
@@ -57,10 +61,14 @@
     </Resource>
     <Resource Include="Resources\Images\GoldLightning.png" />
     <Resource Include="Resources\Images\GoldMedal.png" />
+    <Resource Include="Resources\Images\GoldStar.png" />
     <Resource Include="Resources\Images\GoldTarget.png" />
     <Resource Include="Resources\Images\Keyboard.png" />
     <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
     <Resource Include="Resources\Images\LessonLockIcon.png" />
+    <Resource Include="Resources\Images\LightGrayFlash.png" />
+    <Resource Include="Resources\Images\LightGrayStar.png" />
+    <Resource Include="Resources\Images\LightGrayTarget.png" />
     <Resource Include="Resources\Images\PlatinumMedal.png" />
     <Resource Include="Resources\Images\RepeatIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

@@ -6,35 +6,7 @@
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Style x:Key="SpeedLanguageLayotStatisticBlock" TargetType="cc:LanguageLayotStatisticBlock">
-            <Style.Setters>
-                <Setter Property="HeaderForeground" Value="{StaticResource CustomLightBeigeBrush}"/>
-                <Setter Property="BodyColor" Value="Orange"/>
-                <Setter Property="HeaderColor" Value="DarkOrange"/>
 
-            </Style.Setters>
-        </Style>
-        <Style x:Key="AccuracyLanguageLayotStatisticBlock" TargetType="cc:LanguageLayotStatisticBlock">
-            <Style.Setters>
-                <Setter Property="HeaderForeground" Value="{StaticResource CustomWhiteVioletBrush}"/>
-                <Setter Property="BodyColor" Value="Violet"/>
-                <Setter Property="HeaderColor" Value="DarkViolet"/>
-
-            </Style.Setters>
-        </Style>
-        <Style x:Key="LanguageHeaderTextBlock" TargetType="TextBlock">
-            <Style.Setters>
-                <Setter Property="Foreground" Value="{StaticResource CustomDeepBlue}"/>
-                <Setter Property="TextAlignment" Value="Left"/>
-                <Setter Property="FontSize" Value="36"/>
-                <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="FontStretch" Value="ExtraCondensed"/>
-                <Setter Property="Margin" Value="10"/>
-                <Setter Property="Width" Value="620"/>
-            </Style.Setters>
-        </Style>
-    </UserControl.Resources>
 
     <StackPanel Orientation="Vertical"
                 VerticalAlignment="Center"

@@ -86,7 +86,14 @@
                                 x:Name="ExitButton"
                                 Content="Exit"
                                 Click="ExitButton_Click"/>
-                    
+                            <Button 
+                                x:Name="TempTestResultButton"
+                                Content="TempTestResult"
+                                Click="TempTestResultButton_Click"/>
+                            <Button x:Name="TempTytorResultButton"
+                                    Content="TytorResultButton"
+                                    Click="TempTytorResultButton_Click"/>
+
                         </StackPanel>
                     </materialDesign:PopupBox>
                   
