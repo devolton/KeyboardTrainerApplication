@@ -33,7 +33,7 @@
                 StatUnitValue="%"
                  Margin="5 5 30 5"/>
             <Button Content="Improve result"
-                    Style="{StaticResource CustomApplicationTemplateButton}"/>
+                    Style="{StaticResource CustomYellowTemplateButton}"/>
 
         </StackPanel>
         <Image Width="600"

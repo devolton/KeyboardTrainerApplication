@@ -49,9 +49,8 @@
                        Visibility="Visible"
                       />
             <Button
-                Content="ClickHereToStart"
-                Width="150"
-                Height="40"
+                Content="Click To Start"
+                Style="{StaticResource CustomTypingTestStartButton}"
                 Panel.ZIndex="2"
                 Visibility="Visible"/>
         </Grid>

@@ -64,6 +64,9 @@
     <Compile Update="View\CustomControls\TypingTutorResultControls\AchivementBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Pages\EditUserProfilPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Pages\EducationResultsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -154,6 +157,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\TypingTutorResultControls\AchivementBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\EditUserProfilPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\EducationResultsPage.xaml">

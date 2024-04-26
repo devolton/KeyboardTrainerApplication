@@ -81,6 +81,7 @@
                             <Button
                                 x:Name="EditProfileButton"
                                 Content="Edit profile"
+                                Click="EditProfileButton_Click"
                                 />
                             <Button 
                                 x:Name="ExitButton"

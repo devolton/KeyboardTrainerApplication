@@ -27,6 +27,7 @@ namespace CourseProjectKeyboardApplication
         private EducationResultsPage _educationResultsPage;
         private TypingTestResultPage _typingTestResultPage;
         private TypingTutorResultPage _typingTutorResultPage;
+        private EditUserProfilPage _editUserProfilPage;
 
         public MainWindow()
         {
@@ -39,6 +40,7 @@ namespace CourseProjectKeyboardApplication
             _educationResultsPage = new EducationResultsPage();
             _typingTestResultPage = new TypingTestResultPage();
             _typingTutorResultPage = new TypingTutorResultPage();
+            _editUserProfilPage = new EditUserProfilPage();
 
         }
 
@@ -94,6 +96,11 @@ namespace CourseProjectKeyboardApplication
         {
             MainFrame.Content = _typingTutorResultPage;
 
+        }
+
+        private void EditProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = _editUserProfilPage;
         }
     }
 }

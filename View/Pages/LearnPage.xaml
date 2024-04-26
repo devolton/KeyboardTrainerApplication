@@ -167,24 +167,12 @@
                 <Button x:Name="StartLearnButton"
                         Grid.Column="0"
                         Click="StartLearnButton_Click"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="150"
-                        Height="50"
-                        FontSize="20"
-                        FontWeight="DemiBold"
-                        Background="{StaticResource CustomBlueGreen}"
+                        Style="{StaticResource CustomVioletTemplateButton}"
                         Content="{Binding TrainTimeStudyButtonText}"/>
                 <Button x:Name="TestSpeedButton"
                         Click="TestSpeedButton_Click"
                         Grid.Column="1"
-                        HorizontalAlignment="Center"
-                         VerticalAlignment="Center"
-                          Width="150"
-                          Height="50"
-                          FontSize="20"
-                          FontWeight="DemiBold"
-                        Background="{StaticResource CustomLime}"
+                     Style="{StaticResource CustomYellowTemplateButton}"
                         Content="{Binding TrainTimeTestButtonText}"/>
             </Grid>
             </Border>

@@ -3,45 +3,19 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                  
 >
-    <Style x:Key="CustomApplicationTemplateButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+    <!--template button style(common for applications buttons)-->
+    <Style x:Key="CustomTemplateButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
-            <Setter Property="Background" Value="Yellow"/>
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="60"/>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="Height" Value="50"/>
             <Setter Property="Margin" Value="10 10 10 10"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="{DynamicResource CustomCoal}"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border
-                            CornerRadius="10"
-                            BorderThickness="2 1 2 10"
-                            BorderBrush="{DynamicResource CustomButtonsDarkYellow}"
-                            Background="{StaticResource CustomButtonsLightYellow}">
-                            <Border.Effect>
-                                <DropShadowEffect
-                                    Direction="300"
-                                    Color="LightYellow"
-                                    ShadowDepth="5"
-                                    Opacity="0.8"
-                                    BlurRadius="15"/>
-                            </Border.Effect>
-                            <ContentPresenter
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="{TemplateBinding Padding}"/>
-
-                        </Border>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style.Setters>
         <Style.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
@@ -49,14 +23,14 @@
                     <Storyboard    Storyboard.TargetProperty="Width">
                         <DoubleAnimation       
                                        Duration="00:00:00.5"
-                                       To="210"
+                                       To="150"
                                        AutoReverse="True"/>
                     </Storyboard>
                 </BeginStoryboard>
                 <BeginStoryboard>
                     <Storyboard Storyboard.TargetProperty="Height">
                         <DoubleAnimation Duration="00:00:00.5"
-                                         To="65"
+                                         To="55"
                                          AutoReverse="True"/>
                     </Storyboard>
                 </BeginStoryboard>
@@ -71,6 +45,74 @@
 
         </Style.Triggers>
     </Style>
+    
+    <!--Violet button style-->
+    <Style x:Key="CustomVioletTemplateButton" TargetType="Button" BasedOn="{StaticResource CustomTemplateButton}">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="{StaticResource MaterialDesignPaper}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                          CornerRadius="10"
+                          BorderThickness="2 1 2 10"
+                          BorderBrush="{DynamicResource CustomButtonsDardViolet}"
+                          Background="{StaticResource CustomButtonsLightViolet}">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                  Direction="300"
+                                  Color="LightYellow"
+                                  ShadowDepth="5"
+                                  Opacity="0.8"
+                                  BlurRadius="15"/>
+                            </Border.Effect>
+                            <ContentPresenter
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Margin="{TemplateBinding Padding}"/>
+
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style.Setters>
+
+    </Style>
+    <!--Yellow button style-->
+    <Style x:Key="CustomYellowTemplateButton" TargetType="Button" BasedOn="{StaticResource CustomTemplateButton}">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+               CornerRadius="10"
+               BorderThickness="2 1 2 10"
+               BorderBrush="{DynamicResource CustomButtonsDarkYellow}"
+               Background="{StaticResource CustomButtonsLightYellow}">
+                            <Border.Effect>
+                                <DropShadowEffect
+                       Direction="300"
+                       Color="LightYellow"
+                       ShadowDepth="5"
+                       Opacity="0.8"
+                       BlurRadius="15"/>
+                            </Border.Effect>
+                            <ContentPresenter
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="{TemplateBinding Padding}"/>
+
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+    
+    <!--style for buttons in main menu-->
     <Style x:Key="CustomMainControlButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
             <Setter Property="Background" Value="{DynamicResource CustomAluminum}"/>
@@ -134,7 +176,19 @@
 
         </Style.Triggers>
     </Style>
+    <Style x:Key="CustomTypingTestStartButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="{StaticResource MaterialDesignPaper}"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="{StaticResource CustomDeepBlueViolet}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="Normal"/>
 
+        </Style.Setters>
+    </Style>
+<!--popupBox style-->
     <Style x:Key="CusomPopupBoxButton" TargetType="Button">
         <Style.Setters>
             <Setter Property="FontSize" Value="18"/>

@@ -20,7 +20,7 @@
         <StackPanel Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Margin=" 0 20 0 0">
+                    Margin=" 0 20 0 10">
             <cc:LanguageLayotStatisticBlock
                     Style="{StaticResource SpeedLanguageLayotStatisticBlock}"
                     HeaderText="Speed"
@@ -36,9 +36,8 @@
                     StatUnitValue="%"
                     Margin="5 5 30 5"/>
         </StackPanel>
-        <Button Content="Imporove your score"
-                Width="200"
-                Height="50"
-                Margin="20"/>
+        <Button Content="Imporove score"
+                FontSize="14"
+              Style="{StaticResource CustomYellowTemplateButton}"/>
     </StackPanel>
 </Page>
