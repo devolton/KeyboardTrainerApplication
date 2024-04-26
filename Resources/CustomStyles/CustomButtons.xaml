@@ -5,16 +5,75 @@
 >
     <Style x:Key="CustomApplicationTemplateButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
-            
-            
+            <Setter Property="Background" Value="Yellow"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Tahoma"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Margin" Value="10 10 10 10"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{DynamicResource CustomCoal}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            CornerRadius="10"
+                            BorderThickness="2 1 2 10"
+                            BorderBrush="{DynamicResource CustomButtonsDarkYellow}"
+                            Background="{StaticResource CustomButtonsLightYellow}">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    Direction="300"
+                                    Color="LightYellow"
+                                    ShadowDepth="5"
+                                    Opacity="0.8"
+                                    BlurRadius="15"/>
+                            </Border.Effect>
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="{TemplateBinding Padding}"/>
+
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style.Setters>
         <Style.Triggers>
-            
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard    Storyboard.TargetProperty="Width">
+                        <DoubleAnimation       
+                                       Duration="00:00:00.5"
+                                       To="210"
+                                       AutoReverse="True"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="Height">
+                        <DoubleAnimation Duration="00:00:00.5"
+                                         To="65"
+                                         AutoReverse="True"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="Margin">
+                        <ThicknessAnimation Duration="00:00:00.5"
+                                            To="5 2.5 5 2.5"
+                                            AutoReverse="True"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
         </Style.Triggers>
     </Style>
     <Style x:Key="CustomMainControlButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
-            <Setter Property="Background" Value="{DynamicResource CustomMetal}"/>
+            <Setter Property="Background" Value="{DynamicResource CustomAluminum}"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="Tahoma"/>
             <Setter Property="FontWeight" Value="Normal"/>
@@ -23,16 +82,16 @@
             <Setter Property="Margin" Value="10 10 10 10"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource CustomCoal}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
                         CornerRadius="5"
-                        BorderThickness="2 1 1 7"
-                        BorderBrush="DarkGray"
-                        Background="{StaticResource CustomMetal}">
+                        BorderThickness="2 1 2 7"
+                        BorderBrush="{DynamicResource CustomCoal}"
+                        Background="{StaticResource CustomAluminum}">
                             <Border.Effect>
                                 <DropShadowEffect
                                 Direction="300"
@@ -61,33 +120,17 @@
                                             To="10 10 10 20"/>
                     </Storyboard>
                 </BeginStoryboard>
-                <!--<BeginStoryboard>
-                    <Storyboard Storyboard.TargetProperty="Width">
-                        <DoubleAnimation    From="150"
-                                            To="160"
-                                            Duration="00:00:00.75"
-                                            AutoReverse="True"/>
-                    </Storyboard>
-                </BeginStoryboard>-->
-                <BeginStoryboard>
-                    <Storyboard Storyboard.TargetProperty="Height">
-                        <DoubleAnimation From="50"
-                                         To="55"
-                                         Duration="00:00:00.75"
-                                         AutoReverse="True"/>
-
-                    </Storyboard>
-                </BeginStoryboard>
             </EventTrigger>
             <EventTrigger RoutedEvent="MouseLeave">
                 <BeginStoryboard>
                     <Storyboard Storyboard.TargetProperty="Margin">
                         <ThicknessAnimation From="10 10 10 20"
-                                 Duration="00:00:00.3"
+                                 Duration="00:00:00.1"
                                  To="10 10 10 10"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
+          
 
         </Style.Triggers>
     </Style>
@@ -107,8 +150,6 @@
             <Setter Property="BorderBrush" Value="Silver"/>
             <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
         </Style.Setters>
-     
-    
     </Style>
 
 

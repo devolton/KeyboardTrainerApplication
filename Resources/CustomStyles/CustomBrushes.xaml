@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="CustomButtonsLightYellow" Color="#fff056"/>
+    <SolidColorBrush x:Key="CustomButtonsDarkYellow" Color="#ffd000"/>
     <SolidColorBrush x:Key="CustomLightSilver" Color="#eef4f6"/>
     <SolidColorBrush x:Key="CustomMetal" Color="#6c757d"/>
     <SolidColorBrush x:Key="CustomAluminum" Color="#e9ecef"/>
