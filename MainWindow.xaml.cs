@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
 using CourseProjectKeyboardApplication.View.Pages;
+using CourseProjectKeyboardApplication.View.Windows;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
@@ -101,6 +102,13 @@ namespace CourseProjectKeyboardApplication
         private void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = _editUserProfilPage;
+        }
+
+        private void AuthorizationWindow_Click(object sender, RoutedEventArgs e)
+        {
+            var authorizationWindow = new AuthorizationWindow();
+            authorizationWindow.Show();
+
         }
     }
 }

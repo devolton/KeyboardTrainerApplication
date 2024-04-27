@@ -1,0 +1,62 @@
+﻿<Window x:Class="CourseProjectKeyboardApplication.View.Windows.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Windows"
+        mc:Ignorable="d"
+        Title="AuthorizationWindow"
+           Height="500"
+           Width="400"
+           Background="{x:Null}"
+           AllowsTransparency="True"
+           WindowStyle="None"
+           WindowStartupLocation="CenterScreen"
+           Icon="{StaticResource ApplicationLogo}" >
+    <materialDesign:Card
+     x:Name="MainCard"
+     UniformCornerRadius="50"
+     Margin="20"
+     Background="{DynamicResource MaterialDesignPaper}"
+     >
+        <materialDesign:DialogHost>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal"
+                            Height="70"
+                            Width="330">
+                    <Button Background="BLue"
+                            Foreground="LightBlue"
+                            BorderThickness="0"
+                            Width="130"
+                            Height="50"
+                            Margin="10 5 20 0"
+                          >
+                        <TextBlock Text="Login"
+                                   FontSize="28"
+                                   TextDecorations="Underline"/>
+                    </Button>
+                    <Button Background="Transparent"
+                            Foreground="Black"
+                            BorderThickness="0"
+                            Width="130"
+                            Height="50">
+                        <TextBlock Text="Sing up"
+                                   FontSize="28"
+                                   TextDecorations="Underline"/>
+                    </Button>
+                    <Button Width="30"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        Margin="10 0 0 0"/>
+                </StackPanel>
+                <Frame x:Name="AuthorizationFrame"
+                       Margin="20"
+                       Height="340"
+                       NavigationUIVisibility="Hidden"/>
+            </StackPanel>
+            
+
+        </materialDesign:DialogHost>
+    </materialDesign:Card>
+</Window>
