@@ -1,0 +1,36 @@
+﻿<Page x:Class="CourseProjectKeyboardApplication.View.Pages.EditUserProfilPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
+      xmlns:ccEditUserProfile="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditUserProfilPage">
+    <ScrollViewer
+        VerticalScrollBarVisibility="Hidden">
+        <StackPanel
+        Orientation="Vertical"
+        HorizontalAlignment="Center"
+         Width="700">
+
+            <StackPanel Orientation="Horizontal">
+                <Image Width="70"
+                       Height="70"
+                       Margin="120 20 0 10"
+                       Source="{StaticResource EditProfileIcon}"/>
+                <TextBlock Text="Edit profile"
+                           TextAlignment="Left"
+                           Padding="30 0 0 0"
+                           Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
+            </StackPanel>
+            <ccEditUserProfile:EditUserProfileAvatarBlock/>
+            <ccEditUserProfile:EditUserProfileBodyBlock/>
+
+            <Button x:Name="SaveChangeButton"
+                    Content="Save"
+                    Style="{StaticResource CustomYellowTemplateButton}"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

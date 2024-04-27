@@ -18,6 +18,7 @@
     <None Remove="Resources\Images\CertificateTemp.png" />
     <None Remove="Resources\Images\coding.png" />
     <None Remove="Resources\Images\DevoltonLabsLogo.png" />
+    <None Remove="Resources\Images\EditProfileIcon.png" />
     <None Remove="Resources\Images\GoldLightning.png" />
     <None Remove="Resources\Images\GoldMedal.png" />
     <None Remove="Resources\Images\GoldStar.png" />
@@ -59,6 +60,7 @@
     <Resource Include="Resources\Images\DevoltonLabsLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\EditProfileIcon.png" />
     <Resource Include="Resources\Images\GoldLightning.png" />
     <Resource Include="Resources\Images\GoldMedal.png" />
     <Resource Include="Resources\Images\GoldStar.png" />

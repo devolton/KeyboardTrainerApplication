@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\CustomControls\EditUserProfileControls\EditUserProfileAvatarBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\EditUserProfileControls\EditUserProfileBodyBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CustomControls\EducationResults\EducationResultsHeaderBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,7 +70,7 @@
     <Compile Update="View\CustomControls\TypingTutorResultControls\AchivementBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\EditUserProfilPage.xaml.cs">
+    <Compile Update="View\Pages\EditUserProfilePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\EducationResultsPage.xaml.cs">
@@ -100,6 +106,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\CustomStyles\CustomLanguageLayotStatisticBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\CustomStyles\CustomPasswordBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\CustomStyles\CustomTextBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\EditUserProfileControls\EditUserProfileAvatarBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\EditUserProfileControls\EditUserProfileBodyBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\EducationResults\EducationResultsHeaderBlock.xaml">
@@ -159,7 +177,7 @@
     <Page Update="View\CustomControls\TypingTutorResultControls\AchivementBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\EditUserProfilPage.xaml">
+    <Page Update="View\Pages\EditUserProfilePage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\EducationResultsPage.xaml">
