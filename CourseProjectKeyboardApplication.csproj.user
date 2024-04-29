@@ -100,7 +100,7 @@
     <Compile Update="View\Pages\UserLoginPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\Pages\UserSingInPage.xaml.cs">
+    <Compile Update="View\Pages\UserSingUpPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Windows\AuthorizationWindow.xaml.cs">
@@ -231,7 +231,7 @@
     <Page Update="View\Pages\UserLoginPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\Pages\UserSingInPage.xaml">
+    <Page Update="View\Pages\UserSingUpPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\AuthorizationWindow.xaml">

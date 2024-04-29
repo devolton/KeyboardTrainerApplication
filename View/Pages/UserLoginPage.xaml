@@ -6,33 +6,36 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="340" d:DesignWidth="320"
+      d:DesignHeight="340" d:DesignWidth="400"
       Title="UserLoginPage">
 
-    <StackPanel
-        Margin="40 40 0 0">
+    <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Center">
         <TextBox x:Name="LoginTextBox"
-                 Margin="0 20 0 20"
+                 Margin="20 70 0 25"
                  HorizontalAlignment="Left"
                  BorderBrush="Silver"
-                 Width="240"
+                 Width="310"
+                 Background="Transparent"
                  materialDesign:HintAssist.Hint="Login\Email"
-                 FontSize="14"
+                 FontSize="16"
                  Style="{StaticResource MaterialDesignFilledTextBox}"/>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Left"
-                    Width="280"
+                    Width="350"
+                    Margin="20 0 0 0"
                     VerticalAlignment="Center">
             <PasswordBox x:Name="LoginPasswordBox"
-                     Width="240"
+                      Width="310"
                       Margin="0 0 5 0 " 
-                     materialDesign:HintAssist.Hint="Password"
-
-             FontSize="14"
-             BorderBrush="Silver"
-             Style="{StaticResource MaterialDesignFilledPasswordBox}"/>
+                      materialDesign:HintAssist.Hint="Password"
+                      FontSize="16"
+                      BorderBrush="Silver"
+                      Background="Transparent"
+                      Style="{StaticResource MaterialDesignFilledPasswordBox}"/>
             <TextBlock Text="👁"
                        Cursor="Hand"
+                       Margin="0 7 0 0 "
                        FontSize="18"
                        TextAlignment="Center"
                        VerticalAlignment="Center"
@@ -42,21 +45,26 @@
         </StackPanel>
         <CheckBox IsChecked="False"
                   HorizontalAlignment="Center"
-                  Margin="0 20 20 0 "
+                  Margin="0 25 20 0 "
+                  Background="{StaticResource CustomDeepBlue}"
                   Cursor="Hand">
             <CheckBox.Content>
                 <TextBlock Text="Remember me?"
                            TextAlignment="Center"
                            Foreground="{StaticResource CustomCoal}"
-                           FontSize="12"
-                 Padding="0 0 0 2"/>
+                           FontSize="14"
+                           Padding="0 0 0 2"/>
             </CheckBox.Content>
         </CheckBox>
         <Button Content="Login"
+                FontWeight="Bold"
+                FontSize="20"
+                BorderBrush="{StaticResource CustomDeepBlueViolet}"
+                BorderThickness="4"
                 Margin="0 20 20 0"
-                Width="140"
-                Height="50"
-                Background="Blue"/>
+                Width="180"
+                Height="60"
+                Background="{StaticResource CustomDeepBlue}"/>
 
     </StackPanel>
 </Page>

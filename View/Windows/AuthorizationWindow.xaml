@@ -7,13 +7,13 @@
         xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Windows"
         mc:Ignorable="d"
         Title="AuthorizationWindow"
-           Height="500"
-           Width="400"
+           Height="600"
+           Width="500"
            Background="{x:Null}"
            AllowsTransparency="True"
            WindowStyle="None"
            WindowStartupLocation="CenterScreen"
-           Icon="{StaticResource ApplicationLogo}" 
+           Icon="{StaticResource AuthorizationLogo}" 
         Loaded="Window_Loaded">
     <materialDesign:Card
      x:Name="MainCard"
@@ -25,58 +25,71 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal"
                             Height="70"
-                            Width="330">
-                    <Button Background="BLue"
-                            Foreground="LightBlue"
+                            Margin="20 20 20 0"
+                            Width="380">
+                    <Button x:Name="LoginNavigatorButton"
+                            Background="{StaticResource CustomDeepBlueViolet}"
+                            Foreground="White"
                             BorderThickness="0"
-                            Click="Button_Click_1"
+                            Click="OnLoginNavigatorButtonClick"
                             Width="130"
                             Height="50"
-                            Margin="10 5 20 0"
+                            Margin="25 0 20 0"
                           >
                         <StackPanel Orientation="Horizontal">
-                            <Image Width="20"
+                            <Image x:Name="LoginNavigatorIconImage"
+                                   Width="20"
                                    Height="20"
                                    Margin="0 0 5 0"
-                                Source="{StaticResource LoginUserWhiteIcon}"/>
+                                   Source="{StaticResource LoginUserWhiteIcon}"/>
                             <TextBlock Text="Login"
-                                   FontSize="28"
-                                   TextDecorations="Underline"/>
+                                       x:Name="LoginNavigatorButtonTextBlock"
+                                       FontSize="20"
+                                       Margin="0 0 5 0"
+                                       TextDecorations="Underline"/>
                         </StackPanel>
                     </Button>
-                    <Button Background="Transparent"
-                            Foreground="Black"
+                    <Button x:Name="SingUpNavigatorButton"
+                            Background="Transparent"
+                            Foreground="{StaticResource CustomCoal}"
                             BorderThickness="0"
                             Width="130"
-                            Click="Button_Click_2"
+                            Margin="50 5"
+                            Click="OnSingUpNavigatorButtonClick"
                             Height="50">
                         <StackPanel Orientation="Horizontal">
-                            <Image Width="20"
+                            <Image x:Name="SingUpNavigatorIconImage"
+                                   Width="20"
                                    Height="20"
                                    Margin="0 0 5 0"
                                 Source="{StaticResource SingInUserBlueIcon}"/>
                             <TextBlock Text="Sing up"
-                 FontSize="20"
-                 TextDecorations="Underline"/>
+                                       x:Name="SingUpNavigatorButtonTextBlock"
+                                       FontSize="20"/>
                         </StackPanel>
                     </Button>
+                    
+                </StackPanel>
+                <Frame x:Name="AuthorizationFrame"
+                       Margin="20 20 20 0"
+                       Height="400"
+                       NavigationUIVisibility="Hidden"/>
+                <StackPanel
+                    HorizontalAlignment="Right">
                     <Button Width="30"
-                        BorderThickness="0"
-                        Height="30"
-                        HorizontalAlignment="Right"
-                        Click="Button_Click"
-                        Margin="10 0 0 0">
+                            Margin="0 0 20 0"
+                            BorderThickness="0"
+                            Height="30"
+                            HorizontalAlignment="Center"
+                            Click="Button_Click">
                         <Button.Background>
                             <ImageBrush 
                                 Stretch="Fill"
-                                ImageSource="{StaticResource ExitIcon}"/>
+                                ImageSource="{StaticResource AuthorizationExitIcon}"/>
                         </Button.Background>
                     </Button>
+
                 </StackPanel>
-                <Frame x:Name="AuthorizationFrame"
-                       Margin="20"
-                       Height="340"
-                       NavigationUIVisibility="Hidden"/>
             </StackPanel>
             
 

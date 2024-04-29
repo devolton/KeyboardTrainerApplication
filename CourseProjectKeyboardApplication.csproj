@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\AuthorizationExitIcon.png" />
+    <None Remove="Resources\Images\AuthorizationLogo.png" />
     <None Remove="Resources\Images\BlueVioletStar.png" />
     <None Remove="Resources\Images\CertificateConditionFlash.png" />
     <None Remove="Resources\Images\CertificateConditionLightning.png" />
@@ -52,6 +54,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\AuthorizationExitIcon.png" />
+    <Resource Include="Resources\Images\AuthorizationLogo.png" />
     <Resource Include="Resources\Images\CertificateConditionLightning.png" />
     <Resource Include="Resources\Images\CertificateConditionStar.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
