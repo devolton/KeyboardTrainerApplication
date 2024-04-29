@@ -13,7 +13,8 @@
            AllowsTransparency="True"
            WindowStyle="None"
            WindowStartupLocation="CenterScreen"
-           Icon="{StaticResource ApplicationLogo}" >
+           Icon="{StaticResource ApplicationLogo}" 
+        Loaded="Window_Loaded">
     <materialDesign:Card
      x:Name="MainCard"
      UniformCornerRadius="50"
@@ -28,27 +29,49 @@
                     <Button Background="BLue"
                             Foreground="LightBlue"
                             BorderThickness="0"
+                            Click="Button_Click_1"
                             Width="130"
                             Height="50"
                             Margin="10 5 20 0"
                           >
-                        <TextBlock Text="Login"
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Margin="0 0 5 0"
+                                Source="{StaticResource LoginUserWhiteIcon}"/>
+                            <TextBlock Text="Login"
                                    FontSize="28"
                                    TextDecorations="Underline"/>
+                        </StackPanel>
                     </Button>
                     <Button Background="Transparent"
                             Foreground="Black"
                             BorderThickness="0"
                             Width="130"
+                            Click="Button_Click_2"
                             Height="50">
-                        <TextBlock Text="Sing up"
-                                   FontSize="28"
-                                   TextDecorations="Underline"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Margin="0 0 5 0"
+                                Source="{StaticResource SingInUserBlueIcon}"/>
+                            <TextBlock Text="Sing up"
+                 FontSize="20"
+                 TextDecorations="Underline"/>
+                        </StackPanel>
                     </Button>
                     <Button Width="30"
+                        BorderThickness="0"
                         Height="30"
                         HorizontalAlignment="Right"
-                        Margin="10 0 0 0"/>
+                        Click="Button_Click"
+                        Margin="10 0 0 0">
+                        <Button.Background>
+                            <ImageBrush 
+                                Stretch="Fill"
+                                ImageSource="{StaticResource ExitIcon}"/>
+                        </Button.Background>
+                    </Button>
                 </StackPanel>
                 <Frame x:Name="AuthorizationFrame"
                        Margin="20"

@@ -19,6 +19,7 @@
     <None Remove="Resources\Images\coding.png" />
     <None Remove="Resources\Images\DevoltonLabsLogo.png" />
     <None Remove="Resources\Images\EditProfileIcon.png" />
+    <None Remove="Resources\Images\ExitIcon.png" />
     <None Remove="Resources\Images\GoldLightning.png" />
     <None Remove="Resources\Images\GoldMedal.png" />
     <None Remove="Resources\Images\GoldStar.png" />
@@ -29,12 +30,16 @@
     <None Remove="Resources\Images\LightGrayFlash.png" />
     <None Remove="Resources\Images\LightGrayStar.png" />
     <None Remove="Resources\Images\LightGrayTarget.png" />
+    <None Remove="Resources\Images\LoginUserBlueIcon.png" />
+    <None Remove="Resources\Images\LoginUserWhiteIcon.png" />
     <None Remove="Resources\Images\PlatinumMedal.png" />
     <None Remove="Resources\Images\RepeatIcon.png" />
     <None Remove="Resources\Images\SilverCalendar.png" />
     <None Remove="Resources\Images\SilverFlash.png" />
     <None Remove="Resources\Images\SilverMedal.png" />
     <None Remove="Resources\Images\SilverTarget.png" />
+    <None Remove="Resources\Images\SingInUserBlueIcon.png" />
+    <None Remove="Resources\Images\SingInUserWhiteIcon.png" />
     <None Remove="Resources\Images\StartLeftEng.png" />
     <None Remove="Resources\Images\StartRightEng.png" />
     <None Remove="Resources\Images\StatisticIcon.png" />
@@ -61,6 +66,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\EditProfileIcon.png" />
+    <Resource Include="Resources\Images\ExitIcon.png" />
     <Resource Include="Resources\Images\GoldLightning.png" />
     <Resource Include="Resources\Images\GoldMedal.png" />
     <Resource Include="Resources\Images\GoldStar.png" />
@@ -71,6 +77,8 @@
     <Resource Include="Resources\Images\LightGrayFlash.png" />
     <Resource Include="Resources\Images\LightGrayStar.png" />
     <Resource Include="Resources\Images\LightGrayTarget.png" />
+    <Resource Include="Resources\Images\LoginUserBlueIcon.png" />
+    <Resource Include="Resources\Images\LoginUserWhiteIcon.png" />
     <Resource Include="Resources\Images\PlatinumMedal.png" />
     <Resource Include="Resources\Images\RepeatIcon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -79,6 +87,8 @@
     <Resource Include="Resources\Images\SilverFlash.png" />
     <Resource Include="Resources\Images\SilverMedal.png" />
     <Resource Include="Resources\Images\SilverTarget.png" />
+    <Resource Include="Resources\Images\SingInUserBlueIcon.png" />
+    <Resource Include="Resources\Images\SingInUserWhiteIcon.png" />
     <Resource Include="Resources\Images\StartLeftEng.png" />
     <Resource Include="Resources\Images\StartRightEng.png" />
     <Resource Include="Resources\Images\StatisticIcon.png" />

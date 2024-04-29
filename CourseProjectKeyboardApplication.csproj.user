@@ -97,6 +97,12 @@
     <Compile Update="View\Pages\TypingTutorResultPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Pages\UserLoginPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\UserSingInPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Windows\AuthorizationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -220,6 +226,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\TypingTutorResultPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\UserLoginPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\UserSingInPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\AuthorizationWindow.xaml">

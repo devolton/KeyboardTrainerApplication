@@ -49,6 +49,11 @@
             <BitmapImage x:Key="LightGrayStar" UriSource="pack://application:,,,/Resources/Images/LightGrayStar.png"/>
             <BitmapImage x:Key="LightGrayTarget" UriSource="pack://application:,,,/Resources/Images/LightGrayTarget.png"/>
             <BitmapImage x:Key="EditProfileIcon" UriSource="pack://application:,,,/Resources/Images/EditProfileIcon.png"/>
+            <BitmapImage x:Key="ExitIcon" UriSource="pack://application:,,,/Resources/Images/ExitIcon.png"/>
+            <BitmapImage x:Key="LoginUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/LoginUserWhiteIcon.png"/>
+            <BitmapImage x:Key="LoginUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/LoginUserBlueIcon.png"/>
+            <BitmapImage x:Key="SingInUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserWhiteIcon.png"/>
+            <BitmapImage x:Key="SingInUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserBlueIcon.png"/>
 
 
 
