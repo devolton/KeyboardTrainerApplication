@@ -111,10 +111,8 @@
             </Grid>
             <cc:TypingTestInfoBlock/>
             <Button
-             Margin="0 0 0 30"
+             Style="{StaticResource CustomYellowTemplateButton}"
              x:Name="TakeTestButton"
-             Width="200"
-             Height="50"
              Content="Take a typing test"
              Click="TakeTestButton_Click"/>
         </StackPanel>

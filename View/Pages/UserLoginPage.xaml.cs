@@ -24,5 +24,16 @@ namespace CourseProjectKeyboardApplication.View.Pages
         {
             InitializeComponent();
         }
+
+        private void UserLoginPagePasswordVisibiletyButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations = (UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations is null) ?
+            TextDecorations.Strikethrough : null;
+         
+            
+
+
+        }
+
     }
 }
