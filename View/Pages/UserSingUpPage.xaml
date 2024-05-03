@@ -13,13 +13,13 @@
         Margin="40 0 0 0"
         Orientation="Vertical"
         HorizontalAlignment="Center">
-        <TextBox x:Name="SingInFullNameTextBox"
+        <TextBox x:Name="SingInNameTextBox"
                  Margin="0 0 0 10"
                  HorizontalAlignment="Left"
                  BorderBrush="Silver"
                  Width="300"
                  Background="Transparent"
-                 materialDesign:HintAssist.Hint="Full name"
+                 materialDesign:HintAssist.Hint="Name"
                  FontSize="14"
                  Style="{StaticResource MaterialDesignFilledTextBox}"/>
         <TextBox x:Name="SingInLoginTextBox"
