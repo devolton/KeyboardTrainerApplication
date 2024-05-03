@@ -5,21 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
+      xmlns:vm="clr-namespace:CourseProjectKeyboardApplication.ViewModel"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
       mc:Ignorable="d" 
       d:DesignHeight="340" d:DesignWidth="400"
       Title="UserLoginPage">
 
+
     <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Center">
         <TextBox x:Name="LoginTextBox"
-                 Margin="20 70 0 25"
-                 HorizontalAlignment="Left"
-                 BorderBrush="Silver"
-                 Width="303"
-                 Background="Transparent"
+                 Text="{Binding Login}"
+                Background="Transparent"
                  materialDesign:HintAssist.Hint="Login\Email"
-                 FontSize="16"
-                 Style="{StaticResource MaterialDesignFilledTextBox}"/>
+                 Style="{Binding LoginTextBoxStyle}"/>
+
         <Grid       
              HorizontalAlignment="Left"
              Width="350"
@@ -38,7 +39,9 @@
                          FontSize="16"
                          BorderBrush="Silver"
                          Background="Transparent"
-                         Style="{StaticResource MaterialDesignFilledPasswordBox}"/>
+                         Style="{StaticResource MaterialDesignFilledPasswordBox}">
+                
+            </PasswordBox>
             <Button x:Name="UserLoginPagePasswordVisibilityButton"
                     Grid.Column="1"
                     Background="Transparent"
@@ -59,7 +62,7 @@
                 </Button.Content>
             </Button>
         </Grid>
-        <CheckBox IsChecked="False"
+        <CheckBox IsChecked="{Binding IsChecked}"
                   HorizontalAlignment="Center"
                   Margin="0 25 20 0 "
                   Background="{StaticResource CustomDeepBlue}"
@@ -80,6 +83,9 @@
                 Margin="0 20 20 0"
                 Width="180"
                 Height="60"
+                IsEnabled="{Binding IsButtonEnable}"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="{Binding ElementName=LoginPasswordBox}"
                 Background="{StaticResource CustomDeepBlue}"/>
 
     </StackPanel>

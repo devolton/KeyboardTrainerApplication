@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CourseProjectKeyboardApplication.ViewModel;
 
 namespace CourseProjectKeyboardApplication.View.Pages
 {
@@ -22,18 +24,19 @@ namespace CourseProjectKeyboardApplication.View.Pages
     {
         public UserLoginPage()
         {
+          
             InitializeComponent();
+            DataContext = new LoginUserPageViewModel(LoginPasswordBox);
+
         }
 
         private void UserLoginPagePasswordVisibiletyButton_Click(object sender, RoutedEventArgs e)
         {
             UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations = (UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations is null) ?
             TextDecorations.Strikethrough : null;
-         
-            
-
 
         }
+        
 
     }
 }
