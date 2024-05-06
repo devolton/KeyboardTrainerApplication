@@ -20,21 +20,24 @@ namespace CourseProjectKeyboardApplication.ViewModel
     public class LoginUserPageViewModel : ViewModelBase
     {
         private Style _loginTextBoxStyle;
+        private Style _passwordBoxStyle;
         private Style _loginDefaultStyle;
+        private Style _passwordBoxDefaultStyle;
         private Style _loginInvalidStyle;
+        private Style _passwordBoxInvalidStyle;
         private readonly MultiCommand _multiCommand = new MultiCommand();
         private LoginUserPageModel _loginUserPageModel = new LoginUserPageModel();
         //поля для состояний 
         private bool _isChecked = false;
         private bool _isButtonEnable;
-        private string _login;
-        private string _password;
+        private string _loginOrEmail;
+        private string _password = string.Empty;
         private PasswordBox _loginPasswordBox;
         public LoginUserPageViewModel(PasswordBox passwordBox) : this()
         {
             _loginPasswordBox = passwordBox;
             _loginPasswordBox.Password = _loginUserPageModel.GetPasswordFromRegister();
-            Login = _loginUserPageModel.GetLoginFromRegister();
+            LoginOrEmail = _loginUserPageModel.GetLoginFromRegister();
             
 
             
@@ -47,6 +50,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _loginDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPageTextBox"];
             LoginTextBoxStyle = _loginDefaultStyle;
             _loginInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPageTextBox"];
+            _passwordBoxDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPagePasswordBox"];
+            PasswordBoxStyle = _passwordBoxDefaultStyle;
+            _passwordBoxInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPagePasswordBox"];
 
         }
 
@@ -54,6 +60,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         public ICommand ButtonCommand => _multiCommand;
 
         //свойства 
+        #region
         public bool IsChecked
         {
             get { return _isChecked; }
@@ -74,15 +81,26 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(IsButtonEnable)); //уведомляем о изминении свойства
             }
         }
-        public string Login
+        public string Password
         {
-            get { return _login; }
+            get { return _password; }
             set
             {
-                _login = value;
+                _password = value;
+                ChangePasswordBoxStyle();
+                UpdateButtonEnagleState();
+                OnPropertyChanged(nameof(Password));
+            }
+        }
+        public string LoginOrEmail
+        {
+            get { return _loginOrEmail; }
+            set
+            {
+                _loginOrEmail = value;
                 UpdateButtonEnagleState();
                 ChangeLoginTextBoxStyle();
-                OnPropertyChanged(nameof(Login));
+                OnPropertyChanged(nameof(LoginOrEmail));
 
             }
         }
@@ -95,11 +113,21 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(LoginTextBoxStyle));
             }
         }
+        public Style PasswordBoxStyle
+        {
+            get { return _passwordBoxStyle;}
+            set
+            {
+                _passwordBoxStyle = value;
+                OnPropertyChanged(nameof(PasswordBoxStyle));
+            }
+        }
+        #endregion
 
 
         private void ExecuteButtonCommand(object parameter)
         {
-            new MainWindow().ShowDialog();
+            new MainWindow().Show();
             foreach(Window oneWindow in Application.Current.Windows)
             {
                 if(oneWindow is AuthorizationWindow)
@@ -112,9 +140,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void ExecuteWriteInRegisterCommand(object parameter)
         {
-            _password = _loginPasswordBox.Password;
             if (_isChecked)
-                _loginUserPageModel.WriteDataInRegister(_login, _password);
+                _loginUserPageModel.WriteDataInRegister(LoginOrEmail,Password );
             else
                 _loginUserPageModel.WriteDataInRegister(string.Empty, string.Empty);
 
@@ -122,8 +149,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private bool CanExecuteButtonCommand(object parameter)
         {
-
-            return _loginUserPageModel.IsValidLogin(Login) && _loginUserPageModel.IsValidPassword(_loginPasswordBox.Password);
+            //может не работать потому что эта команда вызывается только при изиминении LOGIN
+            return (_loginUserPageModel.IsValidLogin(LoginOrEmail) || _loginUserPageModel.IsValidEmail(LoginOrEmail)) && _loginUserPageModel.IsValidPassword(Password);
         }
 
         private void UpdateButtonEnagleState()
@@ -133,7 +160,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void ChangeLoginTextBoxStyle()
         {
-            if (_loginUserPageModel.IsValidLogin(Login))
+            if (LoginOrEmail==string.Empty||_loginUserPageModel.IsValidLogin(LoginOrEmail) || _loginUserPageModel.IsValidEmail(LoginOrEmail))
             {
                 LoginTextBoxStyle = _loginDefaultStyle;
             }
@@ -146,6 +173,17 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void ChangePasswordBoxStyle()
         {
+            if(Password.Equals(string.Empty) || _loginUserPageModel.IsValidPassword(Password))
+            {
+                PasswordBoxStyle = _passwordBoxDefaultStyle;
+
+            }
+            else
+            {
+                PasswordBoxStyle=_passwordBoxInvalidStyle;
+            }
+            
+            
 
         }
 

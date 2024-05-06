@@ -14,32 +14,21 @@
         Orientation="Vertical"
         HorizontalAlignment="Center">
         <TextBox x:Name="SingInNameTextBox"
-                 Margin="0 0 0 10"
-                 HorizontalAlignment="Left"
-                 BorderBrush="Silver"
-                 Width="300"
+                 Text="{Binding UserName}"
                  Background="Transparent"
                  materialDesign:HintAssist.Hint="Name"
-                 FontSize="14"
-                 Style="{StaticResource MaterialDesignFilledTextBox}"/>
+                 Style="{Binding UserNameTextBoxStyle}"/>
         <TextBox x:Name="SingInLoginTextBox"
-                 Margin="0 10 0 10"
-                 HorizontalAlignment="Left"
-                 BorderBrush="Silver"
+                 Text="{Binding UserLogin}"
                  Background="Transparent"
-                 Width="300"
                  materialDesign:HintAssist.Hint="Login"
-                 FontSize="14"
-                 Style="{StaticResource MaterialDesignFilledTextBox}"/>
+                 Style="{Binding UserLoginTextBoxStyle}"/>
         <TextBox x:Name="SingInEmailTextBox"
-                 Margin="0 10 0 10"
-                 HorizontalAlignment="Left"
+                 Text="{Binding UserEmail}"
                  BorderBrush="Silver"
                  Background="Transparent"
-                 Width="300"
                  materialDesign:HintAssist.Hint="Email"
-                 FontSize="14"
-                 Style="{StaticResource MaterialDesignFilledTextBox}"/>
+                 Style="{Binding UserEmailTextBoxStyle}"/>
         <Grid 
                     HorizontalAlignment="Left"
                     Width="340"
@@ -51,28 +40,26 @@
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="SingInPasswordBox"
                          Grid.Column="0"
-                     Margin="0 0 5 0 " 
-                     Background="Transparent"
-                     materialDesign:HintAssist.Hint="Password"
-                     FontSize="14"
-                     BorderBrush="Silver"
-                     Style="{StaticResource MaterialDesignFilledPasswordBox}"/>
+                         PasswordChanged="SingInPasswordBox_PasswordChanged" 
+                         Background="Transparent"
+                         materialDesign:HintAssist.Hint="Password"
+                         Style="{Binding UserPasswordBoxStyle}"/>
             <Button x:Name="UserSingUpPagePasswordVisibilityButton"
-            Grid.Column="1"
-            Background="Transparent"
-            BorderThickness="0"
-            Margin="0 10 0 0"
-            Width="30"
-            Padding="0"
-            Height="30">
+                    Grid.Column="1"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="0 10 0 0"
+                    Width="30"
+                    Padding="0"
+                    Height="30">
                 <Button.Content>
                     <TextBlock x:Name="UserSingUpPagePasswordVisibilityIconTextBlock"
-               Text="👁"
-               FontSize="14"
-               TextAlignment="Center"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center"
-               Foreground="Silver"/>
+                               Text="👁"
+                               FontSize="14"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="Silver"/>
                 </Button.Content>
             </Button>
         </Grid>
@@ -86,12 +73,10 @@
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="SingInConfirmPasswordBox"
                          Grid.Column="0"
+                         PasswordChanged="SingInConfirmPasswordBox_PasswordChanged"
                          Background="Transparent"
-                         Margin="0 0 5 0 " 
                          materialDesign:HintAssist.Hint="Confirm password"
-                         FontSize="14"
-                         BorderBrush="Silver"
-                         Style="{StaticResource MaterialDesignFilledPasswordBox}"/>
+                         Style="{Binding UserConfirmPasswordBoxStyle}"/>
             <Button x:Name="UserSingUpPageConfirmPasswordVisibilityButton"
             Grid.Column="1"
             Background="Transparent"
@@ -112,6 +97,8 @@
             </Button>
         </Grid>
         <Button Content="Sing up"
+                Command="{Binding SingUpClickCommand}"
+                IsEnabled="{Binding IsEnabledRegistrationButton}"
                 Margin="0 20 15 0"
                 Width="160"
                 Height="50"

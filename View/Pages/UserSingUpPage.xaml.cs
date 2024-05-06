@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,28 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class UserSingInPage : Page
     {
+        private UserSingupPageViewModel _userSingUpViewModel;
         public UserSingInPage()
         {
             InitializeComponent();
+            _userSingUpViewModel = new UserSingupPageViewModel();
+            DataContext = _userSingUpViewModel;
+        }
+
+        private void SingInPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBoxElement = sender as PasswordBox;
+            if (passwordBoxElement is not null)
+                _userSingUpViewModel.Password = passwordBoxElement.Password;
+        }
+
+        private void SingInConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBoxElement = sender as PasswordBox;
+            if (passwordBoxElement is not null)
+                _userSingUpViewModel.ConfirmPassword = passwordBoxElement.Password;
+
+
         }
     }
 }

@@ -16,7 +16,7 @@
     <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Center">
         <TextBox x:Name="LoginTextBox"
-                 Text="{Binding Login}"
+                 Text="{Binding LoginOrEmail}"
                 Background="Transparent"
                  materialDesign:HintAssist.Hint="Login\Email"
                  Style="{Binding LoginTextBoxStyle}"/>
@@ -31,15 +31,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="LoginPasswordBox"
-                         Visibility="Visible"
                          Grid.Column="0"
-                         Width="310"
-                         Margin="0 0 5 0 " 
+                         PasswordChanged="LoginPasswordBox_PasswordChanged"  
                          materialDesign:HintAssist.Hint="Password"
-                         FontSize="16"
-                         BorderBrush="Silver"
                          Background="Transparent"
-                         Style="{StaticResource MaterialDesignFilledPasswordBox}">
+                         Style="{Binding PasswordBoxStyle}">
                 
             </PasswordBox>
             <Button x:Name="UserLoginPagePasswordVisibilityButton"

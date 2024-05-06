@@ -22,11 +22,13 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class UserLoginPage : Page
     {
+        LoginUserPageViewModel _loginViewModel;
         public UserLoginPage()
         {
-          
+
             InitializeComponent();
-            DataContext = new LoginUserPageViewModel(LoginPasswordBox);
+            _loginViewModel = new LoginUserPageViewModel(LoginPasswordBox);
+            DataContext = _loginViewModel;
 
         }
 
@@ -36,7 +38,13 @@ namespace CourseProjectKeyboardApplication.View.Pages
             TextDecorations.Strikethrough : null;
 
         }
-        
 
+        private void LoginPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            _loginViewModel.Password = passwordBox.Password;
+
+
+        }
     }
 }
