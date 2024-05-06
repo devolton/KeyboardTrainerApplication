@@ -104,11 +104,6 @@ namespace CourseProjectKeyboardApplication
             MainFrame.Content = _editUserProfilPage;
         }
 
-        private void AuthorizationWindow_Click(object sender, RoutedEventArgs e)
-        {
-            var authorizationWindow = new AuthorizationWindow();
-            authorizationWindow.Show();
 
-        }
     }
 }

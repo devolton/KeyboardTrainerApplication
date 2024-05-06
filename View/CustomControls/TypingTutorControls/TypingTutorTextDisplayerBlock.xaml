@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1100">
     <Border Margin="0 0 0 50"
                 Background="White"
                 Width="1100"
@@ -20,26 +20,27 @@
         </Border.Effect>
         <StackPanel>
             <TextBlock
-            
+                        
                         Name="WordsTextBox"
                         Padding="10 20 10 10"
                         Width="1000"
+                        TextAlignment="Center"
                         Height="70"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        FontSize="22px"
+                        FontSize="30px"
                         FontFamily="Georgia"
                         Foreground="Gray"
                         TextWrapping="Wrap"
                         IsEnabled="False">
                      <Run Name="LostFocusRun"
-                          Text="Wor"
-                          Foreground="Red"/><InlineUIContainer>
+                          Text="Hell "
+                          Foreground="LightGray"/><InlineUIContainer>
                           <TextBlock
                               Name="FocusWordTextBlock">
-                              <Run x:Name="FirstRun" Text="H"/><Run x:Name="SecondRun" Text="e"/>
+                              <Run Foreground="LightGray" x:Name="FirstRun" Text="w"/><Run x:Name="SecondRun"  Text="o"/><Run x:Name="ThirdRun" Text="r"/><Run x:Name="FourthRun" Foreground="Green" Text="l"/><Run x:Name="FivethRun" Text=" "/>
                           </TextBlock>
-                        </InlineUIContainer><Run x:Name ="BeforeFocusRun" Text="my"/>
+                        </InlineUIContainer><Run x:Name ="BeforeFocusRun" Text="myst name anto fdti qwer tyui fdsd fdsf skit adrt"/>
                 </TextBlock>
         </StackPanel>
     </Border>

@@ -6,10 +6,16 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.AppPages.Pages"
       xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
-     
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1300"
-      Title="TypingTutor">
+      Title="TypingTutor"
+      PreviewKeyDown="Page_PreviewKeyDown">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="PreviewKeyDown">
+            <i:InvokeCommandAction Command="{Binding KeyDownHandlerCommand}" CommandParameter="{}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <StackPanel x:Name="MainStackPanel">
         <cc:TextDisplayerBlock/>
         <StackPanel Width="300"

@@ -94,9 +94,6 @@
                             <Button x:Name="TempTytorResultButton"
                                     Content="TytorResultButton"
                                     Click="TempTytorResultButton_Click"/>
-                            <Button x:Name="AuthorizationWindow"
-                                    Content="Authorization"
-                                    Click="AuthorizationWindow_Click"/>
 
                         </StackPanel>
                     </materialDesign:PopupBox>

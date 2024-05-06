@@ -38,71 +38,84 @@
          Grid.Column="0"
          Grid.Row="0"
          TextValue="`"
+         Tag="`~"
           Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock 
          Grid.Column="1"
          Grid.Row="0"
+         Tag="1!"
          TextValue="1"
          Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock 
          Grid.Column="2"
          Grid.Row="0"
+         Tag="2@"
          TextValue="2"
          Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="3"
          Grid.Row="0"
+         Tag="3#"
          TextValue="3"
          Style="{StaticResource CustomLeftRingKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="4"
          Grid.Row="0"
+         Tag="4$"
          TextValue="4"
          Style="{StaticResource CustomLeftMiddleKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="5"
          Grid.Row="0"
+         Tag="5%"
          TextValue="5"
          Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="6"
          Grid.Row="0"
+         Tag="6^"
          TextValue="6"
          Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="7"
          Grid.Row="0"
+         Tag="7&amp;"
          TextValue="7"
          Style="{StaticResource CustomRightIndexKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="8"
          Grid.Row="0"
          TextValue="8"
-                        x:Name="TempTextBlock"
+         Tag="8*"
          Style="{StaticResource CustomRightMiddleKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="9"
          Grid.Row="0"
+         Tag="9("
          TextValue="9"
          Style="{StaticResource CustomRightRingKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="10"
          Grid.Row="0"
+         Tag="10)"
          TextValue="0"
          Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="11"
          Grid.Row="0"
+         Tag="-_"
          TextValue="-"
          Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="12"
+         Tag="=+"
          Grid.Row="0"
          TextValue="="
          Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="2"
          Grid.Row="1"
+         Tag="qQ"
          TextValue="q"
          Style="{StaticResource CustomLeftPinkeyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
@@ -118,6 +131,7 @@
         <cc:KeyboardItemTextBlock
          Grid.Column="5"
          Grid.Row="1"
+         IsErrorPushedKeyboardItem="True"
          TextValue="r"
         Style="{StaticResource CustomLeftIndexKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
@@ -154,6 +168,7 @@
          Grid.Column="12"
          Grid.Row="1"
          TextValue="["
+         IsFocusKeyboardItem="True"
          Style="{StaticResource CustomRightPinkyKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock
          Grid.Column="13"
@@ -198,6 +213,7 @@
         <cc:KeyboardItemTextBlock
          Grid.Column="9"
          Grid.Row="2"
+         IsFocusKeyboardItem="True"
          TextValue="k"
          Style="{StaticResource CustomRightMiddleKeyboardItemBlock}"
          />
@@ -234,6 +250,7 @@
         <cc:KeyboardItemTextBlock
          Grid.Column="4"
          Grid.Row="3"
+         IsFocusKeyboardItem="True"
          TextValue="c"
          Style="{StaticResource CustomLeftMiddleKeyboardItemBlock}"/>
         <cc:KeyboardItemTextBlock   
@@ -277,13 +294,13 @@
             Grid.Column="4"
             Grid.ColumnSpan="5"
             Margin="10 0 0 0"
-
             Style="{StaticResource CustomKeyboardControlItemBlock}"/>
 
         <cc:KeyboardControlItemTextBlock
           
             x:Name="RightShiftLabel"
             Grid.Column="12"
+            IsFocusKeyboardItem="True"
             Grid.Row="3"
             Grid.ColumnSpan="2"
             TextValue="Shift"
