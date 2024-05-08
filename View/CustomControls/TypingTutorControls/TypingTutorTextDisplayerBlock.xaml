@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1100">
     <Border Margin="0 0 0 50"
@@ -18,10 +19,12 @@
                                   Opacity="0.7"
                                   BlurRadius="100"/>
         </Border.Effect>
-        <StackPanel>
-            <TextBlock
-                        
-                        Name="WordsTextBox"
+        <Grid>
+            <StackPanel>
+
+                <TextBlock
+                        Panel.ZIndex="1"
+                        x:Name="WordsTextBox"
                         Padding="10 20 10 10"
                         Width="1000"
                         TextAlignment="Center"
@@ -32,16 +35,28 @@
                         FontFamily="Georgia"
                         Foreground="Gray"
                         TextWrapping="Wrap"
-                        IsEnabled="False">
-                     <Run Name="LostFocusRun"
-                          Text="Hell "
-                          Foreground="LightGray"/><InlineUIContainer>
-                          <TextBlock
-                              Name="FocusWordTextBlock">
-                              <Run Foreground="LightGray" x:Name="FirstRun" Text="w"/><Run x:Name="SecondRun"  Text="o"/><Run x:Name="ThirdRun" Text="r"/><Run x:Name="FourthRun" Foreground="Green" Text="l"/><Run x:Name="FivethRun" Text=" "/>
-                          </TextBlock>
-                        </InlineUIContainer><Run x:Name ="BeforeFocusRun" Text="myst name anto fdti qwer tyui fdsd fdsf skit adrt"/>
+                        IsEnabled="False"
+                        Loaded="WordsTextBox_Loaded">
+
+
                 </TextBlock>
-        </StackPanel>
+            </StackPanel>
+            <Rectangle Width="1100"
+                       Focusable="True"
+                       Height="70"
+                       Fill="LightGray"
+                       Opacity="0.8"
+                       Panel.ZIndex="2"
+                       Visibility="{Binding IsHigingPanelVisible}"
+                           
+               />
+            <Button
+                    Focusable="False"
+                    Content="Click To Start"
+                    Command="{Binding StartLessonCommand}"
+                    Style="{StaticResource CustomTypingTestStartButton}"
+                    Panel.ZIndex="2"
+                    Visibility="{Binding IsStartButtonVisible}"/>
+        </Grid>
     </Border>
 </UserControl>

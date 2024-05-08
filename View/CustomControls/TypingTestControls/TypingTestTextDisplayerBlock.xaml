@@ -32,15 +32,8 @@
                      TextWrapping="Wrap"
                      IsEnabled="False"
                      Panel.ZIndex="1">
-                  <Run Name="LostFocusRun"
-                       Text="Wor"
-                       Foreground="Red"/><InlineUIContainer>
-                       <TextBlock
-                           Name="FocusWordTextBlock">
-                           <Run x:Name="FirstRun" Text="H"/><Run x:Name="SecondRun" Text="e"/>
-                       </TextBlock>
-                     </InlineUIContainer><Run x:Name ="BeforeFocusRun" Text="my"/>
-             </TextBlock>
+                  <Run Text="K"/><Run Text="o"/>
+            </TextBlock>
             <Rectangle Width="700"
                        Height="300"
                        Fill="LightGray"

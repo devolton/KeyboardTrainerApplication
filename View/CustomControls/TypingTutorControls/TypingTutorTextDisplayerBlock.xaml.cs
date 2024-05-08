@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,23 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class TextDisplayerBlock : UserControl
     {
+        private TypingTutorPageViewModel _typingTutorPageViewModel;
         public TextDisplayerBlock()
         {
             InitializeComponent();
+            _typingTutorPageViewModel = TypingTutorPageViewModel.Instance();
+            DataContext = _typingTutorPageViewModel;
+            
         }
+
+   
+
+        private void WordsTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            _typingTutorPageViewModel.GenerateRunsBlocksCommand.Execute(WordsTextBox);
+        }
+
+
     }
 }

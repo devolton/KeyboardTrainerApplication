@@ -1,4 +1,5 @@
-﻿using CourseProjectKeyboardApplication.ViewModel;
+﻿
+using CourseProjectKeyboardApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,20 +22,32 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
     /// </summary>
     public partial class TypingTutorPage : Page
     {
-        private TypinTurorPageViewModel _typingTutorPageViewModel;
+        private TypingTutorPageViewModel _typingTutorPageViewModel;
         public TypingTutorPage()
         {
             InitializeComponent();
-            _typingTutorPageViewModel = new TypinTurorPageViewModel();
-
+            _typingTutorPageViewModel = TypingTutorPageViewModel.Instance();
+            DataContext = _typingTutorPageViewModel;
            
 
+         
         }
 
         private void Page_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             _typingTutorPageViewModel.KeyDownCommand.Execute(e.Key);
+            
 
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            FocusRectangle.Focus();
+        }
+
+        private void Page_KeyUp(object sender, KeyEventArgs e)
+        {
+            _typingTutorPageViewModel.KeyUpCommand.Execute(e.Key);
         }
     }
 }

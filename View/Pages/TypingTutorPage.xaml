@@ -10,18 +10,24 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1300"
       Title="TypingTutor"
-      PreviewKeyDown="Page_PreviewKeyDown">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="PreviewKeyDown">
-            <i:InvokeCommandAction Command="{Binding KeyDownHandlerCommand}" CommandParameter="{}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+      Loaded="Page_Loaded"
+      PreviewKeyDown="Page_PreviewKeyDown"
+      KeyUp="Page_KeyUp"
+  
+     >
+
     <StackPanel x:Name="MainStackPanel">
         <cc:TextDisplayerBlock/>
         <StackPanel Width="300"
                     Margin="0 0 0 40"
                     Orientation="Horizontal">
+            <Rectangle x:Name="FocusRectangle" 
+                       Fill="Transparent"
+                       Focusable="True"
+                      />
             <Button x:Name="RepeatButton"
+                    IsEnabled="{Binding IsRepeatButtonEnabled}"
+                    Command="{Binding RestartLessonCommand}"
                     Style="{StaticResource CustomRepeatButton}"
                     Width="30"
                     Height="30"
@@ -32,14 +38,16 @@
 
             </Button>
 
-            <ProgressBar Maximum="100" Minimum="0"
-                Width="200"
-                Height="30"
-                Value="20"
-                Style="{StaticResource CustomTypingTutorProgressBar}"
-                Background="White"
+            <ProgressBar Maximum="{Binding ProgressBarMaxValue}"
+                         Minimum="0"
+                         Width="200"
+                         Height="30"
+                         Value="{Binding ProgressBarValue}"
+                         Style="{StaticResource CustomTypingTutorProgressBar}"
+                         Background="White"
                 />
         </StackPanel>
-        <cc:KeyboardMap/>
+        <cc:KeyboardMap
+            x:Name="TypingTytorPageKeyboard"/>
     </StackPanel>
 </Page>
