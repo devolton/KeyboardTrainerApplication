@@ -49,5 +49,16 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
         {
             _typingTutorPageViewModel.KeyUpCommand.Execute(e.Key);
         }
+
+        private void Page_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+            _typingTutorPageViewModel.RestartLessonCommand.Execute(null);
+        }
+
+        private void Page_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("Page got focus");
+        }
     }
 }

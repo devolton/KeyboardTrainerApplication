@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
-       xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
+       xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingTestResultPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="TypingTestResultPage">
 
     <StackPanel Orientation="Vertical"
@@ -22,21 +23,25 @@
                     HorizontalAlignment="Center"
                     Margin=" 0 20 0 10">
             <cc:LanguageLayotStatisticBlock
+                    x:Name="SpeedBlock"
                     Style="{StaticResource SpeedLanguageLayotStatisticBlock}"
                     HeaderText="Speed"
                     IconSource="{StaticResource GoldFlash}"
-                    StatValue="47"
-                    StatUnitValue="wpm"
+                    StatValue="{Binding SpeedValue}"
+                    StatUnitValue="wpm" 
                     Margin="5 5 30 5"/>
             <cc:LanguageLayotStatisticBlock
+                    x:Name="AccuracyBlock"
                     Style="{StaticResource AccuracyLanguageLayotStatisticBlock}"
                     HeaderText="Accuracy"
                     IconSource="{StaticResource GoldTarget}"
-                    StatValue="99.5"
+                    StatValue="{Binding AccuracyPercent}"
                     StatUnitValue="%"
                     Margin="5 5 30 5"/>
         </StackPanel>
         <Button Content="Imporove score"
+                Focusable="False"
+                Command="{Binding ImproveScoreCommand}"
                 FontSize="14"
               Style="{StaticResource CustomYellowTemplateButton}"/>
     </StackPanel>

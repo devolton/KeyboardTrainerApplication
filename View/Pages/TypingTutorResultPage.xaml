@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
-       xmlns:ccTypingTutorResult="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.TypingTutorResultControls"
+       xmlns:ccTypingTutorResult="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.TypingTutorResultControls" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingTutorResultPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Loaded="Page_Loaded"
@@ -82,9 +82,11 @@
                     HorizontalAlignment="Center"
                     Width="350">
             <Button Content="Try again"
+                    Command="{Binding TryAgainLessonCommand}"
                     Style="{StaticResource CustomVioletTemplateButton}"
                     />
             <Button Content="Next"
+                    Command="{Binding NextLessonCommand}"
                    Style="{StaticResource CustomYellowTemplateButton}"/>
         </StackPanel>
 

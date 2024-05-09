@@ -1,14 +1,9 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.View.CustomControls.TypingTutorResultControls;
-using CourseProjectKeyboardApplication.View.Pages;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CourseProjectKeyboardApplication.Tools;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -26,10 +21,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private SolidColorBrush _speedBrush;
         private static TypingTutorResultPageViewModel _instance;
         private TypingTutorResultPageModel _typingTutorPageModel;
+        private ICommand _tryAgainLessonCommand;
+        private ICommand _nextLessonCommand;
 
         private TypingTutorResultPageViewModel(int typingTutorSpeed, int missclickCount)
         {
             _typingTutorPageModel = new TypingTutorResultPageModel(typingTutorSpeed, missclickCount);
+            _tryAgainLessonCommand = new RelayCommand(OnTryAgainLessonCommand);
+            _nextLessonCommand = new RelayCommand(OnNextLessonCommand);
             _typingTutorSpeed = typingTutorSpeed;
             _missclickCount = missclickCount;
             LessonResultStr = $"{_typingTutorSpeed} wpm, {_missclickCount} errors!";
@@ -41,6 +40,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
             return _instance;
         }
+        //Properties
+        #region
+        public ICommand TryAgainLessonCommand => _tryAgainLessonCommand;
+        public ICommand NextLessonCommand => _nextLessonCommand;
         public SolidColorBrush LessTwoMissclickBrush
         {
             get { return _lessTwoMissclickBrush; }
@@ -69,9 +72,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
         }
 
-
-
-        #region 
         public StackPanel AchivementStackPanel
         {
             get { return _achivementsStackPanel; }
@@ -89,6 +89,16 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 _lessonResultStr = value;
                 OnPropertyChanged(nameof(LessonResultStr));
             }
+        }
+        #endregion
+        //command
+        public void OnTryAgainLessonCommand(object param)
+        {
+            FrameMediator.DisplayTypingTutorPage();
+        }
+        public void OnNextLessonCommand(object param)
+        {
+            FrameMediator.DisplayTypingTutorPage();
         }
 
         private void InitAchivementStackPanel()
@@ -146,7 +156,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
-        #endregion
 
     }
 }

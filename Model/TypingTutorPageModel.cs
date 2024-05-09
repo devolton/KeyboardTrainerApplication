@@ -36,7 +36,7 @@ namespace CourseProjectKeyboardApplication.Model
 
         private TypingTutorPageModel()
         {
-            _currentLearnString = "pell qosw hSdf jskf sfsl lsjf jskj jkss lkds jsks jSkf jskd";
+            _currentLearnString = "pell qosw hzdf jskf sfsl lsjf jskj jkss lkds jsks jskf jskd";
             _currentFocusWordIndex = 0;
             _wordsCount=GetWordsCount();
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
@@ -122,7 +122,7 @@ namespace CourseProjectKeyboardApplication.Model
                 _typingTutorSpeed = GetTypingTutorSpeed();
                 //передавать во фрейм TypingTutorResultPage и передавать результат
                 MessageBox.Show($"Errors: {_missClickCounter} Speed: {_typingTutorSpeed}");
-                FrameService.MainFrame.Content = new TypingTutorResultPage(_typingTutorSpeed,_missClickCounter);
+                FrameMediator.MainFrame.Content = new TypingTutorResultPage(_typingTutorSpeed,_missClickCounter);
 
 
                 return;

@@ -66,6 +66,16 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         //Properties
         #region
+        public bool IsLessonStarter
+        {
+            get {return _isLessonStarted; }
+            set
+            {
+                _isLessonStarted= value;
+                IsHiginglockVisible();
+                OnPropertyChanged(nameof(IsLessonStarter));
+            }
+        }
         public Grid KeyboardGrid
         {
             get { return _keyboardGrid; }
@@ -161,7 +171,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             ProgressBarValue = 0;
             _typingTutorPageModel.LessonReset();
-            _typingTutorPageModel.StartMeasureTime();
+            IsLessonStarter = false;
+            
         }
         private void OnKeyDownCommand(object param)
         {
@@ -289,6 +300,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool CanExecuteStartLessonCommand(object param)
         {
             return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
+        }
+        private void IsHiginglockVisible()
+        {
+            IsHigingPanelVisible = (CanExecuteOnKeyDownCommand(null)) ? Visibility.Hidden: Visibility.Visible;
+            IsStartButtonVisible = (CanExecuteOnKeyDownCommand(null)) ? Visibility.Hidden : Visibility.Visible;
+   
         }
 
         #endregion

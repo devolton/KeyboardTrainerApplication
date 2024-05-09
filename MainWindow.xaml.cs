@@ -40,11 +40,21 @@ namespace CourseProjectKeyboardApplication
             _typingCertificatesPage = new TypingCertificatesPage(); // перенести весь блок в  Window_Loaded
             _typingCertificationResultsPage = new TypingCertificationResultsPage();
             _educationResultsPage = new EducationResultsPage();
-            _typingTestResultPage = new TypingTestResultPage();
+            _typingTestResultPage = new TypingTestResultPage(10,120,10);
             _editUserProfilPage = new EditUserProfilPage();
-            _typingTutorResultPage = new TypingTutorResultPage(22, 0);
+            //_typingTutorResultPage = new TypingTutorResultPage(22, 0);
 
-            FrameService.MainFrame = MainFrame;
+            FrameMediator.MainFrame = MainFrame;
+            FrameMediator.InitPages(new List<Page>() { 
+                _typingTutorPage,
+                _learnPage,
+                _typingTestPage,
+                _typingCertificatesPage,
+                _typingCertificationResultsPage,
+                _educationResultsPage,
+                _editUserProfilPage,
+
+            });
 
         }
 
