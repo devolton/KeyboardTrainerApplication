@@ -7,6 +7,7 @@
        xmlns:ccTypingTutorResult="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.TypingTutorResultControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="TypingTutorResultPage">
     <Page.Resources>
         <Style x:Key="TypingTutorResultHeader" TargetType="TextBlock">
@@ -20,7 +21,7 @@
                 <Setter Property="Width" Value="500"/>
                 <Setter Property="Margin" Value="0 0 0 5"/>
             </Style.Setters>
-            
+
         </Style>
         <Style x:Key="TypingTutorResult" TargetType="TextBlock">
             <Style.Setters>
@@ -32,7 +33,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style.Setters>
-            
+
         </Style>
     </Page.Resources>
 
@@ -47,21 +48,21 @@
                   Canvas.Left="14"
                   Width="120"
                   Height="120"
-                  Stroke="Green"
+                  Stroke="{Binding LessTwoMissclickBrush}"
                   StrokeThickness="8"
                   Fill="Transparent"/>
             <Ellipse Canvas.Top="35"
                   Canvas.Left="35"
                   Width="80"
                   Height="80"
-                  Stroke="Orange"
+                  Stroke="{Binding WithoutMissclickBrush}"
                   StrokeThickness="8"
                   Fill="Transparent"/>
             <Ellipse Canvas.Top="55"
                   Canvas.Left="55"
                   Width="40"
                   Height="40"
-                  Stroke="Blue"
+                  Stroke="{Binding SpeedBrush}"
                   StrokeThickness="8"
                   Fill="Transparent"/>
         </Canvas>
@@ -69,19 +70,11 @@
                 Text="Exercise Finished!"/>
         <TextBlock x:Name="TypingResultTextBlock"
                    Style="{StaticResource TypingTutorResult}"
-                Text="22 wpm, 7 errors!"/>
+                   Text="{Binding LessonResultStr}"/>
         <StackPanel Orientation="Horizontal"
+                    x:Name="AchevementBlocksStackPanel"
                     HorizontalAlignment="Center">
-            <ccTypingTutorResult:AchivementBlock
-              AchivementImageSource="{StaticResource LightGrayStar}"
-                AchivementText="less than 2 typos"
-                />
-            <ccTypingTutorResult:AchivementBlock
-                 AchivementImageSource="{StaticResource LightGrayTarget}"
-                 AchivementText="exercise without errors"/>
-            <ccTypingTutorResult:AchivementBlock
-                AchivementImageSource="{StaticResource LightGrayFlash}"
-                AchivementText="speed more than 21 wpm"/>
+  
 
         </StackPanel>
         <StackPanel Orientation="Horizontal"

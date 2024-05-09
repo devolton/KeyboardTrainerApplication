@@ -1,4 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
+using CourseProjectKeyboardApplication.Tools;
+using CourseProjectKeyboardApplication.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -20,8 +23,10 @@ namespace CourseProjectKeyboardApplication.Model
     {
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
+        private int _typingTutorSpeed;
         private string _currentLearnString;
         private int _missClickCounter;
+        private int _wordsCount;
         private int _currentFocusWordIndex;
         private List<Run> _lettersRunsList;
         private Stopwatch _stopwatcher;
@@ -31,13 +36,22 @@ namespace CourseProjectKeyboardApplication.Model
 
         private TypingTutorPageModel()
         {
-            _currentLearnString = "pell cosw hsdf jskf sfsl lsjf jskj jkss lkds jsks jskf jskd";
+            _currentLearnString = "pell qosw hSdf jskf sfsl lsjf jskj jkss lkds jsks jSkf jskd";
             _currentFocusWordIndex = 0;
+            _wordsCount=GetWordsCount();
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
             InitKeyValueDictionaries();
             _stopwatcher = new Stopwatch();
             _progressBarMaxValue = _currentLearnString.Length;
-
+            
+        }
+        public void StartMeasureTime()
+        {
+            _stopwatcher.Start();
+        }
+        public void StopMeasureTime()
+        {
+            _stopwatcher.Stop();
         }
         public static TypingTutorPageModel Instance()
         {
@@ -48,10 +62,22 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return _progressBarMaxValue;
         }
+        //уведомляет что символ должен быть нажат с Shift
         public bool IsFocusCharUppercase()
         {
             return _shiftPressedKeyValueDictionary.Any(onePair => onePair.Value.Equals(_currentLearnString[_currentFocusWordIndex].ToString()));
         }
+
+        public void SetRunErrorStyle()
+        {
+            _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Red;
+        }
+        public void RemoveRunErrorStyle()
+        {
+            _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Violet;
+        }
+
+        //возвращает тег текущей буквы 
         public string GetCurrentKeyTag()
         {
             return _currentLearnString[_currentFocusWordIndex].ToString();
@@ -72,13 +98,14 @@ namespace CourseProjectKeyboardApplication.Model
         //генерирую елемент для каждой буквы 
         public List<Run> GetLearnStrRuns()
         {
+            _lettersRunsList.Clear();
             for (int i = 0; i < _currentLearnString.Length; i++)
             {
                 _lettersRunsList.Add(new Run(_currentLearnString[i].ToString()));
                 _lettersRunsList[i].FontWeight = FontWeights.Bold;
                 if (i == _currentFocusWordIndex)
                 {
-                    _lettersRunsList[i].Foreground = System.Windows.Media.Brushes.Blue;
+                    _lettersRunsList[i].Foreground = System.Windows.Media.Brushes.Violet;
                 }
             }
             return _lettersRunsList;
@@ -90,7 +117,14 @@ namespace CourseProjectKeyboardApplication.Model
             _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.LightGray;
             if (_currentFocusWordIndex.Equals(_lettersRunsList.Count - 1))
             {
-                LessonReset();
+                //сбросить все стили 
+                _stopwatcher.Stop();
+                _typingTutorSpeed = GetTypingTutorSpeed();
+                //передавать во фрейм TypingTutorResultPage и передавать результат
+                MessageBox.Show($"Errors: {_missClickCounter} Speed: {_typingTutorSpeed}");
+                FrameService.MainFrame.Content = new TypingTutorResultPage(_typingTutorSpeed,_missClickCounter);
+
+
                 return;
             }
             _currentFocusWordIndex++;
@@ -108,10 +142,15 @@ namespace CourseProjectKeyboardApplication.Model
                 oneRun.Foreground = System.Windows.Media.Brushes.Gray;
             }
             _lettersRunsList[0].Foreground = System.Windows.Media.Brushes.Violet;
+            
         }
         public string GetKeyStrTag(Key key)
         {
-            return _defaultKeyValueDictionary.First(onePair => onePair.Key.Equals(key)).Value;
+            return _defaultKeyValueDictionary.FirstOrDefault(onePair => onePair.Key.Equals(key)).Value;
+        }
+        public void AddMissclickCount()
+        {
+            _missClickCounter++;
         }
 
         private void InitKeyValueDictionaries()
@@ -122,7 +161,7 @@ namespace CourseProjectKeyboardApplication.Model
                 { Key.Q, "q" }, { Key.W, "w" },{ Key.E, "e" },{ Key.R, "r" },{ Key.T, "t" },{ Key.Y, "y" }, { Key.U, "u" },{ Key.I, "i" },{ Key.O, "o" },{ Key.P, "p" },{Key.OemOpenBrackets,"["},{Key.Oem6,"]"},
                 { Key.A, "a" },{ Key.S, "s" },{ Key.D, "d" },{ Key.F, "f" },{ Key.G, "g" },{ Key.H, "h" },{ Key.J, "j" },{ Key.K, "k" },{ Key.L, "l" },{Key.Oem1,";" },{Key.OemQuotes,"'"},{Key.Oem5,"\\"},
                 { Key.Z, "z" },{ Key.X, "x" },{ Key.C, "c" },{ Key.V, "v" },{ Key.B, "b" },{ Key.N, "n" },{ Key.M, "m" },{Key.OemComma,","},{Key.OemPeriod,"."},{Key.OemQuestion,"/"},
-                {Key.Space,"Space" },{Key.Tab,"Tab"},{Key.LeftShift,"LeftShift"},{Key.RightShift,"RightShift"},{Key.Back,"Back"},{Key.CapsLock,"Caps"}
+                {Key.Space," " },{Key.Tab,"Tab"},{Key.LeftShift,"LeftShift"},{Key.RightShift,"RightShift"},{Key.Back,"Back"},{Key.CapsLock,"Caps"}
 
 
             };
@@ -134,8 +173,17 @@ namespace CourseProjectKeyboardApplication.Model
                 { Key.Z, "Z" },{ Key.X, "X" },{ Key.C, "C" },{ Key.V, "V" },{ Key.B, "B" },{ Key.N, "N" },{ Key.M, "M" },{Key.OemComma,"<"},{Key.OemPeriod,">"},{Key.OemQuestion,"?"}
 
             };
-
-
+        }
+        private int GetWordsCount()
+        {
+            char delimiters = ' ';
+            string[] words = _currentLearnString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+            return words.Length;
+        }
+        private int GetTypingTutorSpeed()
+        {
+            return (int)(_wordsCount * 60 / _stopwatcher.Elapsed.TotalSeconds);
+            
         }
 
 

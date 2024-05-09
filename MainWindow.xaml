@@ -91,9 +91,10 @@
                                 x:Name="TempTestResultButton"
                                 Content="TempTestResult"
                                 Click="TempTestResultButton_Click"/>
-                            <Button x:Name="TempTytorResultButton"
-                                    Content="TytorResultButton"
-                                    Click="TempTytorResultButton_Click"/>
+                            <Button x:Name="TempTutorResultButton"
+                                    Content="TempTytor"
+                                    Click="TempTutorResultButton_Click"/>
+
 
                         </StackPanel>
                     </materialDesign:PopupBox>

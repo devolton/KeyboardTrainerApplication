@@ -26,11 +26,12 @@
                        Focusable="True"
                       />
             <Button x:Name="RepeatButton"
+                    Focusable="False"
                     IsEnabled="{Binding IsRepeatButtonEnabled}"
                     Command="{Binding RestartLessonCommand}"
                     Style="{StaticResource CustomRepeatButton}"
-                    Width="30"
-                    Height="30"
+                    Width="25"
+                    Height="25"
                     Margin="5 0 25 0">
                 <Button.Background>
                     <ImageBrush Stretch="Fill" ImageSource="{StaticResource RepeateIcon}"/>
@@ -41,7 +42,7 @@
             <ProgressBar Maximum="{Binding ProgressBarMaxValue}"
                          Minimum="0"
                          Width="200"
-                         Height="30"
+                         Height="25"
                          Value="{Binding ProgressBarValue}"
                          Style="{StaticResource CustomTypingTutorProgressBar}"
                          Background="White"

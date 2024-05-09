@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,10 +22,19 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class TypingTutorResultPage : Page
     {
-
-        public TypingTutorResultPage()
+        private TypingTutorResultPageViewModel _typingTutorResultPageViewModel;
+        public TypingTutorResultPage(int typingTutorSpeed,int errorsCount)
         {
+            _typingTutorResultPageViewModel = TypingTutorResultPageViewModel.Instance(typingTutorSpeed, errorsCount);
             InitializeComponent();
+
+            DataContext = _typingTutorResultPageViewModel;
+            
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _typingTutorResultPageViewModel.AchivementStackPanel = AchevementBlocksStackPanel;
         }
     }
 }

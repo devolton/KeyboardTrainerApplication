@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Interfaces;
 using CourseProjectKeyboardApplication.View.CustomControls;
 using MaterialDesignThemes.Wpf.Converters;
 using System;
@@ -13,13 +14,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class TypingTutorPageViewModel : ViewModelBase
     {
-        private List<KeyboardItemTextBlock> _keyboardElementsList;
-        private List<KeyboardControlItemTextBlock> _keyboardControlElementsList;
+        private List<IKeyboardItem> _keyboardItemList;
         private Grid _keyboardGrid;
         private Visibility _isStartButtonVisible;
         private Visibility _isHidingPanelVisible;
@@ -43,10 +44,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             GenerateRunsBlocksCommand = new RelayCommand(OnGenarateRunsElements);
             _startLessonCommand = new RelayCommand(OnStartLessonExecuteCommand, CanExecuteStartLessonCommand);
             _restartLessonCommand = new RelayCommand(OnRestartLessonCommand, CanOnRepeatLessonCommandExecute);
-            KeyUpCommand = new RelayCommand(OnKeyUpCommand);
+            KeyUpCommand = new RelayCommand(OnKeyUpCommand, CanExecuteOnKeyDownCommand);
             _typingTutorPageModel = TypingTutorPageModel.Instance();
-            _keyboardControlElementsList = new List<KeyboardControlItemTextBlock>();
-            _keyboardElementsList = new List<KeyboardItemTextBlock>();
+            _keyboardItemList = new List<IKeyboardItem>();
             _isErrorKeyPushed = false;
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
@@ -72,7 +72,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _keyboardGrid = value;
-                InitKeyboardItemLists();
+                InitKeyboardItemList();
                 OnPropertyChanged(nameof(KeyboardGrid));
             }
         }
@@ -150,6 +150,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnGenarateRunsElements(object param)
         {
             _textBlock = param as TextBlock;
+            ProgressBarValue = 0;
+            _textBlock.Inlines.Clear();
             if (_textBlock is not null)
             {
                 _textBlock.Inlines.AddRange(_typingTutorPageModel.GetLearnStrRuns());
@@ -157,26 +159,56 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnRestartLessonCommand(object param)
         {
+            ProgressBarValue = 0;
             _typingTutorPageModel.LessonReset();
+            _typingTutorPageModel.StartMeasureTime();
         }
         private void OnKeyDownCommand(object param)
         {
             var key = (Key)param;
-            if (_typingTutorPageModel.IsFocusCharUppercase())
+            string keyTag = _typingTutorPageModel.GetKeyStrTag(key);
+            if (IsShiftPushed())
             {
-                if (Keyboard.Modifiers == ModifierKeys.Shift)
+                ShiftKeyDownHandler();
+
+
+                if (_typingTutorPageModel.IsFocusCharUppercase() && IsShiftPushed())
                 {
-                    ShiftKeyDownHandler();
+
+
                     if (_typingTutorPageModel.IsValidPushedButton(key, true))
                     {
-                        _typingTutorPageModel.ChangeFocusToNextRun();
                         ProgressBarValue++;
+                        _typingTutorPageModel.ChangeFocusToNextRun();
+                    }
+                    else
+                    {
+                        SetErrorStyleInKeyboardItem(keyTag);
+                        _typingTutorPageModel.SetRunErrorStyle();
+                        _typingTutorPageModel.AddMissclickCount();
+                    }
+                }
+            }
+            else
+            {
+                if (_typingTutorPageModel.IsValidPushedButton(key, false) && !IsShiftPushed())
+                {
+                    ProgressBarValue++;
+                    _typingTutorPageModel.ChangeFocusToNextRun();
+                }
+                else
+                {
 
+                    if (!IsShiftPushed())
+                    {
+                        _typingTutorPageModel.AddMissclickCount();
+                        SetErrorStyleInKeyboardItem(keyTag);
+                        _typingTutorPageModel.SetRunErrorStyle();
                     }
 
                 }
             }
-            
+
 
         }
         private void OnStartLessonExecuteCommand(object param)
@@ -187,7 +219,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             IsHigingPanelVisible = Visibility.Hidden;
             if (_typingTutorPageModel.IsFocusCharUppercase())
             {
-                var shiftElementEnumerable = _keyboardControlElementsList.FindAll(oneControl => Convert.ToString(oneControl.Tag).Contains("Shift"));
+                var shiftElementEnumerable = _keyboardItemList.FindAll(oneControl => oneControl.KeyTag.Contains("Shift"));
                 foreach (var oneShiftElement in shiftElementEnumerable)
                 {
                     oneShiftElement.IsFocusKeyboardItem = true;
@@ -197,43 +229,48 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 SetFocusInKeyboardItem();
             }
+            _typingTutorPageModel.StartMeasureTime();//запускаем секундомер
         }
         private void OnKeyUpCommand(object param)
         {
+            var key = (Key)param;
+            var tag = _typingTutorPageModel.GetKeyStrTag(key);
             //сбарсываем стиль ошибочно нажатой кнопки а так же стиль нажатого Shift
             if (_isErrorKeyPushed)
             {
-                var key = (Key)param;
-                var tag = _typingTutorPageModel.GetKeyStrTag(key);
                 if (tag is not null)
                 {
-                    var errorElement = _keyboardElementsList.FirstOrDefault(oneElement => Convert.ToString(oneElement.Tag).Contains(tag));
+                    var errorElement = _keyboardItemList.FirstOrDefault(oneElement => oneElement.KeyTag.Contains(tag));
                     if (errorElement is not null)
                     {
                         errorElement.IsErrorPushedKeyboardItem = false;
                     }
-                    else
-                    {
-                        var controlErrorElement = _keyboardControlElementsList.FirstOrDefault(oneElement => Convert.ToString(oneElement.Tag).Contains(tag));
-                        if (controlErrorElement is not null)
-                            controlErrorElement.IsErrorPushedKeyboardItem = false;
 
+                }
+                _isErrorKeyPushed = false;
+                _typingTutorPageModel.RemoveRunErrorStyle();
+            }
 
-                    }
+            if (key == Key.LeftShift || key == Key.RightShift)
+            {
+                var shifts = _keyboardItemList.FindAll(oneControl => oneControl.KeyTag.Contains("Shift"));
+                foreach (var oneShift in shifts)
+                {
+                    oneShift.IsFocusKeyboardItem = false;
+                }
+                foreach (var oneKeyElement in _keyboardItemList)
+                {
+                    var oneKeyItem = oneKeyElement as KeyboardItemTextBlock;
+                    if (oneKeyItem is not null)
+                        oneKeyElement.TextValue = Convert.ToString(oneKeyElement.KeyTag)[0].ToString();
                 }
             }
-            var shifts = _keyboardControlElementsList.FindAll(oneControl => Convert.ToString(oneControl.Tag).Contains("Shift"));
-            foreach (var oneShift in shifts)
-            {
-                oneShift.IsFocusKeyboardItem = false;
-            }
-            foreach (var oneKeyElement in _keyboardElementsList)
-            {
-                oneKeyElement.TextValue = Convert.ToString(oneKeyElement.Tag)[0].ToString();
-            }
-            var focusElement = _keyboardElementsList.FirstOrDefault(oneElement => oneElement.IsFocusKeyboardItem);
+            var focusElement = _keyboardItemList.FirstOrDefault(oneElement => oneElement.IsFocusKeyboardItem);
             if (focusElement is not null)
                 focusElement.IsFocusKeyboardItem = false;
+
+            SetFocusInKeyboardItem();
+
 
 
         }
@@ -258,46 +295,56 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
 
-        private void InitKeyboardItemLists()
+
+        private void InitKeyboardItemList()
         {
-            _keyboardElementsList.Clear();
-            _keyboardControlElementsList.Clear();
+            _keyboardItemList.Clear();
             foreach (var element in KeyboardGrid.Children)
             {
-                var keyboardItem = element as KeyboardItemTextBlock;
-                if (keyboardItem is not null)
-                {
-                    _keyboardElementsList.Add(keyboardItem);
-                    continue;
-                }
-                var keyboardControlItem = element as KeyboardControlItemTextBlock;
-                if (keyboardControlItem is not null)
-                {
-                    _keyboardControlElementsList.Add(keyboardControlItem);
-                }
-
-
+                var keyElement = element as IKeyboardItem;
+                if (keyElement is not null)
+                    _keyboardItemList.Add(keyElement);
             }
         }
         private void ShiftKeyDownHandler()
         {
-            var shiftEnumarable = _keyboardControlElementsList.Where(oneKey => oneKey.Name.Contains("Shift"));
+            var shiftEnumarable = _keyboardItemList.Where(oneKey => oneKey.KeyTag.Contains("Shift"));
             foreach (var oneShift in shiftEnumarable)
             {
                 oneShift.IsFocusKeyboardItem = true;
             }
-            foreach (var oneKeyElement in _keyboardElementsList)
+            foreach (var oneKeyElement in _keyboardItemList)
             {
-                oneKeyElement.TextValue = Convert.ToString(oneKeyElement.Tag)[1].ToString();
+                var keyElement = oneKeyElement as KeyboardItemTextBlock;
+                if (keyElement is not null)
+                    oneKeyElement.TextValue = oneKeyElement.KeyTag[1].ToString();
             }
             SetFocusInKeyboardItem();
         }
         private void SetFocusInKeyboardItem()
         {
             var currentTag = _typingTutorPageModel.GetCurrentKeyTag();
-            var focusElement = _keyboardElementsList.FirstOrDefault(element => Convert.ToString(element.Tag).Contains(currentTag));
-            focusElement.IsFocusKeyboardItem = true;
+            var focusElement = _keyboardItemList.FirstOrDefault(element => element.KeyTag.Contains(currentTag));
+            if (focusElement is not null)
+                focusElement.IsFocusKeyboardItem = true;
+
         }
+
+        private void SetErrorStyleInKeyboardItem(string keyTag)
+        {
+            _isErrorKeyPushed = true;
+            IKeyboardItem errorElement = null;
+            if (keyTag is not null)
+                errorElement = _keyboardItemList.FirstOrDefault(oneKey => oneKey.KeyTag.Contains(keyTag));
+            if (errorElement is not null)
+                errorElement.IsErrorPushedKeyboardItem = true;
+
+        }
+        private bool IsShiftPushed()
+        {
+            return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
+        }
+
 
 
     }

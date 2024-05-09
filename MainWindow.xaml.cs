@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
+using CourseProjectKeyboardApplication.Tools;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.View.Windows;
 using System.Diagnostics;
@@ -27,8 +28,8 @@ namespace CourseProjectKeyboardApplication
         private TypingCertificationResultsPage _typingCertificationResultsPage;
         private EducationResultsPage _educationResultsPage;
         private TypingTestResultPage _typingTestResultPage;
-        private TypingTutorResultPage _typingTutorResultPage;
         private EditUserProfilPage _editUserProfilPage;
+        private TypingTutorResultPage _typingTutorResultPage;
 
         public MainWindow()
         {
@@ -40,8 +41,10 @@ namespace CourseProjectKeyboardApplication
             _typingCertificationResultsPage = new TypingCertificationResultsPage();
             _educationResultsPage = new EducationResultsPage();
             _typingTestResultPage = new TypingTestResultPage();
-            _typingTutorResultPage = new TypingTutorResultPage();
             _editUserProfilPage = new EditUserProfilPage();
+            _typingTutorResultPage = new TypingTutorResultPage(22, 0);
+
+            FrameService.MainFrame = MainFrame;
 
         }
 
@@ -93,17 +96,16 @@ namespace CourseProjectKeyboardApplication
             MainFrame.Content = _typingTestResultPage;
         }
 
-        private void TempTytorResultButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = _typingTutorResultPage;
 
-        }
 
         private void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = _editUserProfilPage;
         }
 
-
+        private void TempTutorResultButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = _typingTutorResultPage;
+        }
     }
 }

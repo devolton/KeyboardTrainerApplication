@@ -54,6 +54,7 @@
             <BitmapImage x:Key="LoginUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/LoginUserBlueIcon.png"/>
             <BitmapImage x:Key="SingInUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserWhiteIcon.png"/>
             <BitmapImage x:Key="SingInUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserBlueIcon.png"/>
+            
 
 
 
