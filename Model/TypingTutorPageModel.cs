@@ -121,7 +121,6 @@ namespace CourseProjectKeyboardApplication.Model
                 _stopwatcher.Stop();
                 _typingTutorSpeed = GetTypingTutorSpeed();
                 //передавать во фрейм TypingTutorResultPage и передавать результат
-                MessageBox.Show($"Errors: {_missClickCounter} Speed: {_typingTutorSpeed}");
                 FrameMediator.MainFrame.Content = new TypingTutorResultPage(_typingTutorSpeed,_missClickCounter);
 
 

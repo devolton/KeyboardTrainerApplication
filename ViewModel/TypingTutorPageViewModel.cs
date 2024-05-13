@@ -68,10 +68,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         public bool IsLessonStarter
         {
-            get {return _isLessonStarted; }
+            get { return _isLessonStarted; }
             set
             {
-                _isLessonStarted= value;
+                _isLessonStarted = value;
                 IsHiginglockVisible();
                 OnPropertyChanged(nameof(IsLessonStarter));
             }
@@ -161,9 +161,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             _textBlock = param as TextBlock;
             ProgressBarValue = 0;
-            _textBlock.Inlines.Clear();
             if (_textBlock is not null)
             {
+                _textBlock.Inlines.Clear();
                 _textBlock.Inlines.AddRange(_typingTutorPageModel.GetLearnStrRuns());
             }
         }
@@ -171,8 +171,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             ProgressBarValue = 0;
             _typingTutorPageModel.LessonReset();
+            RemoveFocusStyle();
             IsLessonStarter = false;
-            
+
         }
         private void OnKeyDownCommand(object param)
         {
@@ -276,15 +277,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                         oneKeyElement.TextValue = Convert.ToString(oneKeyElement.KeyTag)[0].ToString();
                 }
             }
-            var focusElement = _keyboardItemList.FirstOrDefault(oneElement => oneElement.IsFocusKeyboardItem);
-            if (focusElement is not null)
-                focusElement.IsFocusKeyboardItem = false;
+            RemoveFocusStyle();
 
             SetFocusInKeyboardItem();
 
 
 
         }
+
+
         #endregion
 
         //command predicates block
@@ -303,9 +304,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void IsHiginglockVisible()
         {
-            IsHigingPanelVisible = (CanExecuteOnKeyDownCommand(null)) ? Visibility.Hidden: Visibility.Visible;
+            IsHigingPanelVisible = (CanExecuteOnKeyDownCommand(null)) ? Visibility.Hidden : Visibility.Visible;
             IsStartButtonVisible = (CanExecuteOnKeyDownCommand(null)) ? Visibility.Hidden : Visibility.Visible;
-   
+
         }
 
         #endregion
@@ -360,6 +361,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool IsShiftPushed()
         {
             return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
+        }
+        private void RemoveFocusStyle()
+        {
+            var focusElement = _keyboardItemList.FirstOrDefault(oneElement => oneElement.IsFocusKeyboardItem);
+            if (focusElement is not null)
+                focusElement.IsFocusKeyboardItem = false;
         }
 
 

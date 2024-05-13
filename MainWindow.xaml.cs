@@ -113,9 +113,7 @@ namespace CourseProjectKeyboardApplication
             MainFrame.Content = _editUserProfilPage;
         }
 
-        private void TempTutorResultButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = _typingTutorResultPage;
-        }
+
+  
     }
 }

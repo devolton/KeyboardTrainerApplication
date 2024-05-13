@@ -58,7 +58,7 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
 
         private void Page_GotFocus(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Page got focus");
+         
         }
     }
 }
