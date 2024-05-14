@@ -120,7 +120,7 @@ namespace CourseProjectKeyboardApplication.Model
                 //сбросить все стили 
                 _stopwatcher.Stop();
                 _typingTutorSpeed = GetTypingTutorSpeed();
-                //передавать во фрейм TypingTutorResultPage и передавать результат
+                //передавать во фрейм TypingTutorResultPage и передавать результат(подумать об Singltop)
                 FrameMediator.MainFrame.Content = new TypingTutorResultPage(_typingTutorSpeed,_missClickCounter);
 
 

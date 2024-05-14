@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class TypingCertificatesPage : Page
     {
+        private TypingCertificatesPageViewModel _typingCertificatesPageViewModel;
         public TypingCertificatesPage()
         {
             InitializeComponent();
+            _typingCertificatesPageViewModel = TypingCertificatesPageViewModel.Instance();
+            DataContext = _typingCertificatesPageViewModel;
         }
     }
 }

@@ -27,9 +27,7 @@ namespace CourseProjectKeyboardApplication
         private TypingCertificatesPage _typingCertificatesPage;
         private TypingCertificationResultsPage _typingCertificationResultsPage;
         private EducationResultsPage _educationResultsPage;
-        private TypingTestResultPage _typingTestResultPage;
         private EditUserProfilPage _editUserProfilPage;
-        private TypingTutorResultPage _typingTutorResultPage;
 
         public MainWindow()
         {
@@ -37,24 +35,23 @@ namespace CourseProjectKeyboardApplication
             _learnPage = new LearnPage(MainFrame);
             _typingTutorPage = new TypingTutorPage();
             _typingTestPage = new TypingTestPage();
-            _typingCertificatesPage = new TypingCertificatesPage(); // перенести весь блок в  Window_Loaded
+            _typingCertificatesPage = new TypingCertificatesPage(); 
             _typingCertificationResultsPage = new TypingCertificationResultsPage();
             _educationResultsPage = new EducationResultsPage();
-            _typingTestResultPage = new TypingTestResultPage(10,120,10);
             _editUserProfilPage = new EditUserProfilPage();
-            //_typingTutorResultPage = new TypingTutorResultPage(22, 0);
 
             FrameMediator.MainFrame = MainFrame;
-            FrameMediator.InitPages(new List<Page>() { 
+            FrameMediator.InitPages(new List<Page>() {
                 _typingTutorPage,
                 _learnPage,
                 _typingTestPage,
                 _typingCertificatesPage,
                 _typingCertificationResultsPage,
                 _educationResultsPage,
-                _editUserProfilPage,
+                _editUserProfilPage
 
             });
+
 
         }
 
@@ -66,51 +63,47 @@ namespace CourseProjectKeyboardApplication
 
         private void TypingTutorMainButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = _typingTutorPage;
+            FrameMediator.DisplayTypingTutorPage();
         }
 
         private void TypingTestMainButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = _typingTestPage;
+            FrameMediator.DisplayTypingTestPage();
         }
 
         private void LearnMainButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = _learnPage;
+
+            FrameMediator.DisplayLearnPage();
 
         }
 
         private void MainFrame_Loaded(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = _typingTestPage;
+            
+            FrameMediator.DisplayTypingTestPage();
         }
 
         private void CertificatesButton_Click(object sender, RoutedEventArgs e)
         {
-
-            MainFrame.Content = _typingCertificatesPage;
+            FrameMediator.DisplayTypingCertificatesPage();
+          
         }
 
         private void CertificationResultButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = _typingCertificationResultsPage;
+            FrameMediator.DisplayTypingCertificatesResultPage();
         }
 
         private void EducationalResultsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = _educationResultsPage;
+            FrameMediator.DisplayEducationResultsPage();
         }
-
-        private void TempTestResultButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = _typingTestResultPage;
-        }
-
 
 
         private void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = _editUserProfilPage;
+            FrameMediator.DisplayEditUserProfilPage();
         }
 
 

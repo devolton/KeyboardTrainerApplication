@@ -26,41 +26,42 @@ namespace CourseProjectKeyboardApplication.Tools
         }
         public static void DisplayTypingTutorPage()
         {
-            foreach(var onePage in _pagesList)
-            {
-                var typingTutorPage = onePage as TypingTutorPage;
-                if(typingTutorPage is not null)
-                {
-                    MainFrame.Content = typingTutorPage;
-                    return;
-                }
-                
-            }
+            DisplayPage(typeof(TypingTutorPage));
         }
         public static void DisplayTypingTestPage()
         {
-            foreach (var onePage in _pagesList)
-            {
-                var typingTestPage = onePage as TypingTestPage;
-                if (typingTestPage is not null)
-                {
-                    MainFrame.Content = typingTestPage;
-                    return;
-                }
-
-            }
+            DisplayPage(typeof(TypingTestPage));
         }
         public static void DisplayLearnPage()
         {
+            DisplayPage(typeof(LearnPage));
+        }
+        public static void DisplayTypingCertificatesPage()
+        {
+            DisplayPage(typeof(TypingCertificatesPage));
+        }
+        public static void DisplayTypingCertificatesResultPage()
+        {
+            DisplayPage(typeof(TypingCertificationResultsPage));
+        }
+        public static void DisplayEducationResultsPage()
+        {
+            DisplayPage(typeof(EducationResultsPage));
+        }
+        public static void DisplayEditUserProfilPage()
+        {
+            DisplayPage(typeof(EditUserProfilPage));
+        }
+        private static void DisplayPage(Type pageType)
+        {
             foreach (var onePage in _pagesList)
             {
-                var learnPage = onePage as LearnPage;
-                if (learnPage is not null)
+              
+                if (onePage.GetType().Equals(pageType))
                 {
-                    MainFrame.Content = learnPage;
+                    MainFrame.Content = onePage;
                     return;
                 }
-
             }
         }
    
