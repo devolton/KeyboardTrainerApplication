@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,23 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class CertificateResultsFilterBlock : UserControl
     {
+        private TypingCertificationResultPageViewModel _viewModel;
         public CertificateResultsFilterBlock()
         {
+            _viewModel = TypingCertificationResultPageViewModel.Instance();
             InitializeComponent();
+           
+            DataContext = _viewModel;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if(comboBox is not null && _viewModel is not null)
+            {
+                int selectedIndex=comboBox.SelectedIndex;
+                _viewModel.DrawStatisticsCommand.Execute(selectedIndex);
+            }
         }
     }
 }

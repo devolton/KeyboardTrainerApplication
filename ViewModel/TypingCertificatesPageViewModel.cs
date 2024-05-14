@@ -86,12 +86,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;
                 _typingAccuracy = _typingCertifcatesPageModel.GetTypingAccuracy();
-                _typingSpeed = _typingCertifcatesPageModel.GetTypingSpeed();
+                _typingSpeed=_typingCertifcatesPageModel.GetTypingSpeed();
+                _certificateRenderTargetBitmap= _typingCertifcatesPageModel.GetUserCertificate();
                 var speedBlock = elementPair.Key;
                 var accuracyBlock = elementPair.Value;
                 speedBlock.StatValue = TypingSpeed;
                 accuracyBlock.StatValue = TypingAccuracy;
-                _certificateRenderTargetBitmap = _typingCertifcatesPageModel.GetUserCertificate();
+                CertificateSource = _certificateRenderTargetBitmap;
             }
             catch (Exception ex)
             {
