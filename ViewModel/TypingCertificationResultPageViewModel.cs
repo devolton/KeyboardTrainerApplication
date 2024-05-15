@@ -26,7 +26,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private TypingCertificationResultPageViewModel()
         {
             _typingCertificationResultPageModel = new();
-            _drawStatisticsCommand = new RelayCommand(OnDrawStatisticsCommand,CanDrawStatisticsCommandExecute);
+            _drawStatisticsCommand = new RelayCommand(OnDrawStatisticsCommand);
             _statStackPanel = new StackPanel();
 
         }
@@ -53,14 +53,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
              set
             {
                 _statStackPanel= value;
-                InitStatBlock();
+                InitStatBlock(0);
                 OnPropertyChanged(nameof(StatStackPanel));
             }
         }
 
-        private void InitStatBlock()
+        private void InitStatBlock(int selectedIndex)
         {
-            var statCollection = _typingCertificationResultPageModel.GetSortTypingResultList((TypingStatisticsPeriodTime)0, true);
+            var statCollection = _typingCertificationResultPageModel.GetSortTypingResultList((TypingStatisticsPeriodTime)selectedIndex, true);
                 StatStackPanel.Children.Clear();
                 foreach (var item in statCollection)
                 {
@@ -73,6 +73,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                         DateValue = item.TypingDate.ToString("dd MMM yyyy", new CultureInfo("en-US"))
                     }); ;
                 }
+          
         }
 
         public IEnumerable<string> TypingDateCollection {
@@ -92,17 +93,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             var statTuple = _typingCertificationResultPageModel.GetStatistics((TypingStatisticsPeriodTime)selectedIndex);
             SeriesCollection = statTuple.Item1;
             TypingDateCollection = statTuple.Item2;
-            InitStatBlock();
+            InitStatBlock(selectedIndex);
 
         }
         #endregion
-        //command predicates
-        #region
-        private bool CanDrawStatisticsCommandExecute(object param)
-        {
-            return true;
-        }
-        #endregion
+ 
        
     }
 }

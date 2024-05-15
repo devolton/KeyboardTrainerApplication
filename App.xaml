@@ -55,6 +55,7 @@
             <BitmapImage x:Key="SingInUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserWhiteIcon.png"/>
             <BitmapImage x:Key="SingInUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserBlueIcon.png"/>
             <BitmapImage x:Key="CertificateTemplate" UriSource="pack://application:,,,/Resources/Images/EnglishTypingCertificate.png"/>
+            <BitmapImage x:Key="CurrentLessonLeftArrow" UriSource="pack://application:,,,/Resources/Images/LeftArrow.png"/>
 
 
 

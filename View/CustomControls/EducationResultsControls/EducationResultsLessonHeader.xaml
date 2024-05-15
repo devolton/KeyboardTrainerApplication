@@ -25,6 +25,7 @@
     </UserControl.Resources>
     <Border CornerRadius="20"
             Height="100"
+            Margin="0 30 0 20"
             Width="600"
         Background="Silver">
         <Grid

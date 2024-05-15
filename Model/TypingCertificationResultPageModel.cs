@@ -139,11 +139,10 @@ namespace CourseProjectKeyboardApplication.Model
             }
             if (selectedResults.Count > 10)
             {
-                selectedResults.Sort((first, second) => first.TypingSpeed.CompareTo(second.TypingSpeed));
+                selectedResults.Sort((first, second) => second.TypingSpeed.CompareTo(first.TypingSpeed));
                 selectedResults = selectedResults.GetRange(0, 10);
                 if (isForTable)
                 {
-                    selectedResults.Reverse();
                     return selectedResults;
                 }
                     

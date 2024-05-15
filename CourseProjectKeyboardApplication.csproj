@@ -30,6 +30,7 @@
     <None Remove="Resources\Images\GoldTarget.png" />
     <None Remove="Resources\Images\Keyboard.png" />
     <None Remove="Resources\Images\KeyboardSchemeEng.png" />
+    <None Remove="Resources\Images\LeftArrow.png" />
     <None Remove="Resources\Images\LessonLockIcon.png" />
     <None Remove="Resources\Images\LightGrayFlash.png" />
     <None Remove="Resources\Images\LightGrayStar.png" />
@@ -83,6 +84,7 @@
     <Resource Include="Resources\Images\GoldTarget.png" />
     <Resource Include="Resources\Images\Keyboard.png" />
     <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
+    <Resource Include="Resources\Images\LeftArrow.png" />
     <Resource Include="Resources\Images\LessonLockIcon.png" />
     <Resource Include="Resources\Images\LightGrayFlash.png" />
     <Resource Include="Resources\Images\LightGrayStar.png" />
