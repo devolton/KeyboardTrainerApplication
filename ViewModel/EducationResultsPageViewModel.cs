@@ -23,6 +23,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _updateHeaderCommand;
         private ICommand _continueEducationCommand;
         private ICommand _startLessonCommand;
+
+        private IEducationResultLessonButton _currentLessonButton;
         private EducationResultsPageViewModel()
         {
             _model = new EducationResultsPageModel();
@@ -72,9 +74,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnInitializatioCommand(object param)
         {
             _mainStackPanel = param as StackPanel;
-            var educatinLevelsList = _model.GetEducationLevelList();
+            var educatinProgram = _model.GetEducationalProgram();
 
-            foreach (var oneLevel in educatinLevelsList)
+            foreach (var oneLevel in educatinProgram.Levels)
             {
                 var educationResultLessonBlock = new EducationResultsLessonBlock();
                 var lessonHeader = (EducationResultsLessonHeader)educationResultLessonBlock.FindName("LessonHeader");
@@ -85,12 +87,23 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 {
                     if (oneLesson.IsLessonUnlocked)
                     {
-                        var lessonButton = new EducationResultsLessonNumberButton(oneLesson);
-                        lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
-                        lessonButton.LessThanTwoTyposCircleBackground = (oneLesson.IsLessTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
-                        lessonButton.WithoutErrorsCircleBackground = (oneLesson.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
-                        lessonButton.SpeedCircleBackground = (oneLesson.IsSpeedConditionCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
-                        lessonBodyWrapPanel.Children.Add(lessonButton);
+                        if (oneLesson.Id == educatinProgram.CurrentLessonId)
+                        {
+                            var button = new EducationResultsCurrentLessonButton(oneLesson);
+                            button.MouseDoubleClick += LessonButton_MouseDoubleClick;
+                            _currentLessonButton = button;
+                            lessonBodyWrapPanel.Children.Add(button);
+                            continue;
+                        }
+                        else
+                        {
+                            var lessonButton = new EducationResultsLessonNumberButton(oneLesson);
+                            lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+                            lessonButton.LessThanTwoTyposCircleBackground = (oneLesson.IsLessTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
+                            lessonButton.WithoutErrorsCircleBackground = (oneLesson.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
+                            lessonButton.SpeedCircleBackground = (oneLesson.IsSpeedConditionCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
+                            lessonBodyWrapPanel.Children.Add(lessonButton);
+                        }
                     }
                     else
                     {
@@ -108,14 +121,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
-        private void LessonButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var button = sender as IEducationResultLessonButton;
-            if (button != null)
-            {
-                MessageBox.Show(button.EducationLesson.Ordinal.ToString());
-                    }
-        }
+ 
 
         //команда обновления урока после его успешного завершения
         private void OnUpdateLessonStateCommand(object param)
@@ -130,11 +136,21 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //комадна продолжения обучения(continue button)
         private void OnContinueEducationCommand(object param)
         {
+            if(_currentLessonButton is not null)
+            {
+                //OpenTypingTutorPage(_currentLessonButton)
+            }
 
         }
         //команда начала урока(клик по урокy)
         private void OnStartLessonCommand(object param)
         {
+            IEducationResultLessonButton button = param as IEducationResultLessonButton;
+            if(button is not null)
+            {
+                //открытие страницы обучения 
+
+            }
 
         }
         #endregion
@@ -150,9 +166,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
             return true;
         }
 
-
-
         #endregion
-
+        private void LessonButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var button = sender as IEducationResultLessonButton;
+            _currentLessonButton = button;
+            StartLessonCommand.Execute(button);
+        }
     }
 }

@@ -6,8 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
       xmlns:vm="clr-namespace:CourseProjectKeyboardApplication.ViewModel"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" d:DataContext="{d:DesignInstance Type=vm:LoginUserPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="340" d:DesignWidth="400"
       Title="UserLoginPage">
@@ -35,14 +34,21 @@
                          PasswordChanged="LoginPasswordBox_PasswordChanged"  
                          materialDesign:HintAssist.Hint="Password"
                          Background="Transparent"
-                         Style="{Binding PasswordBoxStyle}">
-                
-            </PasswordBox>
+                         Visibility="{Binding PasswordBoxVisibility}"
+                         Style="{Binding PasswordBoxStyle}"/>
+            <TextBox x:Name="LoginPasswordTextBox"
+                     Grid.Column="0"
+                     Text="{Binding Password}"
+                     Background="Transparent"
+                     Margin="0"
+                     materialDesign:HintAssist.Hint="Password"
+                     Visibility="{Binding PasswordTextBoxVisibility}"
+                     Style="{StaticResource CustomDefaultLoginPageTextBox}"/>
             <Button x:Name="UserLoginPagePasswordVisibilityButton"
                     Grid.Column="1"
+                    Command="{Binding PasswordVisibilityCommand}"
                     Background="Transparent"
                     BorderThickness="0"
-                    Click="UserLoginPagePasswordVisibiletyButton_Click"
                     Margin="0 10 0 0 "
                     Width="30"
                     Padding="0"
@@ -50,6 +56,7 @@
                 <Button.Content>
                     <TextBlock x:Name="UserLoginPagePasswordVisibilityIconTextBlock"
                        Text="👁"
+                       TextDecorations="{Binding EyeButtonDecorationCollection}"
                        FontSize="16"
                        TextAlignment="Center"
                        VerticalAlignment="Center"

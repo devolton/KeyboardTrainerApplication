@@ -14,14 +14,24 @@ namespace CourseProjectKeyboardApplication.Model
         {
             
         }
+        public EnlishEducationalProgram GetEducationalProgram()
+        {
+            return new EnlishEducationalProgram() { Levels = GetEducationLevelList(), CurrentLessonId = 5 };
+        }
         public List<EducationLevel> GetEducationLevelList()
         {
             return new List<EducationLevel>() { new EducationLevel() {
-                Title="Title lesson",
+                Title="First lesson",
                 Ordinal=1,
                 Id=1,
                 LessonsList=CreateLessonList()
                 
+            },new EducationLevel()
+            {
+                Title="SeconLesson",
+                Ordinal=2,
+                Id=2,
+                LessonsList=CreateLessonList()
             }
             };
         }
@@ -34,12 +44,12 @@ namespace CourseProjectKeyboardApplication.Model
                 EducationLesson lesson = new EducationLesson
                 {
                     Id = i + 1,
-                    Ordinal=i+1,
+                    Ordinal = i + 1,
                     LessonText = $"Lesson {i + 1} text",
                     IsLessonUnlocked = i < 5,
-                    IsLessTwoErrorsCompleted = false,
-                    IsWithoutErrorsCompleted = false,
-                    IsSpeedConditionCompleted = false
+                    IsLessTwoErrorsCompleted = i == 2,
+                    IsWithoutErrorsCompleted = i < 3,
+                    IsSpeedConditionCompleted = true
                 };
 
                 lessons.Add(lesson);

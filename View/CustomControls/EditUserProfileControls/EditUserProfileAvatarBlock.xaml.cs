@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using CourseProjectKeyboardApplication.ViewModel;
 namespace CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileControls
 {
     /// <summary>
@@ -20,9 +20,12 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileCo
     /// </summary>
     public partial class EditUserProfileAvatarBlock : UserControl
     {
+        private EditUserProfilePageViewModel _viewModel;
         public EditUserProfileAvatarBlock()
         {
             InitializeComponent();
+            _viewModel = EditUserProfilePageViewModel.Instance();
+            this.DataContext = _viewModel;
         }
     }
 }

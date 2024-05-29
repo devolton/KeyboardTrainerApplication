@@ -32,17 +32,12 @@ namespace CourseProjectKeyboardApplication.View.Pages
 
         }
 
-        private void UserLoginPagePasswordVisibiletyButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations = (UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations is null) ?
-            TextDecorations.Strikethrough : null;
-
-        }
 
         private void LoginPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             var passwordBox = sender as PasswordBox;
-            _loginViewModel.Password = passwordBox.Password;
+            if (_loginViewModel != null)
+                _loginViewModel.Password = passwordBox.Password;
 
 
         }

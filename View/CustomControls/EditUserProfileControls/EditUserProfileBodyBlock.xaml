@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:ccEditUserProfile="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileControls"
+             xmlns:ccEditUserProfile="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileControls" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:EditUserProfilePageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel
@@ -12,27 +12,47 @@
         Orientation="Vertical"
         Margin="0 0 0 20">
         <TextBox
-                    x:Name="FullNameTextBox"
-                    materialDesign:HintAssist.Hint="Full name"
+                    x:Name="NameTextBox"
+                    Text="{Binding Name}"
+                    materialDesign:HintAssist.Hint="Name"
                     Style="{StaticResource CustomEditProfileTextBox}"/>
         <TextBox
                     x:Name="LoginTextBox"
+                    Text="{Binding Login}"
                     materialDesign:HintAssist.Hint="Login"
                     Style="{StaticResource CustomEditProfileTextBox}"/>
         <TextBox
                     x:Name="EmailTextBox"
+                    Text="{Binding Email}"
                     materialDesign:HintAssist.Hint="Email"
                     Style="{StaticResource CustomEditProfileTextBox}"/>
         <PasswordBox
-                    x:Name="PasswordTextBox"
+                    x:Name="PasswordBox"
+                    PasswordChanged="PasswordTextBox_PasswordChanged"
                     materialDesign:HintAssist.Hint="Password"
+                    Visibility="Collapsed"
                     Tag="password"
                     Style="{StaticResource CustomEditUserProfilePasswordBox}"/>
+        <TextBox    
+                    x:Name="PasswordTextBox"
+                    Text="{Binding Password}"
+                    materialDesign:HintAssist.Hint="Password"
+                    Visibility="Visible"
+                    Style="{StaticResource CustomEditProfileTextBox}"/>
+
+
         <PasswordBox
-                    x:Name="ConfirmPasswordTextBox"
+                    x:Name="ConfirmPasswordBox"
+                    PasswordChanged="ConfirmPasswordTextBox_PasswordChanged"
                     materialDesign:HintAssist.Hint="Confirm password"
                     Tag="confirmPassword"
+                    Visibility="Collapsed"
                     Style="{StaticResource CustomEditUserProfilePasswordBox}"/>
+        <TextBox x:Name="ConfirmPasswordTextBox" 
+                 Text="{Binding ConfirmPassword}"
+                 materialDesign:HintAssist.Hint="ConfirmPassword"
+                 Visibility="Visible"
+                 Style="{StaticResource CustomEditProfileTextBox}"/>
 
     </StackPanel>
 </UserControl>
