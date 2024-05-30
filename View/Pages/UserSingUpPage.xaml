@@ -5,6 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
+      xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:behaviors="clr-namespace:CourseProjectKeyboardApplication.Tools.Behaviors"
+      d:DataContext="{d:DesignInstance Type=viewmodel:UserSingupPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="400"
       Title="UserSingInPage">
@@ -40,12 +44,24 @@
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="SingInPasswordBox"
                          Grid.Column="0"
-                         PasswordChanged="SingInPasswordBox_PasswordChanged" 
+                         Visibility="{Binding PasswordBoxVisibility}"
                          Background="Transparent"
                          materialDesign:HintAssist.Hint="Password"
-                         Style="{Binding UserPasswordBoxStyle}"/>
+                         Style="{Binding UserPasswordBoxStyle}">
+                <i:Interaction.Behaviors>
+                    <behaviors:PasswordBehavior Password="{Binding Password, Mode=TwoWay}"/>
+                </i:Interaction.Behaviors>
+            </PasswordBox>
+            <TextBox Grid.Column="0"
+                     Margin="0"
+                     Text="{Binding Password}"
+                     Visibility="{Binding PasswordTextBoxVisibility}"
+                     Background="Transparent"
+                     materialDesign:HintAssist.Hint="Password"
+                     Style="{StaticResource CustomDefaultSingUpPageTextBox}"/>
             <Button x:Name="UserSingUpPagePasswordVisibilityButton"
                     Grid.Column="1"
+                    Command="{Binding PasswordVisibilityCommand}"
                     Background="Transparent"
                     BorderThickness="0"
                     Margin="0 10 0 0"
@@ -58,6 +74,7 @@
                                FontSize="14"
                                TextAlignment="Center"
                                VerticalAlignment="Center"
+                               TextDecorations="{Binding PasswordTextDecorations}"
                                HorizontalAlignment="Center"
                                Foreground="Silver"/>
                 </Button.Content>
@@ -73,26 +90,39 @@
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="SingInConfirmPasswordBox"
                          Grid.Column="0"
-                         PasswordChanged="SingInConfirmPasswordBox_PasswordChanged"
+                         Visibility="{Binding ConfirmPasswordBoxVisibility}"
                          Background="Transparent"
                          materialDesign:HintAssist.Hint="Confirm password"
-                         Style="{Binding UserConfirmPasswordBoxStyle}"/>
+                         Style="{Binding UserConfirmPasswordBoxStyle}">
+                <i:Interaction.Behaviors>
+                    <behaviors:PasswordBehavior Password="{Binding ConfirmPassword, Mode=TwoWay}"/>
+                </i:Interaction.Behaviors>
+            </PasswordBox>
+            <TextBox Grid.Column="0"
+                     Margin="0"
+                     Text="{Binding ConfirmPassword}"
+                     Background="Transparent"
+                     Visibility="{Binding ConfirmPasswordTextBoxVisibility}"
+                     materialDesign:HintAssist.Hint="Confirm password"
+                     Style="{StaticResource CustomDefaultSingUpPageTextBox}"/>
             <Button x:Name="UserSingUpPageConfirmPasswordVisibilityButton"
-            Grid.Column="1"
-            Background="Transparent"
-            BorderThickness="0"
-            Margin="0 10 0 0 "
-            Width="30"
-            Padding="0"
-            Height="30">
+                    Grid.Column="1"
+                    Background="Transparent"
+                    Command="{Binding ConfirmPasswordVisivilityCommand}"
+                    BorderThickness="0"
+                    Margin="0 10 0 0 "
+                    Width="30"
+                    Padding="0"
+                    Height="30">
                 <Button.Content>
                     <TextBlock x:Name="UserSingUpPageConfirmPasswordVisibilityIconTextBlock"
-               Text="👁"
-               FontSize="14"
-               TextAlignment="Center"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center"
-               Foreground="Silver"/>
+                               Text="👁"
+                               TextDecorations="{Binding ConfirmPasswordTextDecorations}"
+                                FontSize="14"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Foreground="Silver"/>
                 </Button.Content>
             </Button>
         </Grid>

@@ -29,20 +29,5 @@ namespace CourseProjectKeyboardApplication.View.Pages
             DataContext = _userSingUpViewModel;
         }
 
-        private void SingInPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordBox passwordBoxElement = sender as PasswordBox;
-            if (passwordBoxElement is not null)
-                _userSingUpViewModel.Password = passwordBoxElement.Password;
-        }
-
-        private void SingInConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordBox passwordBoxElement = sender as PasswordBox;
-            if (passwordBoxElement is not null)
-                _userSingUpViewModel.ConfirmPassword = passwordBoxElement.Password;
-
-
-        }
     }
 }

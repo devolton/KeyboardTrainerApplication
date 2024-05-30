@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CourseProjectKeyboardApplication.Model;
@@ -13,8 +15,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
     {
         private EditUserProfilePageModel _model;
         private static EditUserProfilePageViewModel _instance;
-        private PasswordBox _passwordBox;
-        private PasswordBox _confirmPasswordBox;
+
+        private bool _isPasswordVisible = false;
+        private bool _isConfirmPasswordVisible = false;
 
         private string _name;
         private string _login;
@@ -26,6 +29,17 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _removeAvatarCommand;
         private ICommand _changeAvatarCommand;
         private ICommand _saveChangeCommand;
+        private ICommand _passwordVisibilityCommand;
+        private ICommand _confirmPasswordVisibilityCommand;
+
+        private Visibility _passwordBoxVisibility = Visibility.Visible;
+        private Visibility _passwordTextBoxVisibility = Visibility.Collapsed;
+        private Visibility _confirmPasswordBoxVisibility = Visibility.Visible;
+        private Visibility _confirmPasswordTextBoxVisibility = Visibility.Collapsed;
+
+        private TextDecorationCollection _passwordEyeButtonTextDecorationCollection = TextDecorations.Strikethrough;
+        private TextDecorationCollection _confirmPasswordEyeButtonTextDecorationCollection = TextDecorations.Strikethrough;
+
 
 
         private EditUserProfilePageViewModel()
@@ -35,8 +49,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _changeAvatarCommand = new RelayCommand(OnChangeAvatarCommmand);
             _saveChangeCommand = new RelayCommand(OnSaveChangeCommand, CanSaveChangeCommandExecute);
             _loadUserInfoCommand = new RelayCommand(OnLoadUserInfoCommand);
+            _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
+            _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
 
         }
+
+       
 
         public static EditUserProfilePageViewModel Instance()
         {
@@ -46,31 +64,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //properties
         #region
-        public PasswordBox PasswordBox
-        {
-            get { return _passwordBox; }
-            set
-            {
-                _passwordBox = value;
-                OnPropertyChanged(nameof(PasswordBox));
-            }
-
-        }
-
-        public PasswordBox ConfirmPasswordBox
-        {
-            get { return _confirmPasswordBox; }
-            set
-            {
-                _confirmPasswordBox = value;
-                OnPropertyChanged(nameof(ConfirmPasswordBox));
-            }
-        }
+   
         public ICommand LoadUserInfoCommand => _loadUserInfoCommand;
         
         public ICommand RemoveAvatarCommand => _removeAvatarCommand;
         public ICommand ChangeAvatarCommand => _changeAvatarCommand;
         public ICommand SaveChangeCommand => _saveChangeCommand;
+        public ICommand PasswordVisibilityCommand=> _passwordVisibilityCommand;
+        public ICommand ConfirmPasswordVisibilityCommand => _confirmPasswordVisibilityCommand;
 
         public string Name
         {
@@ -117,6 +118,62 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(ConfirmPassword));
             }
         }
+        public Visibility PasswordBoxVisibility
+        {
+            get => _passwordBoxVisibility;
+            set
+            {
+                _passwordBoxVisibility = value;
+                OnPropertyChanged(nameof(PasswordBoxVisibility));
+            }
+        }
+        public Visibility PasswordTextBoxVisibility
+        {
+            get => _passwordTextBoxVisibility;
+            set
+            {
+                _passwordTextBoxVisibility = value;
+                OnPropertyChanged(nameof(PasswordTextBoxVisibility));
+            }
+        }
+        public Visibility ConfirmPasswordBoxVisibility
+        {
+            get=> _confirmPasswordBoxVisibility;
+            set
+            {
+                _confirmPasswordBoxVisibility = value;
+                OnPropertyChanged(nameof(ConfirmPasswordBoxVisibility));
+            }
+        }
+        public Visibility ConfirmPasswordTextBoxVisibility
+        {
+            get => _confirmPasswordTextBoxVisibility;
+            set
+            {
+                _confirmPasswordTextBoxVisibility = value;
+                OnPropertyChanged(nameof(ConfirmPasswordTextBoxVisibility));
+            }
+        }
+        public TextDecorationCollection PasswordEyeButtonTextDecorationCollection
+        {
+            get => _passwordEyeButtonTextDecorationCollection;
+            set
+            {
+                _passwordEyeButtonTextDecorationCollection = value;
+                OnPropertyChanged(nameof(PasswordEyeButtonTextDecorationCollection));
+            }
+        }
+
+        public TextDecorationCollection ConfirmPasswordTextDecorationCollection
+        {
+            get => _confirmPasswordEyeButtonTextDecorationCollection;
+            set
+            {
+                _confirmPasswordEyeButtonTextDecorationCollection = value;
+                OnPropertyChanged(nameof(ConfirmPasswordTextDecorationCollection));
+
+            }
+        }
         #endregion
         //command 
         #region
@@ -135,6 +192,45 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnLoadUserInfoCommand(object param)
         {
 
+
+        }
+        private void OnConfirmPasswordVisibilityCommand(object param)
+        {
+            if (_isConfirmPasswordVisible)
+            {
+                _isConfirmPasswordVisible = false;
+                ConfirmPasswordTextBoxVisibility = Visibility.Collapsed;
+                ConfirmPasswordTextDecorationCollection = TextDecorations.Strikethrough;
+                ConfirmPasswordBoxVisibility = Visibility.Visible;
+            }
+            else
+            {
+                _isConfirmPasswordVisible = true;
+                ConfirmPasswordBoxVisibility = Visibility.Collapsed;
+                ConfirmPasswordTextBoxVisibility = Visibility.Visible;
+                ConfirmPasswordTextDecorationCollection = null;
+
+            }
+
+        }
+
+        private void OnPasswordVisibilityCommand(object param)
+        {
+            if (_isPasswordVisible)
+            {
+                _isPasswordVisible = false;
+                PasswordTextBoxVisibility = Visibility.Collapsed;
+                PasswordEyeButtonTextDecorationCollection = TextDecorations.Strikethrough;
+                PasswordBoxVisibility = Visibility.Visible;
+            }
+            else
+            {
+                _isPasswordVisible = true;
+                PasswordBoxVisibility = Visibility.Collapsed;
+                PasswordTextBoxVisibility = Visibility.Visible;
+                PasswordEyeButtonTextDecorationCollection = null;
+
+            }
 
         }
         #endregion

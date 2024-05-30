@@ -1,21 +1,10 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.View.Windows;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Cryptography;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
+using CourseProjectKeyboardApplication.ViewModel.Commands;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -27,8 +16,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private Style _passwordBoxDefaultStyle;
         private Style _loginInvalidStyle;
         private Style _passwordBoxInvalidStyle;
-        private Visibility _passwordBoxVisibility = Visibility.Collapsed;
-        private Visibility _passwordTextBoxVisibility = Visibility.Visible;
+        private Visibility _passwordBoxVisibility = Visibility.Visible;
+        private Visibility _passwordTextBoxVisibility = Visibility.Collapsed;
         private TextDecorationCollection _passwordEyeButtonDecoration = TextDecorations.Strikethrough;
         private readonly MultiCommand _multiCommand = new MultiCommand();
         private readonly ICommand _passwordVisibilityCommand;
@@ -39,16 +28,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool _isPasswordVisible = false;
         private string _loginOrEmail;
         private string _password = string.Empty;
-        private PasswordBox _loginPasswordBox;
-        public LoginUserPageViewModel(PasswordBox passwordBox) : this()
-        {
-            _loginPasswordBox = passwordBox;
-            _loginPasswordBox.Password = _loginUserPageModel.GetPasswordFromRegister();
-            LoginOrEmail = _loginUserPageModel.GetLoginFromRegister();
-
-
-
-        }
         public LoginUserPageViewModel()
         {
             //делегируем методы (метод который срабатывает при нажатии кнопки)(который проверяет условия выполнения метода)
@@ -61,6 +40,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _passwordBoxDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPagePasswordBox"];
             PasswordBoxStyle = _passwordBoxDefaultStyle;
             _passwordBoxInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPagePasswordBox"];
+            LoginOrEmail = _loginUserPageModel.GetLoginFromRegister();
+            Password = _loginUserPageModel.GetPasswordFromRegister();
 
         }
 

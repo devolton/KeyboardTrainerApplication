@@ -27,19 +27,10 @@ namespace CourseProjectKeyboardApplication.View.Pages
         {
 
             InitializeComponent();
-            _loginViewModel = new LoginUserPageViewModel(LoginPasswordBox);
+            _loginViewModel = new LoginUserPageViewModel();
             DataContext = _loginViewModel;
 
         }
 
-
-        private void LoginPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            var passwordBox = sender as PasswordBox;
-            if (_loginViewModel != null)
-                _loginViewModel.Password = passwordBox.Password;
-
-
-        }
     }
 }

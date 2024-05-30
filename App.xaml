@@ -52,8 +52,8 @@
             <BitmapImage x:Key="AuthorizationExitIcon" UriSource="pack://application:,,,/Resources/Images/AuthorizationExitIcon.png"/>
             <BitmapImage x:Key="LoginUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/LoginUserWhiteIcon.png"/>
             <BitmapImage x:Key="LoginUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/LoginUserBlueIcon.png"/>
-            <BitmapImage x:Key="SingInUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserWhiteIcon.png"/>
-            <BitmapImage x:Key="SingInUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserBlueIcon.png"/>
+            <BitmapImage x:Key="SingUpUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserWhiteIcon.png"/>
+            <BitmapImage x:Key="SingUpUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserBlueIcon.png"/>
             <BitmapImage x:Key="CertificateTemplate" UriSource="pack://application:,,,/Resources/Images/EnglishTypingCertificate.png"/>
             <BitmapImage x:Key="CurrentLessonLeftArrow" UriSource="pack://application:,,,/Resources/Images/LeftArrow.png"/>
 

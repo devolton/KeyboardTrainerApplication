@@ -6,7 +6,9 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
       xmlns:vm="clr-namespace:CourseProjectKeyboardApplication.ViewModel"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" d:DataContext="{d:DesignInstance Type=vm:LoginUserPageViewModel}"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:behaviors="clr-namespace:CourseProjectKeyboardApplication.Tools.Behaviors"
+      d:DataContext="{d:DesignInstance Type=vm:LoginUserPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="340" d:DesignWidth="400"
       Title="UserLoginPage">
@@ -30,12 +32,16 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="LoginPasswordBox"
-                         Grid.Column="0"
-                         PasswordChanged="LoginPasswordBox_PasswordChanged"  
+                         Grid.Column="0"  
                          materialDesign:HintAssist.Hint="Password"
                          Background="Transparent"
                          Visibility="{Binding PasswordBoxVisibility}"
-                         Style="{Binding PasswordBoxStyle}"/>
+                         Style="{Binding PasswordBoxStyle}">
+                <i:Interaction.Behaviors>
+                    <behaviors:PasswordBehavior Password="{Binding Password, Mode=TwoWay}"/>
+                </i:Interaction.Behaviors>
+
+            </PasswordBox>
             <TextBox x:Name="LoginPasswordTextBox"
                      Grid.Column="0"
                      Text="{Binding Password}"

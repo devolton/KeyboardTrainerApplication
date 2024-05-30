@@ -27,22 +27,8 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileCo
             InitializeComponent();
             _viewModel = EditUserProfilePageViewModel.Instance();
             DataContext = _viewModel;
-            _viewModel.PasswordBox = PasswordBox;
-            _viewModel.ConfirmPasswordBox = ConfirmPasswordBox;
 
         }
 
-        private void PasswordTextBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordBox passwordBox = sender as PasswordBox;
-            _viewModel.Password = passwordBox.Password;
-        }
-
-        private void ConfirmPasswordTextBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordBox passwordBox = sender as PasswordBox;
-            _viewModel.ConfirmPassword = passwordBox.Password;
-
-        }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.View.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+using CourseProjectKeyboardApplication.ViewModel.Commands;
+using System.DirectoryServices.ActiveDirectory;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,7 +10,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class UserSingupPageViewModel : ViewModelBase
     {
-        private bool _isEnabledRegistraionButton;
+        private bool _isEnabledRegistraionButton = false;
+        private bool _isPasswordVisible = false;
+        private bool _isConfirmPasswordVisible = false;
+
         private Style _singUpDefaultTextBoxStyle;
         private Style _singUpInvalidTextBoxStyle;
         private Style _singUpDefaultPasswordBoxStyle;
@@ -24,49 +23,41 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private Style _singUpEmailTextBoxStyle;
         private Style _singUpPasswordBoxStyle;
         private Style _singUpConfirmPasswordBoxStyle;
-        private string _userName;
-        private string _userLogin;
-        private string _userEmail;
-        private string _password;
-        private string _confirmPassword;
-        private PasswordBox _passwordBox;
-        private PasswordBox _confirmPasswordBox;
+        private Visibility _passwordBoxVisibility = Visibility.Visible;
+        private Visibility _passwordTextBoxVisibility = Visibility.Collapsed;
+        private Visibility _confirmPasswordBoxVisibility = Visibility.Visible;
+        private Visibility _confirmPasswordTextBoxVisibility = Visibility.Collapsed;
+        private TextDecorationCollection _passwordTextDecorationCollection = TextDecorations.Strikethrough;
+        private TextDecorationCollection _confirmPasswordTextDecorationCollection = TextDecorations.Strikethrough;
+        private string _userName = string.Empty;
+        private string _userLogin = string.Empty;
+        private string _userEmail = string.Empty;
+        private string _password = string.Empty;
+        private string _confirmPassword = string.Empty;
         private readonly MultiCommand _singUpClickButtonMultiCommand;
+        private readonly ICommand _passwordVisibilityCommand;
+        private readonly ICommand _confirmPasswordVisibilityCommand;
         private readonly UserSingUpPageModel _userSingUpPageModel;
-        public UserSingupPageViewModel(PasswordBox passwordBox, PasswordBox confirmPasswordBox) : base()
-        {
-            _passwordBox = passwordBox;
-            _confirmPasswordBox = confirmPasswordBox;
-
-
-        }
         public UserSingupPageViewModel()
         {
             _singUpClickButtonMultiCommand = new MultiCommand();
+            _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
+            _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
             _userSingUpPageModel = new UserSingUpPageModel();
             InitStyles();
-            IsEnabledRegistrationButton = false;
-            UserName = string.Empty;
-            UserLogin = string.Empty;
-            UserEmail = string.Empty;
-            Password = string.Empty;
-            ConfirmPassword = string.Empty;
-
-            _singUpClickButtonMultiCommand.Add(new RelayCommand(TryRegisterUser, IsUserRegistrationCommandExecuted));
+            _singUpClickButtonMultiCommand.Add(new RelayCommand(OnTryRegisterUser, IsUserRegistrationCommandExecuted));
 
         }
        
-        public ICommand SingUpClickCommand => _singUpClickButtonMultiCommand;
+    
+
+        //commands
+        #region
 
         //проверка на возможность выполнения попытки регестрации пользователя 
-        private bool IsUserRegistrationCommandExecuted(object param = null)
-        {
-            return _userSingUpPageModel.IsValidName(UserName) && _userSingUpPageModel.IsValidEmail(UserEmail)
-                && _userSingUpPageModel.IsValidLogin(UserLogin) && _userSingUpPageModel.IsValidPassword(Password) &&
-                Password.Equals(ConfirmPassword);
-        }
+     
         //метод регестрации пользователя 
-        private void TryRegisterUser(object param = null)
+        private void OnTryRegisterUser(object param = null)
         {
             ClearAllField();
             new MainWindow().Show();
@@ -81,11 +72,61 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
+        private void OnPasswordVisibilityCommand(object param)
+        {
+            if (_isPasswordVisible)
+            {
+                _isPasswordVisible = false;
+                PasswordTextBoxVisibility = Visibility.Collapsed;
+                PasswordBoxVisibility = Visibility.Visible;
+                PasswordTextDecorations = TextDecorations.Strikethrough;
+            }
+            else
+            {
+                _isPasswordVisible = true;
+                PasswordBoxVisibility = Visibility.Collapsed;
+                PasswordTextBoxVisibility = Visibility.Visible;
+                PasswordTextDecorations = null;
+                
+            }
+
+        }
+        private void OnConfirmPasswordVisibilityCommand(object param)
+        {
+            if (_isConfirmPasswordVisible)
+            {
+                _isConfirmPasswordVisible = false;
+                ConfirmPasswordTextBoxVisibility = Visibility.Collapsed;
+                ConfirmPasswordBoxVisibility = Visibility.Visible;
+                ConfirmPasswordTextDecorations = TextDecorations.Strikethrough;
+            }
+            else
+            {
+                _isConfirmPasswordVisible = true;
+                ConfirmPasswordBoxVisibility = Visibility.Collapsed;
+                ConfirmPasswordTextBoxVisibility = Visibility.Visible;
+                ConfirmPasswordTextDecorations = null;
+
+            }
+
+        }
+        #endregion
+        //command predicates
+        #region
+        private bool IsUserRegistrationCommandExecuted(object param = null)
+        {
+            return _userSingUpPageModel.IsValidName(UserName) && _userSingUpPageModel.IsValidEmail(UserEmail)
+                && _userSingUpPageModel.IsValidLogin(UserLogin) && _userSingUpPageModel.IsValidPassword(Password) &&
+                Password.Equals(ConfirmPassword);
+        }
         private bool CanEnabledRegistrationButton() => IsEnabledRegistrationButton = IsUserRegistrationCommandExecuted();
+        #endregion
 
         //sing up proporties
         #region
-
+        public ICommand SingUpClickCommand => _singUpClickButtonMultiCommand;
+        public ICommand PasswordVisibilityCommand => _passwordVisibilityCommand;
+        public ICommand ConfirmPasswordVisivilityCommand => _confirmPasswordVisibilityCommand;
         public string UserName
         {
             get { return _userName; }
@@ -198,6 +239,64 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
+        public Visibility PasswordBoxVisibility
+        {
+            get =>_passwordBoxVisibility;
+            set
+            {
+                _passwordBoxVisibility = value;
+                OnPropertyChanged(nameof(PasswordBoxVisibility));
+            }
+        }
+
+        public Visibility PasswordTextBoxVisibility
+        {
+            get => _passwordTextBoxVisibility;
+            set
+            {
+                _passwordTextBoxVisibility = value;
+                OnPropertyChanged(nameof(PasswordTextBoxVisibility));
+            }
+        }
+        public Visibility ConfirmPasswordBoxVisibility
+        {
+            get => _confirmPasswordBoxVisibility;
+            set
+            {
+                _confirmPasswordBoxVisibility = value;
+                OnPropertyChanged(nameof(ConfirmPasswordBoxVisibility));
+            }
+        }
+        public Visibility ConfirmPasswordTextBoxVisibility
+        {
+            get => _confirmPasswordTextBoxVisibility;
+            set
+            {
+                _confirmPasswordTextBoxVisibility = value;
+                OnPropertyChanged(nameof(ConfirmPasswordTextBoxVisibility));
+            }
+        }
+        public TextDecorationCollection PasswordTextDecorations
+        {
+            get => _passwordTextDecorationCollection;
+            set
+            {
+                _passwordTextDecorationCollection = value;
+                OnPropertyChanged(nameof(PasswordTextDecorations));
+            }
+
+        }
+        public TextDecorationCollection ConfirmPasswordTextDecorations
+        {
+            get => _confirmPasswordTextDecorationCollection;
+            set
+            {
+                _confirmPasswordTextDecorationCollection = value;
+                OnPropertyChanged(nameof(ConfirmPasswordTextDecorations));
+            }
+
+        }
+
         #endregion
 
         //Change style methods
@@ -246,8 +345,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             UserEmail=string.Empty;
             Password = string.Empty;
             ConfirmPassword=string.Empty;
-            
-
         }
     }
 }
