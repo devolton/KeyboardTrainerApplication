@@ -119,7 +119,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 && _userSingUpPageModel.IsValidLogin(UserLogin) && _userSingUpPageModel.IsValidPassword(Password) &&
                 Password.Equals(ConfirmPassword);
         }
-        private bool CanEnabledRegistrationButton() => IsEnabledRegistrationButton = IsUserRegistrationCommandExecuted();
+        private void CanEnabledRegistrationButton() => IsEnabledRegistrationButton = IsUserRegistrationCommandExecuted();
         #endregion
 
         //sing up proporties

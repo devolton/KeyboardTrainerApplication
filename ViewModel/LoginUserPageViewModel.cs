@@ -160,9 +160,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnWriteInRegisterCommand(object parameter)
         {
             if (_isChecked)
-                _loginUserPageModel.WriteDataInRegister(LoginOrEmail, Password);
-            else
-                _loginUserPageModel.WriteDataInRegister(string.Empty, string.Empty);
+                _loginUserPageModel.WriteDataInRegister(LoginOrEmail, Password);          
 
         }
         private void OnPasswordVisibilityCommand(object obj)

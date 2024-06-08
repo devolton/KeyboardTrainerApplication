@@ -11,6 +11,12 @@
              d:DataContext="{d:DesignInstance Type=viewmodel:EditUserProfilePageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadUserInfoCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <StackPanel
         HorizontalAlignment="Center"
         Orientation="Vertical"
@@ -57,6 +63,7 @@
                     Style="{StaticResource CustomEditProfileTextBox}"/>
             <Button     
                         Grid.Column="1"
+                        IsEnabled="{Binding IsSaveButtonEnabled}"
                         Command="{Binding PasswordVisibilityCommand}"
                         Background="Transparent"
                         BorderThickness="0"
@@ -114,14 +121,14 @@
                         Height="40">
                 <Button.Content>
                     <TextBlock 
-                                   Text="👁"
-                                   Margin="0 13 0 0"
-                                   TextDecorations="{Binding ConfirmPasswordTextDecorationCollection}"
-                                   FontSize="20"
-                                   TextAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Foreground="Silver"/>
+                           Text="👁"
+                           Margin="0 13 0 0"
+                           TextDecorations="{Binding ConfirmPasswordTextDecorationCollection}"
+                           FontSize="20"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="Silver"/>
                 </Button.Content>
             </Button>
         </Grid>

@@ -15,7 +15,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Width="500">
-            <Image Source="{StaticResource ApplicationLogo}"
+            <Image Source="{Binding AvatarSource}"
                    Width="100"
                    Height="100"
                    ClipToBounds="True"

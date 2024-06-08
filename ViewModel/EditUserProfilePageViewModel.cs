@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using CourseProjectKeyboardApplication.Model;
 
 namespace CourseProjectKeyboardApplication.ViewModel
@@ -15,15 +16,17 @@ namespace CourseProjectKeyboardApplication.ViewModel
     {
         private EditUserProfilePageModel _model;
         private static EditUserProfilePageViewModel _instance;
+        private ImageSource _avatarSource;
 
         private bool _isPasswordVisible = false;
         private bool _isConfirmPasswordVisible = false;
+        private bool _isSaveButtonEnabled = false;
 
-        private string _name;
-        private string _login;
-        private string _email;
-        private string _password;
-        private string _confirmPassword;
+        private string _name = string.Empty;
+        private string _login = string.Empty;
+        private string _email = string.Empty;
+        private string _password = string.Empty;
+        private string _confirmPassword = string.Empty;
 
         private ICommand _loadUserInfoCommand;
         private ICommand _removeAvatarCommand;
@@ -51,6 +54,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _loadUserInfoCommand = new RelayCommand(OnLoadUserInfoCommand);
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
+            _avatarSource = Application.Current.Resources["ApplicationLogo"] as ImageSource;
 
         }
 
@@ -73,12 +77,33 @@ namespace CourseProjectKeyboardApplication.ViewModel
         public ICommand PasswordVisibilityCommand=> _passwordVisibilityCommand;
         public ICommand ConfirmPasswordVisibilityCommand => _confirmPasswordVisibilityCommand;
 
+        public bool IsSaveButtonEnabled
+        {
+            get => _isSaveButtonEnabled;
+            set
+            {
+                _isSaveButtonEnabled = value;
+                OnPropertyChanged(nameof(IsSaveButtonEnabled));
+            }
+            
+        }
+
+        public ImageSource AvatarSource
+        {
+            get => _avatarSource;
+            set
+            {
+                _avatarSource = value;
+                OnPropertyChanged(nameof(AvatarSource));
+            }
+        }
         public string Name
         {
             get { return _name; }
             set
             {
                 _name = value;
+                CanEnabledSaveButton();
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -88,6 +113,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _login = value;
+                CanEnabledSaveButton();
                 OnPropertyChanged(nameof(Login));
             }
         }
@@ -97,6 +123,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _email = value;
+                CanEnabledSaveButton();
                 OnPropertyChanged(nameof(Email));
             }
         }
@@ -106,6 +133,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _password = value;
+                CanEnabledSaveButton();
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -115,6 +143,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _confirmPassword = value;
+                CanEnabledSaveButton();
                 OnPropertyChanged(nameof(ConfirmPassword));
             }
         }
@@ -191,6 +220,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnLoadUserInfoCommand(object param)
         {
+            Login = _model.UserInfo.Login;
+            Password = _model.UserInfo.Password;
+            ConfirmPassword = _model.UserInfo.Password;
+            Name= _model.UserInfo.Name;
+            Email = _model.UserInfo.Email;
 
 
         }
@@ -242,7 +276,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private bool CanSaveChangeCommandExecute(object param)
         {
-            return true;
+            return _model.IsValidName(Name) && _model.IsValidEmail(Email) && _model.IsValidPassword(Password) && _model.IsValidLogin(Login)
+                && Password.Equals(ConfirmPassword);
         }
         private bool IsSaveChangeButtonEnabled()
         {
@@ -252,7 +287,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return CanRemoveAvatarCommandExecute(null);
         }
-
+        private void CanEnabledSaveButton() => IsSaveButtonEnabled = CanSaveChangeCommandExecute(null);
 
         #endregion
     }
