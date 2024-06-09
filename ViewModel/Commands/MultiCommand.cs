@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseProjectKeyboardApplication.ViewModel
+namespace CourseProjectKeyboardApplication.ViewModel.Commands
 {
     using System;
     using System.Collections.Generic;

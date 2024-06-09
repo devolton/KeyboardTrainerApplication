@@ -23,11 +23,25 @@ namespace CourseProjectKeyboardApplication.View.Windows
     {
         private UserLoginPage _userLoginPage;
         private UserSingInPage _userSingInPage;
-        private bool _isLoginPageActive;
+        private bool _isLoginPageActive = true;
+        private SolidColorBrush _deepVioletBrush;
+        private SolidColorBrush _coalBrush;
+        private SolidColorBrush _whiteBrush;
+        private ImageSource _whiteLoginIcon;
+        private ImageSource _blueLoginIcon;
+        private ImageSource _whiteSingUpIcon;
+        private ImageSource _blueSingUpIcon;
         public AuthorizationWindow()
         {
             InitializeComponent();
-            _isLoginPageActive = true;
+            _deepVioletBrush = (SolidColorBrush)Application.Current.Resources["CustomDeepBlueViolet"];
+            _coalBrush = (SolidColorBrush)Application.Current.Resources["CustomCoal"];
+            _whiteBrush = (SolidColorBrush)Application.Current.Resources["CustomWhite"];
+            _whiteLoginIcon = (ImageSource)Application.Current.Resources["LoginUserWhiteIcon"];
+            _blueLoginIcon = (ImageSource)Application.Current.Resources["LoginUserBlueIcon"];
+            _whiteSingUpIcon = (ImageSource)Application.Current.Resources["SingUpUserWhiteIcon"];
+            _blueSingUpIcon = (ImageSource)Application.Current.Resources["SingUpUserBlueIcon"];
+          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -45,53 +59,72 @@ namespace CourseProjectKeyboardApplication.View.Windows
         }
 
         private void OnLoginNavigatorButtonClick(object sender, RoutedEventArgs e)
-        {            
-            AuthorizationFrame.Content = _userLoginPage;
-            _isLoginPageActive = !_isLoginPageActive;
-            ChangeButtonsStyle();
+        {
+            if (!_isLoginPageActive)
+            {
+               
+                AuthorizationFrame.Content = _userLoginPage;
+                _isLoginPageActive = !_isLoginPageActive;
+                ChangeButtonsStyle();
+                _isLoginPageActive = true;
+            }
+
 
         }
 
         private void OnSingUpNavigatorButtonClick(object sender, RoutedEventArgs e)
         {
-            AuthorizationFrame.Content = _userSingInPage;
-            _isLoginPageActive = !_isLoginPageActive;
-            ChangeButtonsStyle();
-        }
-        private void ChangeButtonsStyle()
-        {
-            SolidColorBrush deepVioletBrush = (SolidColorBrush)Application.Current.Resources["CustomDeepBlueViolet"];
-            SolidColorBrush coalBrush = (SolidColorBrush)Application.Current.Resources["CustomCoal"];
-            SolidColorBrush whiteBrush = Brushes.White;
-            ImageSource whiteLoginIcon = (ImageSource)Application.Current.Resources["LoginUserWhiteIcon"];
-            ImageSource blueLoginIcon = (ImageSource)Application.Current.Resources["LoginUserBlueIcon"];
-            ImageSource whiteSingUpIcon = (ImageSource)Application.Current.Resources["SingInUserWhiteIcon"];
-            ImageSource blueSingUpIcon = (ImageSource)Application.Current.Resources["SingInUserBlueIcon"];
-          
             if (_isLoginPageActive)
             {
-                LoginNavigatorButton.Foreground = whiteBrush;
-                LoginNavigatorButton.Background = deepVioletBrush;
-                LoginNavigatorIconImage.Source= whiteLoginIcon;
-                LoginNavigatorButtonTextBlock.TextDecorations = TextDecorations.Underline;
-                SingUpNavigatorButton.Foreground = coalBrush;
-                SingUpNavigatorButton.Background = null;
-                SingUpNavigatorIconImage.Source= blueSingUpIcon;
-                SingUpNavigatorButtonTextBlock.TextDecorations = null;
+                
+                AuthorizationFrame.Content = _userSingInPage;
+                _isLoginPageActive = !_isLoginPageActive;
+                ChangeButtonsStyle();
+                _isLoginPageActive = false;
             }
-            else
+
+
+        }
+
+        private void ChangeButtonsStyle()
+        {
+
+            Task.Run(() =>
             {
-                SingUpNavigatorButton.Foreground = whiteBrush;
-                SingUpNavigatorButton.Background = deepVioletBrush;
-                SingUpNavigatorButtonTextBlock.TextDecorations = TextDecorations.Underline;
-                SingUpNavigatorIconImage.Source = whiteSingUpIcon;
-                LoginNavigatorButton.Foreground = coalBrush;
-                LoginNavigatorIconImage.Source = blueLoginIcon;
-                LoginNavigatorButton.Background = null;
-                LoginNavigatorButtonTextBlock.TextDecorations = null;
+                if (_isLoginPageActive)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        LoginNavigatorButton.Foreground = _whiteBrush;
+                        LoginNavigatorButton.Background = _deepVioletBrush;
+                        LoginNavigatorIconImage.Source = _whiteLoginIcon;
+                        LoginNavigatorButtonTextBlock.TextDecorations = TextDecorations.Underline;
+                        SingUpNavigatorButton.Foreground = _coalBrush;
+                        SingUpNavigatorButton.Background = null;
+                        SingUpNavigatorIconImage.Source = _blueSingUpIcon;
+                        SingUpNavigatorButtonTextBlock.TextDecorations = null;
 
+                    });
+                  
+                }
+                else
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        SingUpNavigatorButton.Foreground = _whiteBrush;
+                        SingUpNavigatorButton.Background = _deepVioletBrush;
+                        SingUpNavigatorButtonTextBlock.TextDecorations = TextDecorations.Underline;
+                        SingUpNavigatorIconImage.Source = _whiteSingUpIcon;
+                        LoginNavigatorButton.Foreground = _coalBrush;
+                        LoginNavigatorIconImage.Source = _blueLoginIcon;
+                        LoginNavigatorButton.Background = null;
+                        LoginNavigatorButtonTextBlock.TextDecorations = null;
 
-            }
+                    });
+                }
+
+            });
+          
 
         }
     }

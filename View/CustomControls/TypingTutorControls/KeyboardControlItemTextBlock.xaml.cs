@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,8 +19,15 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// <summary>
     /// Логика взаимодействия для KeyboardControlItemTextBlock.xaml
     /// </summary>
-    public partial class KeyboardControlItemTextBlock : UserControl
+    public partial class KeyboardControlItemTextBlock : UserControl, IKeyboardItem
     {
+        public string KeyTag
+        {
+            get { return (string)GetValue(KeyTagProperty); }
+            set { SetValue(KeyTagProperty, value);}
+        }
+        public static readonly DependencyProperty KeyTagProperty =
+            DependencyProperty.Register(nameof(KeyTag),typeof(string), typeof(KeyboardControlItemTextBlock), new PropertyMetadata(" "));
         /// <summary>
         /// TextValue
         /// </summary>

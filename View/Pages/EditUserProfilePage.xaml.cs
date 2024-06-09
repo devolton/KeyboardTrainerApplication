@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CourseProjectKeyboardApplication.ViewModel;
 
 namespace CourseProjectKeyboardApplication.View.Pages
 {
@@ -20,9 +21,13 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class EditUserProfilPage : Page
     {
+        private EditUserProfilePageViewModel _viewModel;
+
         public EditUserProfilPage()
         {
             InitializeComponent();
+            _viewModel = EditUserProfilePageViewModel.Instance();
+            this.DataContext= _viewModel;
         }
     }
 }

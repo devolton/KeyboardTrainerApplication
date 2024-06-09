@@ -5,10 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+    
 
 
     <StackPanel Orientation="Vertical"
+                x:Name="LanguageLayotMainStackPanel"
                 VerticalAlignment="Center"
                 Margin="0 40 0 0">
         <TextBlock Text="English layot"
@@ -16,30 +19,33 @@
                    Style="{StaticResource LanguageHeaderTextBlock}"/>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                        >
+                    VerticalAlignment="Center">
             <cc:LanguageLayotStatisticBlock
-               Style="{StaticResource SpeedLanguageLayotStatisticBlock}"
+                x:Name="SpeedBlock"
+                Style="{StaticResource SpeedLanguageLayotStatisticBlock}"
                 HeaderText="Speed"
                 IconSource="{StaticResource GoldFlash}"
-                StatValue="47"
+                StatValue="{Binding TypingSpeed}"
                 StatUnitValue="wpm"
                 Margin="5 5 30 5"/>
             <cc:LanguageLayotStatisticBlock
+                x:Name="AccuracyBlock"
                 Style="{StaticResource AccuracyLanguageLayotStatisticBlock}"
                 HeaderText="Accuracy"
                 IconSource="{StaticResource GoldTarget}"
-                StatValue="99.5"
+                StatValue="{Binding TypingAccuracy}"
                 StatUnitValue="%"
                  Margin="5 5 30 5"/>
             <Button Content="Improve result"
+                    Command="{Binding ImproveResultCommand}"
                     Style="{StaticResource CustomYellowTemplateButton}"/>
 
         </StackPanel>
         <Image Width="600"
                Margin="30"
                Height="400"
-               Source="{StaticResource CertificateTemp}"/>
+               Stretch="Fill"
+               Source="{Binding CertificateSource}"/>
 
     </StackPanel>
 </UserControl>

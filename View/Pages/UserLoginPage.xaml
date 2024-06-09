@@ -6,8 +6,9 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
       xmlns:vm="clr-namespace:CourseProjectKeyboardApplication.ViewModel"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:behaviors="clr-namespace:CourseProjectKeyboardApplication.Tools.Behaviors"
+      d:DataContext="{d:DesignInstance Type=vm:LoginUserPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="340" d:DesignWidth="400"
       Title="UserLoginPage">
@@ -16,7 +17,7 @@
     <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Center">
         <TextBox x:Name="LoginTextBox"
-                 Text="{Binding Login}"
+                 Text="{Binding LoginOrEmail}"
                 Background="Transparent"
                  materialDesign:HintAssist.Hint="Login\Email"
                  Style="{Binding LoginTextBoxStyle}"/>
@@ -31,22 +32,29 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="LoginPasswordBox"
-                         Visibility="Visible"
-                         Grid.Column="0"
-                         Width="310"
-                         Margin="0 0 5 0 " 
+                         Grid.Column="0"  
                          materialDesign:HintAssist.Hint="Password"
-                         FontSize="16"
-                         BorderBrush="Silver"
                          Background="Transparent"
-                         Style="{StaticResource MaterialDesignFilledPasswordBox}">
-                
+                         Visibility="{Binding PasswordBoxVisibility}"
+                         Style="{Binding PasswordBoxStyle}">
+                <i:Interaction.Behaviors>
+                    <behaviors:PasswordBehavior Password="{Binding Password, Mode=TwoWay}"/>
+                </i:Interaction.Behaviors>
+
             </PasswordBox>
+            <TextBox x:Name="LoginPasswordTextBox"
+                     Grid.Column="0"
+                     Text="{Binding Password}"
+                     Background="Transparent"
+                     Margin="0"
+                     materialDesign:HintAssist.Hint="Password"
+                     Visibility="{Binding PasswordTextBoxVisibility}"
+                     Style="{StaticResource CustomDefaultLoginPageTextBox}"/>
             <Button x:Name="UserLoginPagePasswordVisibilityButton"
                     Grid.Column="1"
+                    Command="{Binding PasswordVisibilityCommand}"
                     Background="Transparent"
                     BorderThickness="0"
-                    Click="UserLoginPagePasswordVisibiletyButton_Click"
                     Margin="0 10 0 0 "
                     Width="30"
                     Padding="0"
@@ -54,6 +62,7 @@
                 <Button.Content>
                     <TextBlock x:Name="UserLoginPagePasswordVisibilityIconTextBlock"
                        Text="👁"
+                       TextDecorations="{Binding EyeButtonDecorationCollection}"
                        FontSize="16"
                        TextAlignment="Center"
                        VerticalAlignment="Center"

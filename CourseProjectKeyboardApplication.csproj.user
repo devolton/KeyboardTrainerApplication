@@ -13,19 +13,22 @@
     <Compile Update="View\CustomControls\EditUserProfileControls\EditUserProfileBodyBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\EducationResults\EducationResultsHeaderBlock.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResultsControls\EducationResultsCurrentLessonButton.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\EducationResults\EducationResultsLessonBlock.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResultsControls\EducationResultsHeaderBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\EducationResults\EducationResultsLessonHeader.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResultsControls\EducationResultsLessonBlock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\EducationResults\EducationResultsLessonNumberButton.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResultsControls\EducationResultsLessonHeader.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomControls\EducationResults\EducationResultsLockButton.xaml.cs">
+    <Compile Update="View\CustomControls\EducationResultsControls\EducationResultsLessonNumberButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomControls\EducationResultsControls\EducationResultsLockButton.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\CustomControls\TypingTestControls\CertificateConditionTableBodyItem.xaml.cs">
@@ -129,19 +132,22 @@
     <Page Update="View\CustomControls\EditUserProfileControls\EditUserProfileBodyBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\EducationResults\EducationResultsHeaderBlock.xaml">
+    <Page Update="View\CustomControls\EducationResultsControls\EducationResultsCurrentLessonButton.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\EducationResults\EducationResultsLessonBlock.xaml">
+    <Page Update="View\CustomControls\EducationResultsControls\EducationResultsHeaderBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\EducationResults\EducationResultsLessonHeader.xaml">
+    <Page Update="View\CustomControls\EducationResultsControls\EducationResultsLessonBlock.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\EducationResults\EducationResultsLessonNumberButton.xaml">
+    <Page Update="View\CustomControls\EducationResultsControls\EducationResultsLessonHeader.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CustomControls\EducationResults\EducationResultsLockButton.xaml">
+    <Page Update="View\CustomControls\EducationResultsControls\EducationResultsLessonNumberButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CustomControls\EducationResultsControls\EducationResultsLockButton.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\CustomControls\TypingTestControls\CertificateConditionTableBodyItem.xaml">

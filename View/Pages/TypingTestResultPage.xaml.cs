@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.View.CustomControls;
+using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,19 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class TypingTestResultPage : Page
     {
-        public TypingTestResultPage()
+        private TypingTestResultPageViewModel _typingTestResultPageViewModel;
+        public TypingTestResultPage(int resultSpeed, int allTextSymbolsCount, int misclickCount)
         {
             InitializeComponent();
+            _typingTestResultPageViewModel = new TypingTestResultPageViewModel(resultSpeed,allTextSymbolsCount,misclickCount);
+            DataContext = _typingTestResultPageViewModel;
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _typingTestResultPageViewModel.DisplayResultCommand.Execute(new KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>(SpeedBlock, AccuracyBlock));
+
         }
     }
 }

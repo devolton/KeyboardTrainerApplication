@@ -12,7 +12,7 @@
         Background="{x:Null}"
         AllowsTransparency="True"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" 
         Icon="{StaticResource ApplicationLogo}" 
        
         >
@@ -38,11 +38,13 @@
                         Orientation="Horizontal"
                         Margin="160 0 200 0">
                     <Button
+                       
                         x:Name="TypingTutorMainButton"
                         Content="Typing tutor"
                         Click="TypingTutorMainButton_Click"
                         Style="{StaticResource CustomMainControlButton}"/>
                     <Button
+                            
                             Content="Typing test"
                             x:Name="TypingTestMainButton"
                             Click="TypingTestMainButton_Click"
@@ -87,16 +89,8 @@
                                 x:Name="ExitButton"
                                 Content="Exit"
                                 Click="ExitButton_Click"/>
-                            <Button 
-                                x:Name="TempTestResultButton"
-                                Content="TempTestResult"
-                                Click="TempTestResultButton_Click"/>
-                            <Button x:Name="TempTytorResultButton"
-                                    Content="TytorResultButton"
-                                    Click="TempTytorResultButton_Click"/>
-                            <Button x:Name="AuthorizationWindow"
-                                    Content="Authorization"
-                                    Click="AuthorizationWindow_Click"/>
+                       
+
 
                         </StackPanel>
                     </materialDesign:PopupBox>

@@ -22,21 +22,15 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class UserLoginPage : Page
     {
+        LoginUserPageViewModel _loginViewModel;
         public UserLoginPage()
         {
-          
+
             InitializeComponent();
-            DataContext = new LoginUserPageViewModel(LoginPasswordBox);
+            _loginViewModel = new LoginUserPageViewModel();
+            DataContext = _loginViewModel;
 
         }
-
-        private void UserLoginPagePasswordVisibiletyButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations = (UserLoginPagePasswordVisibilityIconTextBlock.TextDecorations is null) ?
-            TextDecorations.Strikethrough : null;
-
-        }
-        
 
     }
 }

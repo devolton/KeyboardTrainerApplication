@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Entities;
+using CourseProjectKeyboardApplication.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,17 +20,22 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
     /// <summary>
     /// Логика взаимодействия для EducationResultsLockButton.xaml
     /// </summary>
-    public partial class EducationResultsLockButton : UserControl
+    public partial class EducationResultsLockButton : UserControl,IEducationResultLessonButton
     {
         public string LessonNumber { 
             get { return(string)GetValue(LessonNumberProperty);}
             set { SetValue(LessonNumberProperty, value); }
         }
+
+        public EducationLesson EducationLesson { get; set; }
+
         public static readonly DependencyProperty LessonNumberProperty =
             DependencyProperty.Register("LessonNumber",typeof(string),typeof(EducationResultsLockButton),new PropertyMetadata(" "));
-        public EducationResultsLockButton()
+        public EducationResultsLockButton(EducationLesson educationLesson)
         {
             InitializeComponent();
+            EducationLesson = educationLesson;
+            LessonNumber = educationLesson.Ordinal.ToString();
             DataContext = this;
         }
     }

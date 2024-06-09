@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class UserSingInPage : Page
     {
+        private UserSingupPageViewModel _userSingUpViewModel;
         public UserSingInPage()
         {
             InitializeComponent();
+            _userSingUpViewModel = new UserSingupPageViewModel();
+            DataContext = _userSingUpViewModel;
         }
+
     }
 }

@@ -25,7 +25,7 @@
                    Style="{StaticResource CustomLearnMainTitleTextBlock}"/>
             </StackPanel>
             <cc:LanguageLayotTypingCertificateBlock/>
-            <cc:LanguageLayotTypingCertificateBlock/>
+          
         </StackPanel>
     </ScrollViewer>
 </Page>

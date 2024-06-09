@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class KeyboardMap : UserControl
     {
+        private TypingTutorPageViewModel _typingTutorViewModel;
         public KeyboardMap()
         {
             InitializeComponent();
+            _typingTutorViewModel = TypingTutorPageViewModel.Instance();
+            DataContext = _typingTutorViewModel;
+            _typingTutorViewModel.KeyboardGrid = KeyboardGrid;
         }
 
     }

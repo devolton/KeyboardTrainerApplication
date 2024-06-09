@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ccEditUserProfile="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileControls"
+             xmlns:ccEditUserProfile="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EditUserProfileControls" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:EditUserProfilePageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border
@@ -15,7 +15,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Width="500">
-            <Image Source="{StaticResource ApplicationLogo}"
+            <Image Source="{Binding AvatarSource}"
                    Width="100"
                    Height="100"
                    ClipToBounds="True"
@@ -32,9 +32,12 @@
                 </Image.OpacityMask>
             </Image>
             <Button Style="{StaticResource CustomYellowTemplateButton}"
-                        Content="Change"/>
+                    Content="Change"
+                    Command="{Binding ChangeAvatarCommand}"/>
             <Button Style="{StaticResource CustomVioletTemplateButton}"
-                    Content="Remove"/>
+                    Content="Remove"
+                    IsEnabled="{Binding IsRemoveAvatarButtonEnabled}"
+                    Command="{Binding RemoveAvatarCommand}"/>
         </StackPanel>
         
     </Border>

@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
+             xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingTestResultPageViewModel}"
              mc:Ignorable="d" 
+             Focusable="True"
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Margin="0 50 0 50"
              Background="White"
@@ -20,39 +21,37 @@
         </Border.Effect>
         <Grid>
             <TextBlock
-                     Name="WordsTextBox"
+                     Name="WordsTextBlock"
+                     Loaded="WordsTextBlock_Loaded"
                      Padding="10 20 10 10"
                      Width="700"
                      Height="300"
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Center"
+                     TextAlignment="Left"
+                     VerticalAlignment="Top"
                      FontSize="22px"
                      FontFamily="Georgia"
-                     Foreground="{StaticResource CustomLightSilver}"
+                     Foreground="{StaticResource CustomCoal}"
                      TextWrapping="Wrap"
                      IsEnabled="False"
                      Panel.ZIndex="1">
-                  <Run Name="LostFocusRun"
-                       Text="Wor"
-                       Foreground="Red"/><InlineUIContainer>
-                       <TextBlock
-                           Name="FocusWordTextBlock">
-                           <Run x:Name="FirstRun" Text="H"/><Run x:Name="SecondRun" Text="e"/>
-                       </TextBlock>
-                     </InlineUIContainer><Run x:Name ="BeforeFocusRun" Text="my"/>
-             </TextBlock>
+                  
+            </TextBlock>
             <Rectangle Width="700"
+                       Focusable="False"
                        Height="300"
                        Fill="LightGray"
                        Opacity="0.8"
                        Panel.ZIndex="1"
-                       Visibility="Visible"
+                       Visibility="{Binding StartButtonVisibility}"
                       />
             <Button
+                Command="{Binding StartTestCommand}"
+                Focusable="False"
+                IsEnabled="True"
+                Visibility="{Binding HidePanelVisibility}"
                 Content="Click To Start"
                 Style="{StaticResource CustomTypingTestStartButton}"
-                Panel.ZIndex="2"
-                Visibility="Visible"/>
+                Panel.ZIndex="2"/>
         </Grid>
     </Border>
 </UserControl>

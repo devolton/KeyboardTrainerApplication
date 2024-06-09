@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="CourseProjectKeyboardApplication.View.CustomControls.EducationResults.EducationResultsCurrentLessonButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ccEducationResults="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EducationResults"
+             mc:Ignorable="d" 
+             Cursor="Hand"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Width="40"
+             Height="65"
+             Margin="5"
+             VerticalAlignment="Center"
+             HorizontalAlignment="Center">
+        <Border
+
+       CornerRadius="10"
+       BorderBrush="Orange"
+       Background="{StaticResource CustomButtonsDarkYellow}"
+       BorderThickness="2 2 2 5"
+       Width="40"
+       Height="40">
+            <StackPanel
+         Width="40"
+         Background="Transparent"
+         Height="40"
+         Orientation="Vertical"
+         HorizontalAlignment="Center"
+         VerticalAlignment="Center">
+                <Image Width="25"
+                       Margin="0 7 0 0"
+                       Height="25"
+                       Stretch="Fill"
+                       Source="{StaticResource CurrentLessonLeftArrow}"/>
+
+
+            </StackPanel>
+        </Border>
+        <TextBlock Text="{Binding LessonNumber}"
+               FontSize="18"
+               FontWeight="SemiBold"
+               Foreground="{StaticResource CustomCoal}"
+               TextAlignment="Center"/>
+    </StackPanel>
+</UserControl>

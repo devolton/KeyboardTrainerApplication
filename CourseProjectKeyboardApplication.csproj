@@ -22,6 +22,7 @@
     <None Remove="Resources\Images\coding.png" />
     <None Remove="Resources\Images\DevoltonLabsLogo.png" />
     <None Remove="Resources\Images\EditProfileIcon.png" />
+    <None Remove="Resources\Images\EnglishTypingCertificate.png" />
     <None Remove="Resources\Images\ExitIcon.png" />
     <None Remove="Resources\Images\GoldLightning.png" />
     <None Remove="Resources\Images\GoldMedal.png" />
@@ -29,6 +30,7 @@
     <None Remove="Resources\Images\GoldTarget.png" />
     <None Remove="Resources\Images\Keyboard.png" />
     <None Remove="Resources\Images\KeyboardSchemeEng.png" />
+    <None Remove="Resources\Images\LeftArrow.png" />
     <None Remove="Resources\Images\LessonLockIcon.png" />
     <None Remove="Resources\Images\LightGrayFlash.png" />
     <None Remove="Resources\Images\LightGrayStar.png" />
@@ -50,7 +52,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiveCharts" Version="0.9.7" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
   </ItemGroup>
 
@@ -71,6 +76,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\EditProfileIcon.png" />
+    <Resource Include="Resources\Images\EnglishTypingCertificate.png" />
     <Resource Include="Resources\Images\ExitIcon.png" />
     <Resource Include="Resources\Images\GoldLightning.png" />
     <Resource Include="Resources\Images\GoldMedal.png" />
@@ -78,6 +84,7 @@
     <Resource Include="Resources\Images\GoldTarget.png" />
     <Resource Include="Resources\Images\Keyboard.png" />
     <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
+    <Resource Include="Resources\Images\LeftArrow.png" />
     <Resource Include="Resources\Images\LessonLockIcon.png" />
     <Resource Include="Resources\Images\LightGrayFlash.png" />
     <Resource Include="Resources\Images\LightGrayStar.png" />

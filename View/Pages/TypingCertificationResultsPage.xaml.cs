@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.ViewModel;
 
 namespace CourseProjectKeyboardApplication.View.Pages
 {
@@ -20,9 +25,17 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class TypingCertificationResultsPage : Page
     {
+        private TypingCertificationResultPageViewModel _typingCertificationResultPageViewModel;
+ 
         public TypingCertificationResultsPage()
         {
             InitializeComponent();
+            _typingCertificationResultPageViewModel = TypingCertificationResultPageViewModel.Instance();
+            DataContext = _typingCertificationResultPageViewModel;
+
+
+
+
         }
     }
 }

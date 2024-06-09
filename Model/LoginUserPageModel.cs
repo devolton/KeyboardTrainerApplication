@@ -34,6 +34,7 @@ namespace CourseProjectKeyboardApplication.Model
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
         public bool IsValidPassword(SecureString secureString) => AuthorizationFieldsValidator.IsValidPassword(secureString);
         public bool IsValidPassword(string password) => AuthorizationFieldsValidator.IsValidPassword(password);
+        public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
         private void InitRegistryInfo()
         {
             _currentUserRegistrieSubKey = Registry.CurrentUser;

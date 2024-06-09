@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,17 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class EducationResultsPage : Page
     {
+        private EducationResultsPageViewModel _viewModel;
         public EducationResultsPage()
         {
+            _viewModel = EducationResultsPageViewModel.Instance();
             InitializeComponent();
+            DataContext = _viewModel;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.InitializationCommand.Execute(EducationResultMainStackPanel);
         }
     }
 }

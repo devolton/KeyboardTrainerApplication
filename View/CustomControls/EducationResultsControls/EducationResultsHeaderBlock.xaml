@@ -62,8 +62,6 @@
                 VerticalAlignment="Bottom">
                 <ComboBoxItem
                     Content="English layot"/>
-                <ComboBoxItem
-                    Content="Ukrainial layot"/>
             </ComboBox>
             <StackPanel
                 VerticalAlignment="Center"

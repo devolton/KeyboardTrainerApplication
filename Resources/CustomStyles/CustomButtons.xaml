@@ -115,6 +115,7 @@
     <!--style for buttons in main menu-->
     <Style x:Key="CustomMainControlButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
+            <Setter Property="Focusable" Value="False"/>
             <Setter Property="Background" Value="{DynamicResource CustomAluminum}"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="Tahoma"/>

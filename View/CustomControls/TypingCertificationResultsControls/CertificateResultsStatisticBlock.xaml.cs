@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class CertificateResultsStatisticBlock : UserControl
     {
+        private TypingCertificationResultPageViewModel _viewModel;
         public CertificateResultsStatisticBlock()
         {
+            _viewModel = TypingCertificationResultPageViewModel.Instance();
             InitializeComponent();
+            DataContext = _viewModel;
+            _viewModel.StatStackPanel = StatBlockStackPanel;
         }
     }
 }

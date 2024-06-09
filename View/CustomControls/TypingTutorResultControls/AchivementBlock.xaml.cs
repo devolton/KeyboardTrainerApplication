@@ -1,4 +1,5 @@
-﻿using CourseProjectKeyboardApplication.View.Pages;
+﻿using CourseProjectKeyboardApplication.Tools;
+using CourseProjectKeyboardApplication.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,18 +28,36 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.TypingTutorResult
             set { SetValue(AchivementTextProperty, value); }
         }
         public static readonly DependencyProperty AchivementTextProperty =
-            DependencyProperty.Register("AchivementText", typeof(string), typeof(TypingTutorResultPage), new PropertyMetadata(" "));
+            DependencyProperty.Register(nameof(AchivementText), typeof(string), typeof(TypingTutorResultPage), new PropertyMetadata(" "));
         public ImageSource AchivementImageSource
         {
             get { return (ImageSource)GetValue(AchivementImageSourceProperty); }
-            set { SetValue(AchivementImageSourceProperty, value); }
+            set
+            {
+                SetValue(AchivementImageSourceProperty, value);
+            }
         }
         public static readonly DependencyProperty AchivementImageSourceProperty =
-            DependencyProperty.Register("AchivementImageSource", typeof(ImageSource), typeof(TypingTutorResultPage), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(AchivementImageSource), typeof(ImageSource), typeof(TypingTutorResultPage), new PropertyMetadata(null));
+        public SolidColorBrush AchivementTextForeground
+        {
+            get { return (SolidColorBrush)GetValue(AchivementTextForegroundProperty); }
+            set { SetValue(AchivementTextForegroundProperty, value); }
+        }
+        public static readonly DependencyProperty AchivementTextForegroundProperty =
+            DependencyProperty.Register(nameof(AchivementTextForeground), typeof(SolidColorBrush), typeof(TypingTutorResultPage), new PropertyMetadata(Brushes.Silver));
+
         public AchivementBlock()
         {
+
             InitializeComponent();
             DataContext = this;
+
+
+
         }
+
+
+
     }
 }

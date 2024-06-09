@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,8 +20,21 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// <summary>
     /// Логика взаимодействия для KeyboardItemLabel.xaml
     /// </summary>
-    public partial class KeyboardItemTextBlock : UserControl
+    public partial class KeyboardItemTextBlock : UserControl, IKeyboardItem
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KeyTag
+        {
+            get { return (string)GetValue(KeyTagProperty); }
+            set { SetValue(KeyTagProperty, value); }
+        }
+        public static readonly DependencyProperty KeyTagProperty =
+            DependencyProperty.Register(nameof(KeyTag), typeof(string), typeof(KeyboardItemTextBlock), new PropertyMetadata(" "));
+        /// <summary>
+        /// FontWeight
+        /// </summary>
         public FontWeight FontWeightValue { get; set; }
         public static readonly DependencyProperty FontWeightValueProperty =
             DependencyProperty.Register("FontWeightValue", typeof(FontWeight), typeof(KeyboardItemTextBlock), new PropertyMetadata(new FontWeight()));

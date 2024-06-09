@@ -7,6 +7,10 @@
       xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
+      GotFocus="Page_GotFocus"
+      PreviewKeyDown="Page_PreviewKeyDown"
+      LostFocus="Page_LostFocus"
       Title="TypingTestPage">
     <ScrollViewer
         x:Name="TypingTestScrollViewer"
@@ -34,11 +38,16 @@
                     TextAlignment="Left"
                     FontSize="36"
                     Text="Typing Certification Test"/>
+                    <Rectangle Width="10"
+                               Height="10"
+                               Visibility="Hidden"
+                               Focusable="True"
+                               x:Name="FocusRectangel"/>
                     <TextBlock Grid.Row="1"
                            TextAlignment="Left"
                            Foreground="{StaticResource CustomDeepBlue}"
                            FontSize="18"
-                           Text="Take a 1 min test and clarify your typing speed with English layout"/>
+                           Text="Take a 30 seconds test and clarify your typing speed with English layout"/>
                 </Grid>
             </Grid>
             <cc:TypingTestTextDisplayerBlock/>

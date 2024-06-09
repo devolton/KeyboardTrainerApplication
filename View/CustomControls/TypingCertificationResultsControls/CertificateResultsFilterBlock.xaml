@@ -20,9 +20,9 @@
                   SelectedIndex="0"
                   >
             <ComboBoxItem Content="English layot"/>
-            <ComboBoxItem Content="Russian layot"/>
         </ComboBox>
         <ComboBox
+                SelectionChanged="ComboBox_SelectionChanged"
                 BorderThickness="1" 
                 Padding="5 0 5 0"
                 Width="100"
