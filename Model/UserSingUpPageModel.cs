@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class UserSingUpPageModel
+    public class UserSingUpPageModel:RegistrationFormModel
 
     {
         public UserSingUpPageModel()
         {
             
         }
-        public bool IsValidName(string name) =>AuthorizationFieldsValidator.IsValidName(name);
-        public bool IsValidPassword(string password) =>AuthorizationFieldsValidator.IsValidPassword(password);
-        public bool IsValidEmail(string email)=>AuthorizationFieldsValidator.IsValidEmail(email);
-        public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
+     
     }
 }

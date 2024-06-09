@@ -12,37 +12,16 @@ using CourseProjectKeyboardApplication.Model;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
-    public class EditUserProfilePageViewModel : ViewModelBase
+    public class EditUserProfilePageViewModel : RegistrationFormViewModel
     {
         private EditUserProfilePageModel _model;
         private static EditUserProfilePageViewModel _instance;
         private ImageSource _avatarSource;
 
-        private bool _isPasswordVisible = false;
-        private bool _isConfirmPasswordVisible = false;
-        private bool _isSaveButtonEnabled = false;
-
-        private string _name = string.Empty;
-        private string _login = string.Empty;
-        private string _email = string.Empty;
-        private string _password = string.Empty;
-        private string _confirmPassword = string.Empty;
-
         private ICommand _loadUserInfoCommand;
         private ICommand _removeAvatarCommand;
         private ICommand _changeAvatarCommand;
         private ICommand _saveChangeCommand;
-        private ICommand _passwordVisibilityCommand;
-        private ICommand _confirmPasswordVisibilityCommand;
-
-        private Visibility _passwordBoxVisibility = Visibility.Visible;
-        private Visibility _passwordTextBoxVisibility = Visibility.Collapsed;
-        private Visibility _confirmPasswordBoxVisibility = Visibility.Visible;
-        private Visibility _confirmPasswordTextBoxVisibility = Visibility.Collapsed;
-
-        private TextDecorationCollection _passwordEyeButtonTextDecorationCollection = TextDecorations.Strikethrough;
-        private TextDecorationCollection _confirmPasswordEyeButtonTextDecorationCollection = TextDecorations.Strikethrough;
-
 
 
         private EditUserProfilePageViewModel()
@@ -55,6 +34,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
             _avatarSource = Application.Current.Resources["ApplicationLogo"] as ImageSource;
+            
 
         }
 
@@ -79,10 +59,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         public bool IsSaveButtonEnabled
         {
-            get => _isSaveButtonEnabled;
+            get => _isEnabledRegistrationButton;
             set
             {
-                _isSaveButtonEnabled = value;
+                _isEnabledRegistrationButton = value;
                 OnPropertyChanged(nameof(IsSaveButtonEnabled));
             }
             
@@ -183,26 +163,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(ConfirmPasswordTextBoxVisibility));
             }
         }
-        public TextDecorationCollection PasswordEyeButtonTextDecorationCollection
-        {
-            get => _passwordEyeButtonTextDecorationCollection;
-            set
-            {
-                _passwordEyeButtonTextDecorationCollection = value;
-                OnPropertyChanged(nameof(PasswordEyeButtonTextDecorationCollection));
-            }
-        }
-
-        public TextDecorationCollection ConfirmPasswordTextDecorationCollection
-        {
-            get => _confirmPasswordEyeButtonTextDecorationCollection;
-            set
-            {
-                _confirmPasswordEyeButtonTextDecorationCollection = value;
-                OnPropertyChanged(nameof(ConfirmPasswordTextDecorationCollection));
-
-            }
-        }
         #endregion
         //command 
         #region
@@ -228,7 +188,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
-        private void OnConfirmPasswordVisibilityCommand(object param)
+        protected override void OnConfirmPasswordVisibilityCommand(object param)
         {
             if (_isConfirmPasswordVisible)
             {
@@ -247,14 +207,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
+        
 
-        private void OnPasswordVisibilityCommand(object param)
+       protected override void OnPasswordVisibilityCommand(object param)
         {
             if (_isPasswordVisible)
             {
                 _isPasswordVisible = false;
                 PasswordTextBoxVisibility = Visibility.Collapsed;
-                PasswordEyeButtonTextDecorationCollection = TextDecorations.Strikethrough;
+                PasswordTextDecorationCollection = TextDecorations.Strikethrough;
                 PasswordBoxVisibility = Visibility.Visible;
             }
             else
@@ -262,7 +223,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 _isPasswordVisible = true;
                 PasswordBoxVisibility = Visibility.Collapsed;
                 PasswordTextBoxVisibility = Visibility.Visible;
-                PasswordEyeButtonTextDecorationCollection = null;
+                PasswordTextDecorationCollection = null;
 
             }
 

@@ -9,7 +9,7 @@ using CourseProjectKeyboardApplication.ViewModel;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class EditUserProfilePageModel
+    public class EditUserProfilePageModel:RegistrationFormModel
     {
         private UserInfo _userInfo;
       
@@ -26,10 +26,6 @@ namespace CourseProjectKeyboardApplication.Model
             
              
         }
-        public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
-        public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
-        public bool IsValidPassword(string password) => AuthorizationFieldsValidator.IsValidPassword(password);
-        public bool IsValidName(string name) => AuthorizationFieldsValidator.IsValidName(name);
         public UserInfo UserInfo { get { return _userInfo; } set { _userInfo = value; } }
         
     }
