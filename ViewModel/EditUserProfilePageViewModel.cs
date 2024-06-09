@@ -17,6 +17,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private EditUserProfilePageModel _model;
         private static EditUserProfilePageViewModel _instance;
         private ImageSource _avatarSource;
+        private ImageSource _defaultAvatar;
+        private bool _isSetDefaultAvatar = true;
+        private bool _isRemoveAvatarButtonEnabled = false;
 
         private ICommand _loadUserInfoCommand;
         private ICommand _removeAvatarCommand;
@@ -33,7 +36,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _loadUserInfoCommand = new RelayCommand(OnLoadUserInfoCommand);
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
-            _avatarSource = Application.Current.Resources["ApplicationLogo"] as ImageSource;
+            _defaultAvatar= Application.Current.Resources["ApplicationLogo"] as ImageSource; ;
+            _avatarSource = _defaultAvatar;
             
 
         }
@@ -66,6 +70,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(IsSaveButtonEnabled));
             }
             
+        }
+        public bool IsRemoveAvatarButtonEnabled
+        {
+            get => _isRemoveAvatarButtonEnabled;
+            set
+            {
+                _isRemoveAvatarButtonEnabled = value;
+                OnPropertyChanged(nameof(IsRemoveAvatarButtonEnabled));
+            }
         }
 
         public ImageSource AvatarSource
@@ -168,10 +181,19 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private void OnRemoveAvatarCommand(object param)
         {
-
+            AvatarSource = _defaultAvatar;
+            IsRemoveAvatarButtonEnabled = false;
+            _isSetDefaultAvatar = true;
         }
         private void OnChangeAvatarCommmand(object param)
         {
+           var newAvatarSource= _model.LoadNewAvatar();
+            if(newAvatarSource != null)
+            {
+               AvatarSource = newAvatarSource;
+                IsRemoveAvatarButtonEnabled = true;
+                _isSetDefaultAvatar = false;
+            } 
 
         }
         private void OnSaveChangeCommand(object param)
@@ -233,7 +255,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region 
         private bool CanRemoveAvatarCommandExecute(object param)
         {
-            return true;
+            return !_isSetDefaultAvatar;
         }
         private bool CanSaveChangeCommandExecute(object param)
         {
@@ -244,10 +266,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return CanSaveChangeCommandExecute(null);
         }
-        private bool IsRemoveAvatarButtonEnabled()
-        {
-            return CanRemoveAvatarCommandExecute(null);
-        }
+
         private void CanEnabledSaveButton() => IsSaveButtonEnabled = CanSaveChangeCommandExecute(null);
 
         #endregion

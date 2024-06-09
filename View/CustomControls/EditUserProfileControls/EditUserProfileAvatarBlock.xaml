@@ -36,6 +36,7 @@
                     Command="{Binding ChangeAvatarCommand}"/>
             <Button Style="{StaticResource CustomVioletTemplateButton}"
                     Content="Remove"
+                    IsEnabled="{Binding IsRemoveAvatarButtonEnabled}"
                     Command="{Binding RemoveAvatarCommand}"/>
         </StackPanel>
         
