@@ -1,12 +1,24 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
-    <Style x:Key="CustomEditProfileTextBox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+    <Style x:Key="CustomDefaultEditProfileTextBox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
         <Style.Setters>
             <Setter Property="Margin" Value="0 30 0 0"/>
             <Setter Property="Foreground" Value="{StaticResource CustomCoal}"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="BorderBrush" Value="{StaticResource CustomCoal}"/>
+            <Setter Property="Width" Value="300"/>
+        </Style.Setters>
+        <Style.Triggers>
+
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CustomErrorEditProfileTextBox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+        <Style.Setters>
+            <Setter Property="Margin" Value="0 30 0 0"/>
+            <Setter Property="Foreground" Value="DarkRed"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderBrush" Value="DarkRed"/>
             <Setter Property="Width" Value="300"/>
         </Style.Setters>
         <Style.Triggers>

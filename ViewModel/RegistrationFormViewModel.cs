@@ -35,15 +35,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
         protected ICommand _confirmPasswordVisibilityCommand;
 
 
-        private Style _defaultTextBoxStyle;
-        private Style _errorTextBoxStyle;
-        private Style _defaultPasswordBoxStyle;
-        private Style _errorPasswordBoxStyle;
-        private Style _nameTextBoxStyle;
-        private Style _loginTextBoxStyle;
-        private Style _emailTextBoxStyle;
-        private Style _passwordBoxStyle;
-        private Style _confirmPasswordBoxStyle;
+        protected Style _defaultTextBoxStyle;
+        protected Style _errorTextBoxStyle;
+        protected Style _defaultPasswordBoxStyle;
+        protected Style _errorPasswordBoxStyle;
+        protected Style _nameTextBoxStyle;
+        protected Style _loginTextBoxStyle;
+        protected Style _emailTextBoxStyle;
+        protected Style _passwordBoxStyle;
+        protected Style _passwordTextBoxStyle;
+        protected Style _confirmPasswordBoxStyle;
+        protected Style _confirmPasswordTextBoxStyle;
+      
         //properties
         #region 
         public Style NameTextBoxStyle
@@ -83,6 +86,16 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(PasswordBoxStyle));
             }
         }
+        public Style PasswordTextBoxStyle
+        {
+            get => _passwordTextBoxStyle;
+            set
+            {
+                _passwordTextBoxStyle = value;
+                OnPasswordVisibilityCommand(nameof(PasswordTextBoxStyle));
+            }
+        }
+
         public Style ConfirmPasswordBoxStyle
         {
             get => _confirmPasswordBoxStyle;
@@ -90,6 +103,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _confirmPasswordBoxStyle = value;
                 OnPropertyChanged(nameof(ConfirmPasswordBoxStyle));
+            }
+        }
+        public Style ConfirmPasswordTextBoxStyle
+        {
+            get => _confirmPasswordTextBoxStyle;
+            set
+            {
+                _confirmPasswordTextBoxStyle = value;
+                OnPropertyChanged(nameof(ConfirmPasswordTextBoxStyle));
             }
         }
         public TextDecorationCollection PasswordTextDecorationCollection
@@ -122,7 +144,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             LoginTextBoxStyle = _defaultTextBoxStyle;
             EmailTextBoxStyle = _defaultTextBoxStyle;
             PasswordBoxStyle = _defaultPasswordBoxStyle;
+            PasswordTextBoxStyle = _defaultTextBoxStyle;
             ConfirmPasswordBoxStyle = _defaultPasswordBoxStyle;
+            ConfirmPasswordTextBoxStyle = _defaultTextBoxStyle;
         }
         protected virtual void ClearAllFields()
         {

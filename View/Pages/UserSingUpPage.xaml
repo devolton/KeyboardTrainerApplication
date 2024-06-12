@@ -58,7 +58,7 @@
                      Visibility="{Binding PasswordTextBoxVisibility}"
                      Background="Transparent"
                      materialDesign:HintAssist.Hint="Password"
-                     Style="{StaticResource CustomDefaultSingUpPageTextBox}"/>
+                     Style="{Binding PasswordTextBoxStyle}"/>
             <Button x:Name="UserSingUpPagePasswordVisibilityButton"
                     Grid.Column="1"
                     Command="{Binding PasswordVisibilityCommand}"
@@ -104,7 +104,7 @@
                      Background="Transparent"
                      Visibility="{Binding ConfirmPasswordTextBoxVisibility}"
                      materialDesign:HintAssist.Hint="Confirm password"
-                     Style="{StaticResource CustomDefaultSingUpPageTextBox}"/>
+                     Style="{Binding ConfirmPasswordTextBoxStyle}"/>
             <Button x:Name="UserSingUpPageConfirmPasswordVisibilityButton"
                     Grid.Column="1"
                     Background="Transparent"

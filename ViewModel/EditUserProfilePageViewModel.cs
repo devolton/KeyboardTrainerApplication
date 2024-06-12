@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -36,13 +37,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _loadUserInfoCommand = new RelayCommand(OnLoadUserInfoCommand);
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
-            _defaultAvatar= Application.Current.Resources["ApplicationLogo"] as ImageSource; ;
+            this.InitStyles();
+            _defaultAvatar = Application.Current.Resources["ApplicationLogo"] as ImageSource; ;
             _avatarSource = _defaultAvatar;
-            
 
         }
 
-       
+
 
         public static EditUserProfilePageViewModel Instance()
         {
@@ -52,13 +53,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //properties
         #region
-   
+
         public ICommand LoadUserInfoCommand => _loadUserInfoCommand;
-        
+
         public ICommand RemoveAvatarCommand => _removeAvatarCommand;
         public ICommand ChangeAvatarCommand => _changeAvatarCommand;
         public ICommand SaveChangeCommand => _saveChangeCommand;
-        public ICommand PasswordVisibilityCommand=> _passwordVisibilityCommand;
+        public ICommand PasswordVisibilityCommand => _passwordVisibilityCommand;
         public ICommand ConfirmPasswordVisibilityCommand => _confirmPasswordVisibilityCommand;
 
         public bool IsSaveButtonEnabled
@@ -69,7 +70,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 _isEnabledRegistrationButton = value;
                 OnPropertyChanged(nameof(IsSaveButtonEnabled));
             }
-            
+
         }
         public bool IsRemoveAvatarButtonEnabled
         {
@@ -97,6 +98,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _name = value;
                 CanEnabledSaveButton();
+                NameTextBoxStyle = ChangeTextBoxStyle(_model.IsValidName, Name);
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -107,6 +109,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _login = value;
                 CanEnabledSaveButton();
+                LoginTextBoxStyle= ChangeTextBoxStyle(_model.IsValidLogin, Login);
                 OnPropertyChanged(nameof(Login));
             }
         }
@@ -117,6 +120,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _email = value;
                 CanEnabledSaveButton();
+                EmailTextBoxStyle = ChangeTextBoxStyle(_model.IsValidEmail, Email);
                 OnPropertyChanged(nameof(Email));
             }
         }
@@ -127,6 +131,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _password = value;
                 CanEnabledSaveButton();
+                PasswordBoxStyle = ChangePasswordBoxStyle(_model.IsValidPassword, Password);
+                PasswordTextBoxStyle = ChangeTextBoxStyle(_model.IsValidPassword, Password);
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -137,6 +143,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _confirmPassword = value;
                 CanEnabledSaveButton();
+                ConfirmPasswordBoxStyle = ChangePasswordBoxStyle(_model.IsValidPassword, ConfirmPassword);
+                ConfirmPasswordTextBoxStyle = ChangeTextBoxStyle(_model.IsValidPassword, ConfirmPassword);
                 OnPropertyChanged(nameof(ConfirmPassword));
             }
         }
@@ -160,7 +168,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         public Visibility ConfirmPasswordBoxVisibility
         {
-            get=> _confirmPasswordBoxVisibility;
+            get => _confirmPasswordBoxVisibility;
             set
             {
                 _confirmPasswordBoxVisibility = value;
@@ -187,13 +195,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnChangeAvatarCommmand(object param)
         {
-           var newAvatarSource= _model.LoadNewAvatar();
-            if(newAvatarSource != null)
+            var newAvatarSource = _model.LoadNewAvatar();
+            if (newAvatarSource != null)
             {
-               AvatarSource = newAvatarSource;
+                AvatarSource = newAvatarSource;
                 IsRemoveAvatarButtonEnabled = true;
                 _isSetDefaultAvatar = false;
-            } 
+            }
 
         }
         private void OnSaveChangeCommand(object param)
@@ -205,7 +213,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             Login = _model.UserInfo.Login;
             Password = _model.UserInfo.Password;
             ConfirmPassword = _model.UserInfo.Password;
-            Name= _model.UserInfo.Name;
+            Name = _model.UserInfo.Name;
             Email = _model.UserInfo.Email;
 
 
@@ -229,9 +237,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
-        
 
-       protected override void OnPasswordVisibilityCommand(object param)
+
+        protected override void OnPasswordVisibilityCommand(object param)
         {
             if (_isPasswordVisible)
             {
@@ -262,13 +270,26 @@ namespace CourseProjectKeyboardApplication.ViewModel
             return _model.IsValidName(Name) && _model.IsValidEmail(Email) && _model.IsValidPassword(Password) && _model.IsValidLogin(Login)
                 && Password.Equals(ConfirmPassword);
         }
-        private bool IsSaveChangeButtonEnabled()
-        {
-            return CanSaveChangeCommandExecute(null);
-        }
 
         private void CanEnabledSaveButton() => IsSaveButtonEnabled = CanSaveChangeCommandExecute(null);
 
         #endregion
+
+        protected override void InitStyles()
+        {
+            _defaultTextBoxStyle = Application.Current.Resources["CustomDefaultEditProfileTextBox"] as Style;
+            _errorTextBoxStyle = Application.Current.Resources["CustomErrorEditProfileTextBox"] as Style;
+            _defaultPasswordBoxStyle = Application.Current.Resources["CustomDefaultEditUserProfilePasswordBox"] as Style;
+            _errorPasswordBoxStyle = Application.Current.Resources["CustomErrorEditUserProfilePasswordBox"] as Style;
+            NameTextBoxStyle = _defaultTextBoxStyle;
+            LoginTextBoxStyle = _defaultTextBoxStyle;
+            EmailTextBoxStyle = _defaultTextBoxStyle;
+            PasswordBoxStyle = _defaultPasswordBoxStyle;
+            PasswordTextBoxStyle = _defaultTextBoxStyle;
+            ConfirmPasswordBoxStyle = _defaultPasswordBoxStyle;
+            ConfirmPasswordTextBoxStyle = _defaultTextBoxStyle;
+            
+            
+        }
     }
 }
