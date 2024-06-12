@@ -13,13 +13,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private readonly MultiCommand _singUpClickButtonMultiCommand;
         private readonly ICommand _passwordVisibilityCommand;
         private readonly ICommand _confirmPasswordVisibilityCommand;
-        private readonly UserSingUpPageModel _userSingUpPageModel;
+        private readonly UserSingUpPageModel _model;
         public UserSingupPageViewModel()
         {
             _singUpClickButtonMultiCommand = new MultiCommand();
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
-            _userSingUpPageModel = new UserSingUpPageModel();
+            _model = new UserSingUpPageModel();
             InitStyles();
             _singUpClickButtonMultiCommand.Add(new RelayCommand(OnTryRegisterUser, IsUserRegistrationCommandExecuted));
 
@@ -91,8 +91,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private bool IsUserRegistrationCommandExecuted(object param = null)
         {
-            return _userSingUpPageModel.IsValidName(UserName) && _userSingUpPageModel.IsValidEmail(UserEmail)
-                && _userSingUpPageModel.IsValidLogin(UserLogin) && _userSingUpPageModel.IsValidPassword(Password) &&
+            return _model.IsValidName(UserName) && _model.IsValidEmail(UserEmail)
+                && _model.IsValidLogin(UserLogin) && _model.IsValidPassword(Password) &&
                 Password.Equals(ConfirmPassword);
         }
         private void CanEnabledRegistrationButton() => IsEnabledRegistrationButton = IsUserRegistrationCommandExecuted();
@@ -109,7 +109,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _name = value;
-                NameTextBoxStyle=ChangeTextBoxStyle(_userSingUpPageModel.IsValidName, UserName);
+                NameTextBoxStyle=ChangeTextBoxStyle(_model.IsValidName, UserName);
                 CanEnabledRegistrationButton();
                 OnPropertyChanged(nameof(UserName));
 
@@ -121,7 +121,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _login = value;
-                LoginTextBoxStyle=ChangeTextBoxStyle(_userSingUpPageModel.IsValidLogin, UserLogin);
+                LoginTextBoxStyle=ChangeTextBoxStyle(_model.IsValidLogin, UserLogin);
                 CanEnabledRegistrationButton();
                 OnPropertyChanged(nameof(UserLogin));
             }
@@ -132,7 +132,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _email = value;
-                EmailTextBoxStyle=ChangeTextBoxStyle(_userSingUpPageModel.IsValidEmail, UserEmail);
+                EmailTextBoxStyle=ChangeTextBoxStyle(_model.IsValidEmail, UserEmail);
                 CanEnabledRegistrationButton();
                 OnPropertyChanged(nameof(UserEmail));
             }
@@ -143,7 +143,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _password = value;
-                PasswordBoxStyle = ChangePasswordBoxStyle(_userSingUpPageModel.IsValidPassword, Password);
+                PasswordBoxStyle = ChangePasswordBoxStyle(_model.IsValidPassword, Password);
+                PasswordTextBoxStyle = ChangeTextBoxStyle(_model.IsValidPassword, Password);
                 CanEnabledRegistrationButton();
                 OnPropertyChanged(nameof(Password));
             }
@@ -154,7 +155,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _confirmPassword = value;
-                ConfirmPasswordBoxStyle = ChangePasswordBoxStyle(_userSingUpPageModel.IsValidPassword, ConfirmPassword);
+                ConfirmPasswordBoxStyle = ChangePasswordBoxStyle(_model.IsValidPassword, ConfirmPassword);
+                PasswordTextBoxStyle = ChangeTextBoxStyle(_model.IsValidPassword, ConfirmPassword);
                 CanEnabledRegistrationButton();
                 OnPropertyChanged(nameof(ConfirmPassword));
             }

@@ -25,17 +25,17 @@
                     x:Name="NameTextBox"
                     Text="{Binding Name}"
                     materialDesign:HintAssist.Hint="Name"
-                    Style="{StaticResource CustomEditProfileTextBox}"/>
+                    Style="{Binding NameTextBoxStyle}"/>
         <TextBox
                     x:Name="LoginTextBox"
                     Text="{Binding Login}"
                     materialDesign:HintAssist.Hint="Login"
-                    Style="{StaticResource CustomEditProfileTextBox}"/>
+                    Style="{Binding LoginTextBoxStyle}"/>
         <TextBox
                     x:Name="EmailTextBox"
                     Text="{Binding Email}"
                     materialDesign:HintAssist.Hint="Email"
-                    Style="{StaticResource CustomEditProfileTextBox}"/>
+                    Style="{Binding EmailTextBoxStyle}"/>
         <Grid
             HorizontalAlignment="Left"
             Width="360"
@@ -50,7 +50,7 @@
                     materialDesign:HintAssist.Hint="Password"
                     Visibility="{Binding PasswordBoxVisibility}"
                     Tag="password"
-                    Style="{StaticResource CustomEditUserProfilePasswordBox}">
+                    Style="{Binding PasswordBoxStyle}">
                 <i:Interaction.Behaviors>
                     <behaviors:PasswordBehavior Password="{Binding Password, Mode=TwoWay}"/>
                 </i:Interaction.Behaviors>
@@ -60,10 +60,9 @@
                     Text="{Binding Password}"
                     materialDesign:HintAssist.Hint="Password"
                     Visibility="{Binding PasswordTextBoxVisibility}"
-                    Style="{StaticResource CustomEditProfileTextBox}"/>
+                    Style="{Binding PasswordTextBoxStyle}"/>
             <Button     
                         Grid.Column="1"
-                        IsEnabled="{Binding IsSaveButtonEnabled}"
                         Command="{Binding PasswordVisibilityCommand}"
                         Background="Transparent"
                         BorderThickness="0"
@@ -76,7 +75,7 @@
                             Text="👁"
                             Margin="0 13 0 0"
                             FontSize="20"
-                            TextDecorations="{Binding PasswordEyeButtonTextDecorationCollection}"
+                            TextDecorations="{Binding PasswordTextDecorationCollection}"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
@@ -99,7 +98,7 @@
                     materialDesign:HintAssist.Hint="Confirm password"
                     Tag="confirmPassword"
                     Visibility="{Binding ConfirmPasswordBoxVisibility}"
-                    Style="{StaticResource CustomEditUserProfilePasswordBox}">
+                    Style="{Binding ConfirmPasswordBoxStyle}">
                 <i:Interaction.Behaviors>
                     <behaviors:PasswordBehavior Password="{Binding ConfirmPassword, Mode=TwoWay}"/>
                 </i:Interaction.Behaviors>
@@ -108,7 +107,7 @@
                  Text="{Binding ConfirmPassword}"
                  materialDesign:HintAssist.Hint="ConfirmPassword"
                  Visibility="{Binding ConfirmPasswordTextBoxVisibility}"
-                 Style="{StaticResource CustomEditProfileTextBox}"/>
+                 Style="{Binding ConfirmPasswordTextBoxStyle}"/>
 
             <Button 
                         Grid.Column="1"

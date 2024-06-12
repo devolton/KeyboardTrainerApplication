@@ -22,7 +22,7 @@ namespace CourseProjectKeyboardApplication.Tools
             _passwordRegex = new Regex("^(?=.*[A-Z])(?=.*\\d)[A-Za-z0-9_]{8,32}$");
             _emailRegex = new Regex("^[\\w\\d\\.\\-\\+]{1,24}\\@[a-z]{1,10}\\.[a-z]{2,8}$");
             _fullNameRegex = new Regex("^(?=.{1,32}$)[А-ЯЁA-Z][а-яёa-z]+\\s[А-ЯЁA-Z][а-яёa-z]+\\s[А-ЯЁA-Z][а-яёa-z]+$");
-            _nameRegex = new Regex("^(?=.{1,32}$)[А-ЯЁA-Z][а-яёa-z]+$");
+            _nameRegex = new Regex("^(?=.{2,32}$)[А-ЯЁA-Z][а-яёa-z]+$");
         }
         public static bool IsValidLogin(string login) => _loginRegex.IsMatch(login);
         public static bool IsValidPassword(string password) => _passwordRegex.IsMatch(password);
