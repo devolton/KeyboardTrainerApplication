@@ -24,5 +24,14 @@ namespace CourseProjectKeyboardApplication.Database.Entities
         [Required]
         [Column("layout_type")]
         public LayoutType LayoutType { get; set; }
+        [Required]
+        [Column("date")]
+        public DateTime Date { get; set;}
+        [Required]
+        [Column("user_id")]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+        public User User { get; set; } 
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.View.Pages;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,6 +13,11 @@ namespace CourseProjectKeyboardApplication.Database.Context
     {
         private const string  _DB_NAME= "typingTutorDb";
         private static TypingTutorDbContext _instance;
+        public DbSet<User> Users { get; set; }
+        public DbSet<TypingTestResult> TypingTestResults { get; set; }
+        public DbSet<EnglishLayoutLesson> EnglishLayoutLessons { get; set; }
+        public DbSet<EnglishLayoutLevel> EnglishLayoutLevels { get; set; }
+        public DbSet<EducationUsersProgress> EducationUsersProgresses { get; set; }
         
         private TypingTutorDbContext():base($"name={_DB_NAME}")
         {
