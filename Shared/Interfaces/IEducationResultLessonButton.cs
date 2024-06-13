@@ -1,4 +1,4 @@
-﻿using CourseProjectKeyboardApplication.Entities;
+﻿using CourseProjectKeyboardApplication.Database.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace CourseProjectKeyboardApplication.Interfaces
 {
     public interface IEducationResultLessonButton
     {
-        EducationLesson EducationLesson { get; set; }
+        EnglishLayoutLesson EducationLesson { get; set; }
         string LessonNumber { get; set; }
     }
 }

@@ -9,19 +9,35 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Database.Models
 {
-    public class TypingTestResultModel
+    public class TypingTestResultModel:BaseTypingTutorModel
     {
-        private TypingTutorDbContext _context;
         private DbSet<TypingTestResult> _typingTestResults;
         public TypingTestResultModel()
         {
-            _context = TypingTutorDbContext.Instance();
             _typingTestResults = _context.TypingTestResults;
         }
         public IEnumerable<TypingTestResult> GetTypingTestResultsByUserId(int userId)
         {
             return _typingTestResults.Where(oneTestResult => oneTestResult.UserId == userId);
         }
-       
+        public int RemoveUsersTest(int userId)
+        {
+            
+            var removeTestResultsCollection = _typingTestResults.Where(oneResult => oneResult.UserId.Equals(userId));
+            int removeCount = removeTestResultsCollection.Count();
+            _typingTestResults.RemoveRange(removeTestResultsCollection);
+            return removeCount;
+        }
+        public void AddNewTypingTestResult(TypingTestResult typingTestResult)
+        {
+            _typingTestResults.Add(typingTestResult);
+           
+        }
+        
+        public TypingTestResult? GetBestUserTestResult(int userId)
+        {
+            return _typingTestResults.Where(oneResult => oneResult.Id.Equals(userId))?.MaxBy(oneResult => oneResult.Speed);
+        }
+        
     }
 }

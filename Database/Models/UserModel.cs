@@ -10,14 +10,12 @@ using System.Data.Entity;
 
 namespace CourseProjectKeyboardApplication.Database.Models
 {
-    public class UserModel
+    public class UserModel:BaseTypingTutorModel
     {
-        private TypingTutorDbContext _context;
         private DbSet<User> _users;
 
         public UserModel()
         {
-            _context = TypingTutorDbContext.Instance();
             _users = _context.Users;
         }
         public User? GetUserById(int Id)
@@ -71,14 +69,6 @@ namespace CourseProjectKeyboardApplication.Database.Models
         public void AddNewUser(User newUser) // maybe change into int 
         {
             _users.Add(newUser);
-        }
-        public int SaveChanges()
-        {
-            return _context.SaveChanges();
-        }
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
         }
     }
 }

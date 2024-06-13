@@ -1,4 +1,4 @@
-﻿using CourseProjectKeyboardApplication.Entities;
+﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -30,8 +30,8 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
 
         public static readonly DependencyProperty LessonNumberProperty =
             DependencyProperty.Register("LessonNumber", typeof(string), typeof(EducationResultsCurrentLessonButton), new PropertyMetadata(" "));
-        public EducationLesson EducationLesson { get; set; }
-        public EducationResultsCurrentLessonButton(EducationLesson educationLesson)
+        public EnglishLayoutLesson EducationLesson { get; set; }
+        public EducationResultsCurrentLessonButton(EnglishLayoutLesson educationLesson)
         {
             InitializeComponent();
             EducationLesson= educationLesson;

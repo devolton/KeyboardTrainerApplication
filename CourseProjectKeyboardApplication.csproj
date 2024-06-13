@@ -112,10 +112,6 @@
     <Resource Include="Resources\Images\StatisticIcon.png" />
     <Resource Include="Resources\Images\StudyIcon.png" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Database\Models\" />
-  </ItemGroup>
   
 
 </Project>
