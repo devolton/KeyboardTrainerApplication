@@ -23,6 +23,12 @@ namespace CourseProjectKeyboardApplication.Database.Context
             var eightLevelLessonCollection = InitEighthLevelLesson();
             var ninethLevelLessonCollection = InitNinethLevelLesson();
             var tenthLevelLessonCollection = InitTenthLevelLessons();
+            var eleventhLevelLessonsCollection = InitEleventhLevelLesson();
+            var twelvethLevelLessonsCollection = InitTwelvethLevelLessons();
+            var thirteenthLevelLessonsCollection = InitThirteenthLevelLessons();
+            var fourteenthLevelLessonsCollection = InitFourteenthLevelLessons();
+            var fiveteenthLevelLessonsCollection = InitFiveteenthLevelLessons();
+
             context.EnglishLayoutLevels.AddRange(levelsCollection);
             context.EnglishLayoutLessons.AddRange(firstLevelLessonsCollection);
             context.EnglishLayoutLessons.AddRange(secondLevelLessonCollection);
@@ -34,6 +40,11 @@ namespace CourseProjectKeyboardApplication.Database.Context
             context.EnglishLayoutLessons.AddRange(eightLevelLessonCollection);
             context.EnglishLayoutLessons.AddRange(ninethLevelLessonCollection);
             context.EnglishLayoutLessons.AddRange(tenthLevelLessonCollection);
+            context.EnglishLayoutLessons.AddRange(eleventhLevelLessonsCollection);
+            context.EnglishLayoutLessons.AddRange(twelvethLevelLessonsCollection);
+            context.EnglishLayoutLessons.AddRange(thirteenthLevelLessonsCollection);
+            context.EnglishLayoutLessons.AddRange(fourteenthLevelLessonsCollection);
+            context.EnglishLayoutLessons.AddRange(fiveteenthLevelLessonsCollection);
         }
         private List<EnglishLayoutLevel> InitLevels()
         {
@@ -404,10 +415,10 @@ namespace CourseProjectKeyboardApplication.Database.Context
         private List<EnglishLayoutLesson> InitFourthLevelLessons()
         {
             return new List<EnglishLayoutLesson>()
-            { 
+            {
                 new EnglishLayoutLesson()
                 {
-                    EnglishLayoutLevelId = 4, 
+                    EnglishLayoutLevelId = 4,
                     Ordinal = 1,
                     Text="zqqzq qzqqz zqzzq qqzqz zzqzq zqzqq qzqzz zqzqz qqzqz zzqzq"
                 },
@@ -513,7 +524,7 @@ namespace CourseProjectKeyboardApplication.Database.Context
                     EnglishLayoutLevelId=5,
                     Ordinal=6,
                     Text="dish dish dish dish dish dish dish dish dish dish dish dish"
-                    
+
                 },
                       new EnglishLayoutLesson()
                 {
@@ -574,7 +585,7 @@ namespace CourseProjectKeyboardApplication.Database.Context
                 new EnglishLayoutLesson()
                 {
                     EnglishLayoutLevelId =6,
-                    Ordinal = 1, 
+                    Ordinal = 1,
                     Text="pound pound pound pound pound pound pound pound pound pound"
                 },
                 new EnglishLayoutLesson()
@@ -705,7 +716,7 @@ namespace CourseProjectKeyboardApplication.Database.Context
                     Ordinal=7,
                     Text ="chap chap chap chap chap chap chap chap chap chap chap chap"
                 },
-                 
+
                         new EnglishLayoutLesson()
                 {
                     EnglishLayoutLevelId = 7,
@@ -911,6 +922,497 @@ namespace CourseProjectKeyboardApplication.Database.Context
                     Ordinal =5,
                     Text="kruxm aodnw ylq]s kpayc xuspg nzkej iehxf krmxl hsitb dmysk"
                 },
+            };
+        }
+        private List<EnglishLayoutLesson> InitEleventhLevelLesson()
+        {
+            return new List<EnglishLayoutLesson>()
+            {
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 1,
+                    Text="ing ing ing ing ing ing ing ing ing ing ing ing ing"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 2,
+                    Text="tion tion tion tion tion tion tion tion tion tion tion"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 3,
+                    Text="ment ment ment ment ment ment ment ment ment ment ment"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 4,
+                    Text="ure ure ure ure ure ure ure ure ure ure ure ure ure ure"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 5,
+                    Text="sion sion sion sion sion sion sion sion sion sion sion"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 6,
+                    Text="ous ous ous ous ous ous ous ous ous ous ous ous ous ous"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 7,
+                    Text="our our our our our our our our our our our our our our"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 8,
+                    Text="er or er or er or er or er or er or er or er or er or"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 9,
+                    Text="tch tch tch tch tch tch tch tch tch tch tch tch tch tch"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 10,
+                    Text="ck ch ck ch ck ch ck ch ck ch ck ch ck ch ck ch ck ch ck"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 11,
+                    Text="ea ea ea ea ea ea ea ea ea ea ea ea ea ea ea ea ea ea ea"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 12,
+                    Text="er er er er er er er er er er er er er er er er er er er"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 13,
+                    Text="the ht the ht the ht the ht the ht the ht the ht the ht the"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 14,
+                    Text="ghe ht the ht the ht the ht the ht the ht the ht the ht the"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 15,
+                    Text="es ly es ly es ly es ly es ly es ly es ly es ly es ly es ly"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 16,
+                    Text="ed ed ed ed ed ed ed ed ed ed ed ed ed ed ed ed ed ed ed"
+                },new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 11,
+                    Ordinal = 17,
+                    Text="and and and and and and and and and and and and and and"
+                }
+            };
+        }
+        private List<EnglishLayoutLesson> InitTwelvethLevelLessons()
+        {
+            return new List<EnglishLayoutLesson>()
+            {
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=1,
+                    Text="78878 87887 78778 88787 77878 78788 87877 78787 88787 77878"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=2,
+                    Text="mean7 jeans8 echo7 thin8 disk7 dish8 dale7 oils8 path7 last8"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=3,
+                    Text="56656 65665 56556 66565 55656 56566 65655 56565 66565 55656"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=4,
+                    Text="land5 pets6 pound8 pits7 ryas5 ebbed6 risk5 reeks7 leak8 lens6"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=5,
+                    Text="00090 09009 90990 00909 99090 90900 09099 90909 00909 99090"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=6,
+                    Text="flux9 lave0 leis7 leaf0 lief6 lazy9 keno5 quack9 knife8 jack0"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=7,
+                    Text="34434 43443 34334 44343 33434 34344 43433 34343 44343 33434"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=8,
+                    Text="chap3 sock4 keys3 obey0 men's7 caps4 vile3 fine4 vent6 vale4"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=9,
+                    Text="-==-= =-==- -=--= ==-=- --=-= -=-== =-=-- -=-=- ==-=- --=-="
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=10,
+                    Text="back= bans- bags3 tins- gift4 grit= herb5 hand= pink7 chin="
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=11,
+                    Text="12212 21221 12112 22121 11212 12122 21211 12121 22121 11212"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=12,
+                    Text="cash2 come1 earn= evil2 form- join3 vote1 deck6 fern2 zeal1"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=13,
+                    Text="only6 pain3 sale3 rank0===king7 5bait5 3 5deny5 3 4find42-10"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=14,
+                    Text="17-5=12 8-3=5 10-3=7 6-4=2 13-2=11 19-4=15 8-5=3 5-1=4 19-12=7"
+
+                },
+                new EnglishLayoutLesson()
+                {
+                    EnglishLayoutLevelId=12,
+                    Ordinal=15,
+                    Text="49-1=48 12-3=9 15-9=6 12-8=4 11-4=7 19-13=6 12-3=9 10-6=4 9-4=5"
+
+                }
+
+
+            };
+        }
+        private List<EnglishLayoutLesson> InitThirteenthLevelLessons()
+        {
+            return new List<EnglishLayoutLesson>
+            {
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 13,
+                    Ordinal =1,
+                    Text ="GHDJY GYDUC Z:CCH HGXCD V:JPR JGKXG JDJEG YLG<N JENGT CJGCY"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 13,
+                    Ordinal =2,
+                    Text ="GTY<D FGYDH KYNUN RDA:G F<DUJ LPDUY RLCPF GCGGD YAFCJ YGEXR"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 13,
+                    Ordinal =3,
+                    Text ="RPVDC D<\"DV BVXCN TWYPY DNBTG AGLYV RFKBD HYPVL YRPJC G<H:X"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 13,
+                    Ordinal =4,
+                    Text ="MAGIC RIVER MONEY NOISE PAPER WOMAN EVENT ANGRY COVER METAL"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 13,
+                    Ordinal =5,
+                    Text ="COMPANY HORSES HAPPY SPECIAL VENTURE CHANGE RETURN KNIGHT"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 13,
+                    Ordinal =6,
+                    Text ="MagiC RiveR MoneY NoisE PapeR WomaN EvenT AngrY CoveR MetaL"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 13,
+                    Ordinal =7,
+                    Text ="ComPanY HorSeS HappY SpeCiaL VenTurE ChaNgE RetUrN KniGhT"
+                }
+            };
+        }
+        private List<EnglishLayoutLesson> InitFourteenthLevelLessons()
+        {
+            return new List<EnglishLayoutLesson>
+            {
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =1,
+                    Text="! @! @ !@! @ ! @!! ! @! @@ !@@ @ ! !@ @ !!@ !@ ! @! @ @! !@@"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =2,
+                    Text="@song ! song @! song @ song !@ song ! song @@! song @ song !!"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =3,
+                    Text="# $# #$$ $# $#$ # $ $ ##$ # $# $ #$# # $#$ #$ $ # $$# $ #$$"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =4,
+                    Text="rain $ rain #$ rain ##$ rain # rain $# rain $ rain $# rain $"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =5,
+                    Text="%^ ^ %%^ % ^% ^ %^% ^^ % ^%^ ^ %^ % ^%% ^% ^ %^^ % ^^% % ^%^"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =6,
+                    Text="pale %^ pale ^ pale ^%^ pale % pale %^ pale ^% pale ^ pale %"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =7,
+                    Text="& *& * &*& * *&& & *& ** &** & * &* * &&* &* & *& * *& &* **"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =8,
+                    Text="calf & calf *& calf * calf &*& calf & calf **& calf * calf &"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =9,
+                    Text="() ) ( ))( ( )( ()( ) () ))( ( ) ))( )( ) (() )( ( )() () (("
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =10,
+                    Text="mask ( mask )( mask) mask ( mask )() mask ) mask () mask )("
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =11,
+                    Text="+ _ _+_ _+ _ __+ +_+ _ ++ _+ + _ ++_ _ + +_+ _ +_ + _+ + _+_"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =12,
+                    Text="mine _ mine +_ mine _+_ mine + mine _+ mine + mine _ mine _+"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =13,
+                    Text="coal (@ coal ?# coal ) coal $^ coal #_ coal )% coal & coal ^"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =14,
+                    Text="face $ face #( face $% face * face ^_ face @ face ) face %&@"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =15,
+                    Text="deal *$ deal )# deal ( deal &? deal %^ deal &_ deal $ deal @"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =16,
+                    Text="1. Mean, 2. Jeans, 3. Echo? 4. Thin, 5. Disk? 6. Dish, 7. Last? 8. Oils, 9. Path"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =17,
+                    Text=$"1) 'Pound'; 2) 'Pits'; 3) 'Ryas'; 4) 'Ebbed'; 5) 'Risk'; 6) 'Reeks'; 7) 'Leak'"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =18,
+                    Text="(Lief - Lazy) + (Keno ? Quack) + (Knife * Jack) - (Chap & Sock) * (Keys + Obey)"
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId = 14,
+                    Ordinal =19,
+                    Text="<Vile & Fine> @ <Vent & Vale> @ <Back & Bans> @ <Bags & Tins> @ <Gift>"
+                }
+            };
+        }
+        private List<EnglishLayoutLesson> InitFiveteenthLevelLessons()
+        {
+            return new List<EnglishLayoutLesson>
+            {
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=1,
+                    Text="1. A bad workman quarrels with his tools."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=2,
+                    Text="2. Better a glorious death than a shameful life."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=3,
+                    Text="3. Calamity is man's true touchstone."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=4,
+                    Text="4. Eat at pleasure, drink with measure."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=5,
+                    Text="5. He who pleased everybody died before he was born."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=6,
+                    Text="6. Jack of all trades and master of none."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=7,
+                    Text="7. Keep a thing seven years and you will find a use for it."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=8,
+                    Text="8. Make hay while the sun shine."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=9,
+                    Text="9. Between two stools one falls to the ground."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=10,
+                    Text="10. Roll my log and I will roll yours."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=11,
+                    Text="11. Scornful dogs will eat dirty puddings."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=12,
+                    Text="12. We never know the value of water till the well is dry."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=13,
+                    Text="13. Old birds are not to be caught with chaff."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=14,
+                    Text="14. Zeal without knowledge is a runaway horse."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=15,
+                    Text="15. Better die standing than live kneeling."
+                },
+                new EnglishLayoutLesson
+                {
+                    EnglishLayoutLevelId =15,
+                    Ordinal=16,
+                    Text="Looks like I'm typing a bit faster now. Now it's a good time to take a certification test."
+                }
+
             };
         }
     }
