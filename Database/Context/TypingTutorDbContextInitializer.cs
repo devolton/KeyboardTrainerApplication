@@ -5,6 +5,7 @@ using CourseProjectKeyboardApplication.Database.Entities;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KeyboardApplicationToolsLibrary.AuthorizationTools;
 
 namespace CourseProjectKeyboardApplication.Database.Context
 {
@@ -12,7 +13,10 @@ namespace CourseProjectKeyboardApplication.Database.Context
     {
         protected override void Seed(TypingTutorDbContext context)
         {
+            //levels
             var levelsCollection = InitLevels();
+
+            //lessons
             var firstLevelLessonsCollection = InitFirstLevelLessons();
             var secondLevelLessonCollection = InitSecondLevelLessons();
             var thirdLevelLessonCollectoin = InitThirdLevelLessons();
@@ -29,7 +33,18 @@ namespace CourseProjectKeyboardApplication.Database.Context
             var fourteenthLevelLessonsCollection = InitFourteenthLevelLessons();
             var fiveteenthLevelLessonsCollection = InitFiveteenthLevelLessons();
 
+            //users
+            var usersCollection = InitUser();
+
+            //tests
+            var testsCollection = InitTests();
+
+            //educProgresses
+            var educProgressCollection = InitEducProgresses();
+
+
             context.EnglishLayoutLevels.AddRange(levelsCollection);
+
             context.EnglishLayoutLessons.AddRange(firstLevelLessonsCollection);
             context.EnglishLayoutLessons.AddRange(secondLevelLessonCollection);
             context.EnglishLayoutLessons.AddRange(thirdLevelLessonCollectoin);
@@ -45,6 +60,12 @@ namespace CourseProjectKeyboardApplication.Database.Context
             context.EnglishLayoutLessons.AddRange(thirteenthLevelLessonsCollection);
             context.EnglishLayoutLessons.AddRange(fourteenthLevelLessonsCollection);
             context.EnglishLayoutLessons.AddRange(fiveteenthLevelLessonsCollection);
+
+            context.Users.AddRange(usersCollection);
+
+            context.TypingTestResults.AddRange(testsCollection);
+
+            context.EducationUsersProgresses.AddRange(educProgressCollection);
         }
         private List<EnglishLayoutLevel> InitLevels()
         {
@@ -152,54 +173,58 @@ namespace CourseProjectKeyboardApplication.Database.Context
             {
                 new EnglishLayoutLesson()
                 {
+                    Id= 1,
                     Text="kkjk kjkkj jkjjk kkjkj jjkjk jkjkk kjkjj jkjkj kkjkj jjkjk",
                     EnglishLayoutLevelId=1,
                     Ordinal=1
                 },
                 new EnglishLayoutLesson()
                 {
+                    Id= 2,
                     Text="ffdf fdffd dfddf ffdfd ddfdf dfdff fdfdd dfdfd ffdfd ddfdf",
                     EnglishLayoutLevelId=1,
                     Ordinal=2
                 },
                 new EnglishLayoutLesson()
                 {
+                    Id= 3,
                     Text="ffjf jjjff fjffj jjffj fffjj dkdkd kdkdk kkddk ddkdk kddkk",
                     EnglishLayoutLevelId=1,
                     Ordinal=3
                 },
                 new EnglishLayoutLesson()
                 {
+                    Id=4,
                     Text="djjd kkfkk ffjfj kkdkk jjdjd kdkdk ffjjk kkddf dkfdf kkjjf",
                     EnglishLayoutLevelId=1,
                     Ordinal=4
                 },
                 new EnglishLayoutLesson()
-                {
+                {Id = 5,
                     Text=";;l; ;l;;l l;ll; ;;l;l ll;l; l;l;; ;l;ll l;l;l ;;l;l ll;l;",
                     EnglishLayoutLevelId=1,
                     Ordinal=5
                 },
                 new EnglishLayoutLesson()
-                {
+                {Id = 6,
                     Text=";fk ;fk djlf kflf ;fkj kj;f dj;;f ;f;lf ;lfkf dljdf ;f;lfkf",
                     EnglishLayoutLevelId=1,
                     Ordinal=6
                 },
                 new EnglishLayoutLesson()
-                {
+                {Id = 7,
                     Text="ssas sassa asaas ssasa aasas asass sasaa asasa ssasa aasas",
                     EnglishLayoutLevelId=1,
                     Ordinal=7
                 },
                 new EnglishLayoutLesson()
-                {
+                {Id = 8,
                     Text="all add; as ask; sad; fas lad dak; dad fad fall; lass dall;",
                     EnglishLayoutLevelId=1,
                     Ordinal=8
                 },
                 new EnglishLayoutLesson()
-                {
+                {Id = 9,        
                     Text="alas dald fall; dad flak; lass sad; fass; all fall lad; ask",
                     EnglishLayoutLevelId=1,
                     Ordinal=9
@@ -212,114 +237,128 @@ namespace CourseProjectKeyboardApplication.Database.Context
             {
                 new EnglishLayoutLesson()
                 {
+                    Id=10,
                     EnglishLayoutLevelId = 2,
                     Ordinal=1,
                     Text ="ghhgh hghhg ghggh hhghg gghgh ghghh hghgg ghghg hhghg gghgh"
                 },
                  new EnglishLayoutLesson()
                 {
+                     Id=11,
                     EnglishLayoutLevelId = 2,
                     Ordinal=2,
                     Text ="gad has aha; had flag gas; sag ash; gag dash glag half;"
                 },
                   new EnglishLayoutLesson()
                 {
+                      Id=12,
                     EnglishLayoutLevelId = 2,
                     Ordinal=3,
                     Text ="gaff; hall hald saga hash; sash gall flag; has dash half"
                 },
                    new EnglishLayoutLesson()
                 {
+                       Id=13,   
                     EnglishLayoutLevelId = 2,
                     Ordinal=4,
                     Text ="rttrt trttr rtrrt ttrtr rrtrt rtrtt trtrr rtrtr ttrtr rrtrt"
                 },
                     new EnglishLayoutLesson()
                 {
+                        Id=14,
                     EnglishLayoutLevelId = 2,
                     Ordinal=5,
                     Text ="art tad gar at sat rag tag; far jar tar rah hat rat rag tat"
                 },
                      new EnglishLayoutLesson()
                 {
+                         Id=15,
                     EnglishLayoutLevelId = 2,
                     Ordinal=6,
                     Text ="daft dart jars task; hard tart start grad data talk; shaft rash"
                 },
                       new EnglishLayoutLesson()
                 {
+                          Id=16,
                     EnglishLayoutLevelId = 2,
                     Ordinal=7,
                     Text ="hart; haft karat halt salt dark; raft draft shark; grass"
                 },
                        new EnglishLayoutLesson()
                 {
+                           Id=17,
                     EnglishLayoutLevelId = 2,
                     Ordinal=8,
                     Text ="graft fast raja shark gard shard start lard; flat"
                 },
                         new EnglishLayoutLesson()
                 {
+                            Id=18,
                     EnglishLayoutLevelId = 2,
                     Ordinal=9,
                     Text ="yuuyu uyuuy yuyyu uuyuy yyuyu yuyuu uyuyy yuyuy uuyuy yyuyu"
                 },
                          new EnglishLayoutLesson()
                 {
+                             Id=19,
                     EnglishLayoutLevelId = 2,
                     Ordinal=10,
                     Text ="day fly dug lay jay sky lug fur fry try hut; say lady yard"
                 },
                           new EnglishLayoutLesson()
                 {
+                              Id=20,
                     EnglishLayoutLevelId = 2,
                     Ordinal=11,
                     Text ="lush shut fray surd lurk usual surf flay just lust dust"
                 },
                            new EnglishLayoutLesson()
                 {
+                               Id=21,
                     EnglishLayoutLevelId = 2,
                     Ordinal=12,
                     Text ="vbbvb bvbbv vbvvb bbvbv vvbvb vbvbb bvbvv vbvbv bbvbv vvbvb"
                 },
                             new EnglishLayoutLesson()
                 {
+                                Id=22,
                     EnglishLayoutLevelId = 2,
                     Ordinal=13,
                     Text ="bad vag bug bar vug vas vat bav bay bat bag bah vast bur"
                 },
                              new EnglishLayoutLesson()
-                {
+                {   Id=23,
                     EnglishLayoutLevelId = 2,
                     Ordinal=14,
                     Text ="baby vagary burst vary ruby valuta buy vast vault vulgar by"
                 },
                               new EnglishLayoutLesson()
                 {
+                                  Id=24,
                     EnglishLayoutLevelId = 2,
                     Ordinal=15,
                     Text ="nmmnm mnmmn nmnnm mmnmn nnmnm nmnmm mnmnn nmnmn mmnmn"
                 },
                                new EnglishLayoutLesson()
-                {
+                {   Id=25,
                     EnglishLayoutLevelId = 2,
                     Ordinal=16,
                     Text ="ham gun jam ran gum man fun mat nab arm sun may nut tun mud"
                 },
                                 new EnglishLayoutLesson()
-                {
+                {   Id=26,
                     EnglishLayoutLevelId = 2,
                     Ordinal=17,
                     Text ="hang damm harm darn farm hung lamb rang sand tang tank many"
                 },
-                                 new EnglishLayoutLesson()
-                {
+                      new EnglishLayoutLesson()
+                {   Id=27,
                     EnglishLayoutLevelId = 2,
                     Ordinal=18,
                     Text ="must bank gang busy hand thank bury junk human marry funny"
                 },
                                   new EnglishLayoutLesson()
-                {
+                {   Id=29,
                     EnglishLayoutLevelId = 2,
                     Ordinal=19,
                     Text ="humb bush ray baulk flask bald stuff bask shark navy hurry"
@@ -1415,5 +1454,284 @@ namespace CourseProjectKeyboardApplication.Database.Context
 
             };
         }
+        private List<User> InitUser()
+        {
+            return new List<User>
+            {
+                new User
+                {
+                    Id = 1,
+                    Name = "Anton",
+                    Email = "voloshko.03@gmail.com",
+                    Login = "Devolton",
+                    Password = PasswordSHA256Encrypter.EncryptPassword("Password123"),
+                    EnglishLayoutLessonId = 12,
+                    EnglishLayoutLevelId = 2,
+                    AvatarPath = ""
+                },
+                new User
+                {
+                    Id=2,
+                    Name="Artur",
+                    Email="volos.02@gmail.com",
+                    Login="Arturidze",
+                    Password=PasswordSHA256Encrypter.EncryptPassword("Qwerty12345"),
+                    EnglishLayoutLessonId=1,
+                    EnglishLayoutLevelId=1,
+                    AvatarPath=""
+                }
+            };
+        }
+        private List<TypingTestResult> InitTests()
+        {
+            return new List<TypingTestResult>
+            {
+                new TypingTestResult
+                {
+                    Id=1,
+                    Date = new DateTime(2024,06,10),
+                    Speed=40,
+                    AccuracyPercent=89.5,
+                    LayoutType=Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=2,
+                    Date= new DateTime(2024,06,11),
+                    Speed=45,
+                    AccuracyPercent=90.5,
+                    LayoutType=Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=3,
+                    Date = new DateTime(2024,05,29),
+                    Speed=42,
+                    AccuracyPercent = 78.5,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=2
+                },
+                //
+                new TypingTestResult
+                {
+                    Id=4,
+                    Date = new DateTime(2024,06,02),
+                    Speed=41,
+                    AccuracyPercent = 88.5,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=5,
+                    Date = new DateTime(2024,05,22),
+                    Speed=39,
+                    AccuracyPercent = 98.5,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=6,
+                    Date = new DateTime(2024,05,12),
+                    Speed=44,
+                    AccuracyPercent = 90,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=7,
+                    Date = new DateTime(2024,06,07),
+                    Speed=47,
+                    AccuracyPercent = 80.2,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=8,
+                    Date = new DateTime(2024,05,27),
+                    Speed=44,
+                    AccuracyPercent = 91.8,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=9,
+                    Date = new DateTime(2024,06,12),
+                    Speed=51,
+                    AccuracyPercent = 89.5,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=2
+                },
+                new TypingTestResult
+                {
+                    Id=10,
+                    Date = new DateTime(2024,06,01),
+                    Speed=41,
+                    AccuracyPercent = 88.5,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=11,
+                    Date = new DateTime(2024,05,29),
+                    Speed=46,
+                    AccuracyPercent = 93.5,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=12,
+                    Date = new DateTime(2024,05,12),
+                    Speed=50,
+                    AccuracyPercent = 90,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },new TypingTestResult
+                {
+                    Id=13,
+                    Date = new DateTime(2024,05,08),
+                    Speed=42,
+                    AccuracyPercent = 98,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+                new TypingTestResult
+                {
+                    Id=14,
+                    Date = new DateTime(2024,05,23),
+                    Speed=45,
+                    AccuracyPercent = 91.2,
+                    LayoutType= Shared.Enums.LayoutType.English,
+                    UserId=1
+                },
+
+            };
+        }
+        private List<EducationUsersProgress> InitEducProgresses()
+        {
+            return new List<EducationUsersProgress>()
+            {
+                new EducationUsersProgress
+                {
+                    Id=1,
+                    UserId=1,
+                    EnglishLayoutLessonId=1,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=true,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=false
+                },
+                new EducationUsersProgress
+                {
+                    Id=2,
+                    UserId=1,
+                    EnglishLayoutLessonId=2,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=false,
+                    IsSpeedCompleted=true,
+                    IsWithoutErrorsCompleted=false
+                },
+                new EducationUsersProgress
+                {
+                    Id=3,
+                    UserId=1,
+                    EnglishLayoutLessonId=3,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=false,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=false
+                },
+                new EducationUsersProgress
+                {
+                    Id=4,
+                    UserId=1,
+                    EnglishLayoutLessonId=4,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=true,
+                    IsSpeedCompleted=true,
+                    IsWithoutErrorsCompleted=true
+                },
+                new EducationUsersProgress
+                {
+                    Id=5,
+                    UserId=1,
+                    EnglishLayoutLessonId=5,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=false,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=false
+                },
+                new EducationUsersProgress
+                {
+                    Id=6,
+                    UserId=1,
+                    EnglishLayoutLessonId=6,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=true,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=true
+                },
+                new EducationUsersProgress
+                {
+                    Id=7,
+                    UserId=1,
+                    EnglishLayoutLessonId=7,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=false,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=false
+                },
+                new EducationUsersProgress
+                {
+                    Id=8,
+                    UserId=1,
+                    EnglishLayoutLessonId=8,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=true,
+                    IsSpeedCompleted=true,
+                    IsWithoutErrorsCompleted=true
+                },
+                new EducationUsersProgress
+                {
+                    Id=9,
+                    UserId=1,
+                    EnglishLayoutLessonId=9,
+                    EnglishLayoutLevelId=1,
+                    IsLessThanTwoErrorsCompleted=false,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=false
+                },
+                new EducationUsersProgress
+                {
+                    Id=10,
+                    UserId=1,
+                    EnglishLayoutLessonId=10,
+                    EnglishLayoutLevelId=2,
+                    IsLessThanTwoErrorsCompleted=true,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=false
+                },
+                new EducationUsersProgress
+                {
+                    Id=11,
+                    UserId=1,
+                    EnglishLayoutLessonId=11,
+                    EnglishLayoutLevelId=2,
+                    IsLessThanTwoErrorsCompleted=true,
+                    IsSpeedCompleted=false,
+                    IsWithoutErrorsCompleted=false
+                },
+
+            };
+        }
+        
     }
 }
