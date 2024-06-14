@@ -1,11 +1,11 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.View.CustomControls.TypingTutorResultControls;
-using CourseProjectKeyboardApplication.Tools;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {

@@ -1,5 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
-using CourseProjectKeyboardApplication.Tools;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.View.CustomControls;
 using System;
 using System.Collections.Generic;

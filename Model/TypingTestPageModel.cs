@@ -9,8 +9,8 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Timers;
-using CourseProjectKeyboardApplication.Tools;
 using CourseProjectKeyboardApplication.View.Pages;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 
 namespace CourseProjectKeyboardApplication.Model
 {

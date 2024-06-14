@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace CourseProjectKeyboardApplication.Tools
+namespace CourseProjectKeyboardApplication.Shared.Mediators
 {
     public static class FrameMediator
     {
@@ -56,7 +56,7 @@ namespace CourseProjectKeyboardApplication.Tools
         {
             foreach (var onePage in _pagesList)
             {
-              
+
                 if (onePage.GetType().Equals(pageType))
                 {
                     MainFrame.Content = onePage;
@@ -64,6 +64,6 @@ namespace CourseProjectKeyboardApplication.Tools
                 }
             }
         }
-   
+
     }
 }

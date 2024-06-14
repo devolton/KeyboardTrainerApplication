@@ -1,5 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
-using CourseProjectKeyboardApplication.Tools;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.View.Pages;
 using System;
 using System.Collections.Generic;

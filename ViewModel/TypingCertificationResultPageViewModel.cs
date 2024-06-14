@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Input;
-using CourseProjectKeyboardApplication.Tools;
 using System.Windows.Controls;
 using CourseProjectKeyboardApplication.View.CustomControls;
 using System.Globalization;
+using CourseProjectKeyboardApplication.Shared.Enums;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {

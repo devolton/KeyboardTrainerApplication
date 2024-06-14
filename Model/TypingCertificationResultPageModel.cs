@@ -1,4 +1,4 @@
-﻿using CourseProjectKeyboardApplication.Tools;
+﻿using CourseProjectKeyboardApplication.Shared.Enums;
 using LiveCharts;
 using LiveCharts.Wpf;
 using Microsoft.VisualBasic;

@@ -74,46 +74,46 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnInitializatioCommand(object param)
         {
             _mainStackPanel = param as StackPanel;
-            var educatinProgram = _model.GetEducationalProgram();
+            
 
-            foreach (var oneLevel in educatinProgram.Levels)
-            {
-                var educationResultLessonBlock = new EducationResultsLessonBlock();
-                var lessonHeader = (EducationResultsLessonHeader)educationResultLessonBlock.FindName("LessonHeader");
-                var lessonBodyWrapPanel = (WrapPanel)educationResultLessonBlock.FindName("LessonsWrapPanel");
-                lessonHeader.LessonTitle = oneLevel.Title;
-                lessonHeader.LessonNumber = "lesson " + oneLevel.Ordinal.ToString();
-                foreach (var oneLesson in oneLevel.LessonsList)
-                {
-                    if (oneLesson.IsLessonUnlocked)
-                    {
-                        if (oneLesson.Id == educatinProgram.CurrentLessonId)
-                        {
-                            var button = new EducationResultsCurrentLessonButton(oneLesson);
-                            button.MouseDoubleClick += LessonButton_MouseDoubleClick;
-                            _currentLessonButton = button;
-                            lessonBodyWrapPanel.Children.Add(button);
-                            continue;
-                        }
-                        else
-                        {
-                            var lessonButton = new EducationResultsLessonNumberButton(oneLesson);
-                            lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
-                            lessonButton.LessThanTwoTyposCircleBackground = (oneLesson.IsLessTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
-                            lessonButton.WithoutErrorsCircleBackground = (oneLesson.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
-                            lessonButton.SpeedCircleBackground = (oneLesson.IsSpeedConditionCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
-                            lessonBodyWrapPanel.Children.Add(lessonButton);
-                        }
-                    }
-                    else
-                    {
-                        var lessonButton = new EducationResultsLockButton(oneLesson);
-                        lessonBodyWrapPanel.Children.Add(lessonButton);
+            //foreach (var oneLevel in educatinProgram.Levels)
+            //{
+            //    var educationResultLessonBlock = new EducationResultsLessonBlock();
+            //    var lessonHeader = (EducationResultsLessonHeader)educationResultLessonBlock.FindName("LessonHeader");
+            //    var lessonBodyWrapPanel = (WrapPanel)educationResultLessonBlock.FindName("LessonsWrapPanel");
+            //    lessonHeader.LessonTitle = oneLevel.Title;
+            //    lessonHeader.LessonNumber = "lesson " + oneLevel.Ordinal.ToString();
+            //    foreach (var oneLesson in oneLevel.LessonsList)
+            //    {
+            //        if (oneLesson.IsLessonUnlocked)
+            //        {
+            //            if (oneLesson.Id == educatinProgram.CurrentLessonId)
+            //            {
+            //                var button = new EducationResultsCurrentLessonButton(oneLesson);
+            //                button.MouseDoubleClick += LessonButton_MouseDoubleClick;
+            //                _currentLessonButton = button;
+            //                lessonBodyWrapPanel.Children.Add(button);
+            //                continue;
+            //            }
+            //            else
+            //            {
+            //                var lessonButton = new EducationResultsLessonNumberButton(oneLesson);
+            //                lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+            //                lessonButton.LessThanTwoTyposCircleBackground = (oneLesson.IsLessTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
+            //                lessonButton.WithoutErrorsCircleBackground = (oneLesson.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
+            //                lessonButton.SpeedCircleBackground = (oneLesson.IsSpeedConditionCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
+            //                lessonBodyWrapPanel.Children.Add(lessonButton);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            var lessonButton = new EducationResultsLockButton(oneLesson);
+            //            lessonBodyWrapPanel.Children.Add(lessonButton);
 
-                    }
-                }
-                MainStackPanel.Children.Add(educationResultLessonBlock);
-            }
+            //        }
+            //    }
+            //    MainStackPanel.Children.Add(educationResultLessonBlock);
+            //}
 
 
 

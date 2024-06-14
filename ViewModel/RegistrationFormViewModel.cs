@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Mediators;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         protected ICommand _passwordVisibilityCommand;
         protected ICommand _confirmPasswordVisibilityCommand;
 
+        
+
 
         protected Style _defaultTextBoxStyle;
         protected Style _errorTextBoxStyle;
@@ -46,7 +50,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         protected Style _passwordTextBoxStyle;
         protected Style _confirmPasswordBoxStyle;
         protected Style _confirmPasswordTextBoxStyle;
-      
+
         //properties
         #region 
         public Style NameTextBoxStyle
@@ -134,6 +138,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
 
         #endregion
+        //methods
+        #region
+        
         protected virtual void InitStyles()
         {
             _defaultTextBoxStyle = (Style)Application.Current.Resources["CustomDefaultSingUpPageTextBox"];
@@ -179,5 +186,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         protected abstract void OnConfirmPasswordVisibilityCommand(object param);
         protected abstract void OnPasswordVisibilityCommand(object param);
+        #endregion
     }
 }
