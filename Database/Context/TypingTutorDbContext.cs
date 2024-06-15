@@ -20,11 +20,15 @@ namespace CourseProjectKeyboardApplication.Database.Context
         public DbSet<EnglishLayoutLevel> EnglishLayoutLevels { get; set; }
         public DbSet<EducationUsersProgress> EducationUsersProgresses { get; set; }
         
-        private TypingTutorDbContext():base($"name={_DB_NAME}")
+        private TypingTutorDbContext(object dummy):base($"name={_DB_NAME}")
         {
             System.Data.Entity.Database.SetInitializer <TypingTutorDbContext>(new TypingTutorDbContextInitializer());
             this.Database.Initialize(true);
 
+        }
+        public TypingTutorDbContext()
+        {
+            
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -33,7 +37,7 @@ namespace CourseProjectKeyboardApplication.Database.Context
         }
         public static TypingTutorDbContext Instance()
         {
-            _instance ??= new TypingTutorDbContext();
+            _instance ??= new TypingTutorDbContext(null);
             return _instance;
         }
     }

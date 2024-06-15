@@ -17,6 +17,7 @@ namespace CourseProjectKeyboardApplication.Shared.Mediators
         private static EnglishLayoutLevelModel _levelModel; 
         static DatabaseModelMediator()
         {
+            
             _userModel = new UserModel();
             _educationProgressModel=new EducationUserProgressModel();
             _typingTestResultModel=new TypingTestResultModel();

@@ -58,12 +58,17 @@ namespace CourseProjectKeyboardApplication.Model
         /// </summary>
         /// <param name="login">User login</param>
         /// <param name="password">User password</param>
-        public void WriteDataInRegister(string login, string password)
+        public  void WriteDataInRegister(string login, string password)
         {
-            string sha256KeyCode = PasswordSHA256Encrypter.EncryptPassword(password);
-            _applicationSubKey.SetValue(_userLoginRegistryKeyName, login);
-            _applicationSubKey.SetValue(_userPasswordRegistryCodeKeyName, sha256KeyCode);
-            _applicationSubKey.SetValue(_userPasswordRegistryKeyName, _devoltonEncrypter.Encrypt(password, sha256KeyCode));
+            Task.Run(() =>
+            {
+                 string sha256KeyCode = PasswordSHA256Encrypter.EncryptPassword(password);
+                _applicationSubKey.SetValue(_userLoginRegistryKeyName, login);
+                _applicationSubKey.SetValue(_userPasswordRegistryCodeKeyName, sha256KeyCode);
+                _applicationSubKey.SetValue(_userPasswordRegistryKeyName, _devoltonEncrypter.Encrypt(password, sha256KeyCode));
+
+            });
+     
         }
         /// <summary>
         /// Get login from register if the user saved it earlier

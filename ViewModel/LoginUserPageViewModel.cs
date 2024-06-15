@@ -26,6 +26,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private LoginUserPageModel _model = new LoginUserPageModel();
         //поля для состояний 
         private bool _isChecked = false;
+        private bool _isValidUser = false;
         private bool _isButtonEnable;
         private bool _isPasswordVisible = false;
         private string _loginOrEmail;
@@ -162,6 +163,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 MessageBox.Show("InvalidPassword");
                 return;
             }
+            _isValidUser = true;
 
             new MainWindow().Show();
             foreach (Window oneWindow in Application.Current.Windows)
@@ -177,7 +179,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnWriteInRegisterCommand(object parameter)
         {
-            if (_isChecked)
+            if (_isChecked && _isValidUser)
                 _model.WriteDataInRegister(LoginOrEmail, Password);          
 
         }
