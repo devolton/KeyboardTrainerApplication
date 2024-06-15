@@ -1,9 +1,11 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Tools;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +28,7 @@ namespace CourseProjectKeyboardApplication.Model
             {
                 Name = name,
                 Email = email,
+                Login = login,
                 Password = PasswordSHA256Encrypter.EncryptPassword(password),
                 EnglishLayoutLessonId=1,
                 EnglishLayoutLevelId=1,
@@ -33,6 +36,7 @@ namespace CourseProjectKeyboardApplication.Model
 
             };
             _userModel.AddNewUser(user);
+            _userModel.SaveChangesAsync();
             return user;
         }
 

@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using KeyboardApplicationToolsLibrary.AuthorizationTools;
+using System.Collections;
+using System.Xml;
 
 namespace CourseProjectKeyboardApplication.Database.Models
 {
-    public class UserModel:BaseTypingTutorModel
+    public class UserModel:BaseTypingTutorModel,IEnumerable<User>
     {
         private DbSet<User> _users;
 
@@ -39,7 +42,7 @@ namespace CourseProjectKeyboardApplication.Database.Models
                 userInDbSet.Email = user.Email;
                 userInDbSet.Name = user.Name;
                 userInDbSet.Login = user.Login;
-                userInDbSet.Password = user.Password;
+                userInDbSet.Password = PasswordSHA256Encrypter.EncryptPassword(user.Password);
                 userInDbSet.EnglishLayoutLesson = user.EnglishLayoutLesson;
                 userInDbSet.EnglishLayoutLevel = user.EnglishLayoutLevel;
                 userInDbSet.EnglishLayoutLessonId = user.EnglishLayoutLessonId;
@@ -69,6 +72,29 @@ namespace CourseProjectKeyboardApplication.Database.Models
         public void AddNewUser(User newUser) // maybe change into int 
         {
             _users.Add(newUser);
+        }
+        public bool IsUserExistByEmail(string email)
+        {
+            return _users.Any(oneUser => oneUser.Email == email);
+        }
+        public bool IsUserExistByLogin(string login)
+        {
+            return _users.Any(oneUser => oneUser.Login == login);
+        }
+        public User? GetUserByLoginOrEmailAndPassword(string loginOrEmail, string shaPassword)
+        {
+            return _users.FirstOrDefault(oneUser => (oneUser.Login == loginOrEmail || oneUser.Email == loginOrEmail)
+            && oneUser.Password == shaPassword);
+        }
+
+        public IEnumerator<User> GetEnumerator()
+        {
+            return _users.AsEnumerable().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }

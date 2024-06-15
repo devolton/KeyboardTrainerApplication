@@ -15,7 +15,7 @@ namespace CourseProjectKeyboardApplication.Database.Entities
         [Column("Id")]
         public int Id { get; set; }
         [Required]
-        [StringLength(64)]
+        [StringLength(128)]
         [Column("text")]
         public string Text {  get; set; }
         [Required]

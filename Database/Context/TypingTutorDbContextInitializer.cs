@@ -6,66 +6,78 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
+using System.Windows;
 
 namespace CourseProjectKeyboardApplication.Database.Context
 {
     public class TypingTutorDbContextInitializer : CreateDatabaseIfNotExists<TypingTutorDbContext>
     {
+        
         protected override void Seed(TypingTutorDbContext context)
         {
-            //levels
-            var levelsCollection = InitLevels();
-
-            //lessons
-            var firstLevelLessonsCollection = InitFirstLevelLessons();
-            var secondLevelLessonCollection = InitSecondLevelLessons();
-            var thirdLevelLessonCollectoin = InitThirdLevelLessons();
-            var fourthLevelLessonCollection = InitFourthLevelLessons();
-            var fivethLevelLessonCollection = InitFivethLevelLesson();
-            var sixhtLevelLessonCollection = InitSixthLevelLesson();
-            var seventhLevelLessonCollectoin = InitSeventhLevelLesson();
-            var eightLevelLessonCollection = InitEighthLevelLesson();
-            var ninethLevelLessonCollection = InitNinethLevelLesson();
-            var tenthLevelLessonCollection = InitTenthLevelLessons();
-            var eleventhLevelLessonsCollection = InitEleventhLevelLesson();
-            var twelvethLevelLessonsCollection = InitTwelvethLevelLessons();
-            var thirteenthLevelLessonsCollection = InitThirteenthLevelLessons();
-            var fourteenthLevelLessonsCollection = InitFourteenthLevelLessons();
-            var fiveteenthLevelLessonsCollection = InitFiveteenthLevelLessons();
-
-            //users
-            var usersCollection = InitUser();
-
-            //tests
-            var testsCollection = InitTests();
-
-            //educProgresses
-            var educProgressCollection = InitEducProgresses();
+            try
+            {
+                //levels
+                var levelsCollection = InitLevels();
 
 
-            context.EnglishLayoutLevels.AddRange(levelsCollection);
+                //lessons
+                var firstLevelLessonsCollection = InitFirstLevelLessons();
+                var secondLevelLessonCollection = InitSecondLevelLessons();
+                var thirdLevelLessonCollectoin = InitThirdLevelLessons();
+                var fourthLevelLessonCollection = InitFourthLevelLessons();
+                var fivethLevelLessonCollection = InitFivethLevelLesson();
+                var sixhtLevelLessonCollection = InitSixthLevelLesson();
+                var seventhLevelLessonCollectoin = InitSeventhLevelLesson();
+                var eightLevelLessonCollection = InitEighthLevelLesson();
+                var ninethLevelLessonCollection = InitNinethLevelLesson();
+                var tenthLevelLessonCollection = InitTenthLevelLessons();
+                var eleventhLevelLessonsCollection = InitEleventhLevelLesson();
+                var twelvethLevelLessonsCollection = InitTwelvethLevelLessons();
+                var thirteenthLevelLessonsCollection = InitThirteenthLevelLessons();
+                var fourteenthLevelLessonsCollection = InitFourteenthLevelLessons();
+                var fiveteenthLevelLessonsCollection = InitFiveteenthLevelLessons();
 
-            context.EnglishLayoutLessons.AddRange(firstLevelLessonsCollection);
-            context.EnglishLayoutLessons.AddRange(secondLevelLessonCollection);
-            context.EnglishLayoutLessons.AddRange(thirdLevelLessonCollectoin);
-            context.EnglishLayoutLessons.AddRange(fourthLevelLessonCollection);
-            context.EnglishLayoutLessons.AddRange(fivethLevelLessonCollection);
-            context.EnglishLayoutLessons.AddRange(sixhtLevelLessonCollection);
-            context.EnglishLayoutLessons.AddRange(seventhLevelLessonCollectoin);
-            context.EnglishLayoutLessons.AddRange(eightLevelLessonCollection);
-            context.EnglishLayoutLessons.AddRange(ninethLevelLessonCollection);
-            context.EnglishLayoutLessons.AddRange(tenthLevelLessonCollection);
-            context.EnglishLayoutLessons.AddRange(eleventhLevelLessonsCollection);
-            context.EnglishLayoutLessons.AddRange(twelvethLevelLessonsCollection);
-            context.EnglishLayoutLessons.AddRange(thirteenthLevelLessonsCollection);
-            context.EnglishLayoutLessons.AddRange(fourteenthLevelLessonsCollection);
-            context.EnglishLayoutLessons.AddRange(fiveteenthLevelLessonsCollection);
+                //users
+                var usersCollection = InitUser();
 
-            context.Users.AddRange(usersCollection);
+                //tests
+                var testsCollection = InitTests();
 
-            context.TypingTestResults.AddRange(testsCollection);
+                //educProgresses
+                var educProgressCollection = InitEducProgresses();
 
-            context.EducationUsersProgresses.AddRange(educProgressCollection);
+
+                context.EnglishLayoutLevels.AddRange(levelsCollection);
+
+                context.EnglishLayoutLessons.AddRange(firstLevelLessonsCollection);
+                context.EnglishLayoutLessons.AddRange(secondLevelLessonCollection);
+                context.EnglishLayoutLessons.AddRange(thirdLevelLessonCollectoin);
+                context.EnglishLayoutLessons.AddRange(fourthLevelLessonCollection);
+                context.EnglishLayoutLessons.AddRange(fivethLevelLessonCollection);
+                context.EnglishLayoutLessons.AddRange(sixhtLevelLessonCollection);
+                context.EnglishLayoutLessons.AddRange(seventhLevelLessonCollectoin);
+                context.EnglishLayoutLessons.AddRange(eightLevelLessonCollection);
+                context.EnglishLayoutLessons.AddRange(ninethLevelLessonCollection);
+                context.EnglishLayoutLessons.AddRange(tenthLevelLessonCollection);
+                context.EnglishLayoutLessons.AddRange(eleventhLevelLessonsCollection);
+                context.EnglishLayoutLessons.AddRange(twelvethLevelLessonsCollection);
+                context.EnglishLayoutLessons.AddRange(thirteenthLevelLessonsCollection);
+                context.EnglishLayoutLessons.AddRange(fourteenthLevelLessonsCollection);
+                context.EnglishLayoutLessons.AddRange(fiveteenthLevelLessonsCollection);
+
+                context.Users.AddRange(usersCollection);
+
+                context.TypingTestResults.AddRange(testsCollection);
+
+                context.EducationUsersProgresses.AddRange(educProgressCollection);
+                context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
         private List<EnglishLayoutLevel> InitLevels()
         {

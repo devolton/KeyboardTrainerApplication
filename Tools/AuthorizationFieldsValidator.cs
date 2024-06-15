@@ -26,7 +26,6 @@ namespace CourseProjectKeyboardApplication.Tools
         }
         public static bool IsValidLogin(string login) => _loginRegex.IsMatch(login);
         public static bool IsValidPassword(string password) => _passwordRegex.IsMatch(password);
-        public static bool IsValidPassword(SecureString secureString) => _passwordRegex.IsMatch(secureString.ToUnsecureString());
         public static bool IsValidEmail(string email) => _emailRegex.IsMatch(email);
         public static bool IsValidFullName(string fullName) => _fullNameRegex.IsMatch(fullName);
         public static bool IsValidName(string name) => _nameRegex.IsMatch(name);

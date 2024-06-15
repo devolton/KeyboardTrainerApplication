@@ -3,6 +3,7 @@ using CourseProjectKeyboardApplication.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace CourseProjectKeyboardApplication.Database.Context
 {
     public class TypingTutorDbContext:DbContext
     {
-        private const string  _DB_NAME= "typingTutorDb";
+        private const string  _DB_NAME= "TypingTutorDb";
         private static TypingTutorDbContext _instance;
         public DbSet<User> Users { get; set; }
         public DbSet<TypingTestResult> TypingTestResults { get; set; }
@@ -24,6 +25,11 @@ namespace CourseProjectKeyboardApplication.Database.Context
             System.Data.Entity.Database.SetInitializer <TypingTutorDbContext>(new TypingTutorDbContextInitializer());
             this.Database.Initialize(true);
 
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
         public static TypingTutorDbContext Instance()
         {

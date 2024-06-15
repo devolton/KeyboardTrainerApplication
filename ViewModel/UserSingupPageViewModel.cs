@@ -35,16 +35,32 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //метод регестрации пользователя 
         private void OnTryRegisterUser(object param = null)
         {
-            ClearAllFields();
-            new MainWindow().Show();
-          
-            foreach (Window oneWindow in Application.Current.Windows)
+            if (_model.IsUniqueCreditails(UserEmail, UserLogin))
             {
-                if (oneWindow is AuthorizationWindow)
+               var newUser= _model.RegisterUser(UserName, UserLogin, UserEmail, Password);
+                if(newUser is null)
                 {
-                    oneWindow.Close();
+                    MessageBox.Show("Invalid registerUserOperation");
+                    
                     return;
                 }
+                MessageBox.Show(newUser.ToString());
+                ClearAllFields();
+                new MainWindow().Show();
+
+                foreach (Window oneWindow in Application.Current.Windows)
+                {
+                    if (oneWindow is AuthorizationWindow)
+                    {
+                        oneWindow.Close();
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                //invalid login or email handler 
+                MessageBox.Show("Invalid login or password");
             }
 
         }

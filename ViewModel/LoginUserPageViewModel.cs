@@ -1,4 +1,6 @@
-﻿using CourseProjectKeyboardApplication.Model;
+﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.View.Windows;
 using CourseProjectKeyboardApplication.ViewModel.Commands;
@@ -21,7 +23,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private TextDecorationCollection _passwordEyeButtonDecoration = TextDecorations.Strikethrough;
         private readonly MultiCommand _multiCommand = new MultiCommand();
         private readonly ICommand _passwordVisibilityCommand;
-        private LoginUserPageModel _loginUserPageModel = new LoginUserPageModel();
+        private LoginUserPageModel _model = new LoginUserPageModel();
         //поля для состояний 
         private bool _isChecked = false;
         private bool _isButtonEnable;
@@ -40,8 +42,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _passwordBoxDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPagePasswordBox"];
             PasswordBoxStyle = _passwordBoxDefaultStyle;
             _passwordBoxInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPagePasswordBox"];
-            LoginOrEmail = _loginUserPageModel.GetLoginFromRegister();
-            Password = _loginUserPageModel.GetPasswordFromRegister();
+            LoginOrEmail = _model.GetLoginFromRegister();
+            Password = _model.GetPasswordFromRegister();
 
         }
 
@@ -146,6 +148,21 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private void OnLoginUserCommand(object parameter)
         {
+            if (!_model.IsUserExist(LoginOrEmail))
+            {
+                //add handler invalid login or email
+                MessageBox.Show("User with this Email or Login doesnt' exist");
+                return;
+
+            }
+            User user = _model.GetUserByLoginOrEmailAndPassword(LoginOrEmail, Password);
+            if(user is null)
+            {
+                //add handler invalid password
+                MessageBox.Show("InvalidPassword");
+                return;
+            }
+
             new MainWindow().Show();
             foreach (Window oneWindow in Application.Current.Windows)
             {
@@ -156,11 +173,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
             }
 
+
         }
         private void OnWriteInRegisterCommand(object parameter)
         {
             if (_isChecked)
-                _loginUserPageModel.WriteDataInRegister(LoginOrEmail, Password);          
+                _model.WriteDataInRegister(LoginOrEmail, Password);          
 
         }
         private void OnPasswordVisibilityCommand(object obj)
@@ -189,7 +207,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool CanExecuteButtonCommand(object parameter)
         {
             //может не работать потому что эта команда вызывается только при изиминении LOGIN
-            return (_loginUserPageModel.IsValidLogin(LoginOrEmail) || _loginUserPageModel.IsValidEmail(LoginOrEmail)) && _loginUserPageModel.IsValidPassword(Password);
+            return (_model.IsValidLogin(LoginOrEmail) || _model.IsValidEmail(LoginOrEmail)) && _model.IsValidPassword(Password);
         }
         private void UpdateButtonEnagleState()
         {
@@ -202,7 +220,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private void ChangeLoginTextBoxStyle()
         {
-            if (LoginOrEmail == string.Empty || _loginUserPageModel.IsValidLogin(LoginOrEmail) || _loginUserPageModel.IsValidEmail(LoginOrEmail))
+            if (LoginOrEmail == string.Empty || _model.IsValidLogin(LoginOrEmail) || _model.IsValidEmail(LoginOrEmail))
             {
                 LoginTextBoxStyle = _loginDefaultStyle;
             }
@@ -215,7 +233,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void ChangePasswordBoxStyle()
         {
-            if (Password.Equals(string.Empty) || _loginUserPageModel.IsValidPassword(Password))
+            if (Password.Equals(string.Empty) || _model.IsValidPassword(Password))
             {
                 PasswordBoxStyle = _passwordBoxDefaultStyle;
 
