@@ -35,13 +35,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //метод регестрации пользователя 
         private void OnTryRegisterUser(object param = null)
         {
-            if (_model.IsUniqueCreditails(UserEmail, UserLogin))
+            if (_model.IsUniqueCredentials(UserEmail, UserLogin))
             {
                var newUser= _model.RegisterUser(UserName, UserLogin, UserEmail, Password);
                 if(newUser is null)
                 {
                     MessageBox.Show("Invalid registerUserOperation");
-                    
+                    //creating handler invalid registration operation
                     return;
                 }
                 MessageBox.Show(newUser.ToString());
@@ -59,11 +59,56 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
             else
             {
-                //invalid login or email handler 
-                MessageBox.Show("Invalid login or password");
+                if (!_model.IsUniqueLogin())
+                {
+                    ChangeLoginTextBoxStyleAsync();
+
+                }
+                if (!_model.IsUniqueEmail())
+                {
+                    ChangeEmailTextBoxStyleAsync();
+                }
             }
 
         }
+
+        private Task ChangeEmailTextBoxStyleAsync()
+        {
+            return Task.Run(async() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    EmailTextBoxStyle = _errorTextBoxStyle;
+
+                });
+                await Task.Delay(1500);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    EmailTextBoxStyle = _defaultTextBoxStyle;
+                });
+
+            });
+        }
+
+        private Task ChangeLoginTextBoxStyleAsync()
+        {
+            return Task.Run(async () =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoginTextBoxStyle = _errorTextBoxStyle;
+
+                });
+                await Task.Delay(1500);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoginTextBoxStyle = _defaultTextBoxStyle;
+
+                });
+                
+            });
+        }
+
         protected override void OnPasswordVisibilityCommand(object param)
         {
             if (_isPasswordVisible)

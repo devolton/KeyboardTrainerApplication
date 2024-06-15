@@ -13,15 +13,20 @@ namespace CourseProjectKeyboardApplication.Model
 {
     public class UserSingUpPageModel:RegistrationFormModel
     {
+        private bool _isUniqueEmail = false;
+        private bool _isUniqueLogin= false;
         public UserSingUpPageModel()
         {
           
         }
-        public bool IsUniqueCreditails(string email, string login)
+        public bool IsUniqueCredentials(string email, string login)
         {
-            return _userModel.IsUniqueLogin(login) && _userModel.IsUniqueEmail(email);
-
+            _isUniqueEmail = _userModel.IsUniqueEmail(email);
+            _isUniqueLogin = _userModel.IsUniqueLogin(login);
+            return _isUniqueLogin && _isUniqueEmail;
         }
+        public bool IsUniqueEmail() => _isUniqueEmail;
+        public bool IsUniqueLogin() => _isUniqueLogin;
         public User RegisterUser(string name,string login,string email, string password)
         {
             var user = new User

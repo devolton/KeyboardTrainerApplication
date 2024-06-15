@@ -7,11 +7,13 @@ using CourseProjectKeyboardApplication.ViewModel.Commands;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class LoginUserPageViewModel : ViewModelBase
     {
+        //style fields 
         private Style _loginTextBoxStyle;
         private Style _passwordBoxStyle;
         private Style _loginDefaultStyle;
@@ -21,19 +23,21 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private Visibility _passwordBoxVisibility = Visibility.Visible;
         private Visibility _passwordTextBoxVisibility = Visibility.Collapsed;
         private TextDecorationCollection _passwordEyeButtonDecoration = TextDecorations.Strikethrough;
+        //commands fields 
         private readonly MultiCommand _multiCommand = new MultiCommand();
         private readonly ICommand _passwordVisibilityCommand;
         private LoginUserPageModel _model = new LoginUserPageModel();
-        //поля для состояний 
+        //state fields
         private bool _isChecked = false;
         private bool _isValidUser = false;
         private bool _isButtonEnable;
         private bool _isPasswordVisible = false;
+        // user credentiels fields
         private string _loginOrEmail;
         private string _password = string.Empty;
         public LoginUserPageViewModel()
         {
-            //делегируем методы (метод который срабатывает при нажатии кнопки)(который проверяет условия выполнения метода)
+
             _multiCommand.Add(new RelayCommand(OnLoginUserCommand, CanExecuteButtonCommand));
             _multiCommand.Add(new RelayCommand(OnWriteInRegisterCommand));
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
@@ -151,36 +155,25 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             if (!_model.IsUserExist(LoginOrEmail))
             {
-                //add handler invalid login or email
-                MessageBox.Show("User with this Email or Login doesnt' exist");
+                ChangeLoginTextBoxAsync();
                 return;
 
             }
-            User user = _model.GetUserByLoginOrEmailAndPassword(LoginOrEmail, Password);
-            if(user is null)
+            User? user = _model.GetUserByLoginOrEmailAndPassword(LoginOrEmail, Password);
+            if (user is null)
             {
-                //add handler invalid password
-                MessageBox.Show("InvalidPassword");
+                ChangePasswordBoxStyleAsync();
                 return;
             }
             _isValidUser = true;
-
-            new MainWindow().Show();
-            foreach (Window oneWindow in Application.Current.Windows)
-            {
-                if (oneWindow is AuthorizationWindow)
-                {
-                    oneWindow.Close();
-                    return;
-                }
-            }
-
-
+            OpenMainWindow();
         }
+
+
         private void OnWriteInRegisterCommand(object parameter)
         {
             if (_isChecked && _isValidUser)
-                _model.WriteDataInRegister(LoginOrEmail, Password);          
+                _model.WriteDataInRegister(LoginOrEmail, Password);
 
         }
         private void OnPasswordVisibilityCommand(object obj)
@@ -188,7 +181,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             if (_isPasswordVisible)
             {
                 _isPasswordVisible = false;
-                
+
                 PasswordTextBoxVisibility = Visibility.Collapsed;
                 EyeButtonDecorationCollection = TextDecorations.Strikethrough;
                 PasswordBoxVisibility = Visibility.Visible;
@@ -245,8 +238,52 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 PasswordBoxStyle = _passwordBoxInvalidStyle;
             }
 
+        }
+        private Task ChangeLoginTextBoxAsync()
+        {
+           return Task.Run(async () =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoginTextBoxStyle = _loginInvalidStyle;
 
+                });
+                await Task.Delay(1500);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoginTextBoxStyle = _loginDefaultStyle;
+                });
 
+            });
+        }
+        private Task ChangePasswordBoxStyleAsync()
+        {
+            return Task.Run(async () =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    PasswordBoxStyle = _passwordBoxInvalidStyle;
+
+                });
+                await Task.Delay(1500);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    PasswordBoxStyle = _passwordBoxDefaultStyle;
+                });
+
+            });
+        }
+        private void OpenMainWindow()
+        {
+            new MainWindow().Show();
+            foreach (Window oneWindow in Application.Current.Windows)
+            {
+                if (oneWindow is AuthorizationWindow)
+                {
+                    oneWindow.Close();
+                    return;
+                }
+            }
         }
 
 
