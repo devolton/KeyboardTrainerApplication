@@ -13,13 +13,23 @@ namespace CourseProjectKeyboardApplication.Model
     public abstract class RegistrationFormModel
     {
         protected UserModel _userModel;
+        protected bool _isUniqueEmail = false;
+        protected bool _isUniqueLogin = false;
         public RegistrationFormModel()
         {
             _userModel = DatabaseModelMediator.UserModel;
         }
+        public bool IsUniqueEmail() => _isUniqueEmail;
+        public bool IsUniqueLogin() => _isUniqueLogin;
         public bool IsValidName(string name) => AuthorizationFieldsValidator.IsValidName(name);
         public bool IsValidPassword(string password) => AuthorizationFieldsValidator.IsValidPassword(password);
         public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
+        public virtual bool IsUniqueCredentials(string email, string login)
+        {
+            _isUniqueEmail = _userModel.IsUniqueEmail(email);
+            _isUniqueLogin = _userModel.IsUniqueLogin(login);
+            return _isUniqueLogin && _isUniqueEmail;
+        }
     }
 }

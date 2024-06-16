@@ -32,7 +32,9 @@ namespace CourseProjectKeyboardApplication
         public MainWindow()
         {
             InitializeComponent();
-            _learnPage = new LearnPage(MainFrame);
+
+            //придумать асинхронную иницализацию для уменьшения времени загрузки приложения 
+            _learnPage = new LearnPage();
             _typingTutorPage = new TypingTutorPage();
             _typingTestPage = new TypingTestPage();
             _typingCertificatesPage = new TypingCertificatesPage(); 

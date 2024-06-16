@@ -30,7 +30,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //commands
         #region
 
-        //проверка на возможность выполнения попытки регестрации пользователя 
      
         //метод регестрации пользователя 
         private void OnTryRegisterUser(object param = null)
@@ -44,7 +43,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     //creating handler invalid registration operation
                     return;
                 }
-                MessageBox.Show(newUser.ToString());
                 ClearAllFields();
                 new MainWindow().Show();
 
@@ -140,8 +138,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             else
             {
                 _isConfirmPasswordVisible = true;
-                ConfirmPasswordBoxVisibility = Visibility.Collapsed;
-                ConfirmPasswordTextBoxVisibility = Visibility.Visible;
+                ConfirmPasswordBoxVisibility = Visibility.Visible;
+                ConfirmPasswordTextBoxVisibility = Visibility.Collapsed;
                 ConfirmPasswordTextDecorationCollection = null;
 
             }
@@ -163,7 +161,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         public ICommand SingUpClickCommand => _singUpClickButtonMultiCommand;
         public ICommand PasswordVisibilityCommand => _passwordVisibilityCommand;
-        public ICommand ConfirmPasswordVisivilityCommand => _confirmPasswordVisibilityCommand;
+        public ICommand ConfirmPasswordVisibilityCommand => _confirmPasswordVisibilityCommand;
         public string UserName
         {
             get { return _name; }

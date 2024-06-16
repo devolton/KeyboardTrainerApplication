@@ -96,7 +96,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _passwordTextBoxStyle = value;
-                OnPasswordVisibilityCommand(nameof(PasswordTextBoxStyle));
+                OnPropertyChanged(nameof(PasswordTextBoxStyle));
             }
         }
 

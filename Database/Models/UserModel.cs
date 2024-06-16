@@ -42,7 +42,7 @@ namespace CourseProjectKeyboardApplication.Database.Models
                 userInDbSet.Email = user.Email;
                 userInDbSet.Name = user.Name;
                 userInDbSet.Login = user.Login;
-                userInDbSet.Password = PasswordSHA256Encrypter.EncryptPassword(user.Password);
+                userInDbSet.Password =user.Password;
                 userInDbSet.EnglishLayoutLesson = user.EnglishLayoutLesson;
                 userInDbSet.EnglishLayoutLevel = user.EnglishLayoutLevel;
                 userInDbSet.EnglishLayoutLessonId = user.EnglishLayoutLessonId;

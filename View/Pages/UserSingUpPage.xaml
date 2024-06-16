@@ -108,7 +108,7 @@
             <Button x:Name="UserSingUpPageConfirmPasswordVisibilityButton"
                     Grid.Column="1"
                     Background="Transparent"
-                    Command="{Binding ConfirmPasswordVisivilityCommand}"
+                    Command="{Binding ConfirmPasswordVisibilityCommand}"
                     BorderThickness="0"
                     Margin="0 10 0 0 "
                     Width="30"

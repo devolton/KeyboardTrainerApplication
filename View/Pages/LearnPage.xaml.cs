@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Shared.Mediators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,17 +22,11 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
     public partial class LearnPage : Page
     {
         private LearnPageEnInfoModel _enLocalisation;
-        private readonly Uri _typingTutorUri;
-        private readonly Uri _typingTestUri;
-        private Frame _mainFrame;
-        public LearnPage(Frame mainFrame)
+        public LearnPage( )
         {
             InitializeComponent();
             _enLocalisation = new LearnPageEnInfoModel();
             DataContext = _enLocalisation;
-            _typingTutorUri = new Uri("/View/Pages/TypingTutorPage.xaml", UriKind.Relative);
-            _typingTestUri = new Uri("/View/Pages/TypingTestPage.xaml", UriKind.Relative);
-            _mainFrame = mainFrame;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -42,14 +37,14 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
 
         private void TestSpeedButton_Click(object sender, RoutedEventArgs e)
         {
-            _mainFrame.Navigate(_typingTestUri);
+            FrameMediator.DisplayTypingTestPage();
 
 
         }
 
         private void StartLearnButton_Click(object sender, RoutedEventArgs e)
         {
-            _mainFrame.Navigate(_typingTutorUri);
+            FrameMediator.DisplayTypingTutorPage();
 
         }
     }

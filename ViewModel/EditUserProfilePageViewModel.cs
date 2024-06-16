@@ -206,15 +206,27 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnSaveChangeCommand(object param)
         {
+            if (_model.IsUniqueCredentials(Email, Login))
+            {
+                _model.SaveUpdateUser(Name, Login, Email, Password);
+            }
+            else if (!_model.IsUniqueEmail())
+            {
+                ChangeEmailTextBoxStyleAsync();
+            }
+            else if (!_model.IsUniqueLogin())
+            {
+                ChangeLoginTextBoxStyleAsync();
+            }
+            
 
         }
         private void OnLoadUserInfoCommand(object param)
         {
-            Login = _model.UserInfo.Login;
-            Password = _model.UserInfo.Password;
-            ConfirmPassword = _model.UserInfo.Password;
-            Name = _model.UserInfo.Name;
-            Email = _model.UserInfo.Email;
+            var user = _model.GetUserInfo();
+            Login = user.Login;
+            Name = user.Name;
+            Email = user.Email;
 
 
         }
@@ -267,8 +279,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private bool CanSaveChangeCommandExecute(object param)
         {
-            return _model.IsValidName(Name) && _model.IsValidEmail(Email) && _model.IsValidPassword(Password) && _model.IsValidLogin(Login)
-                && Password.Equals(ConfirmPassword);
+            return _model.IsValidName(Name) && _model.IsValidEmail(Email) && (_model.IsValidPassword(Password) && _model.IsValidLogin(Login)
+                && Password.Equals(ConfirmPassword)) || (Password.Equals(string.Empty) && ConfirmPassword.Equals(string.Empty));
         }
 
         private void CanEnabledSaveButton() => IsSaveButtonEnabled = CanSaveChangeCommandExecute(null);
@@ -290,6 +302,40 @@ namespace CourseProjectKeyboardApplication.ViewModel
             ConfirmPasswordTextBoxStyle = _defaultTextBoxStyle;
             
             
+        }
+        private Task ChangeLoginTextBoxStyleAsync()
+        {
+            return Task.Run(async () =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoginTextBoxStyle = _errorTextBoxStyle;
+
+                });
+                 await Task.Delay(2000);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoginTextBoxStyle = _defaultTextBoxStyle;
+                });
+
+            });
+        }
+        private Task ChangeEmailTextBoxStyleAsync()
+        {
+            return Task.Run( async () =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    EmailTextBoxStyle = _errorTextBoxStyle;
+
+                });
+                await Task.Delay(2000);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    EmailTextBoxStyle = _defaultTextBoxStyle;
+                });
+
+            });
         }
     }
 }

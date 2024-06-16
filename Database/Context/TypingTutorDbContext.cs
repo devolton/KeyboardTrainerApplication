@@ -19,6 +19,7 @@ namespace CourseProjectKeyboardApplication.Database.Context
         public DbSet<EnglishLayoutLesson> EnglishLayoutLessons { get; set; }
         public DbSet<EnglishLayoutLevel> EnglishLayoutLevels { get; set; }
         public DbSet<EducationUsersProgress> EducationUsersProgresses { get; set; }
+        //public DbSet<EnglishTypingTestText> EnglishTypingTestTexts { get; set; }
         
         private TypingTutorDbContext(object dummy):base($"name={_DB_NAME}")
         {
