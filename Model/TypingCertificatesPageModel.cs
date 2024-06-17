@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Tools;
 
@@ -12,14 +15,13 @@ namespace CourseProjectKeyboardApplication.Model
 {
     public class TypingCertificatesPageModel
     {
-        private int _typingSpeed;
-        private double _typingAccuracy;
+        private TypingTestResultModel _typingTestResultModel;
+        private TypingTestResult _bestUserTest;
 
         public TypingCertificatesPageModel()
         {
-            _typingAccuracy = 99.45;
-            _typingSpeed = 45;
-         
+            _typingTestResultModel = DatabaseModelMediator.TypingTestResultModel;
+            InitBestUserTestResult();
         }
         public  void DisplayTestPage()
         {
@@ -27,10 +29,15 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public RenderTargetBitmap GetUserCertificate()
         {
-            //запрос в бд 
-            return CertificateGenerator.RenderCertificate("Anton", _typingSpeed.ToString(), _typingAccuracy.ToString("0.0"), new DateTime(2024, 10, 10));
+            //change "Anton" to user name 
+            return CertificateGenerator.RenderCertificate("Anton", _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"),_bestUserTest.Date);
         }
-        public string GetTypingSpeed() => _typingSpeed.ToString();
-        public string GetTypingAccuracy() => _typingAccuracy.ToString("0.0");
+        public string GetTypingSpeed() => _bestUserTest.Speed.ToString();
+        public string GetTypingAccuracy() => _bestUserTest.AccuracyPercent.ToString("0.0");
+        private void InitBestUserTestResult()
+        {
+            _bestUserTest = _typingTestResultModel.GetBestUserTestResult(1);//CurrentUserId
+        }
+
     }
 }

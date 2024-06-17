@@ -77,7 +77,7 @@ namespace CourseProjectKeyboardApplication.Model
             return _isUniqueEmail && _isUniqueLogin;
         }
 
-        //adding method which, if update is succesfull, updates the data in the register
+        //adding method which, if update is succesfull, updates the data in the register or delete data from register
 
     }
 }

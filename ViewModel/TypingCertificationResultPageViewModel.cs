@@ -22,6 +22,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private SeriesCollection _seriesCollection;
         private IEnumerable<string> _typingDateCollection;
         private static TypingCertificationResultPageViewModel _instance;
+        private int _dateRangeSelectedIndex = 0;
         private TypingCertificationResultPageModel _typingCertificationResultPageModel;
         private TypingCertificationResultPageViewModel()
         {
@@ -46,6 +47,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(SeriesCollection));
             }
         }
+        public int DateRangeSelectedIndex
+        {
+            get => _dateRangeSelectedIndex;
+            set
+            {
+                _dateRangeSelectedIndex = value;
+                OnPropertyChanged(nameof(DateRangeSelectedIndex));
+            }
+        }
         //разобратся с инитом 
         public StackPanel StatStackPanel
         {
@@ -67,10 +77,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     StatStackPanel.Children.Add(new TypingStatLine()
                     {
                         SpeedUnitValue = "wpm",
-                        SpeedValue = item.TypingSpeed.ToString(),
+                        SpeedValue = item.Speed.ToString(),
                         AccuracyUnitValue = "%",
-                        AccuracyValue = item.TypingAccuracy.ToString("#.#"),
-                        DateValue = item.TypingDate.ToString("dd MMM yyyy", new CultureInfo("en-US"))
+                        AccuracyValue = item.AccuracyPercent.ToString("#.#"),
+                        DateValue = item.Date.ToString("dd MMM yyyy", new CultureInfo("en-US"))
                     }); ;
                 }
           
@@ -89,11 +99,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private void OnDrawStatisticsCommand(object param)
         {
-            int selectedIndex = (int)param;
-            var statTuple = _typingCertificationResultPageModel.GetStatistics((TypingStatisticsPeriodTime)selectedIndex);
+            var statTuple = _typingCertificationResultPageModel.GetStatistics((TypingStatisticsPeriodTime)DateRangeSelectedIndex);
             SeriesCollection = statTuple.Item1;
             TypingDateCollection = statTuple.Item2;
-            InitStatBlock(selectedIndex);
+            InitStatBlock(DateRangeSelectedIndex);
 
         }
         #endregion

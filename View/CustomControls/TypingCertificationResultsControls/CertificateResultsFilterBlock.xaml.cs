@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace CourseProjectKeyboardApplication.View.CustomControls
 {
-    /// <summary>
-    /// Логика взаимодействия для CertificateResultsFilterBlock.xaml
-    /// </summary>
     public partial class CertificateResultsFilterBlock : UserControl
     {
         private TypingCertificationResultPageViewModel _viewModel;
@@ -32,12 +29,8 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            if(comboBox is not null && _viewModel is not null)
-            {
-                int selectedIndex=comboBox.SelectedIndex;
-                _viewModel.DrawStatisticsCommand.Execute(selectedIndex);
-            }
+            _viewModel.DrawStatisticsCommand.Execute(null);
+
         }
     }
 }

@@ -49,6 +49,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _passwordBoxInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPagePasswordBox"];
             LoginOrEmail = _model.GetLoginFromRegister();
             Password = _model.GetPasswordFromRegister();
+            if(LoginOrEmail!=string.Empty && Password != string.Empty)
+            {
+                IsChecked = true;
+            }
 
         }
 

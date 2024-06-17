@@ -1,4 +1,7 @@
-﻿using CourseProjectKeyboardApplication.Shared.Enums;
+﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Enums;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using LiveCharts;
 using LiveCharts.Wpf;
 using Microsoft.VisualBasic;
@@ -14,15 +17,14 @@ namespace CourseProjectKeyboardApplication.Model
 {
     public class TypingCertificationResultPageModel
     {
-        private List<ResultTemp> _typingUserStatisticList;
         private SeriesCollection _typingUserStatisticSeriesCollection;
         private LineSeries _typingAccuracyLineSeries;
         private LineSeries _typingSpeedLineSeries;
-        private List<string> _typingDateList;
+        private TypingTestResultModel _typingTestResultModel;
+        private List<TypingTestResult> _userTypingTestsCollection;
         public TypingCertificationResultPageModel()
         {
             _typingUserStatisticSeriesCollection = new SeriesCollection();
-            _typingUserStatisticList = GetTypingUserStatistic();
 
             _typingSpeedLineSeries = new LineSeries()
             {
@@ -38,42 +40,26 @@ namespace CourseProjectKeyboardApplication.Model
             };
             _typingSpeedLineSeries.Values = new ChartValues<int>();
             _typingAccuracyLineSeries.Values = new ChartValues<double>();
+            _typingTestResultModel = DatabaseModelMediator.TypingTestResultModel;
+            _userTypingTestsCollection = _typingTestResultModel.GetTypingTestResultsByUserId(1).ToList();
 
 
 
         }
 
-        private List<ResultTemp> GetTypingUserStatistic()
-        {
-
-            //запрос с бд на получение всех данных (а еще лучше топ 10 по результату и все результаты за месяц и сегодня)
-            List<ResultTemp> resultList = new List<ResultTemp>();
-
-            Random random = new Random();
-            for (int i = 0; i < 20; i++)
-            {
-                resultList.Add(new ResultTemp
-                {
-                    TypingSpeed = random.Next(51), // Генерируем случайное число от 0 до 50
-                    TypingAccuracy = random.NextDouble() * 100, // Генерируем случайное число от 0 до 100
-                    TypingDate = DateTime.Now.AddDays(-i) // Устанавливаем дату, уменьшая на каждой итерации
-                });
-            }
-            return resultList;
-        }
         public Tuple<SeriesCollection, List<string>> GetStatistics(TypingStatisticsPeriodTime periodTime)
         {
-            List<ResultTemp> selectedResults = GetSortTypingResultList(periodTime,false);
+            List<TypingTestResult> selectedResults = GetSortTypingResultList(periodTime,false);
            
             var seriesCollection = InitSeriesCollection(selectedResults);
             var dateList = new List<string>();
             foreach (var item in selectedResults)
             {
-                dateList.Add(item.TypingDate.ToString("dd MMM yyyy",new CultureInfo("en-US")));
+                dateList.Add(item.Date.ToString("dd MMM yyyy",new CultureInfo("en-US")));
             }
             return Tuple.Create(seriesCollection, dateList);
         }
-        private SeriesCollection InitSeriesCollection(List<ResultTemp> statList)
+        private SeriesCollection InitSeriesCollection(List<TypingTestResult> statList)
         {
             _typingUserStatisticSeriesCollection.Clear();
             _typingSpeedLineSeries.Values.Clear();
@@ -88,58 +74,58 @@ namespace CourseProjectKeyboardApplication.Model
 
         }
 
-        private ChartValues<int> GetSpeedChartValues(List<ResultTemp> collection)
+        private ChartValues<int> GetSpeedChartValues(List<TypingTestResult> collection)
         {
             var chartValues = new ChartValues<int>();
             foreach (var stat in collection)
             {
-                chartValues.Add(stat.TypingSpeed);
+                chartValues.Add(stat.Speed);
             }
             return chartValues;
         }
-        private ChartValues<double> GetAccuracyChartValues(List<ResultTemp> collection)
+        private ChartValues<double> GetAccuracyChartValues(List<TypingTestResult> collection)
         {
             var chartValues = new ChartValues<double>();
             foreach (var stat in collection)
             {
-                chartValues.Add(stat.TypingAccuracy);
+                chartValues.Add(stat.AccuracyPercent);
             }
             return chartValues;
         }
 
 
-        public List<ResultTemp> GetSortTypingResultList(TypingStatisticsPeriodTime periodTime,bool isForTable)
+        public List<TypingTestResult> GetSortTypingResultList(TypingStatisticsPeriodTime periodTime,bool isForTable)
         {
-            List<ResultTemp> selectedResults;
+            List<TypingTestResult> selectedResults;
             switch (periodTime)
             {
                 case TypingStatisticsPeriodTime.AllTime:
                     {
-                        selectedResults = _typingUserStatisticList;
+                        selectedResults = _userTypingTestsCollection;
                         break;
                     }
                 case TypingStatisticsPeriodTime.Month:
                     {
                         int currentMonth = DateTime.Now.Month;
-                        selectedResults = _typingUserStatisticList.FindAll(element => element.TypingDate.Month.Equals(currentMonth));
+                        selectedResults = _userTypingTestsCollection.FindAll(element => element.Date.Month.Equals(currentMonth));
                         break;
                     }
                 case TypingStatisticsPeriodTime.Day:
                     {
                         int currentDay = DateTime.Now.Day;
-                        selectedResults = _typingUserStatisticList.FindAll(element => element.TypingDate.Day.Equals(currentDay));
+                        selectedResults = _userTypingTestsCollection.FindAll(element => element.Date.Day.Equals(currentDay));
                         break;
                     }
                 default:
                     {
-                        selectedResults = _typingUserStatisticList;
+                        selectedResults = _userTypingTestsCollection;
                         break;
                     }
 
             }
             if (selectedResults.Count > 10)
             {
-                selectedResults.Sort((first, second) => second.TypingSpeed.CompareTo(first.TypingSpeed));
+                selectedResults.Sort((first, second) => second.Speed.CompareTo(first.Speed));
                 selectedResults = selectedResults.GetRange(0, 10);
                 if (isForTable)
                 {
@@ -150,10 +136,10 @@ namespace CourseProjectKeyboardApplication.Model
             }
             if (isForTable)
             {
-                selectedResults.Sort((first, second) => second.TypingSpeed.CompareTo(first.TypingSpeed));
+                selectedResults.Sort((first, second) => second.Speed.CompareTo(first.Speed));
                 return selectedResults;
             }
-            selectedResults.Sort((first, second) => first.TypingDate.CompareTo(second.TypingDate));
+            selectedResults.Sort((first, second) => first.Date.CompareTo(second.Date));
             return selectedResults;
         }
 
@@ -162,10 +148,5 @@ namespace CourseProjectKeyboardApplication.Model
 
 
     }
-    public class ResultTemp
-    {
-        public int TypingSpeed { get; set; }
-        public double TypingAccuracy { get; set; }
-        public DateTime TypingDate { get; set; }
-    }
+
 }

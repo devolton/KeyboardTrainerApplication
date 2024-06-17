@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingCertificationResultPageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel
@@ -22,7 +23,7 @@
             <ComboBoxItem Content="English layot"/>
         </ComboBox>
         <ComboBox
-                SelectionChanged="ComboBox_SelectionChanged"
+                SelectionChanged="ComboBox_SelectionChanged" 
                 BorderThickness="1" 
                 Padding="5 0 5 0"
                 Width="100"
@@ -30,7 +31,7 @@
                 Background="Snow"
                 Height="40"
                 FontSize="18"
-                SelectedIndex="0">
+                SelectedIndex="{Binding DateRangeSelectedIndex}">
             <ComboBoxItem Content="All time"/>
             <ComboBoxItem Content="Month"/>
             <ComboBoxItem Content="Today"/>
