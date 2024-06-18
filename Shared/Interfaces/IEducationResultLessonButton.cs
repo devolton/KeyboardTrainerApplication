@@ -10,6 +10,7 @@ namespace CourseProjectKeyboardApplication.Interfaces
     public interface IEducationResultLessonButton
     {
         EnglishLayoutLesson EducationLesson { get; set; }
+        EducationUsersProgress EducationUserProgress { get; set; }
         string LessonNumber { get; set; }
     }
 }

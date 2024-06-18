@@ -4,10 +4,6 @@ using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using LiveCharts;
 using LiveCharts.Wpf;
-using Microsoft.VisualBasic;
-using Microsoft.Xaml.Behaviors.Media;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -46,7 +42,13 @@ namespace CourseProjectKeyboardApplication.Model
 
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="periodTime">period of time for which to take data</param>
+        /// <returns>Tuple of two collection:
+        /// [FIRST] - SeriesCollection that stores data about speed and accuracy of user typing test | 
+        /// [SECOND] - List containing the date for passing these tests</returns>
         public Tuple<SeriesCollection, List<string>> GetStatistics(TypingStatisticsPeriodTime periodTime)
         {
             List<TypingTestResult> selectedResults = GetSortTypingResultList(periodTime,false);
@@ -59,6 +61,12 @@ namespace CourseProjectKeyboardApplication.Model
             }
             return Tuple.Create(seriesCollection, dateList);
         }
+
+        /// <summary>
+        ///  Initialize seriesCollection for 
+        /// </summary>
+        /// <param name="statList">User typing test results list</param>
+        /// <returns> SeriesCollection that stores data about speed and accuracy of user typing test </returns>
         private SeriesCollection InitSeriesCollection(List<TypingTestResult> statList)
         {
             _typingUserStatisticSeriesCollection.Clear();
@@ -73,7 +81,11 @@ namespace CourseProjectKeyboardApplication.Model
             return _typingUserStatisticSeriesCollection;
 
         }
-
+        /// <summary>
+        /// Create ChartValues and fill it with typing speed data
+        /// </summary>
+        /// <param name="collection">Typing test results collection of current user</param>
+        /// <returns>ChartValues collection of typing speed data</returns>
         private ChartValues<int> GetSpeedChartValues(List<TypingTestResult> collection)
         {
             var chartValues = new ChartValues<int>();
@@ -83,6 +95,12 @@ namespace CourseProjectKeyboardApplication.Model
             }
             return chartValues;
         }
+
+        /// <summary>
+        /// Create ChartValues and fill it with typing accuracy data
+        /// </summary>
+        /// <param name="collection">Typing test results collection of current user</param>
+        /// <returns>ChartValues collection of typing accuracy data</returns>
         private ChartValues<double> GetAccuracyChartValues(List<TypingTestResult> collection)
         {
             var chartValues = new ChartValues<double>();
@@ -93,7 +111,12 @@ namespace CourseProjectKeyboardApplication.Model
             return chartValues;
         }
 
-
+        /// <summary>
+        /// Get sorting 
+        /// </summary>
+        /// <param name="periodTime"></param>
+        /// <param name="isForTable"></param>
+        /// <returns>Get sort TypingTestResults list</returns>
         public List<TypingTestResult> GetSortTypingResultList(TypingStatisticsPeriodTime periodTime,bool isForTable)
         {
             List<TypingTestResult> selectedResults;

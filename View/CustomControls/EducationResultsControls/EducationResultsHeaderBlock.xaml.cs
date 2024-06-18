@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
     /// </summary>
     public partial class EducationResultsHeaderBlock : UserControl
     {
+        private EducationResultsPageViewModel _viewModel;
         public EducationResultsHeaderBlock()
         {
             InitializeComponent();
+            _viewModel = EducationResultsPageViewModel.Instance();
         }
     }
 }

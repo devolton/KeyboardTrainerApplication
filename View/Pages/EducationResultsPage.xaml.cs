@@ -29,9 +29,6 @@ namespace CourseProjectKeyboardApplication.View.Pages
             DataContext = _viewModel;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            _viewModel.InitializationCommand.Execute(EducationResultMainStackPanel);
-        }
+
     }
 }

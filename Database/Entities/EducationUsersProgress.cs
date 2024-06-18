@@ -46,5 +46,12 @@ namespace CourseProjectKeyboardApplication.Database.Entities
         public EnglishLayoutLesson EnglishLayoutLesson { get; set; } = null;
         public EnglishLayoutLevel EnglishLayoutLevel { get; set; } = null;
 
+        public override string ToString()
+        {
+            return $"[Id]: {Id}\n\t[UserId]: {UserId}\n\t[EnglishLayoutLevelId]: {EnglishLayoutLevelId}\n\t" +
+                $"[EnglishLayoutLessonId]: {EnglishLayoutLessonId}\n\t[IsLessThanTwoErrorCompleted]: {IsLessThanTwoErrorsCompleted}\n\t" +
+                $"[IsWithoutErrorCompleted: {IsWithoutErrorsCompleted}\n\t[IsSpeedComleted]: {IsSpeedCompleted}";
+        }
+
     }
 }

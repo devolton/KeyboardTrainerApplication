@@ -31,10 +31,12 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
         public static readonly DependencyProperty LessonNumberProperty =
             DependencyProperty.Register("LessonNumber", typeof(string), typeof(EducationResultsCurrentLessonButton), new PropertyMetadata(" "));
         public EnglishLayoutLesson EducationLesson { get; set; }
-        public EducationResultsCurrentLessonButton(EnglishLayoutLesson educationLesson)
+        public EducationUsersProgress EducationUserProgress { get; set; };
+        public EducationResultsCurrentLessonButton(EnglishLayoutLesson educationLesson, EducationUsersProgress educationUsersProgress)
         {
             InitializeComponent();
             EducationLesson= educationLesson;
+            EducationUserProgress = educationUsersProgress;
             LessonNumber = educationLesson.Ordinal.ToString();
             DataContext = this;
         }

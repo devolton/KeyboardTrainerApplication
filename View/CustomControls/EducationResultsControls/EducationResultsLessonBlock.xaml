@@ -16,13 +16,14 @@
                     Width="600">
             <ccEducationResults:EducationResultsLessonHeader
                 x:Name="LessonHeader"
-                LessonNumber="Lesson 1"
-                LessonTitle="Home Row Position"
+                LessonNumber=""
+                LessonTitle=""
                 />
 
             <WrapPanel Orientation="Horizontal"
                        x:Name="LessonsWrapPanel"
                        >
+                
 
 
             </WrapPanel>

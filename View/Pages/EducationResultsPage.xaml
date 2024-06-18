@@ -4,11 +4,18 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Pages"
-      xmlns:ccEducationResults="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EducationResults"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:ccEducationResults="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EducationResults" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:EducationResultsPageViewModel}"
       mc:Ignorable="d" 
-      Loaded="Page_Loaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EducationResultsPage">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding InitializationCommand}"
+                                   CommandParameter="{Binding ElementName=EducationResultMainStackPanel}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
 
     <ScrollViewer
         VerticalScrollBarVisibility="Hidden">

@@ -16,19 +16,27 @@ namespace CourseProjectKeyboardApplication.ViewModel
     public class EducationResultsPageViewModel : ViewModelBase
     {
         private EducationResultsPageModel _model;
-        private StackPanel _mainStackPanel;
+
         private static EducationResultsPageViewModel _instance;
+        private StackPanel _mainStackPanel;
+
+        //commands
         private ICommand _initializationCommand;
         private ICommand _updateLessonStateCommand;
         private ICommand _updateHeaderCommand;
         private ICommand _continueEducationCommand;
         private ICommand _startLessonCommand;
 
+        //header fields
+        private double _valueProgressBar;
+        private string _levelProgressHeaderStr = string.Empty;
+        private string _languageLayoutTypeHeaderStr = string.Empty;
+
         private IEducationResultLessonButton _currentLessonButton;
         private EducationResultsPageViewModel()
         {
             _model = new EducationResultsPageModel();
-            _initializationCommand = new RelayCommand(OnInitializatioCommand);
+            _initializationCommand = new RelayCommand(OnInitializationCommand);
             _updateLessonStateCommand = new RelayCommand(OnUpdateLessonStateCommand);
             _updateHeaderCommand = new RelayCommand(OnUpdateHeaderCommand, CanUpdateHeaderCommandExecute);
             _continueEducationCommand = new RelayCommand(OnContinueEducationCommand);
@@ -63,6 +71,34 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
+        public double ValueProgressBar
+        {
+            get => _valueProgressBar;
+            set
+            {
+                _valueProgressBar = value;
+                OnPropertyChanged(nameof(ValueProgressBar));
+            }
+        }
+        //template(Level 2 from 19)
+        public string LevelProgressHeaderStr
+        {
+            get => _levelProgressHeaderStr;
+            set
+            {
+                _levelProgressHeaderStr = value;
+                OnPropertyChanged(nameof(LevelProgressHeaderStr));
+            }
+        }
+        public string LanguageLayoutTypeHeaderStr
+        {
+            get => _languageLayoutTypeHeaderStr;
+            set
+            {
+                _languageLayoutTypeHeaderStr = value;
+                OnPropertyChanged(nameof(LanguageLayoutTypeHeaderStr));
+            }
+        }
         #endregion
 
         //command
@@ -71,10 +107,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// команда инициализации
         /// </summary>
         /// <param name="param">MainStackPanel</param>
-        private void OnInitializatioCommand(object param)
+        private void OnInitializationCommand(object param)
         {
             _mainStackPanel = param as StackPanel;
-            
+            LevelProgressHeaderStr = _model.GetCurrentLevelHeaderStr();
+            ValueProgressBar = _model.GetPercentOfCompletedLessons();
+            LanguageLayoutTypeHeaderStr = _model.GetLanguageLayoutTypeHeaderStr();
 
             //foreach (var oneLevel in educatinProgram.Levels)
             //{
@@ -136,10 +174,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //комадна продолжения обучения(continue button)
         private void OnContinueEducationCommand(object param)
         {
-            if(_currentLessonButton is not null)
-            {
-                //OpenTypingTutorPage(_currentLessonButton)
-            }
+            MessageBox.Show("Continue education command executed!");
 
         }
         //команда начала урока(клик по урокy)

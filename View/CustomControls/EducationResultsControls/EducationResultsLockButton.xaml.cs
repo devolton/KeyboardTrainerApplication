@@ -29,15 +29,18 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
         }
 
         public EnglishLayoutLesson EducationLesson { get; set; }
+        public EducationUsersProgress EducationUserProgress { get; set; };
 
         public static readonly DependencyProperty LessonNumberProperty =
             DependencyProperty.Register("LessonNumber",typeof(string),typeof(EducationResultsLockButton),new PropertyMetadata(" "));
-        public EducationResultsLockButton(EnglishLayoutLesson educationLesson)
+        public EducationResultsLockButton(EnglishLayoutLesson educationLesson, EducationUsersProgress educationUserProgress=null)
         {
             InitializeComponent();
             EducationLesson = educationLesson;
+            EducationUserProgress = educationUserProgress;
             LessonNumber = educationLesson.Ordinal.ToString();
             DataContext = this;
+            
         }
     }
 }

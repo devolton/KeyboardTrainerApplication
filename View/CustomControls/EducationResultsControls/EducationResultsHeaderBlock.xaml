@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ccEducationResults="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EducationResults"
+             xmlns:ccEducationResults="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls.EducationResults" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:EducationResultsPageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -52,7 +52,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
               Style="{StaticResource EducationResultsLayoutLanguageNameTextBlock}"
-                Text="Engish layot"/>
+                Text="{Binding LanguageLayoutTypeHeaderStr}"/>
             <ComboBox
                 Grid.Row="0"
                 Grid.Column="1"
@@ -69,11 +69,12 @@
                 Grid.Column="0">
                 <TextBlock 
                    Style="{StaticResource EducationResultsLessonsCountTextBlock}"
-                    Text="Lesson 2 from 19"/>
+                    Text="{Binding LevelProgressHeaderStr}"/>
                 <ProgressBar
                     
                     Width="500"
-                    Value="29"
+                    Maximum="100"
+                    Value="{Binding ValueProgressBar}"
                     HorizontalAlignment="Left"
                     Height="20"
                     Style="{StaticResource CustomEducationResultsProgressBar}"/>
@@ -84,7 +85,8 @@
                 Style="{StaticResource CustomYellowTemplateButton}"
                 Grid.Column="1"
                 Grid.Row="1"
-                Content="Continue"/>
+                Content="Continue"
+                Command="{Binding ContinueEducationCommand}"/>
 
         </Grid>
     </Border>
