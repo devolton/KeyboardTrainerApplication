@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseProjectKeyboardApplication.Database.Models
 {
@@ -14,11 +15,12 @@ namespace CourseProjectKeyboardApplication.Database.Models
         private DbSet<EnglishLayoutLevel> _englishLayoutLevels;
         public EnglishLayoutLevelModel()
         {
-            _englishLayoutLevels = _context.EnglishLayoutLevels;   
+            _englishLayoutLevels = _context.EnglishLayoutLevels;
+            _englishLayoutLevels.Load();
         }
         public IEnumerable<EnglishLayoutLevel> GetLevels()
         {
-            return _englishLayoutLevels;
+            return _englishLayoutLevels.Local;
         }
         public void AddLevel(EnglishLayoutLevel level)
         {
@@ -46,6 +48,10 @@ namespace CourseProjectKeyboardApplication.Database.Models
                 successOparationCode++;
             }
             return successOparationCode;
+        }
+        public EnglishLayoutLevel? GetLevelById(int levelId)
+        {
+            return _englishLayoutLevels.FirstOrDefault(oneLevel => oneLevel.Id.Equals(levelId));
         }
     }
 }

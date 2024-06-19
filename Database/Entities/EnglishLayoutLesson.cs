@@ -25,6 +25,8 @@ namespace CourseProjectKeyboardApplication.Database.Entities
         [Column("english_layout_level_id")]
         [ForeignKey(nameof(EnglishLayoutLevel))]
         public int EnglishLayoutLevelId { get; set; }
-        public EnglishLayoutLevel EnglishLayoutLevel { get; set; } = null;
+        public virtual EnglishLayoutLevel EnglishLayoutLevel { get; set; } = null;
+        public virtual ICollection<User> Users { get; set; } = null;
+        public virtual ICollection<EducationUsersProgress> EducationUsersProgresses { get; set; } = null;
     }
 }

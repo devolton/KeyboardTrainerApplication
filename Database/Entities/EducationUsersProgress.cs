@@ -42,9 +42,9 @@ namespace CourseProjectKeyboardApplication.Database.Entities
         [ForeignKey(nameof(EnglishLayoutLesson))]
         public int EnglishLayoutLessonId { get; set; }
 
-        public User User { get; set; } = null;
-        public EnglishLayoutLesson EnglishLayoutLesson { get; set; } = null;
-        public EnglishLayoutLevel EnglishLayoutLevel { get; set; } = null;
+        public virtual User User { get; set; } = null;
+        public virtual EnglishLayoutLesson EnglishLayoutLesson { get; set; } = null;
+        public virtual EnglishLayoutLevel EnglishLayoutLevel { get; set; } = null;
 
         public override string ToString()
         {

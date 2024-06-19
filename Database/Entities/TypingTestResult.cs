@@ -31,7 +31,7 @@ namespace CourseProjectKeyboardApplication.Database.Entities
         [Column("user_id")]
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
-        public User User { get; set; } = null;
+        public virtual User User { get; set; } = null;
         public override string ToString()
         {
             return $"Id: {Id}\n\tSpeed: {Speed}\n\tAccuracyPercent: {AccuracyPercent}\n\tLayoutType:{LayoutType}\n\tDate: {Date}\n\tUserId:{UserId}";

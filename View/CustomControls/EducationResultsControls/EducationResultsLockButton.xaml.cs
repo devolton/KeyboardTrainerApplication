@@ -29,7 +29,7 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
         }
 
         public EnglishLayoutLesson EducationLesson { get; set; }
-        public EducationUsersProgress EducationUserProgress { get; set; };
+        public EducationUsersProgress EducationUserProgress { get; set; }
 
         public static readonly DependencyProperty LessonNumberProperty =
             DependencyProperty.Register("LessonNumber",typeof(string),typeof(EducationResultsLockButton),new PropertyMetadata(" "));

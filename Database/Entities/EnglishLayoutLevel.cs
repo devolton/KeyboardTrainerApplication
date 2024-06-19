@@ -21,5 +21,8 @@ namespace CourseProjectKeyboardApplication.Database.Entities
         [Required]
         [Column("ordinal")]
         public int Ordinal { get; set; }
+        public virtual ICollection<EnglishLayoutLesson> Lessons { get; set; }
+        public virtual ICollection<User> Users { get; set; } = null;
+  
     }
 }

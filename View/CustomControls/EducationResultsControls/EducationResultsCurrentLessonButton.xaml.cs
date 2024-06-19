@@ -31,7 +31,7 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
         public static readonly DependencyProperty LessonNumberProperty =
             DependencyProperty.Register("LessonNumber", typeof(string), typeof(EducationResultsCurrentLessonButton), new PropertyMetadata(" "));
         public EnglishLayoutLesson EducationLesson { get; set; }
-        public EducationUsersProgress EducationUserProgress { get; set; };
+        public EducationUsersProgress EducationUserProgress { get; set; }
         public EducationResultsCurrentLessonButton(EnglishLayoutLesson educationLesson, EducationUsersProgress educationUsersProgress)
         {
             InitializeComponent();
