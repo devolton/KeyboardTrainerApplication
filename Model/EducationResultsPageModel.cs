@@ -19,23 +19,14 @@ namespace CourseProjectKeyboardApplication.Model
         private string _languageLayoutType = "English layout";
         private EducationUserProgressModel _educationUserProgressModel;
         private EnglishLayoutLevelModel _englishLayoutLevelModel;
-        private EnglishLayoutLessonModel _englishLayoutLessonModel;
         private TypingTestResultModel _typingTestModel;
-        private UserModel _userModel;
+
        
         public EducationResultsPageModel()
         {
             _educationUserProgressModel = DatabaseModelMediator.EducationUserProgressModel;
             _englishLayoutLevelModel= DatabaseModelMediator.EnglishLayoutLevelModel;
-            _englishLayoutLessonModel = DatabaseModelMediator.EnglishLayoutLessonModel;
-            _userModel = DatabaseModelMediator.UserModel;
             _typingTestModel = DatabaseModelMediator.TypingTestResultModel;
-            var levelsCollection = _englishLayoutLevelModel.GetLevels();
-            foreach (var level in levelsCollection)
-            {
-                MessageBox.Show(level.Lessons.Count().ToString());
-            }
-
 
         }
         /// <summary>
@@ -61,6 +52,11 @@ namespace CourseProjectKeyboardApplication.Model
         public string GetLanguageLayoutTypeHeaderStr()
         {
             return _languageLayoutType;
+        }
+        public IEnumerable<EnglishLayoutLevel> GetLevels()
+        {
+           
+            return _englishLayoutLevelModel.GetLevels();
         }
 
        

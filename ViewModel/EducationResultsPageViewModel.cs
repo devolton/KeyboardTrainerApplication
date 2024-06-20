@@ -113,7 +113,40 @@ namespace CourseProjectKeyboardApplication.ViewModel
             LevelProgressHeaderStr = _model.GetCurrentLevelHeaderStr();
             ValueProgressBar = _model.GetPercentOfCompletedLessons();
             LanguageLayoutTypeHeaderStr = _model.GetLanguageLayoutTypeHeaderStr();
-
+            var levelsCollection = _model.GetLevels();
+            foreach (var oneLevel in levelsCollection)
+            {
+                var educationResultLessonBlock = new EducationResultsLessonBlock();
+                var lessonHeader = educationResultLessonBlock.FindName("LessonHeader") as EducationResultsLessonHeader;
+                var lessonBodyWrapPanel = educationResultLessonBlock.FindName("LessonsWrapPanel") as WrapPanel;
+                if (lessonHeader != null)
+                {
+                    lessonHeader.LessonTitle = oneLevel.Title;
+                    lessonHeader.LessonNumber = "lesson " + oneLevel.Ordinal.ToString();
+                }
+                foreach (var oneLesson in oneLevel.Lessons)
+                {
+                    var currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == 1);
+                    if (currentEducUserProgress is null)
+                    {
+                        var lockButton = new EducationResultsLockButton(oneLesson);
+                        lessonBodyWrapPanel?.Children.Add(lockButton);
+                    }
+                    else
+                    {
+                        //add current lesson button
+                        var lessonButton = new EducationResultsLessonNumberButton(oneLesson,currentEducUserProgress);
+                        lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+                        lessonButton.LessThanTwoTyposCircleBackground = (currentEducUserProgress.IsLessThanTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
+                        lessonButton.WithoutErrorsCircleBackground = (currentEducUserProgress.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
+                        lessonButton.SpeedCircleBackground = (currentEducUserProgress.IsSpeedCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
+                        lessonBodyWrapPanel?.Children.Add(lessonButton);
+                    }
+                }
+                MainStackPanel.Children.Add(educationResultLessonBlock);
+            }
+            //init template
+            #region
             //foreach (var oneLevel in educatinProgram.Levels)
             //{
             //    var educationResultLessonBlock = new EducationResultsLessonBlock();
@@ -152,14 +185,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
             //    }
             //    MainStackPanel.Children.Add(educationResultLessonBlock);
             //}
-
+            #endregion
 
 
 
 
         }
 
- 
+
 
         //команда обновления урока после его успешного завершения
         private void OnUpdateLessonStateCommand(object param)
@@ -181,7 +214,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnStartLessonCommand(object param)
         {
             IEducationResultLessonButton button = param as IEducationResultLessonButton;
-            if(button is not null)
+            if (button is not null)
             {
                 //открытие страницы обучения 
 
