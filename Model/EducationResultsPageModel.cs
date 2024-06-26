@@ -13,20 +13,22 @@ namespace CourseProjectKeyboardApplication.Model
 {
     public class EducationResultsPageModel
     {
-        private int _currentLevel = 1;//change to data from db
-        private int _commonLevelCount= 15; // change data from db
-        private double _currentPercentOfCompletedLessons = 19.5;
+
+        private int _commonLevelCount;
         private string _languageLayoutType = "English layout";
         private EducationUserProgressModel _educationUserProgressModel;
         private EnglishLayoutLevelModel _englishLayoutLevelModel;
-        private TypingTestResultModel _typingTestModel;
+        private UserModel _userModel;
+        private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection; 
 
        
         public EducationResultsPageModel()
         {
             _educationUserProgressModel = DatabaseModelMediator.EducationUserProgressModel;
             _englishLayoutLevelModel= DatabaseModelMediator.EnglishLayoutLevelModel;
-            _typingTestModel = DatabaseModelMediator.TypingTestResultModel;
+            _userModel = DatabaseModelMediator.UserModel;
+            GetLevels();
+            InitAllLevelCount();
 
         }
         /// <summary>
@@ -35,7 +37,9 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns></returns>
         public string GetCurrentLevelHeaderStr()
         {
-            return $"Level {_currentLevel} from {_commonLevelCount}";
+            
+            int currentLevelCounter = _userModel.GetUserById(1).EnglishLayoutLevel.Ordinal;
+            return $"Level {currentLevelCounter} from {_commonLevelCount}";
         }
         /// <summary>
         /// Get actual user education progress percent of completed lessons count
@@ -43,7 +47,15 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns></returns>
         public double GetPercentOfCompletedLessons()
         {
-            return _currentPercentOfCompletedLessons;
+            var completedLessonCount = _educationUserProgressModel.GetUsersEducationProgress(1).Count();
+            var allLevelCount = 0;
+            var levelsCollection = _englishLayoutLevelModel.GetLevels();
+            foreach(var level in levelsCollection)
+            {
+                allLevelCount += level.Lessons.Count;
+            }
+            return((double)completedLessonCount / (double)allLevelCount) * 100;
+
         }
         /// <summary>
         /// Get current language layout str 
@@ -56,8 +68,17 @@ namespace CourseProjectKeyboardApplication.Model
         public IEnumerable<EnglishLayoutLevel> GetLevels()
         {
            
-            return _englishLayoutLevelModel.GetLevels();
+            _englishLayoutLevelsCollection??= _englishLayoutLevelModel.GetLevels();
+            return _englishLayoutLevelsCollection;
         }
+        /// <summary>
+        /// Initial all level count
+        /// </summary>
+        private void InitAllLevelCount()
+        {
+            _commonLevelCount = _englishLayoutLevelsCollection.Count();
+        }
+
 
        
         

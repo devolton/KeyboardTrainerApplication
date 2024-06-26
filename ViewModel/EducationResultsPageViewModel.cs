@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Interfaces;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.View.CustomControls.EducationResults;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private double _valueProgressBar;
         private string _levelProgressHeaderStr = string.Empty;
         private string _languageLayoutTypeHeaderStr = string.Empty;
+
+        private bool _isCurrentLesson = true;
 
         private IEducationResultLessonButton _currentLessonButton;
         private EducationResultsPageViewModel()
@@ -127,65 +130,27 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 foreach (var oneLesson in oneLevel.Lessons)
                 {
                     var currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == 1);
-                    if (currentEducUserProgress is null)
+                    if (currentEducUserProgress != null)
                     {
-                        var lockButton = new EducationResultsLockButton(oneLesson);
-                        lessonBodyWrapPanel?.Children.Add(lockButton);
-                    }
-                    else
-                    {
-                        //add current lesson button
-                        var lessonButton = new EducationResultsLessonNumberButton(oneLesson,currentEducUserProgress);
+                        var lessonButton = new EducationResultsLessonNumberButton(oneLesson, currentEducUserProgress);
                         lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
                         lessonButton.LessThanTwoTyposCircleBackground = (currentEducUserProgress.IsLessThanTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
                         lessonButton.WithoutErrorsCircleBackground = (currentEducUserProgress.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
                         lessonButton.SpeedCircleBackground = (currentEducUserProgress.IsSpeedCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
                         lessonBodyWrapPanel?.Children.Add(lessonButton);
                     }
+                    //add current lesson button
+
+                    else
+                    {
+                        var lockButton = new EducationResultsLockButton(oneLesson);
+                        lessonBodyWrapPanel?.Children.Add(lockButton);
+                    }
                 }
+
                 MainStackPanel.Children.Add(educationResultLessonBlock);
             }
-            //init template
-            #region
-            //foreach (var oneLevel in educatinProgram.Levels)
-            //{
-            //    var educationResultLessonBlock = new EducationResultsLessonBlock();
-            //    var lessonHeader = (EducationResultsLessonHeader)educationResultLessonBlock.FindName("LessonHeader");
-            //    var lessonBodyWrapPanel = (WrapPanel)educationResultLessonBlock.FindName("LessonsWrapPanel");
-            //    lessonHeader.LessonTitle = oneLevel.Title;
-            //    lessonHeader.LessonNumber = "lesson " + oneLevel.Ordinal.ToString();
-            //    foreach (var oneLesson in oneLevel.LessonsList)
-            //    {
-            //        if (oneLesson.IsLessonUnlocked)
-            //        {
-            //            if (oneLesson.Id == educatinProgram.CurrentLessonId)
-            //            {
-            //                var button = new EducationResultsCurrentLessonButton(oneLesson);
-            //                button.MouseDoubleClick += LessonButton_MouseDoubleClick;
-            //                _currentLessonButton = button;
-            //                lessonBodyWrapPanel.Children.Add(button);
-            //                continue;
-            //            }
-            //            else
-            //            {
-            //                var lessonButton = new EducationResultsLessonNumberButton(oneLesson);
-            //                lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
-            //                lessonButton.LessThanTwoTyposCircleBackground = (oneLesson.IsLessTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
-            //                lessonButton.WithoutErrorsCircleBackground = (oneLesson.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
-            //                lessonButton.SpeedCircleBackground = (oneLesson.IsSpeedConditionCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
-            //                lessonBodyWrapPanel.Children.Add(lessonButton);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            var lessonButton = new EducationResultsLockButton(oneLesson);
-            //            lessonBodyWrapPanel.Children.Add(lessonButton);
-
-            //        }
-            //    }
-            //    MainStackPanel.Children.Add(educationResultLessonBlock);
-            //}
-            #endregion
+            ValueProgressBar = _model.GetPercentOfCompletedLessons();
 
 
 
@@ -216,7 +181,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             IEducationResultLessonButton button = param as IEducationResultLessonButton;
             if (button is not null)
             {
-                //открытие страницы обучения 
+                FrameMediator.DisplayTypingTutorPage();
 
             }
 
