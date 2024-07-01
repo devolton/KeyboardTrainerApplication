@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Data.Entity.Core.Objects;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -30,30 +31,31 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private ICommand _startLessonCommand;
         private ICommand _restartLessonCommand;
+        private ICommand _keyDownCommand;
+        private ICommand _keyUpCommand;
+        private ICommand _generateRunsBlockCommand;
         private bool _isLessonStarted;
         private bool _isRepeatButtonEnabled;
-        private bool _isStartButtonEnabled;
         private bool _isErrorKeyPushed;
 
         private static TypingTutorPageViewModel _instance;
-        private readonly TypingTutorPageModel _typingTutorPageModel;
+        private readonly TypingTutorPageModel _model;
 
         private TypingTutorPageViewModel()
         {
-            KeyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteOnKeyDownCommand);
-            GenerateRunsBlocksCommand = new RelayCommand(OnGenarateRunsElements);
+            _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteOnKeyDownCommand);
+            _generateRunsBlockCommand = new RelayCommand(OnGenarateRunsElements);
             _startLessonCommand = new RelayCommand(OnStartLessonExecuteCommand, CanExecuteStartLessonCommand);
             _restartLessonCommand = new RelayCommand(OnRestartLessonCommand, CanOnRepeatLessonCommandExecute);
-            KeyUpCommand = new RelayCommand(OnKeyUpCommand, CanExecuteOnKeyDownCommand);
-            _typingTutorPageModel = TypingTutorPageModel.Instance();
+            _keyUpCommand = new RelayCommand(OnKeyUpCommand, CanExecuteOnKeyDownCommand);
+            _model = TypingTutorPageModel.Instance();
             _keyboardItemList = new List<IKeyboardItem>();
             _isErrorKeyPushed = false;
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
-            ProgressBarValue = 0;
             IsStartButtonVisible = Visibility.Visible;
             IsHigingPanelVisible = Visibility.Visible;
-            ProgressBarMaxValue = _typingTutorPageModel.GetProgressBarMaxValue();
+           
 
 
 
@@ -88,18 +90,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         public ICommand RestartLessonCommand => _restartLessonCommand;
         public ICommand StartLessonCommand => _startLessonCommand;
-        public ICommand KeyDownCommand
-        {
-            get;
-        }
-        public ICommand KeyUpCommand
-        {
-            get;
-        }
-        public ICommand GenerateRunsBlocksCommand
-        {
-            get;
-        }
+        public ICommand KeyDownCommand => _keyDownCommand;
+        public ICommand KeyUpCommand => _keyUpCommand;
+        public ICommand GenerateRunsBlocksCommand => _generateRunsBlockCommand;
         public Visibility IsStartButtonVisible
         {
             get { return _isStartButtonVisible; }
@@ -157,20 +150,23 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //Commands
         #region
+
         private void OnGenarateRunsElements(object param)
         {
             _textBlock = param as TextBlock;
-            ProgressBarValue = 0;
+
             if (_textBlock is not null)
             {
                 _textBlock.Inlines.Clear();
-                _textBlock.Inlines.AddRange(_typingTutorPageModel.GetLearnStrRuns());
+                _textBlock.Inlines.AddRange(_model.GetLearnStrRuns());
             }
+            ProgressBarValue = 0;
+            ProgressBarMaxValue = _model.GetProgressBarMaxValue();
         }
         private void OnRestartLessonCommand(object param)
         {
             ProgressBarValue = 0;
-            _typingTutorPageModel.LessonReset();
+            _model.LessonReset();
             RemoveFocusStyle();
             IsLessonStarter = false;
 
@@ -178,48 +174,49 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnKeyDownCommand(object param)
         {
             var key = (Key)param;
-            string keyTag = _typingTutorPageModel.GetKeyStrTag(key);
+            string keyTag = _model.GetKeyStrTag(key);
             if (IsShiftPushed())
             {
                 ShiftKeyDownHandler();
 
 
-                if (_typingTutorPageModel.IsFocusCharUppercase() && IsShiftPushed())
+                if (_model.IsFocusCharUppercase() && IsShiftPushed())
                 {
 
 
-                    if (_typingTutorPageModel.IsValidPushedButton(key, true))
+                    if (_model.IsValidPushedButton(key, true))
                     {
                         ProgressBarValue++;
-                        _typingTutorPageModel.ChangeFocusToNextRun();
+                        _model.ChangeFocusToNextRun();
                     }
                     else
                     {
                         SetErrorStyleInKeyboardItem(keyTag);
-                        _typingTutorPageModel.SetRunErrorStyle();
-                        _typingTutorPageModel.AddMissclickCount();
+                        _model.SetRunErrorStyle();
+                        _model.AddMissclickCount();
                     }
                 }
             }
             else
             {
-                if (_typingTutorPageModel.IsValidPushedButton(key, false) && !IsShiftPushed())
+                if (_model.IsValidPushedButton(key, false) && !IsShiftPushed())
                 {
                     ProgressBarValue++;
-                    _typingTutorPageModel.ChangeFocusToNextRun();
+                    _model.ChangeFocusToNextRun();
                 }
                 else
                 {
 
                     if (!IsShiftPushed())
                     {
-                        _typingTutorPageModel.AddMissclickCount();
+                        _model.AddMissclickCount();
                         SetErrorStyleInKeyboardItem(keyTag);
-                        _typingTutorPageModel.SetRunErrorStyle();
+                        _model.SetRunErrorStyle();
                     }
 
                 }
             }
+            
 
 
         }
@@ -229,7 +226,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             IsRepeatButtonEnabled = true;
             IsStartButtonVisible = Visibility.Hidden;
             IsHigingPanelVisible = Visibility.Hidden;
-            if (_typingTutorPageModel.IsFocusCharUppercase())
+            if (_model.IsFocusCharUppercase())
             {
                 var shiftElementEnumerable = _keyboardItemList.FindAll(oneControl => oneControl.KeyTag.Contains("Shift"));
                 foreach (var oneShiftElement in shiftElementEnumerable)
@@ -241,12 +238,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 SetFocusInKeyboardItem();
             }
-            _typingTutorPageModel.StartMeasureTime();//запускаем секундомер
+            _model.StartMeasureTime();//запускаем секундомер
         }
         private void OnKeyUpCommand(object param)
         {
             var key = (Key)param;
-            var tag = _typingTutorPageModel.GetKeyStrTag(key);
+            var tag = _model.GetKeyStrTag(key);
             //сбарсываем стиль ошибочно нажатой кнопки а так же стиль нажатого Shift
             if (_isErrorKeyPushed)
             {
@@ -260,7 +257,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
                 }
                 _isErrorKeyPushed = false;
-                _typingTutorPageModel.RemoveRunErrorStyle();
+                _model.RemoveRunErrorStyle();
             }
 
             if (key == Key.LeftShift || key == Key.RightShift)
@@ -341,7 +338,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void SetFocusInKeyboardItem()
         {
-            var currentTag = _typingTutorPageModel.GetCurrentKeyTag();
+            var currentTag = _model.GetCurrentKeyTag();
             var focusElement = _keyboardItemList.FirstOrDefault(element => element.KeyTag.Contains(currentTag));
             if (focusElement is not null)
                 focusElement.IsFocusKeyboardItem = true;

@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.View.Pages;
 using System;
@@ -24,7 +25,7 @@ namespace CourseProjectKeyboardApplication.Model
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
         private int _typingTutorSpeed;
-        private string _currentLearnString;
+        private string _currentLearnString = string.Empty;
         private int _missClickCounter;
         private int _wordsCount;
         private int _currentFocusWordIndex;
@@ -36,13 +37,13 @@ namespace CourseProjectKeyboardApplication.Model
 
         private TypingTutorPageModel()
         {
-            _currentLearnString = "pell qosw hzdf jskf sfsl lsjf jskj jkss lkds jsks jskf jskd";
+            
             _currentFocusWordIndex = 0;
-            _wordsCount=GetWordsCount();
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
             InitKeyValueDictionaries();
             _stopwatcher = new Stopwatch();
-            _progressBarMaxValue = _currentLearnString.Length;
+            
+            _wordsCount=GetWordsCount();   
             
         }
         public void StartMeasureTime()
@@ -58,6 +59,10 @@ namespace CourseProjectKeyboardApplication.Model
             _instance ??= new TypingTutorPageModel();
             return _instance;
         }
+        /// <summary>
+        /// Get progress bar max value
+        /// </summary>
+        /// <returns>Max value of progress bar </returns>
         public double GetProgressBarMaxValue()
         {
             return _progressBarMaxValue;
@@ -67,21 +72,35 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return _shiftPressedKeyValueDictionary.Any(onePair => onePair.Value.Equals(_currentLearnString[_currentFocusWordIndex].ToString()));
         }
-
+        /// <summary>
+        /// Set error Runs style when user pressed incorrectly key
+        /// </summary>
         public void SetRunErrorStyle()
         {
             _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Red;
         }
+        /// <summary>
+        /// Remove error Runs style when user releases incorrectly pressed key
+        /// </summary>
         public void RemoveRunErrorStyle()
         {
             _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Violet;
         }
 
-        //возвращает тег текущей буквы 
+        /// <summary>
+        /// Get tag of current char
+        /// </summary>
+        /// <returns>tag of current key</returns>
         public string GetCurrentKeyTag()
         {
             return _currentLearnString[_currentFocusWordIndex].ToString();
         }
+        /// <summary>
+        /// Get bool value: is corrert keyboard button click
+        /// </summary>
+        /// <param name="pushedKey">Key of pressed keyboard button</param>
+        /// <param name="isShiftPushed">flag: is shift or no</param>
+        /// <returns>Is valid keyboard button pressed</returns>
         public bool IsValidPushedButton(Key pushedKey, bool isShiftPushed)
         {
             if (isShiftPushed)
@@ -95,9 +114,14 @@ namespace CourseProjectKeyboardApplication.Model
 
 
 
-        //генерирую елемент для каждой буквы 
+         /// <summary>
+         /// Get list of runs elements for each leter of lesson string 
+         /// </summary>
+         /// <returns></returns>
         public List<Run> GetLearnStrRuns()
         {
+            _currentLearnString = UserController.CurrentUserEducationProgress?.EnglishLayoutLesson.Text ?? "Hello"; //вынести в отдельную функцию 
+            _progressBarMaxValue = _currentLearnString.Length;
             _lettersRunsList.Clear();
             for (int i = 0; i < _currentLearnString.Length; i++)
             {
@@ -110,7 +134,9 @@ namespace CourseProjectKeyboardApplication.Model
             }
             return _lettersRunsList;
         }
-        //изминения стиля одного елемента Run при нажатии на верную клавишу клавиатуры
+        /// <summary>
+        /// Change current and next runs styles on successfull keyboard button pressed 
+        /// </summary>
         public void ChangeFocusToNextRun()
         {
 
@@ -129,7 +155,9 @@ namespace CourseProjectKeyboardApplication.Model
             _currentFocusWordIndex++;
             _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Violet;
         }
-        //метод по перезапуску урока 
+        /// <summary>
+        /// Method of lesson restart
+        /// </summary>
         public void LessonReset()
         {
             _currentFocusWordIndex = 0;
@@ -147,6 +175,9 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return _defaultKeyValueDictionary.FirstOrDefault(onePair => onePair.Key.Equals(key)).Value;
         }
+        /// <summary>
+        /// Increment of missclick count
+        /// </summary>
         public void AddMissclickCount()
         {
             _missClickCounter++;
@@ -173,12 +204,21 @@ namespace CourseProjectKeyboardApplication.Model
 
             };
         }
+
+    /// <summary>
+    /// Get words count in current lesson str
+    /// </summary>
+    /// <returns>Count of words in lesson string</returns>
         private int GetWordsCount()
         {
             char delimiters = ' ';
             string[] words = _currentLearnString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
             return words.Length;
         }
+        /// <summary>
+        /// Culculate the avarage print speed
+        /// </summary>
+        /// <returns>Typing tutor speed</returns>
         private int GetTypingTutorSpeed()
         {
             return (int)(_wordsCount * 60 / _stopwatcher.Elapsed.TotalSeconds);

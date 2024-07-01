@@ -1,5 +1,7 @@
-﻿using CourseProjectKeyboardApplication.Interfaces;
+﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Interfaces;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.View.CustomControls.EducationResults;
 using System;
@@ -32,7 +34,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private double _valueProgressBar;
         private string _levelProgressHeaderStr = string.Empty;
         private string _languageLayoutTypeHeaderStr = string.Empty;
-
         private bool _isCurrentLesson = true;
 
         private IEducationResultLessonButton _currentLessonButton;
@@ -139,12 +140,25 @@ namespace CourseProjectKeyboardApplication.ViewModel
                         lessonButton.SpeedCircleBackground = (currentEducUserProgress.IsSpeedCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
                         lessonBodyWrapPanel?.Children.Add(lessonButton);
                     }
-                    //add current lesson button
 
                     else
                     {
-                        var lockButton = new EducationResultsLockButton(oneLesson);
-                        lessonBodyWrapPanel?.Children.Add(lockButton);
+                        if (_isCurrentLesson)
+                        {
+                            var currentButton = new EducationResultsCurrentLessonButton(oneLesson, new EducationUsersProgress());
+                            currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+                            _isCurrentLesson = false;
+                            _currentLessonButton = currentButton;
+                            lessonBodyWrapPanel?.Children.Add(currentButton);
+                            
+                           
+
+                        }
+                        else
+                        {
+                            var lockButton = new EducationResultsLockButton(oneLesson);
+                            lessonBodyWrapPanel?.Children.Add(lockButton);
+                        }
                     }
                 }
 
@@ -156,8 +170,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
-
-
 
         //команда обновления урока после его успешного завершения
         private void OnUpdateLessonStateCommand(object param)
@@ -172,7 +184,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //комадна продолжения обучения(continue button)
         private void OnContinueEducationCommand(object param)
         {
-            MessageBox.Show("Continue education command executed!");
+            if(_currentLessonButton != null)
+            {
+                FrameMediator.DisplayTypingTutorPage();
+            }
 
         }
         //команда начала урока(клик по урокy)
@@ -183,6 +198,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 FrameMediator.DisplayTypingTutorPage();
 
+            }
+            else
+            {
+                MessageBox.Show("Button is null!");
             }
 
         }
@@ -203,8 +222,16 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void LessonButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var button = sender as IEducationResultLessonButton;
-            _currentLessonButton = button;
-            StartLessonCommand.Execute(button);
+            if(button != null) {
+                _currentLessonButton = button;
+                UserController.CurrentUserEducationProgress = button.EducationUserProgress;
+                StartLessonCommand.Execute(button);
+            }
+            else
+            {
+                MessageBox.Show("Button is null", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
     }
 }

@@ -19,7 +19,7 @@ namespace CourseProjectKeyboardApplication.Model
         private EducationUserProgressModel _educationUserProgressModel;
         private EnglishLayoutLevelModel _englishLayoutLevelModel;
         private UserModel _userModel;
-        private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection; 
+        private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection;
 
        
         public EducationResultsPageModel()
@@ -29,7 +29,7 @@ namespace CourseProjectKeyboardApplication.Model
             _userModel = DatabaseModelMediator.UserModel;
             GetLevels();
             InitAllLevelCount();
-
+ 
         }
         /// <summary>
         /// Get actual user education progress str(current level and common levels count) to educationResultsPage header
@@ -60,17 +60,22 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Get current language layout str 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Percent of completed lessons</returns>
         public string GetLanguageLayoutTypeHeaderStr()
         {
             return _languageLayoutType;
         }
+        /// <summary>
+        /// Get current english layout levels colletion 
+        /// </summary>
+        /// <returns>User english layout levels collection</returns>
         public IEnumerable<EnglishLayoutLevel> GetLevels()
         {
            
             _englishLayoutLevelsCollection??= _englishLayoutLevelModel.GetLevels();
             return _englishLayoutLevelsCollection;
         }
+
         /// <summary>
         /// Initial all level count
         /// </summary>
