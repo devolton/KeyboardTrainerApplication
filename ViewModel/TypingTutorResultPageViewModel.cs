@@ -6,37 +6,40 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using System.Xml.XPath;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
 
     public class TypingTutorResultPageViewModel : ViewModelBase
     {
-        private string _lessonResultStr;
+        private string _lessonResultStr = string.Empty;
         private StackPanel _achivementsStackPanel;
-        private int _typingTutorSpeed;
-        private int _missclickCount;
+        private int _typingTutorSpeed = 0;
+        private int _missclickCount = 0;
+
         private SolidColorBrush _lessTwoMissclickBrush;
         private SolidColorBrush _withoutMissclickBrush;
         private SolidColorBrush _speedBrush;
+
         private static TypingTutorResultPageViewModel _instance;
-        private TypingTutorResultPageModel _typingTutorPageModel;
+        private TypingTutorResultPageModel _model;
+
+        private ICommand _loadedPageCommand;
         private ICommand _tryAgainLessonCommand;
         private ICommand _nextLessonCommand;
 
-        private TypingTutorResultPageViewModel(int typingTutorSpeed, int missclickCount)
+        private TypingTutorResultPageViewModel()
         {
-            _typingTutorPageModel = new TypingTutorResultPageModel(typingTutorSpeed, missclickCount);
+            _model = new TypingTutorResultPageModel();
             _tryAgainLessonCommand = new RelayCommand(OnTryAgainLessonCommand);
             _nextLessonCommand = new RelayCommand(OnNextLessonCommand);
-            _typingTutorSpeed = typingTutorSpeed;
-            _missclickCount = missclickCount;
-            LessonResultStr = $"{_typingTutorSpeed} wpm, {_missclickCount} errors!";
+            _loadedPageCommand = new RelayCommand(OnLoadedPageCommand);
 
         }
-        public static TypingTutorResultPageViewModel Instance(int typingTutorSpeed, int missclickCount)
+        public static TypingTutorResultPageViewModel Instance()
         {
-            _instance ??= new TypingTutorResultPageViewModel(typingTutorSpeed, missclickCount);
+            _instance ??= new TypingTutorResultPageViewModel();
 
             return _instance;
         }
@@ -44,6 +47,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         public ICommand TryAgainLessonCommand => _tryAgainLessonCommand;
         public ICommand NextLessonCommand => _nextLessonCommand;
+        public ICommand LoadedPageCommand => _loadedPageCommand;
+
         public SolidColorBrush LessTwoMissclickBrush
         {
             get { return _lessTwoMissclickBrush; }
@@ -78,13 +83,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _achivementsStackPanel = value;
-                InitAchivementStackPanel();
+                //InitAchivementStackPanel()
             }
         }
         public string LessonResultStr
         {
             get { return _lessonResultStr; }
-            init
+            set
             {
                 _lessonResultStr = value;
                 OnPropertyChanged(nameof(LessonResultStr));
@@ -92,39 +97,51 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         #endregion
         //command
-        public void OnTryAgainLessonCommand(object param)
+        private void OnTryAgainLessonCommand(object param)
         {
+            //working with current lesson 
             FrameMediator.DisplayTypingTutorPage();
         }
-        public void OnNextLessonCommand(object param)
+        private void OnNextLessonCommand(object param)
         {
+            //select next lesson
             FrameMediator.DisplayTypingTutorPage();
         }
+        private void OnLoadedPageCommand(object param)
+        {
+            LessonResultStr = _model.GetLessonResultStr();
+            if(AchivementStackPanel != null)
+            {
+                InitAchivementStackPanel();
+            }
+            else
+            {
+                MessageBox.Show("Achivement stack panel is null!");
+            }
+        }
+
 
         private void InitAchivementStackPanel()
         {
 
             AchivementStackPanel.Children.Clear();
-            var lessTwoMistakeAchivementBlock = new AchivementBlock();
-            var withoutMistakeAchivementBlock = new AchivementBlock();
-            var speedAchivementBlock = new AchivementBlock();
-            lessTwoMistakeAchivementBlock.AchivementText = "less than 2 typos";
-            withoutMistakeAchivementBlock.AchivementText = "exercise without typos";
-            speedAchivementBlock.AchivementText = "speed more than 21 wpm";
-            if (_typingTutorPageModel.IsExecuteWithoutMisclickCondition())
-            {
-                withoutMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldTarget"] as BitmapImage;
-                withoutMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Green;
-                WithoutMissclickBrush = System.Windows.Media.Brushes.Green;
+            var lessTwoMistakeAchivementBlock = GetLessTwoMistakeAchivementBlock();
+            var withoutMistakeAchivementBlock = GetWithoutMistakeAchivementBlock();
+            var speedAchivementBlock = GetSpeedAchivementBlock();
+            AchivementStackPanel.Children.Add(lessTwoMistakeAchivementBlock);
+            AchivementStackPanel.Children.Add(withoutMistakeAchivementBlock);
+            AchivementStackPanel.Children.Add(speedAchivementBlock);
+            _model.UpdateLessonData();
 
-            }
-            else
-            {
-                withoutMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["LightGrayTarget"] as BitmapImage;
-                withoutMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Silver;
-                WithoutMissclickBrush = System.Windows.Media.Brushes.Silver;
-            }
-            if (_typingTutorPageModel.IsExecuteLessTwoErrorCondition())
+
+        }
+        //Achivement blocks methods generator
+        #region 
+        private AchivementBlock GetLessTwoMistakeAchivementBlock()
+        {
+            var lessTwoMistakeAchivementBlock = new AchivementBlock();
+            lessTwoMistakeAchivementBlock.AchivementText = _model.GetLessTwoMistakeText();
+            if (_model.IsExecuteLessTwoErrorCondition())
             {
                 lessTwoMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldStar"] as BitmapImage;
                 lessTwoMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Orange;
@@ -137,12 +154,39 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 lessTwoMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Silver;
                 LessTwoMissclickBrush = System.Windows.Media.Brushes.Silver;
             }
-            if (_typingTutorPageModel.IsExecuteWithoutMisclickCondition())
+            return lessTwoMistakeAchivementBlock;
+        }
+        private AchivementBlock GetWithoutMistakeAchivementBlock()
+        {
+            var withoutMistakeAchivementBlock= new AchivementBlock();
+            withoutMistakeAchivementBlock.AchivementText = _model.GetWithoutMistakeText();
+            if (_model.IsExecuteWithoutMisclickCondition())
+            {
+                withoutMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldTarget"] as BitmapImage;
+                withoutMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Green;
+                WithoutMissclickBrush = System.Windows.Media.Brushes.Green;
+
+            }
+            else
+            {
+                withoutMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["LightGrayTarget"] as BitmapImage;
+                withoutMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Silver;
+                WithoutMissclickBrush = System.Windows.Media.Brushes.Silver;
+            }
+
+            return withoutMistakeAchivementBlock;
+        }
+        private AchivementBlock GetSpeedAchivementBlock()
+        {
+            var speedAchivementBlock = new AchivementBlock();
+            speedAchivementBlock.AchivementText = _model.GetSpeedText();
+
+
+            if (_model.IsExecuteWithoutMisclickCondition())
             {
                 speedAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldFlash"] as BitmapImage;
                 speedAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Blue;
                 SpeedBrush = System.Windows.Media.Brushes.Blue;
-
             }
             else
             {
@@ -150,12 +194,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 speedAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Silver;
                 SpeedBrush = System.Windows.Media.Brushes.Silver;
             }
-            AchivementStackPanel.Children.Add(lessTwoMistakeAchivementBlock);
-            AchivementStackPanel.Children.Add(withoutMistakeAchivementBlock);
-            AchivementStackPanel.Children.Add(speedAchivementBlock);
 
+            return speedAchivementBlock;
 
         }
+        #endregion
 
     }
 }

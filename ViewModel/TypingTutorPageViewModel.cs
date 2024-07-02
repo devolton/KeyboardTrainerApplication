@@ -27,7 +27,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private Visibility _isHidingPanelVisible;
         private double _progressBarValue;
         private double _progressBarMaxValue;
-        private TextBlock _textBlock;
+        private TextBlock? _textBlock;
 
         private ICommand _startLessonCommand;
         private ICommand _restartLessonCommand;
@@ -307,8 +307,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
 
         #endregion
-
-
 
 
         private void InitKeyboardItemList()

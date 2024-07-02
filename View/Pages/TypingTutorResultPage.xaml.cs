@@ -23,9 +23,9 @@ namespace CourseProjectKeyboardApplication.View.Pages
     public partial class TypingTutorResultPage : Page
     {
         private TypingTutorResultPageViewModel _typingTutorResultPageViewModel;
-        public TypingTutorResultPage(int typingTutorSpeed,int errorsCount)
+        public TypingTutorResultPage()
         {
-            _typingTutorResultPageViewModel = TypingTutorResultPageViewModel.Instance(typingTutorSpeed, errorsCount);
+            _typingTutorResultPageViewModel = TypingTutorResultPageViewModel.Instance();
             InitializeComponent();
 
             DataContext = _typingTutorResultPageViewModel;
@@ -35,6 +35,7 @@ namespace CourseProjectKeyboardApplication.View.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _typingTutorResultPageViewModel.AchivementStackPanel = AchevementBlocksStackPanel;
+            _typingTutorResultPageViewModel.LoadedPageCommand.Execute(null);
         }
     }
 }

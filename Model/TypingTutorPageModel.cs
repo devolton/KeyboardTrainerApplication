@@ -46,10 +46,16 @@ namespace CourseProjectKeyboardApplication.Model
             _wordsCount=GetWordsCount();   
             
         }
+        /// <summary>
+        /// Start stopwatcher
+        /// </summary>
         public void StartMeasureTime()
         {
             _stopwatcher.Start();
         }
+        /// <summary>
+        /// Stop stopwatcher
+        /// </summary>
         public void StopMeasureTime()
         {
             _stopwatcher.Stop();
@@ -67,7 +73,10 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return _progressBarMaxValue;
         }
-        //уведомляет что символ должен быть нажат с Shift
+        /// <summary>
+        /// Notify that char is uppercase
+        /// </summary>
+        /// <returns>Is uppercase current letter</returns>
         public bool IsFocusCharUppercase()
         {
             return _shiftPressedKeyValueDictionary.Any(onePair => onePair.Value.Equals(_currentLearnString[_currentFocusWordIndex].ToString()));
@@ -112,8 +121,6 @@ namespace CourseProjectKeyboardApplication.Model
 
         }
 
-
-
          /// <summary>
          /// Get list of runs elements for each leter of lesson string 
          /// </summary>
@@ -143,12 +150,11 @@ namespace CourseProjectKeyboardApplication.Model
             _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.LightGray;
             if (_currentFocusWordIndex.Equals(_lettersRunsList.Count - 1))
             {
-                //сбросить все стили 
+
+                //create global class which will be contain speed and misclick count 
                 _stopwatcher.Stop();
                 _typingTutorSpeed = GetTypingTutorSpeed();
-                //передавать во фрейм TypingTutorResultPage и передавать результат(подумать об Singltop)
-                FrameMediator.MainFrame.Content = new TypingTutorResultPage(_typingTutorSpeed,_missClickCounter);
-
+                FrameMediator.DisplayTypingTutorResultPage();
 
                 return;
             }
@@ -171,6 +177,11 @@ namespace CourseProjectKeyboardApplication.Model
             _lettersRunsList[0].Foreground = System.Windows.Media.Brushes.Violet;
             
         }
+        /// <summary>
+        /// Get string tag value of pressed keyboard button
+        /// </summary>
+        /// <param name="key">Key of pressed keyboard button</param>
+        /// <returns>Str tag of current pressed keyboard button</returns>
         public string GetKeyStrTag(Key key)
         {
             return _defaultKeyValueDictionary.FirstOrDefault(onePair => onePair.Key.Equals(key)).Value;

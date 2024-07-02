@@ -26,43 +26,82 @@ namespace CourseProjectKeyboardApplication.Shared.Mediators
         }
         public static void DisplayTypingTutorPage()
         {
-            DisplayPage(typeof(TypingTutorPage));
+            var page = GetPage(typeof(TypingTutorPage)) as TypingTutorPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
         }
         public static void DisplayTypingTestPage()
         {
-            DisplayPage(typeof(TypingTestPage));
+            var page = GetPage(typeof(TypingTestPage)) as TypingTestPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
         }
         public static void DisplayLearnPage()
         {
-            DisplayPage(typeof(LearnPage));
+            var page = GetPage(typeof(LearnPage)) as LearnPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
         }
         public static void DisplayTypingCertificatesPage()
         {
-            DisplayPage(typeof(TypingCertificatesPage));
+            var page = GetPage(typeof(TypingCertificatesPage)) as TypingCertificatesPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
         }
         public static void DisplayTypingCertificatesResultPage()
         {
-            DisplayPage(typeof(TypingCertificationResultsPage));
+            var page = GetPage(typeof(TypingCertificationResultsPage)) as TypingCertificationResultsPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
         }
         public static void DisplayEducationResultsPage()
         {
-            DisplayPage(typeof(EducationResultsPage));
+            var page = GetPage(typeof(EducationResultsPage)) as EducationResultsPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
         }
         public static void DisplayEditUserProfilPage()
         {
-            DisplayPage(typeof(EditUserProfilPage));
+            var page = GetPage(typeof(EditUserProfilPage)) as EditUserProfilPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
         }
-        private static void DisplayPage(Type pageType)
+        public static void DisplayTypingTutorResultPage()
+        {
+            var page = GetPage(typeof(TypingTutorResultPage)) as TypingTutorResultPage;
+            if (page != null)
+            {
+                MainFrame.Content = page;
+            }
+
+        }
+
+        private static Page? GetPage(Type pageType)
         {
             foreach (var onePage in _pagesList)
             {
 
                 if (onePage.GetType().Equals(pageType))
                 {
-                    MainFrame.Content = onePage;
-                    return;
+                    return onePage;
+
                 }
             }
+            return null;
         }
 
     }

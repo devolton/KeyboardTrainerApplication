@@ -28,6 +28,8 @@ namespace CourseProjectKeyboardApplication
         private TypingCertificationResultsPage _typingCertificationResultsPage;
         private EducationResultsPage _educationResultsPage;
         private EditUserProfilPage _editUserProfilPage;
+        private TypingTestResultPage _typingTestResultPage;
+        private TypingTutorResultPage _typingTutorResultPage;
 
         public MainWindow()
         {
@@ -41,6 +43,8 @@ namespace CourseProjectKeyboardApplication
             _typingCertificationResultsPage = new TypingCertificationResultsPage();
             _educationResultsPage = new EducationResultsPage();
             _editUserProfilPage = new EditUserProfilPage();
+            //_typingTestResultPage = new TypingTestResultPage();
+            _typingTutorResultPage = new TypingTutorResultPage();
 
             FrameMediator.MainFrame = MainFrame;
             FrameMediator.InitPages(new List<Page>() {
@@ -50,7 +54,9 @@ namespace CourseProjectKeyboardApplication
                 _typingCertificatesPage,
                 _typingCertificationResultsPage,
                 _educationResultsPage,
-                _editUserProfilPage
+                _editUserProfilPage,
+                _typingTutorResultPage,
+                _typingTestResultPage
 
             });
 
