@@ -42,8 +42,7 @@ namespace CourseProjectKeyboardApplication.Model
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
             InitKeyValueDictionaries();
             _stopwatcher = new Stopwatch();
-            
-            _wordsCount=GetWordsCount();   
+              
             
         }
         /// <summary>
@@ -124,11 +123,15 @@ namespace CourseProjectKeyboardApplication.Model
          /// <summary>
          /// Get list of runs elements for each leter of lesson string 
          /// </summary>
-         /// <returns></returns>
+         /// <returns>List of run elements</returns>
         public List<Run> GetLearnStrRuns()
         {
-            _currentLearnString = UserController.CurrentUserEducationProgress?.EnglishLayoutLesson.Text ?? "Hello"; //вынести в отдельную функцию 
+            //maybe remove reset method and reset data when lesson is starting
+            #region
+            _currentLearnString = UserController.CurrentUserEducationProgress?.EnglishLayoutLesson.Text ?? "Hello world my name is Antonio Montana"; //вынести в отдельную функцию 
             _progressBarMaxValue = _currentLearnString.Length;
+            _wordsCount = GetWordsCount();
+            #endregion
             _lettersRunsList.Clear();
             for (int i = 0; i < _currentLearnString.Length; i++)
             {
@@ -154,6 +157,8 @@ namespace CourseProjectKeyboardApplication.Model
                 //create global class which will be contain speed and misclick count 
                 _stopwatcher.Stop();
                 _typingTutorSpeed = GetTypingTutorSpeed();
+                TypingTutorResultController.TypingTutorSpeed = _typingTutorSpeed;
+                TypingTutorResultController.MisclickCount = _missClickCounter;
                 FrameMediator.DisplayTypingTutorResultPage();
 
                 return;

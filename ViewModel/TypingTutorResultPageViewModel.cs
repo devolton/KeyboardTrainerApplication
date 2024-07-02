@@ -109,6 +109,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnLoadedPageCommand(object param)
         {
+            _model.InitData();
             LessonResultStr = _model.GetLessonResultStr();
             if(AchivementStackPanel != null)
             {

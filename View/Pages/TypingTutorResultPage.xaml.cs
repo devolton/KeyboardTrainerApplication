@@ -27,7 +27,6 @@ namespace CourseProjectKeyboardApplication.View.Pages
         {
             _typingTutorResultPageViewModel = TypingTutorResultPageViewModel.Instance();
             InitializeComponent();
-
             DataContext = _typingTutorResultPageViewModel;
             
         }
