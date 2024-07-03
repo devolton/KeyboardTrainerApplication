@@ -41,9 +41,7 @@ namespace CourseProjectKeyboardApplication.Model
             _currentFocusWordIndex = 0;
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
             InitKeyValueDictionaries();
-            _stopwatcher = new Stopwatch();
-              
-            
+            _stopwatcher = new Stopwatch();      
         }
         /// <summary>
         /// Start stopwatcher

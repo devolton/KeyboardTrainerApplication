@@ -15,8 +15,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
     {
         private string _lessonResultStr = string.Empty;
         private StackPanel _achivementsStackPanel;
-        private int _typingTutorSpeed = 0;
-        private int _missclickCount = 0;
 
         private SolidColorBrush _lessTwoMissclickBrush;
         private SolidColorBrush _withoutMissclickBrush;
@@ -83,7 +81,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _achivementsStackPanel = value;
-                //InitAchivementStackPanel()
             }
         }
         public string LessonResultStr
@@ -105,6 +102,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnNextLessonCommand(object param)
         {
             //select next lesson
+            _model.SetNextEducationUserProgress();
             FrameMediator.DisplayTypingTutorPage();
         }
         private void OnLoadedPageCommand(object param)
@@ -183,7 +181,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             speedAchivementBlock.AchivementText = _model.GetSpeedText();
 
 
-            if (_model.IsExecuteWithoutMisclickCondition())
+            if (_model.IsExecuteSpeedCondition())
             {
                 speedAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldFlash"] as BitmapImage;
                 speedAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Blue;

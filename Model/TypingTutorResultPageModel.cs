@@ -1,4 +1,6 @@
-﻿using CourseProjectKeyboardApplication.Shared.Controllers;
+﻿using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,8 @@ namespace CourseProjectKeyboardApplication.Model
     public class TypingTutorResultPageModel
     {
         private const int _WITHOUT_MISCLICK_DELIMITER = 0;
-        private int _lessTwoDelimiter;
-        private int _speedDelimiter;
+        private const int _LESS_TWO_DELIMITER = 2;
+        private const int _SPEED_DELIMITER = 30;
         private int _typingTutorSpeed;
         private int _misclickCount;
         private string _lessTwoMistakeText;
@@ -22,11 +24,9 @@ namespace CourseProjectKeyboardApplication.Model
         
         public TypingTutorResultPageModel()
         {
-            _lessTwoDelimiter = 2;
-            _speedDelimiter= 21;
-            _lessTwoMistakeText = "less than 2 typos";
+            _lessTwoMistakeText = $"less than {_LESS_TWO_DELIMITER} typos";
             _withoutMistakeText = "exercise without typos";
-            _speedText = "speed more than 21 wpm";
+            _speedText = $"speed more than {_SPEED_DELIMITER} wpm";
         }
 
         /// <summary>
@@ -36,6 +36,7 @@ namespace CourseProjectKeyboardApplication.Model
         {
             _misclickCount = TypingTutorResultController.MisclickCount;
             _typingTutorSpeed = TypingTutorResultController.TypingTutorSpeed;
+          
             _resultStr=$"{_typingTutorSpeed} wpm, {_misclickCount} errors!";
         }
         /// <summary>
@@ -45,7 +46,7 @@ namespace CourseProjectKeyboardApplication.Model
       
         public bool IsExecuteLessTwoErrorCondition()
         {   
-            return _misclickCount <= _lessTwoDelimiter;
+            return _misclickCount <= _LESS_TWO_DELIMITER;
         }
         /// <summary>
         /// Check is without mistake condition completed 
@@ -63,17 +64,24 @@ namespace CourseProjectKeyboardApplication.Model
         public bool IsExecuteSpeedCondition()
         {
            
-            return _typingTutorSpeed <= _speedDelimiter;
+            return _typingTutorSpeed >= _SPEED_DELIMITER;
         }
         /// <summary>
         /// Update lessons EducationUsersProgresses object 
         /// </summary>
         public void UpdateLessonData()
         {
-            UserController.CurrentUserEducationProgress.IsLessThanTwoErrorsCompleted = IsExecuteLessTwoErrorCondition();
-            UserController.CurrentUserEducationProgress.IsWithoutErrorsCompleted = IsExecuteWithoutMisclickCondition();
-            UserController.CurrentUserEducationProgress.IsSpeedCompleted = IsExecuteSpeedCondition();
-            MessageBox.Show("Updated education user progress: " + UserController.CurrentUserEducationProgress.ToString());
+            bool isLessTwoCompleted = IsExecuteLessTwoErrorCondition();
+            bool isWithoutMistakeCompleted = IsExecuteWithoutMisclickCondition();
+            bool isSpeedCompleted = IsExecuteSpeedCondition();
+            UserController.UpdateCurrentEducationUserProgress(isLessTwoCompleted, isWithoutMistakeCompleted,isSpeedCompleted);
+           
+            //MessageBox.Show("Updated education user progress: " + UserController.CurrentUserEducationProgress.ToString());
+        }
+        public void SetNextEducationUserProgress() // maybe rename
+        {
+            UserController.SetNextEducationUserProgeress();
+
         }
 
         public string GetLessTwoMistakeText() => _lessTwoMistakeText;
