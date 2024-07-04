@@ -48,13 +48,13 @@ namespace CourseProjectKeyboardApplication.Model
         public double GetPercentOfCompletedLessons()
         {
             var completedLessonCount = _educationUserProgressModel.GetUsersEducationProgress(1).Count();
-            var allLevelCount = 0;
+            var commonLessonsCount = 0;
             var levelsCollection = _englishLayoutLevelModel.GetLevels();
             foreach(var level in levelsCollection)
             {
-                allLevelCount += level.Lessons.Count;
+                commonLessonsCount += level.Lessons.Count;
             }
-            return((double)completedLessonCount / (double)allLevelCount) * 100;
+            return((double)completedLessonCount / (double)commonLessonsCount) * 100;
 
         }
         /// <summary>

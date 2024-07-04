@@ -5,23 +5,25 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CourseProjectKeyboardApplication.Database.Models
 {
-    public class EducationUserProgressModel:BaseTypingTutorModel
+    public class EducationUserProgressModel : BaseTypingTutorModel
     {
         private DbSet<EducationUsersProgress> _educationUsersProgresses;
         public EducationUserProgressModel()
         {
             _educationUsersProgresses = _context.EducationUsersProgresses;
         }
-        public void AddNewEducationUserProgress(EducationUsersProgress educationUser)
+        public EducationUsersProgress AddNewEducationUserProgress(EducationUsersProgress educationUser)
         {
-            _educationUsersProgresses.Add(educationUser);
+            educationUser = _educationUsersProgresses.Add(educationUser);
+            return educationUser;
         }
         public IEnumerable<EducationUsersProgress> GetUsersEducationProgress(int userId)
         {
-            return _educationUsersProgresses.Where(oneProgress=>oneProgress.UserId == userId);
+            return _educationUsersProgresses.Where(oneProgress => oneProgress.UserId == userId);
         }
         public int RemoveUsersEducationProgress(int userId)
         {

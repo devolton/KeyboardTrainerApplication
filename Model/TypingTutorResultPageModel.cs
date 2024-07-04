@@ -74,10 +74,16 @@ namespace CourseProjectKeyboardApplication.Model
             bool isLessTwoCompleted = IsExecuteLessTwoErrorCondition();
             bool isWithoutMistakeCompleted = IsExecuteWithoutMisclickCondition();
             bool isSpeedCompleted = IsExecuteSpeedCondition();
+            if(UserController.CurrentUserEducationProgress is null)
+            {
+                UserController.CurrentUserEducationProgress=UserController.CreateNewEducationUsersProgresses();
+            }
             UserController.UpdateCurrentEducationUserProgress(isLessTwoCompleted, isWithoutMistakeCompleted,isSpeedCompleted);
            
-            //MessageBox.Show("Updated education user progress: " + UserController.CurrentUserEducationProgress.ToString());
         }
+        /// <summary>
+        /// Set Current EducationUserProgress to next 
+        /// </summary>
         public void SetNextEducationUserProgress() // maybe rename
         {
             UserController.SetNextEducationUserProgeress();

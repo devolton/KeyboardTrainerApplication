@@ -25,8 +25,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //commands
         private ICommand _initializationCommand;
-        private ICommand _updateLessonStateCommand;
-        private ICommand _updateHeaderCommand;
         private ICommand _continueEducationCommand;
         private ICommand _startLessonCommand;
 
@@ -41,8 +39,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             _model = new EducationResultsPageModel();
             _initializationCommand = new RelayCommand(OnInitializationCommand);
-            _updateLessonStateCommand = new RelayCommand(OnUpdateLessonStateCommand);
-            _updateHeaderCommand = new RelayCommand(OnUpdateHeaderCommand, CanUpdateHeaderCommandExecute);
             _continueEducationCommand = new RelayCommand(OnContinueEducationCommand);
             _startLessonCommand = new RelayCommand(OnStartLessonCommand, CanStartLessonCommandExecute);
 
@@ -57,10 +53,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //команда иницализации блоков
         public ICommand InitializationCommand => _initializationCommand;
 
-        //Команда обновления состояния кнопки после завершения урока
-        public ICommand UpdateLessonStateCommand => _updateHeaderCommand;
-        //команда обновления header после завершения урока
-        public ICommand UpdateHeaderCommand => _updateHeaderCommand;
         //команда нажатия на кнопку продолжить обучения 
         public ICommand ContinueEducationCommand => _continueEducationCommand;
         //команда начала урока 
@@ -111,9 +103,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// команда инициализации
         /// </summary>
         /// <param name="param">MainStackPanel</param>
-        private void OnInitializationCommand(object param)
+        private void OnInitializationCommand(object param)  //возможно разбить на мелкие функции
         {
             _mainStackPanel = param as StackPanel;
+            _isCurrentLesson = true;
+            if (MainStackPanel.Children.Count >2) 
+                MainStackPanel.Children.RemoveRange(2, MainStackPanel.Children.Count - 2);
             LevelProgressHeaderStr = _model.GetCurrentLevelHeaderStr();
             ValueProgressBar = _model.GetPercentOfCompletedLessons();
             LanguageLayoutTypeHeaderStr = _model.GetLanguageLayoutTypeHeaderStr();
@@ -145,14 +140,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     {
                         if (_isCurrentLesson)
                         {
-                            var currentButton = new EducationResultsCurrentLessonButton(oneLesson, new EducationUsersProgress());
+                            //var newEducUserResult = UserController.CreateNewEducationUsersProgresses(oneLesson);
+                            var currentButton = new EducationResultsCurrentLessonButton(oneLesson);
                             currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
                             _isCurrentLesson = false;
                             _currentLessonButton = currentButton;
                             lessonBodyWrapPanel?.Children.Add(currentButton);
-                            
-                           
-
                         }
                         else
                         {
@@ -171,20 +164,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
-        //команда обновления урока после его успешного завершения
-        private void OnUpdateLessonStateCommand(object param)
-        {
-
-        }
-        //команда обновления header
-        private void OnUpdateHeaderCommand(object param)
-        {
-
-        }
         //комадна продолжения обучения(continue button)
         private void OnContinueEducationCommand(object param)
         {
-            if(_currentLessonButton != null)
+            if (_currentLessonButton != null)
             {
                 FrameMediator.DisplayTypingTutorPage();
             }
@@ -222,16 +205,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void LessonButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var button = sender as IEducationResultLessonButton;
-            if(button != null) {
+            if (button != null)
+            {
                 _currentLessonButton = button;
                 UserController.CurrentUserEducationProgress = button.EducationUserProgress;
+                UserController.CurrentLesson = button.EducationLesson;
                 StartLessonCommand.Execute(button);
             }
             else
             {
                 MessageBox.Show("Button is null", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
         }
     }
 }

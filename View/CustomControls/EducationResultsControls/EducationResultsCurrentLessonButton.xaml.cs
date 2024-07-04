@@ -32,7 +32,7 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
             DependencyProperty.Register("LessonNumber", typeof(string), typeof(EducationResultsCurrentLessonButton), new PropertyMetadata(" "));
         public EnglishLayoutLesson EducationLesson { get; set; }
         public EducationUsersProgress EducationUserProgress { get; set; }
-        public EducationResultsCurrentLessonButton(EnglishLayoutLesson educationLesson, EducationUsersProgress educationUsersProgress)
+        public EducationResultsCurrentLessonButton(EnglishLayoutLesson educationLesson, EducationUsersProgress educationUsersProgress = null)
         {
             InitializeComponent();
             EducationLesson= educationLesson;

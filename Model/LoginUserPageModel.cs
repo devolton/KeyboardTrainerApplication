@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Tools;
 using Encrypter;
@@ -29,6 +30,10 @@ namespace CourseProjectKeyboardApplication.Model
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
         public bool IsValidPassword(string password) => AuthorizationFieldsValidator.IsValidPassword(password);
         public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
+        public void InitUserInUserController(User user)
+        {
+            UserController.CurrentUser = user;
+        }
         private void InitRegistryInfo()
         {
             _currentUserRegistrieSubKey = Registry.CurrentUser;

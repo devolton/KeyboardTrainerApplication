@@ -170,6 +170,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 return;
             }
             _isValidUser = true;
+            _model.InitUserInUserController(user);
             OpenMainWindow();
         }
 

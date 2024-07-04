@@ -14,6 +14,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
     public static class UserController
     {
         public static User CurrentUser { get; set; }
+        public static EnglishLayoutLesson CurrentLesson { get; set; }
         private static EducationUserProgressModel _educModel;
         private static TypingTestResultModel _typingTestResultsModel;
         private static List<EducationUsersProgress> _currentUserEducationProgressCollection;
@@ -62,6 +63,27 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
             {
                 CurrentUserEducationProgress = _currentUserEducationProgressCollection[++currentIndex];
             }
+
+        }
+        public static EducationUsersProgress CreateNewEducationUsersProgresses()
+        {
+            EducationUsersProgress newEducProgress = new EducationUsersProgress
+            {
+                IsLessThanTwoErrorsCompleted = false,
+                IsSpeedCompleted = false,
+                IsWithoutErrorsCompleted = false,
+                EnglishLayoutLesson = CurrentLesson,
+                EnglishLayoutLevel = CurrentLesson.EnglishLayoutLevel,
+                EnglishLayoutLessonId = CurrentLesson.Id,
+                EnglishLayoutLevelId = CurrentLesson.EnglishLayoutLevelId,
+                UserId =CurrentUser.Id,
+                User = CurrentUser
+            };
+            var updateEducUser = _educModel.AddNewEducationUserProgress(newEducProgress);
+            //MessageBox.Show(updateEducUser.ToString());
+            _currentUserEducationProgressCollection.Add(updateEducUser);
+            _educModel.SaveChanges();
+            return updateEducUser;
 
         }
 
