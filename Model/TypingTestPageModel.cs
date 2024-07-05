@@ -43,7 +43,6 @@ namespace CourseProjectKeyboardApplication.Model
 
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            TimerReset();
             Application.Current.Dispatcher.Invoke(() =>
             {
                 FrameMediator.MainFrame.Content = new TypingTestResultPage(GetTypingTutorSpeed(), _currentText.Length, _misclickCount);
