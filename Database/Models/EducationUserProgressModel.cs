@@ -32,5 +32,9 @@ namespace CourseProjectKeyboardApplication.Database.Models
             _educationUsersProgresses.RemoveRange(removeEducationProgressesCollection);
             return removeCount;
         }
+        public EducationUsersProgress? GetNextEducationProgress(EducationUsersProgress currentProgress)
+        {
+            return _educationUsersProgresses.Where(oneProg => oneProg.Id > currentProgress.Id)?.OrderBy(oneProg => oneProg.Id).FirstOrDefault();
+        }
     }
 }

@@ -47,5 +47,10 @@ namespace CourseProjectKeyboardApplication.Database.Models
             return successOperationCode;
 
         }
+        public EnglishLayoutLesson? GetNextLesson(EnglishLayoutLesson currentLesson)
+        {
+            return _englishLayoutLessons.Where(oneLesson => oneLesson.Id > currentLesson.Id)?.OrderBy(oneLesson => oneLesson.Id).FirstOrDefault();
+
+        }
     }
 }

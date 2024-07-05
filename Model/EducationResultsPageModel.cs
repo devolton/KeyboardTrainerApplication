@@ -1,13 +1,8 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -18,7 +13,6 @@ namespace CourseProjectKeyboardApplication.Model
         private string _languageLayoutType = "English layout";
         private EducationUserProgressModel _educationUserProgressModel;
         private EnglishLayoutLevelModel _englishLayoutLevelModel;
-        private UserModel _userModel;
         private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection;
 
        
@@ -26,7 +20,6 @@ namespace CourseProjectKeyboardApplication.Model
         {
             _educationUserProgressModel = DatabaseModelMediator.EducationUserProgressModel;
             _englishLayoutLevelModel= DatabaseModelMediator.EnglishLayoutLevelModel;
-            _userModel = DatabaseModelMediator.UserModel;
             GetLevels();
             InitAllLevelCount();
  
@@ -38,7 +31,7 @@ namespace CourseProjectKeyboardApplication.Model
         public string GetCurrentLevelHeaderStr()
         {
             
-            int currentLevelCounter = _userModel.GetUserById(1).EnglishLayoutLevel.Ordinal;
+            int currentLevelCounter = UserController.CurrentUser.EnglishLayoutLevel.Ordinal;
             return $"Level {currentLevelCounter} from {_commonLevelCount}";
         }
         /// <summary>

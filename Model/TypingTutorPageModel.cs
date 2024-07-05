@@ -37,11 +37,11 @@ namespace CourseProjectKeyboardApplication.Model
 
         private TypingTutorPageModel()
         {
-            
+
             _currentFocusWordIndex = 0;
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
             InitKeyValueDictionaries();
-            _stopwatcher = new Stopwatch();      
+            _stopwatcher = new Stopwatch();
         }
         /// <summary>
         /// Start stopwatcher
@@ -118,15 +118,17 @@ namespace CourseProjectKeyboardApplication.Model
 
         }
 
-         /// <summary>
-         /// Get list of runs elements for each leter of lesson string 
-         /// </summary>
-         /// <returns>List of run elements</returns>
+        /// <summary>
+        /// Get list of runs elements for each leter of lesson string 
+        /// </summary>
+        /// <returns>List of run elements</returns>
         public List<Run> GetLearnStrRuns()
         {
             //maybe remove reset method and reset data when lesson is starting
             #region
-            _currentLearnString = UserController.CurrentLesson?.Text ?? "Hello world my name is Antonio Montana"; //вынести в отдельную функцию 
+
+            UserController.CurrentLesson ??= UserController.CurrentUser.EnglishLayoutLesson;
+            _currentLearnString = UserController.CurrentLesson.Text;
             _progressBarMaxValue = _currentLearnString.Length;
             _wordsCount = GetWordsCount();
             #endregion
@@ -175,7 +177,7 @@ namespace CourseProjectKeyboardApplication.Model
                 oneRun.Foreground = System.Windows.Media.Brushes.Gray;
             }
             _lettersRunsList[0].Foreground = System.Windows.Media.Brushes.Violet;
-            
+
         }
         /// <summary>
         /// Get string tag value of pressed keyboard button
@@ -216,10 +218,10 @@ namespace CourseProjectKeyboardApplication.Model
             };
         }
 
-    /// <summary>
-    /// Get words count in current lesson str
-    /// </summary>
-    /// <returns>Count of words in lesson string</returns>
+        /// <summary>
+        /// Get words count in current lesson str
+        /// </summary>
+        /// <returns>Count of words in lesson string</returns>
         private int GetWordsCount()
         {
             char delimiters = ' ';
@@ -233,7 +235,7 @@ namespace CourseProjectKeyboardApplication.Model
         private int GetTypingTutorSpeed()
         {
             return (int)(_wordsCount * 60 / _stopwatcher.Elapsed.TotalSeconds);
-            
+
         }
 
 

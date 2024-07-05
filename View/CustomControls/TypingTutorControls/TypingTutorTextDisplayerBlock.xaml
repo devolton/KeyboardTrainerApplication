@@ -52,6 +52,7 @@
                />
             <Button
                     Focusable="False"
+                    IsEnabled="True"
                     Content="Click To Start"
                     Command="{Binding StartLessonCommand}"
                     Style="{StaticResource CustomTypingTestStartButton}"

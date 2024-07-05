@@ -4,6 +4,7 @@ using CourseProjectKeyboardApplication.Shared.Mediators;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,15 +17,11 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         public static User CurrentUser { get; set; }
         public static EnglishLayoutLesson CurrentLesson { get; set; }
         private static EducationUserProgressModel _educModel;
-        private static TypingTestResultModel _typingTestResultsModel;
-        private static List<EducationUsersProgress> _currentUserEducationProgressCollection;
-        private static List<TypingTestResult> _typingTestResultsCollection;
+        private static EnglishLayoutLessonModel _lessonsModel;
         static UserController()
         {
             _educModel = DatabaseModelMediator.EducationUserProgressModel;
-            _currentUserEducationProgressCollection = _educModel.GetUsersEducationProgress(1).ToList();
-
-
+            _lessonsModel = DatabaseModelMediator.EnglishLayoutLessonModel;
         }
         public static EducationUsersProgress CurrentUserEducationProgress
         {
@@ -58,11 +55,9 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         }
         public static void SetNextEducationUserProgeress()
         {
-            var currentIndex = _currentUserEducationProgressCollection.IndexOf(CurrentUserEducationProgress);
-            if (currentIndex != _currentUserEducationProgressCollection.Count - 1)
-            {
-                CurrentUserEducationProgress = _currentUserEducationProgressCollection[++currentIndex];
-            }
+
+            CurrentUserEducationProgress = _educModel.GetNextEducationProgress(CurrentUserEducationProgress);
+            CurrentLesson = CurrentUserEducationProgress?.EnglishLayoutLesson;
 
         }
         public static EducationUsersProgress CreateNewEducationUsersProgresses()
@@ -76,14 +71,24 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 EnglishLayoutLevel = CurrentLesson.EnglishLayoutLevel,
                 EnglishLayoutLessonId = CurrentLesson.Id,
                 EnglishLayoutLevelId = CurrentLesson.EnglishLayoutLevelId,
-                UserId =CurrentUser.Id,
+                UserId = CurrentUser.Id,
                 User = CurrentUser
             };
             var updateEducUser = _educModel.AddNewEducationUserProgress(newEducProgress);
-            //MessageBox.Show(updateEducUser.ToString());
-            _currentUserEducationProgressCollection.Add(updateEducUser);
             _educModel.SaveChanges();
             return updateEducUser;
+
+        }
+        public static void ChangeCurrentUserLesson()
+        {
+            var nextLesson = _lessonsModel.GetNextLesson(CurrentLesson);
+            if (nextLesson != null)
+            {
+                CurrentUser.EnglishLayoutLesson = nextLesson;
+                CurrentUser.EnglishLayoutLessonId = nextLesson.Id;
+                CurrentUser.EnglishLayoutLevel = nextLesson.EnglishLayoutLevel;
+                CurrentUser.EnglishLayoutLevelId = nextLesson.EnglishLayoutLevelId;
+            }
 
         }
 

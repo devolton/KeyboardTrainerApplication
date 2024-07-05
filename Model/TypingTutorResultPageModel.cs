@@ -77,8 +77,12 @@ namespace CourseProjectKeyboardApplication.Model
             if(UserController.CurrentUserEducationProgress is null)
             {
                 UserController.CurrentUserEducationProgress=UserController.CreateNewEducationUsersProgresses();
+                UserController.ChangeCurrentUserLesson();
+
             }
             UserController.UpdateCurrentEducationUserProgress(isLessTwoCompleted, isWithoutMistakeCompleted,isSpeedCompleted);
+            
+
            
         }
         /// <summary>

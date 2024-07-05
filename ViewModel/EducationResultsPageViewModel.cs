@@ -140,7 +140,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     {
                         if (_isCurrentLesson)
                         {
-                            //var newEducUserResult = UserController.CreateNewEducationUsersProgresses(oneLesson);
                             var currentButton = new EducationResultsCurrentLessonButton(oneLesson);
                             currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
                             _isCurrentLesson = false;
