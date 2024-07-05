@@ -115,6 +115,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             var levelsCollection = _model.GetLevels();
             foreach (var oneLevel in levelsCollection)
             {
+                
                 var educationResultLessonBlock = new EducationResultsLessonBlock();
                 var lessonHeader = educationResultLessonBlock.FindName("LessonHeader") as EducationResultsLessonHeader;
                 var lessonBodyWrapPanel = educationResultLessonBlock.FindName("LessonsWrapPanel") as WrapPanel;
@@ -126,6 +127,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 foreach (var oneLesson in oneLevel.Lessons)
                 {
                     var currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == 1);
+                    
                     if (currentEducUserProgress != null)
                     {
                         var lessonButton = new EducationResultsLessonNumberButton(oneLesson, currentEducUserProgress);
@@ -140,6 +142,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     {
                         if (_isCurrentLesson)
                         {
+                            //MessageBox.Show("First element and current equals: " + (oneLevel.Lessons.FirstOrDefault().Id == oneLesson.Id).ToString());
                             var currentButton = new EducationResultsCurrentLessonButton(oneLesson);
                             currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
                             _isCurrentLesson = false;
@@ -153,8 +156,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
                         }
                     }
                 }
-
+               
                 MainStackPanel.Children.Add(educationResultLessonBlock);
+
             }
             ValueProgressBar = _model.GetPercentOfCompletedLessons();
 

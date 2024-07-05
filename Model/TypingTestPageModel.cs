@@ -35,24 +35,24 @@ namespace CourseProjectKeyboardApplication.Model
             _misclickCount = 0;
             _timerInterval = 30_000;
             _timer = new System.Timers.Timer(_timerInterval);
-            _timer.Elapsed += timer_Elapsed;
             _timer.AutoReset = false;
+            _timer.Elapsed += Timer_Elapsed;
             InitKeyValueDictionaries();
 
         }
 
-        private void timer_Elapsed(object? sender, ElapsedEventArgs e)
+        private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            
+            TimerReset();
             Application.Current.Dispatcher.Invoke(() =>
             {
                 FrameMediator.MainFrame.Content = new TypingTestResultPage(GetTypingTutorSpeed(), _currentText.Length, _misclickCount);
-                
+
             });
-           
+            
 
         }
-     
+
 
         public static TypingTestPageModel Instance()
         {
@@ -61,8 +61,8 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public List<Run> GetTextRuns()
         {
-            
-            
+
+
             for (int i = 0; i < _currentText.Length; i++)
             {
                 _runsList.Add(new Run(_currentText[i].ToString()));
@@ -83,7 +83,10 @@ namespace CourseProjectKeyboardApplication.Model
             _currentSymbolIndex = 0;
 
         }
-        public void StartTimer() => _timer.Start();
+        public void StartTimer()
+        {
+            _timer.Start();
+        } 
         public void TimerReset()
         {
             _timer.Stop();

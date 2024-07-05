@@ -24,6 +24,8 @@ namespace CourseProjectKeyboardApplication.Model
     {
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
+        private const int _LARGE_FONT_SIZE_VALUE = 30;
+        private const int _SMALL_FONT_SIZE_VALUE = 24;
         private int _typingTutorSpeed;
         private string _currentLearnString = string.Empty;
         private int _missClickCounter;
@@ -129,6 +131,7 @@ namespace CourseProjectKeyboardApplication.Model
 
             UserController.CurrentLesson ??= UserController.CurrentUser.EnglishLayoutLesson;
             _currentLearnString = UserController.CurrentLesson.Text;
+            //MessageBox.Show("Words count: "+GetWordsCount().ToString()+"\nSymbols count: "+_currentLearnString.Length.ToString());
             _progressBarMaxValue = _currentLearnString.Length;
             _wordsCount = GetWordsCount();
             #endregion
@@ -194,6 +197,14 @@ namespace CourseProjectKeyboardApplication.Model
         public void AddMissclickCount()
         {
             _missClickCounter++;
+        }
+        public double GetCurrentTextSize() //сделать боллее гибким 
+        {
+            if(_wordsCount > 13  || _wordsCount < 11)
+            {
+                return _SMALL_FONT_SIZE_VALUE;
+            }
+            return _LARGE_FONT_SIZE_VALUE;
         }
 
         private void InitKeyValueDictionaries()

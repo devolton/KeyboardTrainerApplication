@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingTutorPageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1100">
     <Border Margin="0 0 0 50"
@@ -31,7 +31,7 @@
                         Height="70"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        FontSize="30px"
+                        FontSize="{Binding TextSize}"
                         FontFamily="Georgia"
                         Foreground="Gray"
                         TextWrapping="Wrap"

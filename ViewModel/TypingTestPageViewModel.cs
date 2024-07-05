@@ -147,7 +147,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             HidePanelVisibility = Visibility.Visible;
             _isTestStarted = false;
             _isFirstKeyPushed = false;
-            _typingTestPageModel.TimerReset();
 
         }
         #endregion

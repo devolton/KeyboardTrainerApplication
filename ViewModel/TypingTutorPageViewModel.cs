@@ -25,8 +25,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private Grid _keyboardGrid;
         private Visibility _isStartButtonVisible;
         private Visibility _isHidingPanelVisible;
+
         private double _progressBarValue;
         private double _progressBarMaxValue;
+        private double _textSize;
+
         private TextBlock? _textBlock;
 
         private ICommand _startLessonCommand;
@@ -53,6 +56,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _isErrorKeyPushed = false;
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
+            _textSize = 24;
             IsStartButtonVisible = Visibility.Visible;
             IsHigingPanelVisible = Visibility.Visible;
            
@@ -132,6 +136,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
         }
 
+        public double TextSize
+        {
+            get => _textSize;
+            set
+            {
+                _textSize = value;
+                OnPropertyChanged(nameof(TextSize));
+            }
+        }
 
 
         public double ProgressBarValue
@@ -162,6 +175,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
             ProgressBarValue = 0;
             ProgressBarMaxValue = _model.GetProgressBarMaxValue();
+            TextSize = _model.GetCurrentTextSize();
         }
         private void OnRestartLessonCommand(object param)
         {
