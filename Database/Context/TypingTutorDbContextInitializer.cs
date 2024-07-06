@@ -20,7 +20,6 @@ namespace CourseProjectKeyboardApplication.Database.Context
                 //levels
                 var levelsCollection = InitLevels();
 
-
                 //lessons
                 var firstLevelLessonsCollection = InitFirstLevelLessons();
                 var secondLevelLessonCollection = InitSecondLevelLessons();
@@ -47,6 +46,9 @@ namespace CourseProjectKeyboardApplication.Database.Context
                 //educProgresses
                 var educProgressCollection = InitEducProgresses();
 
+                //english layout test texts
+                var testTextCollection = InitEnglishTypingTestTexts();
+
 
                 context.EnglishLayoutLevels.AddRange(levelsCollection);
 
@@ -71,6 +73,8 @@ namespace CourseProjectKeyboardApplication.Database.Context
                 context.TypingTestResults.AddRange(testsCollection);
 
                 context.EducationUsersProgresses.AddRange(educProgressCollection);
+
+                context.EnglishTypingTestTexts.AddRange(testTextCollection);
                 context.SaveChanges();
             }
             catch(Exception ex)
@@ -1742,6 +1746,67 @@ namespace CourseProjectKeyboardApplication.Database.Context
                     IsWithoutErrorsCompleted=false
                 },
 
+            };
+        }
+        private List<EnglishTypingTestText> InitEnglishTypingTestTexts()
+        {
+            return new List<EnglishTypingTestText>
+            {
+                new EnglishTypingTestText
+                {
+                    Id=1,
+                    Text = "The sun rises, painting the sky with hues of orange and pink. Birds chirp their morning song, welcoming the dawn. Dew glistens on blades of grass, nature's own jewels. A new day begins, full of possibilities and adventures waiting to be discovered. Embrace the day, for it is yours to conquer."
+                },
+                new EnglishTypingTestText
+                {
+                    Id =2,
+                    Text = "The forest was alive with the sounds of nature. Birds sang melodious tunes, and leaves rustled in the gentle breeze. Sunlight filtered through the canopy, creating dappled patterns on the forest floor. A deer cautiously approached a stream for a drink, while squirrels darted up trees. It was a peaceful morning, perfect for a hike. Nature's beauty and tranquility offered a much-needed escape from the chaos of daily life."
+                },
+                new EnglishTypingTestText
+                {
+                    Id =3,
+                    Text = "On a serene beach, waves lapped gently against the shore. The sun, setting in a blaze of orange and pink, cast long shadows on the sand. Seagulls called out as they soared overhead. A couple strolled hand in hand, leaving footprints in their wake. Children built sandcastles, their laughter mingling with the sound of the sea. As night approached, the stars began to twinkle, promising a peaceful end to the day."
+                },
+                new EnglishTypingTestText
+                {
+                    Id= 4,
+                    Text = "In a bustling city, the streets were filled with people and the hum of traffic. Skyscrapers towered overhead, their windows reflecting the midday sun. Street vendors called out, selling everything from food to trinkets. Amidst the chaos, a street musician played a soulful tune on his guitar, capturing the attention of passersby. Despite the city's frenetic pace, moments of beauty and connection could still be found."
+                },
+                new EnglishTypingTestText
+                {
+                    Id=  5, 
+                    Text = "The garden was a riot of color. Flowers of every hue bloomed, their scents mingling in the air. Bees buzzed from blossom to blossom, while butterflies danced in the sunlight. A gardener tended to the plants with care, pruning and watering. In one corner, a small pond reflected the sky, with koi fish swimming lazily beneath the surface. It was a sanctuary of peace, a reminder of nature's bounty and beauty."
+                },
+                new EnglishTypingTestText
+                {
+                    Id =6,
+                    Text = "On a cold winter's night, snow fell gently, blanketing the world in white. The air was crisp, and the only sounds were the crunch of footsteps and the distant hoot of an owl. Inside a cozy cabin, a fire crackled warmly in the hearth. Family and friends gathered, sharing stories and laughter. Hot cocoa was passed around, its steam rising in the air. Outside, the world slept, wrapped in a peaceful, snowy silence."
+                },
+                new EnglishTypingTestText
+                {
+                    Id= 7, 
+                    Text ="The market was alive with activity. Stalls overflowed with fresh produce, colorful fabrics, and handcrafted goods. Vendors called out, enticing customers with their wares. The smell of spices and cooked food wafted through the air. Children ran about, laughing and playing. Musicians played lively tunes, adding to the festive atmosphere. It was a place of community and culture, where people from all walks of life came together."
+                },
+                new EnglishTypingTestText
+                {
+                    Id = 8, 
+                    Text = "In a quiet library, the only sound was the rustle of pages turning. Rows upon rows of books lined the shelves, each one a gateway to another world. A student sat at a table, engrossed in a thick tome. Nearby, a librarian carefully shelved books. The atmosphere was one of calm and concentration. Outside, the hustle and bustle of the city continued, but inside, time seemed to slow, offering a refuge of knowledge and peace."
+                },
+                new EnglishTypingTestText
+                {
+                    Id =9, 
+                    Text = "A lone hiker trekked through the mountains, the path winding through rugged terrain. The air was fresh and crisp, with the scent of pine trees all around. Birds of prey soared high above, their cries echoing through the valleys. The hiker paused at a lookout point, taking in the breathtaking view of snow-capped peaks and lush forests below. It was a moment of pure freedom and connection with nature, far from the chaos of civilization."
+                },
+                new EnglishTypingTestText
+                {
+                    Id =10,
+                    Text = "The old café was a haven for artists and dreamers. Its walls were adorned with paintings and photographs, each telling a unique story. The smell of freshly brewed coffee filled the air. Patrons sat at small tables, some scribbling in notebooks, others deep in conversation. A jazz band played softly in the corner, adding to the intimate ambiance. It was a place where creativity flourished, and ideas flowed freely."
+                },
+                new EnglishTypingTestText
+                {
+                    Id =11,
+                    Text = "At dawn, the countryside woke slowly. Farmers began their day, tending to fields and livestock. The sky was painted in soft pastel colors as the sun rose. Birds sang their morning songs, and a gentle breeze rustled the leaves. A dog barked in the distance, greeting the new day. It was a simple, yet beautiful scene, a reminder of the quiet, enduring rhythms of rural life and the beauty of nature's daily renewal."
+                }
             };
         }
         

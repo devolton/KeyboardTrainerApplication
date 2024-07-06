@@ -23,7 +23,7 @@ namespace CourseProjectKeyboardApplication.Model
         private int _timerInterval;
         private int _misclickCount;
         private static TypingTestPageModel _instance;
-        private string _currentText = "the sun rises, painting the sky with hues of orange and pink. Birds chirp their morning song, welcoming the dawn. Dew glistens on blades of grass, nature's own jewels. A new day begins, full of possibilities and adventures waiting to be discovered. Embrace the day, for it is yours to conquer.";
+        private string _currentText = "The sun rises, painting the sky with hues of orange and pink. Birds chirp their morning song, welcoming the dawn. Dew glistens on blades of grass, nature's own jewels. A new day begins, full of possibilities and adventures waiting to be discovered. Embrace the day, for it is yours to conquer.";
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
 
