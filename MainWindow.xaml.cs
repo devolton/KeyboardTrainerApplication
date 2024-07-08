@@ -114,7 +114,9 @@ namespace CourseProjectKeyboardApplication
             FrameMediator.DisplayEditUserProfilPage();
         }
 
-
-  
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DatabaseModelMediator.EducationUserProgressModel.SaveChanges();
+        }
     }
 }

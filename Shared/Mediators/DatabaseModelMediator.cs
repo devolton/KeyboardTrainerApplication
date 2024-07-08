@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,5 @@ namespace CourseProjectKeyboardApplication.Shared.Mediators
         public static EnglishLayoutLessonModel EnglishLayoutLessonModel => _lessonsModel;
         public static EnglishLayoutLevelModel EnglishLayoutLevelModel => _levelModel;
         public static EnglishTypingTestTextModel EnglishTypingTestTextModel => _typingTestTextModel;
-
     }
 }

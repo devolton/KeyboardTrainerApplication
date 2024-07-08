@@ -54,7 +54,7 @@ namespace CourseProjectKeyboardApplication.Model
                 Speed = _typingSpeed
             };
             DatabaseModelMediator.TypingTestResultModel.AddNewTypingTestResult(newTest);
-            DatabaseModelMediator.TypingTestResultModel.SaveChanges();
+            DatabaseModelMediator.TypingTestResultModel.SaveChanges(); //remove 
         }
     }
 }

@@ -75,7 +75,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 User = CurrentUser
             };
             var updateEducUser = _educModel.AddNewEducationUserProgress(newEducProgress);
-            _educModel.SaveChanges();
+            //_educModel.SaveChanges();
             return updateEducUser;
 
         }

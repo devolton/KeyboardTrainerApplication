@@ -23,10 +23,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private IEnumerable<string> _typingDateCollection;
         private static TypingCertificationResultPageViewModel _instance;
         private int _dateRangeSelectedIndex = 0;
-        private TypingCertificationResultPageModel _typingCertificationResultPageModel;
+        private TypingCertificationResultPageModel _model;
         private TypingCertificationResultPageViewModel()
         {
-            _typingCertificationResultPageModel = new();
+            _model = new();
             _drawStatisticsCommand = new RelayCommand(OnDrawStatisticsCommand);
             _statStackPanel = new StackPanel();
 
@@ -70,7 +70,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private void InitStatBlock(int selectedIndex)
         {
-            var statCollection = _typingCertificationResultPageModel.GetSortTypingResultList((TypingStatisticsPeriodTime)selectedIndex, true);
+            _model.InitTypingTests();
+            var statCollection = _model.GetSortTypingResultList((TypingStatisticsPeriodTime)selectedIndex, true);
                 StatStackPanel.Children.Clear();
                 foreach (var item in statCollection)
                 {
@@ -99,7 +100,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private void OnDrawStatisticsCommand(object param)
         {
-            var statTuple = _typingCertificationResultPageModel.GetStatistics((TypingStatisticsPeriodTime)DateRangeSelectedIndex);
+            var statTuple = _model.GetStatistics((TypingStatisticsPeriodTime)DateRangeSelectedIndex);
             SeriesCollection = statTuple.Item1;
             TypingDateCollection = statTuple.Item2;
             InitStatBlock(DateRangeSelectedIndex);

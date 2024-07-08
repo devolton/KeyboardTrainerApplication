@@ -14,20 +14,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
     public class TypingCertificatesPageViewModel : ViewModelBase
     {
         private static TypingCertificatesPageViewModel _instance;
-        private TypingCertificatesPageModel _typingCertifcatesPageModel;
+        private TypingCertificatesPageModel _model;
         private ICommand _improveResultCommand;
         private ICommand _drawInfoCommand;
         private RenderTargetBitmap _certificateRenderTargetBitmap;
-        private string _typingSpeed;
-        private string _typingAccuracy;
+        private string _typingSpeed = string.Empty;
+        private string _typingAccuracy = string.Empty;
 
         private TypingCertificatesPageViewModel()
         {
-            _typingCertifcatesPageModel = new TypingCertificatesPageModel();
+            _model = new TypingCertificatesPageModel();
             _improveResultCommand = new RelayCommand(OnImproveResultCommand);
             _drawInfoCommand = new RelayCommand(OnDrawInfoCommand);
-            _typingAccuracy = "45";
-            _typingSpeed = "90";
 
         }
         public static TypingCertificatesPageViewModel Instance()
@@ -76,18 +74,19 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //command
         #region
-        public void OnImproveResultCommand(object param)
+        private void OnImproveResultCommand(object param)
         {
-            _typingCertifcatesPageModel.DisplayTestPage();
+            _model.DisplayTestPage();
         }
-        public void OnDrawInfoCommand(object param)
+        private void OnDrawInfoCommand(object param)
         {
+            _model.InitBestUserTestResult();
             try
             {
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;
-                _typingAccuracy = _typingCertifcatesPageModel.GetTypingAccuracy();
-                _typingSpeed=_typingCertifcatesPageModel.GetTypingSpeed();
-                _certificateRenderTargetBitmap= _typingCertifcatesPageModel.GetUserCertificate();
+                _typingAccuracy = _model.GetTypingAccuracy();
+                _typingSpeed=_model.GetTypingSpeed();
+                _certificateRenderTargetBitmap= _model.GetUserCertificate();
                 var speedBlock = elementPair.Key;
                 var accuracyBlock = elementPair.Value;
                 speedBlock.StatValue = TypingSpeed;

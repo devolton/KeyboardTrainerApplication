@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Tools;
 
@@ -21,7 +22,6 @@ namespace CourseProjectKeyboardApplication.Model
         public TypingCertificatesPageModel()
         {
             _typingTestResultModel = DatabaseModelMediator.TypingTestResultModel;
-            InitBestUserTestResult();
         }
         public  void DisplayTestPage()
         {
@@ -29,14 +29,14 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public RenderTargetBitmap GetUserCertificate()
         {
-            //change "Anton" to user name 
-            return CertificateGenerator.RenderCertificate("Anton", _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"),_bestUserTest.Date);
+   
+            return CertificateGenerator.RenderCertificate(UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"),_bestUserTest.Date);
         }
         public string GetTypingSpeed() => _bestUserTest.Speed.ToString();
         public string GetTypingAccuracy() => _bestUserTest.AccuracyPercent.ToString("0.0");
-        private void InitBestUserTestResult()
+        public void InitBestUserTestResult()
         {
-            _bestUserTest = _typingTestResultModel.GetBestUserTestResult(1);//CurrentUserId
+            _bestUserTest = _typingTestResultModel.GetBestUserTestResult(UserController.CurrentUser.Id);
         }
 
     }

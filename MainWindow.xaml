@@ -13,6 +13,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen" 
+        Closing="Window_Closing"
         Icon="{StaticResource ApplicationLogo}" 
        
         >

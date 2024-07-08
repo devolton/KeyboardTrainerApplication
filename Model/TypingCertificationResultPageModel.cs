@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using LiveCharts;
@@ -8,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -37,7 +39,6 @@ namespace CourseProjectKeyboardApplication.Model
             _typingSpeedLineSeries.Values = new ChartValues<int>();
             _typingAccuracyLineSeries.Values = new ChartValues<double>();
             _typingTestResultModel = DatabaseModelMediator.TypingTestResultModel;
-            _userTypingTestsCollection = _typingTestResultModel.GetTypingTestResultsByUserId(1).ToList();
 
 
 
@@ -110,6 +111,10 @@ namespace CourseProjectKeyboardApplication.Model
             }
             return chartValues;
         }
+        public void InitTypingTests()
+        {
+            _userTypingTestsCollection = _typingTestResultModel.GetTypingTestResultsByUserId(UserController.CurrentUser.Id).ToList();
+        }
 
         /// <summary>
         /// Get sorting 
@@ -119,7 +124,11 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns>Get sort TypingTestResults list</returns>
         public List<TypingTestResult> GetSortTypingResultList(TypingStatisticsPeriodTime periodTime,bool isForTable)
         {
+            
             List<TypingTestResult> selectedResults;
+            int currentDay = DateTime.Now.Day;
+            int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
             switch (periodTime)
             {
                 case TypingStatisticsPeriodTime.AllTime:
@@ -129,14 +138,16 @@ namespace CourseProjectKeyboardApplication.Model
                     }
                 case TypingStatisticsPeriodTime.Month:
                     {
-                        int currentMonth = DateTime.Now.Month;
-                        selectedResults = _userTypingTestsCollection.FindAll(element => element.Date.Month.Equals(currentMonth));
+
+                        selectedResults = _userTypingTestsCollection.FindAll(element => element.Date.Month.Equals(currentMonth) && element.Date.Year.Equals(currentYear));
                         break;
                     }
                 case TypingStatisticsPeriodTime.Day:
                     {
-                        int currentDay = DateTime.Now.Day;
-                        selectedResults = _userTypingTestsCollection.FindAll(element => element.Date.Day.Equals(currentDay));
+     
+                        selectedResults = _userTypingTestsCollection.FindAll(element => element.Date.Day.Equals(currentDay)
+                        && element.Date.Month.Equals(currentMonth) 
+                        && element.Date.Year.Equals(currentYear));
                         break;
                     }
                 default:
