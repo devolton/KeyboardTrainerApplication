@@ -14,19 +14,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class TypingTestResultPageViewModel : ViewModelBase
     {
-        private string _resultSpeed;
-        private int _allTextSymbolsCount;
-        private int _misclickCount;
-        private string _accuracyPercent;
+        private string _resultSpeed = string.Empty;
+        private string _accuracyPercent = string.Empty;
         private ICommand _displayResultCommand;
         private ICommand _improveScoreCommand;
-        private TypingTestResultPageModel _typingTestResultPageModel;
-        public TypingTestResultPageViewModel(int resultSpeed, int allTextSymbolsCount, int missclickCount)
+        private TypingTestResultPageModel _model;
+        public TypingTestResultPageViewModel()
         {
-            _typingTestResultPageModel = new TypingTestResultPageModel();
-            _resultSpeed = resultSpeed.ToString();  
-            _allTextSymbolsCount=allTextSymbolsCount;
-            _misclickCount = missclickCount;
+            _model = new TypingTestResultPageModel();
             _displayResultCommand = new RelayCommand(OnDisplayResultCommand);
             _improveScoreCommand = new RelayCommand(OnImproveScoreCommand);
             
@@ -58,11 +53,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private void OnDisplayResultCommand(object param)
         {
+            _model.InitStat();
             try
             {
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;
-                AccuracyPercent = _typingTestResultPageModel.GetAccuracyPercentStr(_misclickCount, _allTextSymbolsCount);
-                SpeedValue = _resultSpeed;
+                AccuracyPercent = _model.GetAccuracyPercentStr();
+                SpeedValue = _model.GetSpeedStr();
                 var speedBlock = elementPair.Key;
                 var accuracyBlock = elementPair.Value;
                 speedBlock.StatValue= SpeedValue;

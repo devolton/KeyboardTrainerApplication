@@ -36,10 +36,6 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Page_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -49,8 +45,6 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
         private void Page_GotFocus(object sender, RoutedEventArgs e)
         {
             FocusRectangel.Focus();
-
-
         }
 
         private void Page_LostFocus(object sender, RoutedEventArgs e)

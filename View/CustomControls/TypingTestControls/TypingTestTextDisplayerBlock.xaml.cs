@@ -29,9 +29,5 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
             DataContext = _typingTestViewModel;
         }
 
-        private void WordsTextBlock_Loaded(object sender, RoutedEventArgs e)
-        {
-            _typingTestViewModel.TestSetupCommand.Execute(WordsTextBlock);
-        }
     }
 }

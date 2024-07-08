@@ -11,6 +11,8 @@ using System.Windows.Threading;
 using System.Timers;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -23,29 +25,34 @@ namespace CourseProjectKeyboardApplication.Model
         private int _timerInterval;
         private int _misclickCount;
         private static TypingTestPageModel _instance;
-        private string _currentText = "The sun rises, painting the sky with hues of orange and pink. Birds chirp their morning song, welcoming the dawn. Dew glistens on blades of grass, nature's own jewels. A new day begins, full of possibilities and adventures waiting to be discovered. Embrace the day, for it is yours to conquer.";
+        private string _currentText = string.Empty;
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
+        private List<EnglishTypingTestText> _testTextCollection;
+        private Random _random;
 
         private TypingTestPageModel()
         {
             _runsList = new List<Run>(_currentText.Length);
-            _currentSymbolIndex = 0;
-            _wordsTypingCount = 1;
-            _misclickCount = 0;
             _timerInterval = 30_000;
             _timer = new System.Timers.Timer(_timerInterval);
             _timer.AutoReset = false;
             _timer.Elapsed += Timer_Elapsed;
             InitKeyValueDictionaries();
+            _testTextCollection = DatabaseModelMediator.EnglishTypingTestTextModel.GetAllTexts().ToList();
+            _random = new Random();
+            
 
         }
 
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
+            TypingTestResultController.MiscliskCount = _misclickCount;
+            TypingTestResultController.AllSymbolCount = _currentText.Length;
+            TypingTestResultController.TypingSpeed = GetTypingTutorSpeed();
             Application.Current.Dispatcher.Invoke(() =>
             {
-                FrameMediator.MainFrame.Content = new TypingTestResultPage(GetTypingTutorSpeed(), _currentText.Length, _misclickCount);
+                FrameMediator.DisplayTypingTestResultPage();
 
             });
             
@@ -60,8 +67,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public List<Run> GetTextRuns()
         {
-
-
+            _runsList.Clear();
             for (int i = 0; i < _currentText.Length; i++)
             {
                 _runsList.Add(new Run(_currentText[i].ToString()));
@@ -73,6 +79,14 @@ namespace CourseProjectKeyboardApplication.Model
             }
 
             return _runsList;
+        }
+        public void SetupTest()
+        {
+            int randomIndex = _random.Next(_testTextCollection.Count);
+            _currentText = _testTextCollection[randomIndex].Text;
+            _currentSymbolIndex = 0;
+            _wordsTypingCount = 1;
+            _misclickCount = 0;
         }
         public void ResetTestSettings()
         {

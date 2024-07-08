@@ -14,7 +14,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
     public class TypingTestPageViewModel : ViewModelBase
     {
         private static TypingTestPageViewModel _instance;
-        private TypingTestPageModel _typingTestPageModel;
+        private TypingTestPageModel _model;
         private bool _isTestStarted;
         private bool _isFirstKeyPushed;
         private TextBlock _textBlock;
@@ -27,7 +27,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private TypingTestPageViewModel()
         {
-            _typingTestPageModel = TypingTestPageModel.Instance();
+            _model = TypingTestPageModel.Instance();
             HidePanelVisibility = Visibility.Visible;
             StartButtonVisibility = Visibility.Visible;
             _isTestStarted = false;
@@ -82,11 +82,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnTestSetupCommand(object param)
         {
             _textBlock = param as TextBlock;
-            _typingTestPageModel.ResetTestSettings();
+            _model.ResetTestSettings();
+            _model.SetupTest();
             if (_textBlock is not null)
             {
                 _textBlock.Inlines.Clear();
-                _textBlock.Inlines.AddRange(_typingTestPageModel.GetTextRuns());
+                _textBlock.Inlines.AddRange(_model.GetTextRuns());
 
             }
             
@@ -97,25 +98,25 @@ namespace CourseProjectKeyboardApplication.ViewModel
             if (!_isFirstKeyPushed)
             {
                 _isFirstKeyPushed = true;
-                _typingTestPageModel.StartTimer();
+                _model.StartTimer();
             }
 
             Key key = (Key)param;
-            if (_typingTestPageModel.IsFocusCharUppercase())
+            if (_model.IsFocusCharUppercase())
             {
-                if (IsShiftPushed() && _typingTestPageModel.IsValidPushedButton(key, true))
+                if (IsShiftPushed() && _model.IsValidPushedButton(key, true))
                 {
                     if (key.Equals(Key.Space))
-                        _typingTestPageModel.IncrementWordsTypingCount();
-                    _typingTestPageModel.SetSymbolRunStyle(true);
+                        _model.IncrementWordsTypingCount();
+                    _model.SetSymbolRunStyle(true);
                
                 }
                 else
                 {
                     if (IsShiftPushed())
                         return;
-                    _typingTestPageModel.SetSymbolRunStyle(false);
-                    _typingTestPageModel.IncrementMissclickCount();
+                    _model.SetSymbolRunStyle(false);
+                    _model.IncrementMissclickCount();
 
                 }
             }
@@ -123,17 +124,17 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 if (IsShiftPushed())
                     return;
-                if (_typingTestPageModel.IsValidPushedButton(key, false))
+                if (_model.IsValidPushedButton(key, false))
                 {
                     if (key.Equals(Key.Space))
-                        _typingTestPageModel.IncrementWordsTypingCount();
-                    _typingTestPageModel.SetSymbolRunStyle(true);
+                        _model.IncrementWordsTypingCount();
+                    _model.SetSymbolRunStyle(true);
             
                 }
                 else
                 {
-                    _typingTestPageModel.SetSymbolRunStyle(false);
-                    _typingTestPageModel.IncrementMissclickCount();
+                    _model.SetSymbolRunStyle(false);
+                    _model.IncrementMissclickCount();
                 }
 
             }
@@ -147,7 +148,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             HidePanelVisibility = Visibility.Visible;
             _isTestStarted = false;
             _isFirstKeyPushed = false;
-            _typingTestPageModel.TimerReset();
+            _model.TimerReset();
 
         }
         #endregion

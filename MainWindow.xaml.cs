@@ -43,7 +43,7 @@ namespace CourseProjectKeyboardApplication
             _typingCertificationResultsPage = new TypingCertificationResultsPage();
             _educationResultsPage = new EducationResultsPage();
             _editUserProfilPage = new EditUserProfilPage();
-            //_typingTestResultPage = new TypingTestResultPage();
+            _typingTestResultPage = new TypingTestResultPage();
             _typingTutorResultPage = new TypingTutorResultPage();
 
             FrameMediator.MainFrame = MainFrame;

@@ -89,6 +89,14 @@ namespace CourseProjectKeyboardApplication.Shared.Mediators
             }
 
         }
+        public static void DisplayTypingTestResultPage()
+        {
+            var page = GetPage(typeof(TypingTestResultPage)) as TypingTestResultPage;
+            if(page != null)
+            {
+                MainFrame.Content = page;
+            }
+        }
 
         private static Page? GetPage(Type pageType)
         {

@@ -23,10 +23,10 @@ namespace CourseProjectKeyboardApplication.View.Pages
     public partial class TypingTestResultPage : Page
     {
         private TypingTestResultPageViewModel _typingTestResultPageViewModel;
-        public TypingTestResultPage(int resultSpeed, int allTextSymbolsCount, int misclickCount)
+        public TypingTestResultPage()
         {
             InitializeComponent();
-            _typingTestResultPageViewModel = new TypingTestResultPageViewModel(resultSpeed,allTextSymbolsCount,misclickCount);
+            _typingTestResultPageViewModel = new TypingTestResultPageViewModel();
             DataContext = _typingTestResultPageViewModel;
 
         }

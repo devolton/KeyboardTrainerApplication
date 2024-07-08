@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace CourseProjectKeyboardApplication.Shared.Controllers
 {
     public static class TypingTutorResultController
-    { private static int _misclickCount = 0;
+    { 
+        private static int _misclickCount = 0;
         private static int _typingTutorSpeed = 0;
         public static int MisclickCount
         {
