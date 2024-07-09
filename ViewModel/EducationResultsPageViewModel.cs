@@ -126,7 +126,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
                 foreach (var oneLesson in oneLevel.Lessons)
                 {
-                    var currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == 1);
+                    var currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == UserController.CurrentUser.Id);
                     
                     if (currentEducUserProgress != null)
                     {
@@ -142,7 +142,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     {
                         if (_isCurrentLesson)
                         {
-                            //MessageBox.Show("First element and current equals: " + (oneLevel.Lessons.FirstOrDefault().Id == oneLesson.Id).ToString());
                             var currentButton = new EducationResultsCurrentLessonButton(oneLesson);
                             currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
                             _isCurrentLesson = false;

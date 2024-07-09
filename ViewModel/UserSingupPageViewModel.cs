@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.View.Windows;
 using CourseProjectKeyboardApplication.ViewModel.Commands;
 using System.DirectoryServices.ActiveDirectory;
@@ -44,6 +45,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     return;
                 }
                 ClearAllFields();
+                UserController.CurrentUser=newUser;
                 new MainWindow().Show();
 
                 foreach (Window oneWindow in Application.Current.Windows)

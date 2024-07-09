@@ -13,6 +13,7 @@ namespace CourseProjectKeyboardApplication.Model
         private string _languageLayoutType = "English layout";
         private EducationUserProgressModel _educationUserProgressModel;
         private EnglishLayoutLevelModel _englishLayoutLevelModel;
+        private User _currentUser;
         private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection;
 
        
@@ -20,6 +21,7 @@ namespace CourseProjectKeyboardApplication.Model
         {
             _educationUserProgressModel = DatabaseModelMediator.EducationUserProgressModel;
             _englishLayoutLevelModel= DatabaseModelMediator.EnglishLayoutLevelModel;
+            _currentUser = UserController.CurrentUser;
             GetLevels();
             InitAllLevelCount();
  
@@ -40,7 +42,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns></returns>
         public double GetPercentOfCompletedLessons()
         {
-            var completedLessonCount = _educationUserProgressModel.GetUsersEducationProgress(1).Count();
+            var completedLessonCount = _educationUserProgressModel.GetUsersEducationProgress(_currentUser.Id).Count();
             var commonLessonsCount = 0;
             var levelsCollection = _englishLayoutLevelModel.GetLevels();
             foreach(var level in levelsCollection)

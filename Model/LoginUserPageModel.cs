@@ -56,24 +56,33 @@ namespace CourseProjectKeyboardApplication.Model
         public User? GetUserByLoginOrEmailAndPassword(string loginOrEmail, string password)
         {
             var encryptSha256Password = PasswordSHA256Encrypter.EncryptPassword(password);
-            return _userModel.GetUserByLoginOrEmailAndPassword(loginOrEmail,encryptSha256Password);
+            return _userModel.GetUserByLoginOrEmailAndPassword(loginOrEmail, encryptSha256Password);
         }
         /// <summary>
         /// Writing users credentials to quickly enter the application when logging in
         /// </summary>
         /// <param name="login">User login</param>
         /// <param name="password">User password</param>
-        public  void WriteDataInRegister(string login, string password)
+        public void WriteDataInRegister(string login, string password)
         {
             Task.Run(() =>
             {
-                 string sha256KeyCode = PasswordSHA256Encrypter.EncryptPassword(password);
+                string sha256KeyCode = PasswordSHA256Encrypter.EncryptPassword(password);
                 _applicationSubKey.SetValue(_userLoginRegistryKeyName, login);
                 _applicationSubKey.SetValue(_userPasswordRegistryCodeKeyName, sha256KeyCode);
                 _applicationSubKey.SetValue(_userPasswordRegistryKeyName, _devoltonEncrypter.Encrypt(password, sha256KeyCode));
 
             });
-     
+        }
+        public void WriteNakedDataInRegister()
+        {
+            Task.Run(() =>
+            {
+                _applicationSubKey.SetValue(_userLoginRegistryKeyName, string.Empty);
+                _applicationSubKey.SetValue(_userPasswordRegistryCodeKeyName, string.Empty);
+                _applicationSubKey.SetValue(_userPasswordRegistryKeyName, string.Empty);
+
+            });
         }
         /// <summary>
         /// Get login from register if the user saved it earlier
@@ -96,7 +105,10 @@ namespace CourseProjectKeyboardApplication.Model
             if (obj is not null)
             {
                 string encryptPassword = Convert.ToString(obj);
-                return _devoltonEncrypter.Decrypt(encryptPassword, GetKeyFromRegister());
+                if (encryptPassword == string.Empty)
+                    return string.Empty;
+                else
+                    return _devoltonEncrypter.Decrypt(encryptPassword, GetKeyFromRegister());
             }
             return string.Empty;
 

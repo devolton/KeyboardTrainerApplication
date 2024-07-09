@@ -66,6 +66,7 @@
         <Style.Setters>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 10 0 10"/>
             <Setter Property="Foreground" Value="DarkRed"/>
             <Setter Property="BorderBrush" Value="DarkRed"/>
             <Setter Property="Width" Value="300"/>

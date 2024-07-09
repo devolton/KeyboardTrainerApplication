@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Tools;
 using CourseProjectKeyboardApplication.ViewModel;
@@ -54,7 +55,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public User GetUserInfo()
         {
-            _user = _userModel.GetUserById(1); // change in method which working with current user 
+            _user = UserController.CurrentUser;
             _oldEmail = _user.Email;
             _oldLogin = _user.Login;
             return _user;

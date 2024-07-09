@@ -179,6 +179,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             if (_isChecked && _isValidUser)
                 _model.WriteDataInRegister(LoginOrEmail, Password);
+            else
+                _model.WriteNakedDataInRegister();
 
         }
         private void OnPasswordVisibilityCommand(object obj)
