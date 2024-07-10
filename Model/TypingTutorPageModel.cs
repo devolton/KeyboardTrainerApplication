@@ -16,7 +16,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -34,8 +33,14 @@ namespace CourseProjectKeyboardApplication.Model
         private List<Run> _lettersRunsList;
         private Stopwatch _stopwatcher;
         private double _progressBarMaxValue;
+        private System.Windows.Media.Brush _errorBrush;
+        private System.Windows.Media.Brush _focusBrush;
+        private System.Windows.Media.Brush _passedElementsBrush;
+        private System.Windows.Media.Brush _expectedElementsBrush;
 
-        public static TypingTutorPageModel _instance;
+        private static TypingTutorPageModel _instance;
+
+
 
         private TypingTutorPageModel()
         {
@@ -44,6 +49,10 @@ namespace CourseProjectKeyboardApplication.Model
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
             InitKeyValueDictionaries();
             _stopwatcher = new Stopwatch();
+            _errorBrush = System.Windows.Media.Brushes.Red;
+            _focusBrush = System.Windows.Media.Brushes.SteelBlue;
+            _expectedElementsBrush = System.Windows.Media.Brushes.Gray;
+            _passedElementsBrush = System.Windows.Media.Brushes.LightGray;
         }
         /// <summary>
         /// Start stopwatcher
@@ -85,14 +94,14 @@ namespace CourseProjectKeyboardApplication.Model
         /// </summary>
         public void SetRunErrorStyle()
         {
-            _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Red;
+            _lettersRunsList[_currentFocusWordIndex].Foreground = _errorBrush;
         }
         /// <summary>
         /// Remove error Runs style when user releases incorrectly pressed key
         /// </summary>
         public void RemoveRunErrorStyle()
         {
-            _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Violet;
+            _lettersRunsList[_currentFocusWordIndex].Foreground = _focusBrush;
         }
 
         /// <summary>
@@ -141,7 +150,7 @@ namespace CourseProjectKeyboardApplication.Model
                 _lettersRunsList[i].FontWeight = FontWeights.Bold;
                 if (i == _currentFocusWordIndex)
                 {
-                    _lettersRunsList[i].Foreground = System.Windows.Media.Brushes.Violet;
+                    _lettersRunsList[i].Foreground = _focusBrush;
                 }
             }
             return _lettersRunsList;
@@ -152,7 +161,7 @@ namespace CourseProjectKeyboardApplication.Model
         public void ChangeFocusToNextRun()
         {
 
-            _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.LightGray;
+            _lettersRunsList[_currentFocusWordIndex].Foreground = _passedElementsBrush;
             if (_currentFocusWordIndex.Equals(_lettersRunsList.Count - 1))
             {
                 _stopwatcher.Stop();
@@ -163,7 +172,7 @@ namespace CourseProjectKeyboardApplication.Model
                 return;
             }
             _currentFocusWordIndex++;
-            _lettersRunsList[_currentFocusWordIndex].Foreground = System.Windows.Media.Brushes.Violet;
+            _lettersRunsList[_currentFocusWordIndex].Foreground = _focusBrush;
         }
         /// <summary>
         /// Method of lesson restart
@@ -176,9 +185,9 @@ namespace CourseProjectKeyboardApplication.Model
             _stopwatcher.Reset();
             foreach (var oneRun in _lettersRunsList)
             {
-                oneRun.Foreground = System.Windows.Media.Brushes.Gray;
+                oneRun.Foreground = _expectedElementsBrush;
             }
-            _lettersRunsList[0].Foreground = System.Windows.Media.Brushes.Violet;
+            _lettersRunsList[0].Foreground = _focusBrush;
 
         }
         /// <summary>
@@ -199,7 +208,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public double GetCurrentTextSize() //сделать боллее гибким 
         {
-            if(_wordsCount > 13  || _wordsCount < 11)
+            if (_wordsCount > 13 || _wordsCount < 11)
             {
                 return _SMALL_FONT_SIZE_VALUE;
             }

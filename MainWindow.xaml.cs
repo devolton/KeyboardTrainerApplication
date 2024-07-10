@@ -36,18 +36,23 @@ namespace CourseProjectKeyboardApplication
             InitializeComponent();
 
             //придумать асинхронную иницализацию для уменьшения времени загрузки приложения 
-            _learnPage = new LearnPage();
-            _typingTutorPage = new TypingTutorPage();
             _typingTestPage = new TypingTestPage();
-            _typingCertificatesPage = new TypingCertificatesPage(); 
-            _typingCertificationResultsPage = new TypingCertificationResultsPage();
-            _educationResultsPage = new EducationResultsPage();
-            _editUserProfilPage = new EditUserProfilPage();
-            _typingTestResultPage = new TypingTestResultPage();
-            _typingTutorResultPage = new TypingTutorResultPage();
+            Task.Run(() =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    _learnPage = new LearnPage();
+                    _typingTutorPage = new TypingTutorPage();
+                    _typingCertificatesPage = new TypingCertificatesPage();
+                    _typingCertificationResultsPage = new TypingCertificationResultsPage();
+                    _educationResultsPage = new EducationResultsPage();
+                    _editUserProfilPage = new EditUserProfilPage();
+                    _typingTestResultPage = new TypingTestResultPage();
+                    _typingTutorResultPage = new TypingTutorResultPage();
 
-            FrameMediator.MainFrame = MainFrame;
-            FrameMediator.InitPages(new List<Page>() {
+
+                    FrameMediator.MainFrame = MainFrame;
+                    FrameMediator.InitPages(new List<Page>() {
                 _typingTutorPage,
                 _learnPage,
                 _typingTestPage,
@@ -60,6 +65,11 @@ namespace CourseProjectKeyboardApplication
 
             });
 
+                });
+
+
+
+            });
 
         }
 
@@ -88,14 +98,14 @@ namespace CourseProjectKeyboardApplication
 
         private void MainFrame_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            FrameMediator.DisplayTypingTestPage();
+
+            MainFrame.Content = _typingTestPage;
         }
 
         private void CertificatesButton_Click(object sender, RoutedEventArgs e)
         {
             FrameMediator.DisplayTypingCertificatesPage();
-          
+
         }
 
         private void CertificationResultButton_Click(object sender, RoutedEventArgs e)

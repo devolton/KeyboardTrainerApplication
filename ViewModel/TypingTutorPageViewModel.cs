@@ -22,6 +22,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
     public class TypingTutorPageViewModel : ViewModelBase
     {
         private List<IKeyboardItem> _keyboardItemList;
+        private List<IKeyboardItem> _errorPressedKeyboardCollection;
+        private List<IKeyboardItem> _shiftKeyboardItemCollection;
         private Grid _keyboardGrid;
         private Visibility _isStartButtonVisible;
         private Visibility _isHidingPanelVisible;
@@ -29,7 +31,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private double _progressBarValue;
         private double _progressBarMaxValue;
         private double _textSize;
-
+        
         private TextBlock? _textBlock;
 
         private ICommand _startLessonCommand;
@@ -39,7 +41,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _generateRunsBlockCommand;
         private bool _isLessonStarted;
         private bool _isRepeatButtonEnabled;
-        private bool _isErrorKeyPushed;
 
         private static TypingTutorPageViewModel _instance;
         private readonly TypingTutorPageModel _model;
@@ -53,13 +54,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _keyUpCommand = new RelayCommand(OnKeyUpCommand, CanExecuteOnKeyDownCommand);
             _model = TypingTutorPageModel.Instance();
             _keyboardItemList = new List<IKeyboardItem>();
-            _isErrorKeyPushed = false;
+            _errorPressedKeyboardCollection = new List<IKeyboardItem>();
+            _shiftKeyboardItemCollection = new List<IKeyboardItem>();
+            
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
             _textSize = 24;
             IsStartButtonVisible = Visibility.Visible;
             IsHigingPanelVisible = Visibility.Visible;
-           
+
 
 
 
@@ -187,6 +190,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnKeyDownCommand(object param)
         {
+
             var key = (Key)param;
             string keyTag = _model.GetKeyStrTag(key);
             if (IsShiftPushed())
@@ -196,7 +200,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
                 if (_model.IsFocusCharUppercase() && IsShiftPushed())
                 {
-
 
                     if (_model.IsValidPushedButton(key, true))
                     {
@@ -230,8 +233,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
                 }
             }
-            
-
 
         }
         private void OnStartLessonExecuteCommand(object param)
@@ -242,11 +243,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             IsHigingPanelVisible = Visibility.Hidden;
             if (_model.IsFocusCharUppercase())
             {
-                var shiftElementEnumerable = _keyboardItemList.FindAll(oneControl => oneControl.KeyTag.Contains("Shift"));
-                foreach (var oneShiftElement in shiftElementEnumerable)
-                {
-                    oneShiftElement.IsFocusKeyboardItem = true;
-                }
+                ChangeFocusForShift(true);
             }
             else
             {
@@ -256,31 +253,17 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnKeyUpCommand(object param)
         {
+
             var key = (Key)param;
             var tag = _model.GetKeyStrTag(key);
-            //сбарсываем стиль ошибочно нажатой кнопки а так же стиль нажатого Shift
-            if (_isErrorKeyPushed)
+            if (_errorPressedKeyboardCollection.Count != 0)
             {
-                if (tag is not null)
-                {
-                    var errorElement = _keyboardItemList.FirstOrDefault(oneElement => oneElement.KeyTag.Contains(tag));
-                    if (errorElement is not null)
-                    {
-                        errorElement.IsErrorPushedKeyboardItem = false;
-                    }
-
-                }
-                _isErrorKeyPushed = false;
-                _model.RemoveRunErrorStyle();
+                RemoveErrorStyle();
             }
 
             if (key == Key.LeftShift || key == Key.RightShift)
             {
-                var shifts = _keyboardItemList.FindAll(oneControl => oneControl.KeyTag.Contains("Shift"));
-                foreach (var oneShift in shifts)
-                {
-                    oneShift.IsFocusKeyboardItem = false;
-                }
+                ChangeFocusForShift(false);
                 foreach (var oneKeyElement in _keyboardItemList)
                 {
                     var oneKeyItem = oneKeyElement as KeyboardItemTextBlock;
@@ -289,10 +272,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
             }
             RemoveFocusStyle();
-
             SetFocusInKeyboardItem();
-
-
 
         }
 
@@ -326,20 +306,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void InitKeyboardItemList()
         {
             _keyboardItemList.Clear();
+            _shiftKeyboardItemCollection.Clear();
             foreach (var element in KeyboardGrid.Children)
             {
                 var keyElement = element as IKeyboardItem;
                 if (keyElement is not null)
                     _keyboardItemList.Add(keyElement);
             }
+            _shiftKeyboardItemCollection = _keyboardItemList.Where(oneKey => oneKey.KeyTag.Contains("Shift")).ToList();
         }
         private void ShiftKeyDownHandler()
         {
-            var shiftEnumarable = _keyboardItemList.Where(oneKey => oneKey.KeyTag.Contains("Shift"));
-            foreach (var oneShift in shiftEnumarable)
-            {
-                oneShift.IsFocusKeyboardItem = true;
-            }
+            ChangeFocusForShift(true);
             foreach (var oneKeyElement in _keyboardItemList)
             {
                 var keyElement = oneKeyElement as KeyboardItemTextBlock;
@@ -359,12 +337,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private void SetErrorStyleInKeyboardItem(string keyTag)
         {
-            _isErrorKeyPushed = true;
             IKeyboardItem errorElement = null;
             if (keyTag is not null)
                 errorElement = _keyboardItemList.FirstOrDefault(oneKey => oneKey.KeyTag.Contains(keyTag));
             if (errorElement is not null)
+            {
                 errorElement.IsErrorPushedKeyboardItem = true;
+                _errorPressedKeyboardCollection.Add(errorElement);
+            }
 
         }
         private bool IsShiftPushed()
@@ -376,6 +356,24 @@ namespace CourseProjectKeyboardApplication.ViewModel
             var focusElement = _keyboardItemList.FirstOrDefault(oneElement => oneElement.IsFocusKeyboardItem);
             if (focusElement is not null)
                 focusElement.IsFocusKeyboardItem = false;
+        }
+        private void RemoveErrorStyle()
+        {
+            foreach (var item in _errorPressedKeyboardCollection)
+            {
+                item.IsErrorPushedKeyboardItem = false;
+
+            }
+            _errorPressedKeyboardCollection.Clear();
+            _model.RemoveRunErrorStyle();
+        }
+        private void ChangeFocusForShift(bool isFocused)
+        {
+            
+            foreach (var oneShift in _shiftKeyboardItemCollection)
+            {
+                oneShift.IsFocusKeyboardItem = isFocused;
+            }
         }
 
 

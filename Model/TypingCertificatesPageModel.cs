@@ -35,7 +35,7 @@ namespace CourseProjectKeyboardApplication.Model
                 _certificate= CertificateGenerator.RenderCertificate(UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
             return _certificate;
         }
-        public void SaveImage( )
+        public void SaveImage()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {

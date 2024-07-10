@@ -115,7 +115,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             var levelsCollection = _model.GetLevels();
             foreach (var oneLevel in levelsCollection)
             {
-                
+                var lessonsCollection = oneLevel.Lessons.OrderBy(oneLesson => oneLesson.Ordinal);
                 var educationResultLessonBlock = new EducationResultsLessonBlock();
                 var lessonHeader = educationResultLessonBlock.FindName("LessonHeader") as EducationResultsLessonHeader;
                 var lessonBodyWrapPanel = educationResultLessonBlock.FindName("LessonsWrapPanel") as WrapPanel;
@@ -124,17 +124,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     lessonHeader.LessonTitle = oneLevel.Title;
                     lessonHeader.LessonNumber = "lesson " + oneLevel.Ordinal.ToString();
                 }
-                foreach (var oneLesson in oneLevel.Lessons)
+                foreach (var oneLesson in lessonsCollection)
                 {
                     var currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == UserController.CurrentUser.Id);
                     
                     if (currentEducUserProgress != null)
                     {
-                        var lessonButton = new EducationResultsLessonNumberButton(oneLesson, currentEducUserProgress);
-                        lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
-                        lessonButton.LessThanTwoTyposCircleBackground = (currentEducUserProgress.IsLessThanTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
-                        lessonButton.WithoutErrorsCircleBackground = (currentEducUserProgress.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
-                        lessonButton.SpeedCircleBackground = (currentEducUserProgress.IsSpeedCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
+
+                        var lessonButton = CreateEducationResultLessonNumberButton(oneLesson, currentEducUserProgress);
                         lessonBodyWrapPanel?.Children.Add(lessonButton);
                     }
 
@@ -142,16 +139,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     {
                         if (_isCurrentLesson)
                         {
-                            var currentButton = new EducationResultsCurrentLessonButton(oneLesson);
-                            currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
-                            _isCurrentLesson = false;
-                            _currentLessonButton = currentButton;
+                            var currentButton = CreateEducationResultCurrentButton(oneLesson);
                             lessonBodyWrapPanel?.Children.Add(currentButton);
                         }
                         else
                         {
-                            var lockButton = new EducationResultsLockButton(oneLesson);
+                            var lockButton = CreateEducationResultsLockButton(oneLesson);
                             lessonBodyWrapPanel?.Children.Add(lockButton);
+                            
                         }
                     }
                 }
@@ -218,7 +213,27 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 MessageBox.Show("Button is null", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
+        }
+        private EducationResultsLessonNumberButton CreateEducationResultLessonNumberButton(EnglishLayoutLesson lesson, EducationUsersProgress educationUsersProgress)
+        {
+            var lessonButton = new EducationResultsLessonNumberButton(lesson, educationUsersProgress);
+            lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+            lessonButton.LessThanTwoTyposCircleBackground = (educationUsersProgress.IsLessThanTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
+            lessonButton.WithoutErrorsCircleBackground = (educationUsersProgress.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
+            lessonButton.SpeedCircleBackground = (educationUsersProgress.IsSpeedCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
+            return lessonButton;
+        }
+        private EducationResultsCurrentLessonButton CreateEducationResultCurrentButton(EnglishLayoutLesson lesson)
+        {
+            var currentButton = new EducationResultsCurrentLessonButton(lesson);
+            currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+            _isCurrentLesson = false;
+            _currentLessonButton = currentButton;
+            return currentButton;
+        }
+        private EducationResultsLockButton CreateEducationResultsLockButton(EnglishLayoutLesson lesson)
+        {
+           return new EducationResultsLockButton(lesson);
         }
     }
 }
