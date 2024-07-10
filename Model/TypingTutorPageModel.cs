@@ -131,7 +131,6 @@ namespace CourseProjectKeyboardApplication.Model
 
             UserController.CurrentLesson ??= UserController.CurrentUser.EnglishLayoutLesson;
             _currentLearnString = UserController.CurrentLesson.Text;
-            //MessageBox.Show("Words count: "+GetWordsCount().ToString()+"\nSymbols count: "+_currentLearnString.Length.ToString());
             _progressBarMaxValue = _currentLearnString.Length;
             _wordsCount = GetWordsCount();
             #endregion

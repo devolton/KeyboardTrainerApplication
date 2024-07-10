@@ -36,7 +36,7 @@ namespace CourseProjectKeyboardApplication.Database.Models
         
         public TypingTestResult? GetBestUserTestResult(int userId)
         {
-            return _typingTestResults.Where(oneResult => oneResult.Id.Equals(userId))?.OrderByDescending(oneResult=>oneResult.Speed).FirstOrDefault();
+            return _typingTestResults.Where(oneResult => oneResult.UserId.Equals(userId))?.OrderByDescending(oneResult=>oneResult.Speed).FirstOrDefault();
         }
         
     }

@@ -53,6 +53,12 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return _userModel.IsUserExistByEmail(emailOrLogin) || _userModel.IsUserExistByLogin(emailOrLogin);
         }
+        /// <summary>
+        /// Get user by login (or email) and password 
+        /// </summary>
+        /// <param name="loginOrEmail">User login or email</param>
+        /// <param name="password">user password</param>
+        /// <returns></returns>
         public User? GetUserByLoginOrEmailAndPassword(string loginOrEmail, string password)
         {
             var encryptSha256Password = PasswordSHA256Encrypter.EncryptPassword(password);
@@ -74,6 +80,9 @@ namespace CourseProjectKeyboardApplication.Model
 
             });
         }
+        /// <summary>
+        /// Write credentials in register is user pressed 'Remember me' button and user data is valid
+        /// </summary>
         public void WriteNakedDataInRegister()
         {
             Task.Run(() =>
@@ -99,20 +108,26 @@ namespace CourseProjectKeyboardApplication.Model
             return string.Empty;
 
         }
+        /// <summary>
+        /// Get password from register 
+        /// </summary>
+        /// <returns></returns>
         public string GetPasswordFromRegister()
         {
             var obj = _applicationSubKey.GetValue(_userPasswordRegistryKeyName);
             if (obj is not null)
             {
                 string encryptPassword = Convert.ToString(obj);
-                if (encryptPassword == string.Empty)
-                    return string.Empty;
-                else
+                if (encryptPassword != string.Empty)
                     return _devoltonEncrypter.Decrypt(encryptPassword, GetKeyFromRegister());
             }
             return string.Empty;
 
         }
+        /// <summary>
+        /// Get encryptor key from register
+        /// </summary>
+        /// <returns>Encryptor key</returns>
         private string GetKeyFromRegister()
         {
             var keyObj = _applicationSubKey.GetValue(_userPasswordRegistryCodeKeyName);

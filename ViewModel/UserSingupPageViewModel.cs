@@ -133,18 +133,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
             if (_isConfirmPasswordVisible)
             {
                 _isConfirmPasswordVisible = false;
-                ConfirmPasswordTextBoxVisibility = Visibility.Collapsed;
                 ConfirmPasswordBoxVisibility = Visibility.Visible;
-                ConfirmPasswordTextDecorationCollection = TextDecorations.Strikethrough;
+                ConfirmPasswordTextBoxVisibility = Visibility.Collapsed;
+                ConfirmPasswordTextDecorationCollection = null; 
             }
             else
             {
                 _isConfirmPasswordVisible = true;
-                ConfirmPasswordBoxVisibility = Visibility.Visible;
-                ConfirmPasswordTextBoxVisibility = Visibility.Collapsed;
-                ConfirmPasswordTextDecorationCollection = null;
-
+                ConfirmPasswordBoxVisibility = Visibility.Collapsed;
+                ConfirmPasswordTextBoxVisibility = Visibility.Visible;
+                ConfirmPasswordTextDecorationCollection = TextDecorations.Strikethrough; 
             }
+
 
         }
         #endregion

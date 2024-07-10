@@ -42,8 +42,8 @@ namespace Encrypter
                 string concatStr = firstBitStr + secondBitStr;
                 concatStr = EnlargeBinary(concatStr, true);
                 var currentNum = Convert.ToInt32(concatStr, 2);
-                if
-                    (booferNumber != 0) booferNumber = booferNumber ^ currentNum;
+                if (booferNumber != 0)
+                    booferNumber ^= currentNum;
                 else
                     booferNumber = currentNum;
 
