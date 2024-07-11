@@ -126,6 +126,9 @@
     <Page Update="Resources\CustomStyles\CustomTextBox.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\CustomStyles\CustomUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\CustomControls\EditUserProfileControls\EditUserProfileAvatarBlock.xaml">
       <SubType>Designer</SubType>
     </Page>

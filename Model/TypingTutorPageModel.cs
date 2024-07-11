@@ -85,6 +85,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// Notify that char is uppercase
         /// </summary>
         /// <returns>Is uppercase current letter</returns>
+        
         public bool IsFocusCharUppercase()
         {
             return _shiftPressedKeyValueDictionary.Any(onePair => onePair.Value.Equals(_currentLearnString[_currentFocusWordIndex].ToString()));
@@ -127,6 +128,10 @@ namespace CourseProjectKeyboardApplication.Model
             return _defaultKeyValueDictionary.Any(onePair => onePair.Key == pushedKey && onePair.Value.Equals(_currentLearnString[_currentFocusWordIndex].ToString()));
 
 
+        }
+        public bool IsEnglishLanguageSelected()
+        {
+            return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
         }
 
         /// <summary>

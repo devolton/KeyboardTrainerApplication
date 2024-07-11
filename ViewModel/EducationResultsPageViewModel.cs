@@ -199,7 +199,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
 
         #endregion
-        private void LessonButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void LessonButton_MouseClick(object sender, MouseButtonEventArgs e)
         {
             var button = sender as IEducationResultLessonButton;
             if (button != null)
@@ -217,7 +217,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private EducationResultsLessonNumberButton CreateEducationResultLessonNumberButton(EnglishLayoutLesson lesson, EducationUsersProgress educationUsersProgress)
         {
             var lessonButton = new EducationResultsLessonNumberButton(lesson, educationUsersProgress);
-            lessonButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+            lessonButton.Style =(Style) Application.Current.Resources["EducationLessonUserControl"];
+            lessonButton.MouseLeftButtonDown += LessonButton_MouseClick;
             lessonButton.LessThanTwoTyposCircleBackground = (educationUsersProgress.IsLessThanTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
             lessonButton.WithoutErrorsCircleBackground = (educationUsersProgress.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
             lessonButton.SpeedCircleBackground = (educationUsersProgress.IsSpeedCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
@@ -226,7 +227,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private EducationResultsCurrentLessonButton CreateEducationResultCurrentButton(EnglishLayoutLesson lesson)
         {
             var currentButton = new EducationResultsCurrentLessonButton(lesson);
-            currentButton.MouseDoubleClick += LessonButton_MouseDoubleClick;
+            currentButton.Style = (Style)Application.Current.Resources["EducationLessonUserControl"];
+            currentButton.MouseLeftButtonDown += LessonButton_MouseClick;
             _isCurrentLesson = false;
             _currentLessonButton = currentButton;
             return currentButton;

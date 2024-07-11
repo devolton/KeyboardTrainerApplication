@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomLanguageLayotStatisticBlock.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomTextBox.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomPasswordBox.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomUserControl.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <BitmapImage x:Key="AuthorizationLogo" UriSource="pack://application:,,,/Resources/Images/AuthorizationLogo.png"/>
             <BitmapImage x:Key="KeyboardSchemeEngImage" UriSource="pack://application:,,,/Resources/Images/KeyboardSchemeEng.png"/>

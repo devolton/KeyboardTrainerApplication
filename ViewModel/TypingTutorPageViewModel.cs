@@ -291,7 +291,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private bool CanExecuteStartLessonCommand(object param)
         {
-            return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
+            return _model.IsEnglishLanguageSelected();
         }
         private void IsHiginglockVisible()
         {

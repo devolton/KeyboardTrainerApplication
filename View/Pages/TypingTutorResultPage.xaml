@@ -86,6 +86,7 @@
                     Style="{StaticResource CustomVioletTemplateButton}"
                     />
             <Button Content="Next"
+                    IsEnabled="{Binding IsNextLessonButtonEnabled}"
                     Command="{Binding NextLessonCommand}"
                    Style="{StaticResource CustomYellowTemplateButton}"/>
         </StackPanel>

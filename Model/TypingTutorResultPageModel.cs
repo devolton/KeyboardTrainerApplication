@@ -69,6 +69,11 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Update lessons EducationUsersProgresses object 
         /// </summary>
+        
+        public bool IsCurrentLessonNotLast()
+        {
+            return true;// придумать проверку
+        }
         public void UpdateLessonData()
         {
             bool isLessTwoCompleted = IsExecuteLessTwoErrorCondition();

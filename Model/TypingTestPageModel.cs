@@ -80,6 +80,10 @@ namespace CourseProjectKeyboardApplication.Model
 
             return _runsList;
         }
+        public bool IsEnglishLanguageSelected()
+        {
+            return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
+        }
         public void SetupTest()
         {
             int randomIndex = _random.Next(_testTextCollection.Count);

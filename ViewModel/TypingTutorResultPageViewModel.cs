@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using System.Xml.XPath;
+using System.Runtime.CompilerServices;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -27,11 +28,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _tryAgainLessonCommand;
         private ICommand _nextLessonCommand;
 
+        private bool _isNextLessonButtonEnabled = true;
+
         private TypingTutorResultPageViewModel()
         {
             _model = new TypingTutorResultPageModel();
             _tryAgainLessonCommand = new RelayCommand(OnTryAgainLessonCommand);
-            _nextLessonCommand = new RelayCommand(OnNextLessonCommand);
+            _nextLessonCommand = new RelayCommand(OnNextLessonCommand, CanExecuteNextLessonCommand);
             _loadedPageCommand = new RelayCommand(OnLoadedPageCommand);
 
         }
@@ -92,16 +95,24 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(LessonResultStr));
             }
         }
+        public bool IsNextLessonButtonEnabled
+        {
+            get => _isNextLessonButtonEnabled;
+            set
+            {
+                _isNextLessonButtonEnabled = value;
+                OnPropertyChanged(nameof(IsNextLessonButtonEnabled));
+            }
+        }
         #endregion
         //command
+        #region
         private void OnTryAgainLessonCommand(object param)
         {
-            //working with current lesson 
             FrameMediator.DisplayTypingTutorPage();
         }
         private void OnNextLessonCommand(object param)
         {
-            //select next lesson
             _model.SetNextEducationUserProgress();
             FrameMediator.DisplayTypingTutorPage();
         }
@@ -119,7 +130,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
         }
 
-
+        #endregion
+        //command predicate 
+        #region
+         private bool CanExecuteNextLessonCommand(object param)
+        {
+            return _model.IsCurrentLessonNotLast();
+        }
+        #endregion
         private void InitAchivementStackPanel()
         {
 
@@ -130,6 +148,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             AchivementStackPanel.Children.Add(lessTwoMistakeAchivementBlock);
             AchivementStackPanel.Children.Add(withoutMistakeAchivementBlock);
             AchivementStackPanel.Children.Add(speedAchivementBlock);
+            IsNextLessonButtonEnabled = CanExecuteNextLessonCommand(null);
             _model.UpdateLessonData();
 
 

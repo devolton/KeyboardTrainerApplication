@@ -32,7 +32,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             StartButtonVisibility = Visibility.Visible;
             _isTestStarted = false;
             _isFirstKeyPushed = false;
-            _startLessonCommand = new RelayCommand(OnStartTestCommand);
+            _startLessonCommand = new RelayCommand(OnStartTestCommand ,CanExecuteStartTestCommand);
             _testSetupCommand = new RelayCommand(OnTestSetupCommand);
             _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteKeyCommand);
             _endTestCommand = new RelayCommand(OnEndTestCommand);
@@ -158,6 +158,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool CanExecuteKeyCommand(object param)
         {
             return _isTestStarted;
+        }
+        private bool CanExecuteStartTestCommand(object param)
+        {
+            return _model.IsEnglishLanguageSelected();
         }
         #endregion
         private bool IsShiftPushed()

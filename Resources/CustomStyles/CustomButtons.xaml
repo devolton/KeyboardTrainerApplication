@@ -193,6 +193,7 @@
     <Style x:Key="CusomPopupBoxButton" TargetType="Button">
         <Style.Setters>
             <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="{StaticResource CustomCoal}"/>
         </Style.Setters>
         <Style.Triggers>
@@ -206,6 +207,7 @@
             <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
         </Style.Setters>
     </Style>
+
 
 
 </ResourceDictionary>
