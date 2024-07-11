@@ -21,7 +21,7 @@
                 </BeginStoryboard>
                 <BeginStoryboard >
                     <Storyboard Storyboard.TargetProperty="Opacity">
-                        <DoubleAnimation From="0.7"
+                        <DoubleAnimation From="0.8"
                                          To="1"
                                          Duration="00:00:00.1"/>
                     </Storyboard>
@@ -45,7 +45,7 @@
                 <BeginStoryboard >
                     <Storyboard Storyboard.TargetProperty="Opacity">
                         <DoubleAnimation From="1"
-                         To="0.7"
+                         To="0.8"
                          Duration="00:00:00.1"/>
                     </Storyboard>
                 </BeginStoryboard>

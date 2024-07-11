@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class TypingTestInfoBlock : UserControl
     {
+        private TypingTestPageViewModel _viewModel;
         public TypingTestInfoBlock()
         {
             InitializeComponent();
+            _viewModel = TypingTestPageViewModel.Instance();
+            DataContext = _viewModel;
         }
     }
 }

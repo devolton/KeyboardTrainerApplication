@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,11 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
     /// </summary>
     public partial class LearnPage : Page
     {
-        private LearnPageEnInfoModel _enLocalisation;
+        private LearnPageViewModel _enLocalisation;
         public LearnPage( )
         {
             InitializeComponent();
-            _enLocalisation = new LearnPageEnInfoModel();
+            _enLocalisation = new LearnPageViewModel();
             DataContext = _enLocalisation;
         }
 

@@ -39,7 +39,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
             this.InitStyles();
             _defaultAvatar = Application.Current.Resources["ApplicationLogo"] as ImageSource; ;
-            _avatarSource = _defaultAvatar;
 
         }
 
@@ -88,6 +87,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _avatarSource = value;
+                MessageBox.Show(AvatarSource.ToString());
                 OnPropertyChanged(nameof(AvatarSource));
             }
         }
@@ -109,7 +109,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _login = value;
                 CanEnabledSaveButton();
-                LoginTextBoxStyle= ChangeTextBoxStyle(_model.IsValidLogin, Login);
+                LoginTextBoxStyle = ChangeTextBoxStyle(_model.IsValidLogin, Login);
                 OnPropertyChanged(nameof(Login));
             }
         }
@@ -218,7 +218,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 ChangeLoginTextBoxStyleAsync();
             }
-            
+
 
         }
         private void OnLoadUserInfoCommand(object param)
@@ -227,6 +227,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             Login = user.Login;
             Name = user.Name;
             Email = user.Email;
+            AvatarSource = _model.GetUserAvatarSource() ?? _defaultAvatar;
 
 
         }
@@ -279,8 +280,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private bool CanSaveChangeCommandExecute(object param)
         {
-            return _model.IsValidName(Name) && _model.IsValidEmail(Email) && (_model.IsValidPassword(Password) && _model.IsValidLogin(Login)
-                && Password.Equals(ConfirmPassword)) || (Password.Equals(string.Empty) && ConfirmPassword.Equals(string.Empty));
+            return _model.IsValidName(Name) && _model.IsValidEmail(Email) && _model.IsValidLogin(Login) && ((_model.IsValidPassword(Password)
+                && ConfirmPassword.Equals(Password)) || (Password.Equals(string.Empty) && ConfirmPassword.Equals(string.Empty)));
         }
 
         private void CanEnabledSaveButton() => IsSaveButtonEnabled = CanSaveChangeCommandExecute(null);
@@ -300,8 +301,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             PasswordTextBoxStyle = _defaultTextBoxStyle;
             ConfirmPasswordBoxStyle = _defaultPasswordBoxStyle;
             ConfirmPasswordTextBoxStyle = _defaultTextBoxStyle;
-            
-            
+
+
         }
         private Task ChangeLoginTextBoxStyleAsync()
         {
@@ -312,7 +313,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     LoginTextBoxStyle = _errorTextBoxStyle;
 
                 });
-                 await Task.Delay(2000);
+                await Task.Delay(2000);
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     LoginTextBoxStyle = _defaultTextBoxStyle;
@@ -322,7 +323,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private Task ChangeEmailTextBoxStyleAsync()
         {
-            return Task.Run( async () =>
+            return Task.Run(async () =>
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {

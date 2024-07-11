@@ -15,6 +15,7 @@
         WindowStartupLocation="CenterScreen" 
         Closing="Window_Closing"
         Icon="{StaticResource ApplicationLogo}" 
+        Loaded="Window_Loaded"
        
         >
     <materialDesign:Card

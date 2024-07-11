@@ -22,6 +22,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private static EducationResultsPageViewModel _instance;
         private StackPanel _mainStackPanel;
+        private Style _lessonButtonUserElementStyle;
 
         //commands
         private ICommand _initializationCommand;
@@ -41,6 +42,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _initializationCommand = new RelayCommand(OnInitializationCommand);
             _continueEducationCommand = new RelayCommand(OnContinueEducationCommand);
             _startLessonCommand = new RelayCommand(OnStartLessonCommand, CanStartLessonCommandExecute);
+            _lessonButtonUserElementStyle = (Style)Application.Current.Resources["EducationLessonUserControl"];
 
         }
         public static EducationResultsPageViewModel Instance()
@@ -217,7 +219,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private EducationResultsLessonNumberButton CreateEducationResultLessonNumberButton(EnglishLayoutLesson lesson, EducationUsersProgress educationUsersProgress)
         {
             var lessonButton = new EducationResultsLessonNumberButton(lesson, educationUsersProgress);
-            lessonButton.Style =(Style) Application.Current.Resources["EducationLessonUserControl"];
+            lessonButton.Style = _lessonButtonUserElementStyle;
             lessonButton.MouseLeftButtonDown += LessonButton_MouseClick;
             lessonButton.LessThanTwoTyposCircleBackground = (educationUsersProgress.IsLessThanTwoErrorsCompleted) ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Silver;
             lessonButton.WithoutErrorsCircleBackground = (educationUsersProgress.IsWithoutErrorsCompleted) ? System.Windows.Media.Brushes.ForestGreen : System.Windows.Media.Brushes.Silver;
@@ -227,7 +229,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private EducationResultsCurrentLessonButton CreateEducationResultCurrentButton(EnglishLayoutLesson lesson)
         {
             var currentButton = new EducationResultsCurrentLessonButton(lesson);
-            currentButton.Style = (Style)Application.Current.Resources["EducationLessonUserControl"];
+            currentButton.Style = _lessonButtonUserElementStyle;
             currentButton.MouseLeftButtonDown += LessonButton_MouseClick;
             _isCurrentLesson = false;
             _currentLessonButton = currentButton;

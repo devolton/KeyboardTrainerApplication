@@ -35,6 +35,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         // user credentiels fields
         private string _loginOrEmail;
         private string _password = string.Empty;
+        private MainWindow _mainWindow;
+
         public LoginUserPageViewModel()
         {
 
@@ -49,11 +51,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _passwordBoxInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPagePasswordBox"];
             LoginOrEmail = _model.GetLoginFromRegister();
             Password = _model.GetPasswordFromRegister();
-            if(LoginOrEmail!=string.Empty && Password != string.Empty)
+            if (LoginOrEmail!=string.Empty && Password != string.Empty)
             {
                 IsChecked = true;
             }
-
+            InitMainPage();
         }
 
         //свойства 
@@ -282,7 +284,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OpenMainWindow()
         {
-            new MainWindow().Show();
+            _mainWindow.Show();
             foreach (Window oneWindow in Application.Current.Windows)
             {
                 if (oneWindow is AuthorizationWindow)
@@ -292,6 +294,17 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
             }
         }
+        private Task InitMainPage()
+        {
+            return Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    _mainWindow = new MainWindow();
+                });
+            });
+        }
+
 
 
 

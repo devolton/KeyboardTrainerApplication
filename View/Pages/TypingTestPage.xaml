@@ -69,15 +69,18 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
-                               FontSize="20"
+                               FontSize="18"
+                               Padding="5"
+                               TextWrapping="Wrap"
                                TextAlignment="Left"
-                               Text="Do you know that you can get certified in keyboarding on any layout? That’s right — whether you’re a QWERTY fan or prefer DVORAK, there’s a certification test for you."/>
+                               Text="{Binding FirstPartNearAchivementTableText}"/>
 
                     <TextBlock Grid.Row="1"
                                TextWrapping="Wrap"
-                               FontSize="20"
+                               FontSize="18"
+                               Padding="5"
                                TextAlignment="Left"
-                               Text="You can take the test as many times as you want! Only the best score will count towards your certification, there’s no need to worry about making a mistake."/>
+                               Text="{Binding SecondPartNearAchivementTableText}"/>
                 </Grid>
                 <Border Grid.Column="1"
                         Margin="30 10 10 10 "

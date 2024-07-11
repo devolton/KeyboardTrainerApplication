@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseProjectKeyboardApplication
+namespace CourseProjectKeyboardApplication.ViewModel
 {
-    public class LearnPageEnInfoModel : ILearnPageInfo
+    public class LearnPageViewModel:ViewModelBase
     {
         public string MainTitle { get; init; } = "Learn how to touch type";
         public string MainDescription { get; init; } = "Touch typing is all about the idea that each finger has its own area on the keyboard. Thanks to that fact you can type without looking at the keys. Practice regularly and your fingers will learn their location on the keyboard through muscle memory.";
@@ -24,15 +24,15 @@ namespace CourseProjectKeyboardApplication
         public string TrainTimeTitle { get; init; } = "It's time to get some practice";
         public string TrainTimeTestButtonText { get; init; } = "Speed test";
         public string TrainTimeStudyButtonText { get; init; } = "Start learn";
-        public LearnPageEnInfoModel()
+        public LearnPageViewModel()
         {
             TypingPoseRulesList = new List<string>() { "• Sit straight and remember to keep your back straight.",
                 "• Keep your elbows bent at the right angle.",
                 "• Face the screen with your head slightly tilted forward.",
                 "• Keep at least 45 - 70 cm of distance between your eyes and the screen.",
                 "• Еxpose the shoulder, arm, and wrist muscles to the least possible strain." +
-                " The wrists can touch the tabletop in front of the keyboard." +
-                " Never shift your body weight to the wrists by resting on them." };
+                "• The wrists can touch the tabletop in front of the keyboard." +
+                "• Never shift your body weight to the wrists by resting on them." };
             KeyboardSchemeRulesList = new List<string>()
             {
                 "• Hit keys only with the fingers for which they have been reserved.",

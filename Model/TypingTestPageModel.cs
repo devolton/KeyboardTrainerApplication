@@ -30,6 +30,12 @@ namespace CourseProjectKeyboardApplication.Model
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
         private List<EnglishTypingTestText> _testTextCollection;
         private Random _random;
+        private string _infoBlockRightHeaderText = "How is typing speedmeasured on DevoltonLabs?";
+        private string _infoBlockLeftHeaderText = "Why do I need to take a typing test?";
+        private string _infoBlockRightBodyText = "The most common way to measure typing speed is words per minute, or WPM. The 'word' is an average of 5 characters. To calculate WPM, simply take the number of words typed in a minute with no typos and divide by five. For example, if you type 100 characters in a minute including spaces, your typing speed would be 20 WPM. We all know how frustrating it is to make a typo in an important document.But did you know that typos can also have a major impact on your typing speed? That's why we don't allow you to continue typing if you have a typo in your test.You have to fix it to proceed with the WPM test.";
+        private string _infoBlockLeftBodyText = "There are many reasons why you might want to take a typing speed test. Perhaps you’re curious to find out how fast you can type, or maybe you want to see if you need to improve your accuracy. Either way, a typing speed test is a great way to estimate your progress. The average typing speed is 40 words per minute, so if you can beat that, you’re doing great!\r\n\r\nYou can take the test as many times as you like, and each time you’ll likely see your speed and accuracy improve. So why not give it a try today? You might be surprised at how fast you can type.";
+        private string _firstPartNearAchivementTableText = "Do you know that you can get certified in keyboarding on any layout? That’s right — whether you’re a QWERTY fan or prefer DVORAK, there’s a certification test for you.";
+        private string _secondPartNearAchivementTebleText = "You can take the test as many times as you want! Only the best score will count towards your certification, there’s no need to worry about making a mistake.";
 
         private TypingTestPageModel()
         {
@@ -154,6 +160,10 @@ namespace CourseProjectKeyboardApplication.Model
             });
 
         }
+        public string GetLeftInfoHeaderText() => _infoBlockLeftHeaderText;
+        public string GetRightInfoHeaderText() => _infoBlockRightHeaderText;
+        public string GetLeftInfoBodyText() => _infoBlockLeftBodyText;
+        public string GetRightInfoBodyText() => _infoBlockRightBodyText;
         public void IncrementMissclickCount() => ++_misclickCount;
         public void IncrementWordsTypingCount() => _wordsTypingCount++;
         private void InitKeyValueDictionaries()

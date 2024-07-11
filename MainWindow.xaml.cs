@@ -30,14 +30,81 @@ namespace CourseProjectKeyboardApplication
         private EditUserProfilPage _editUserProfilPage;
         private TypingTestResultPage _typingTestResultPage;
         private TypingTutorResultPage _typingTutorResultPage;
+        private Stopwatch _stopwatch = new Stopwatch();
 
         public MainWindow()
         {
+           
             InitializeComponent();
-
-            //придумать асинхронную иницализацию для уменьшения времени загрузки приложения 
+           
             _typingTestPage = new TypingTestPage();
-            Task.Run(() =>
+            
+           
+
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
+
+        }
+
+        private void TypingTutorMainButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMediator.DisplayTypingTutorPage();
+        }
+
+        private void TypingTestMainButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMediator.DisplayTypingTestPage();
+        }
+
+        private void LearnMainButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            FrameMediator.DisplayLearnPage();
+
+        }
+
+        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = _typingTestPage;
+        }
+
+        private void CertificatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMediator.DisplayTypingCertificatesPage();
+
+        }
+
+        private void CertificationResultButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMediator.DisplayTypingCertificatesResultPage();
+        }
+
+        private void EducationalResultsButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMediator.DisplayEducationResultsPage();
+        }
+
+
+        private void EditProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameMediator.DisplayEditUserProfilPage();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DatabaseModelMediator.EducationUserProgressModel.SaveChanges();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitPageS();
+        }
+        private Task InitPageS()
+        {
+          return  Task.Run(() =>
             {
                 Dispatcher.Invoke(() =>
                 {
@@ -70,63 +137,6 @@ namespace CourseProjectKeyboardApplication
 
 
             });
-
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Process.GetCurrentProcess().Kill();
-
-        }
-
-        private void TypingTutorMainButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayTypingTutorPage();
-        }
-
-        private void TypingTestMainButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayTypingTestPage();
-        }
-
-        private void LearnMainButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            FrameMediator.DisplayLearnPage();
-
-        }
-
-        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            MainFrame.Content = _typingTestPage;
-        }
-
-        private void CertificatesButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayTypingCertificatesPage();
-
-        }
-
-        private void CertificationResultButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayTypingCertificatesResultPage();
-        }
-
-        private void EducationalResultsButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayEducationResultsPage();
-        }
-
-
-        private void EditProfileButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayEditUserProfilPage();
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            DatabaseModelMediator.EducationUserProgressModel.SaveChanges();
         }
     }
 }

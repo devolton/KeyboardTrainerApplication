@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Database.Entities;
@@ -20,6 +22,7 @@ namespace CourseProjectKeyboardApplication.Model
     public class EditUserProfilePageModel : RegistrationFormModel
     {
         private string _openFileDialogImageFilter;
+        private string _remotePath = @"D:\C#WinForms\CourseProjectKeyboardApplication\Resources\UserAvatars\\";
         private OpenFileDialog _openFileDialog;
         private string _oldEmail = string.Empty;
         private string _oldLogin = string.Empty;
@@ -35,22 +38,30 @@ namespace CourseProjectKeyboardApplication.Model
             _userModel = DatabaseModelMediator.UserModel;
 
 
-
         }
 
         public ImageSource? LoadNewAvatar()
         {
             if (_openFileDialog.ShowDialog() == true)
             {
-                //adding local
-                return new BitmapImage(new Uri(_openFileDialog.FileName));
+                //1.Копировать фото в место хранения аватаров
+                //1.1 Переименовываем на (userId).png
+                //2. Создаем BitmapImage на основе нового Uri куда мы копировали фото
+                //3. Возвращаем его
+                MessageBox.Show(_openFileDialog.FileName);
+                var fileName = Path.GetFileName(_openFileDialog.FileName);
+                string remotePath = _remotePath + fileName;
+                File.Copy(_openFileDialog.FileName, remotePath, true);
+                var remoteUri = new Uri(remotePath);
+                UpdateUserAvatarPath(remotePath);
+                return new BitmapImage(remoteUri);
             }
             return null;
 
         }
         public void RemoveAvatar()
         {
-            //removing local avatar
+            //removing remote avatar
 
         }
         public User GetUserInfo()
@@ -58,14 +69,26 @@ namespace CourseProjectKeyboardApplication.Model
             _user = UserController.CurrentUser;
             _oldEmail = _user.Email;
             _oldLogin = _user.Login;
+            MessageBox.Show(_user.AvatarPath.ToString());
             return _user;
+        }
+        public ImageSource? GetUserAvatarSource()
+        {
+            if(_user.AvatarPath == string.Empty)
+            {
+                if (File.Exists(_user.AvatarPath))
+                {
+                    return new BitmapImage(new Uri(_user.AvatarPath)); 
+                }
+            }
+            return null;
         }
         public void SaveUpdateUser(string updateName, string updateLogin, string updateEmail, string updatePassword)
         {
             _user.Login = updateLogin;
             _user.Email = updateEmail;
             _user.Name = updateName;
-            if (updatePassword != "")
+            if (updatePassword != string.Empty)
             {
                 _user.Password = PasswordSHA256Encrypter.EncryptPassword(updatePassword);
             }
@@ -76,6 +99,11 @@ namespace CourseProjectKeyboardApplication.Model
             _isUniqueEmail = _oldEmail == email || _userModel.IsUniqueEmail(email);
             _isUniqueLogin = _oldLogin == login || _userModel.IsUniqueLogin(login);
             return _isUniqueEmail && _isUniqueLogin;
+        }
+        private void UpdateUserAvatarPath(string avatarPath)
+        {
+            _user.AvatarPath = avatarPath;
+
         }
 
         //adding method which, if update is succesfull, updates the data in the register or delete data from register

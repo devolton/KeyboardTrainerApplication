@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -25,6 +28,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _keyDownCommand;
         private ICommand _endTestCommand;
 
+        private string _infoBlockRightHeaderText = string.Empty;
+        private string _infoBlockLeftHeaderText = string.Empty;
+        private string _infoBlockRightBodyText = string.Empty;
+        private string _infoBlockLeftBodyText = string.Empty;
+        private string _firstPartNearAchivementTableText = string.Empty;
+        private string _secondPartNearAchivementTebleText = string.Empty;
         private TypingTestPageViewModel()
         {
             _model = TypingTestPageModel.Instance();
@@ -32,10 +41,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
             StartButtonVisibility = Visibility.Visible;
             _isTestStarted = false;
             _isFirstKeyPushed = false;
-            _startLessonCommand = new RelayCommand(OnStartTestCommand ,CanExecuteStartTestCommand);
+            _startLessonCommand = new RelayCommand(OnStartTestCommand, CanExecuteStartTestCommand);
             _testSetupCommand = new RelayCommand(OnTestSetupCommand);
             _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteKeyCommand);
             _endTestCommand = new RelayCommand(OnEndTestCommand);
+            _infoBlockRightHeaderText = _model.GetRightInfoHeaderText();
+            _infoBlockRightBodyText = _model.GetRightInfoBodyText();
+            _infoBlockLeftHeaderText = _model.GetLeftInfoHeaderText();
+            _infoBlockLeftBodyText = _model.GetLeftInfoBodyText();
 
         }
         public static TypingTestPageViewModel Instance()
@@ -68,6 +81,60 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(HidePanelVisibility));
             }
         }
+        public string InfoBlockRightHeaderText
+        {
+            get => _infoBlockRightHeaderText;
+            set
+            {
+                _infoBlockLeftBodyText = value;
+                OnPropertyChanged(nameof(InfoBlockRightHeaderText));
+            }
+        }
+        public string InfoBlockLeftHeaderText
+        {
+            get => _infoBlockLeftHeaderText;
+            set
+            {
+                _infoBlockLeftHeaderText = value;
+                OnPropertyChanged(nameof(InfoBlockLeftHeaderText));
+            }
+        }
+        public string InfoBlockRightBodyText
+        {
+            get => _infoBlockRightBodyText;
+            set
+            {
+                _infoBlockRightBodyText = value;
+                OnPropertyChanged(nameof(InfoBlockRightBodyText));
+            }
+        }
+        public string InfoBlockLeftBodyText
+        {
+            get => _infoBlockLeftBodyText;
+            set
+            {
+                _infoBlockLeftBodyText = value;
+                OnPropertyChanged(nameof(InfoBlockLeftBodyText));
+            }
+        }
+        public string FirstPartNearAchivementTableText
+        {
+            get => _firstPartNearAchivementTableText;
+            set
+            {
+                _firstPartNearAchivementTableText = value;
+                OnPropertyChanged(nameof(FirstPartNearAchivementTableText));
+            }
+        }
+        public string SecondPartNearAchivementTableText
+        {
+            get => _secondPartNearAchivementTebleText;
+            set
+            {
+                _secondPartNearAchivementTebleText = value;
+                OnPropertyChanged(nameof(SecondPartNearAchivementTableText));
+            }
+        }
 
         #endregion
         //commands
@@ -90,7 +157,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 _textBlock.Inlines.AddRange(_model.GetTextRuns());
 
             }
-            
+
 
         }
         private void OnKeyDownCommand(object param)
@@ -109,7 +176,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     if (key.Equals(Key.Space))
                         _model.IncrementWordsTypingCount();
                     _model.SetSymbolRunStyle(true);
-               
+
                 }
                 else
                 {
@@ -129,7 +196,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     if (key.Equals(Key.Space))
                         _model.IncrementWordsTypingCount();
                     _model.SetSymbolRunStyle(true);
-            
+
                 }
                 else
                 {
