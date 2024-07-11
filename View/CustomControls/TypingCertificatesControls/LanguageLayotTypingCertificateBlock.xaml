@@ -45,7 +45,14 @@
                Margin="30"
                Height="400"
                Stretch="Fill"
-               Source="{Binding CertificateSource}"/>
+               Source="{Binding CertificateSource}">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="20" 
+                                  Opacity="0.8"
+                                  Direction="300"
+                                  Color="Black"/>
+            </Image.Effect>
+        </Image>
         <Button 
                 IsEnabled="{Binding IsSaveCertificateButtonEnabled}"
                 HorizontalAlignment="Right"

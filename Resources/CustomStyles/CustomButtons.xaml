@@ -41,6 +41,7 @@
                                             AutoReverse="True"/>
                     </Storyboard>
                 </BeginStoryboard>
+               
             </EventTrigger>
 
         </Style.Triggers>
@@ -173,7 +174,7 @@
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
-          
+
 
         </Style.Triggers>
     </Style>
@@ -188,6 +189,30 @@
             <Setter Property="FontWeight" Value="Normal"/>
 
         </Style.Setters>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard >
+                        <ColorAnimation
+                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        From="#03045e"
+                                        To="#003249"
+                                        Duration="0:0:01"
+                                        AutoReverse="True"
+                                        RepeatBehavior="Forever" />
+
+                        <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                         From="0"
+                                         To="0 0 0 7"
+                                         Duration="0:0:00.7"
+                                         AutoReverse="True"
+                                         RepeatBehavior="Forever"/>
+                    </Storyboard>
+
+                        
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
     </Style>
 <!--popupBox style-->
     <Style x:Key="CusomPopupBoxButton" TargetType="Button">
