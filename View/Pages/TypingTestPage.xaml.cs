@@ -42,14 +42,16 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
             _typingTestPageViewModel.KeyDownCommand.Execute(e.Key);
         }
 
-        private void Page_GotFocus(object sender, RoutedEventArgs e)
-        {
-            FocusRectangel.Focus();
-        }
+
 
         private void Page_LostFocus(object sender, RoutedEventArgs e)
         {
             _typingTestPageViewModel.EndTestCommand.Execute(e);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            TypingPage.Focus();
         }
     }
 }

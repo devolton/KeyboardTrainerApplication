@@ -15,6 +15,7 @@ using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Tools;
 using CourseProjectKeyboardApplication.ViewModel;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 
 namespace CourseProjectKeyboardApplication.Model
@@ -27,6 +28,7 @@ namespace CourseProjectKeyboardApplication.Model
         private string _oldEmail = string.Empty;
         private string _oldLogin = string.Empty;
         private User _user;
+        private BitmapImage _userAvatarBitmapImage;
 
         public EditUserProfilePageModel()
         {
@@ -44,24 +46,22 @@ namespace CourseProjectKeyboardApplication.Model
         {
             if (_openFileDialog.ShowDialog() == true)
             {
-                //1.Копировать фото в место хранения аватаров
-                //1.1 Переименовываем на (userId).png
-                //2. Создаем BitmapImage на основе нового Uri куда мы копировали фото
-                //3. Возвращаем его
-                MessageBox.Show(_openFileDialog.FileName);
-                var fileName = Path.GetFileName(_openFileDialog.FileName);
-                string remotePath = _remotePath + fileName;
-                File.Copy(_openFileDialog.FileName, remotePath, true);
-                var remoteUri = new Uri(remotePath);
-                UpdateUserAvatarPath(remotePath);
-                return new BitmapImage(remoteUri);
+                var avatarFileName = Path.GetFileName(_openFileDialog.FileName); // имя файла 
+                string remoteAvatarPathBeforeRename = _remotePath + avatarFileName; //полный удаленный путь файла
+                File.Copy(_openFileDialog.FileName, remoteAvatarPathBeforeRename, true); // копирование файла в удаленный репозиторий 
+                string remoteAvatarPathAfterRename = GetRenamedUserAvatarPath(remoteAvatarPathBeforeRename);
+
+                var remoteRepositoryAvatarUri = new Uri(remoteAvatarPathAfterRename);
+                UpdateUserAvatarPath(remoteAvatarPathAfterRename);
+                _userAvatarBitmapImage = new BitmapImage(remoteRepositoryAvatarUri);
+                return _userAvatarBitmapImage;
             }
             return null;
 
         }
         public void RemoveAvatar()
         {
-            //removing remote avatar
+            UpdateUserAvatarPath(string.Empty);
 
         }
         public User GetUserInfo()
@@ -69,18 +69,18 @@ namespace CourseProjectKeyboardApplication.Model
             _user = UserController.CurrentUser;
             _oldEmail = _user.Email;
             _oldLogin = _user.Login;
-            MessageBox.Show(_user.AvatarPath.ToString());
             return _user;
         }
         public ImageSource? GetUserAvatarSource()
         {
-            if(_user.AvatarPath == string.Empty)
+            if(_user.AvatarPath != string.Empty)
             {
                 if (File.Exists(_user.AvatarPath))
                 {
                     return new BitmapImage(new Uri(_user.AvatarPath)); 
                 }
             }
+           
             return null;
         }
         public void SaveUpdateUser(string updateName, string updateLogin, string updateEmail, string updatePassword)
@@ -105,8 +105,19 @@ namespace CourseProjectKeyboardApplication.Model
             _user.AvatarPath = avatarPath;
 
         }
+        private string GetRenamedUserAvatarPath(string remoteFilePathBeforeRename)
+        {
+            string newUserAvatarName = _user.Id.ToString()+"_" + Guid.NewGuid();//maybe update or using other 
+            string avatarFileExtension = Path.GetExtension(remoteFilePathBeforeRename);
+            string remoteAvatarPathAfterRename = Path.Combine(_remotePath, newUserAvatarName + avatarFileExtension);
+            if (File.Exists(remoteAvatarPathAfterRename))
+            {
+                //выполнять удаление аватара удаленно после того как user закрыл приложение
+            }
+            File.Move(remoteFilePathBeforeRename, remoteAvatarPathAfterRename);
+            return remoteAvatarPathAfterRename;
+        }
 
-        //adding method which, if update is succesfull, updates the data in the register or delete data from register
 
     }
 }

@@ -30,6 +30,7 @@
                     </i:InvokeCommandAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+         
             <TextBlock
                      Name="WordsTextBlock"
                      Padding="10 20 10 10"

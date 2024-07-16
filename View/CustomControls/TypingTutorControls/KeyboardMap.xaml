@@ -331,7 +331,6 @@
             x:Name="RightShiftLabel"
             KeyTag="Shift"
             Grid.Column="12"
-            IsFocusKeyboardItem="True"
             Grid.Row="3"
             Grid.ColumnSpan="2"
             TextValue="Shift"

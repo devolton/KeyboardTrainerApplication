@@ -16,6 +16,8 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Data.Entity.Core.Objects;
+using System.Drawing;
+using System.Windows.Shapes;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -31,7 +33,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private double _progressBarValue;
         private double _progressBarMaxValue;
         private double _textSize;
-        
+
         private TextBlock? _textBlock;
 
         private ICommand _startLessonCommand;
@@ -56,7 +58,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _keyboardItemList = new List<IKeyboardItem>();
             _errorPressedKeyboardCollection = new List<IKeyboardItem>();
             _shiftKeyboardItemCollection = new List<IKeyboardItem>();
-            
+
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
             _textSize = 24;
@@ -255,7 +257,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
 
             var key = (Key)param;
-            var tag = _model.GetKeyStrTag(key);
             if (_errorPressedKeyboardCollection.Count != 0)
             {
                 RemoveErrorStyle();
@@ -369,7 +370,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void ChangeFocusForShift(bool isFocused)
         {
-            
+
             foreach (var oneShift in _shiftKeyboardItemCollection)
             {
                 oneShift.IsFocusKeyboardItem = isFocused;

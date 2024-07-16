@@ -87,7 +87,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _avatarSource = value;
-                MessageBox.Show(AvatarSource.ToString());
                 OnPropertyChanged(nameof(AvatarSource));
             }
         }
@@ -192,6 +191,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             AvatarSource = _defaultAvatar;
             IsRemoveAvatarButtonEnabled = false;
             _isSetDefaultAvatar = true;
+            _model.RemoveAvatar();
         }
         private void OnChangeAvatarCommmand(object param)
         {
@@ -201,6 +201,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 AvatarSource = newAvatarSource;
                 IsRemoveAvatarButtonEnabled = true;
                 _isSetDefaultAvatar = false;
+                
             }
 
         }
@@ -227,7 +228,17 @@ namespace CourseProjectKeyboardApplication.ViewModel
             Login = user.Login;
             Name = user.Name;
             Email = user.Email;
-            AvatarSource = _model.GetUserAvatarSource() ?? _defaultAvatar;
+            var userAvatar = _model.GetUserAvatarSource();
+            if (userAvatar is null)
+            {
+                AvatarSource = _defaultAvatar;
+            }
+            else
+            {
+                AvatarSource = userAvatar;
+                _isSetDefaultAvatar = false;
+                IsRemoveAvatarButtonEnabled = true;
+            }
 
 
         }

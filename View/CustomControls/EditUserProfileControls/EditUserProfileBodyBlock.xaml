@@ -10,6 +10,7 @@
              xmlns:behaviors="clr-namespace:CourseProjectKeyboardApplication.Tools.Behaviors"
              d:DataContext="{d:DesignInstance Type=viewmodel:EditUserProfilePageViewModel}"
              mc:Ignorable="d" 
+             Margin="0 0 0 20"
              d:DesignHeight="450" d:DesignWidth="800">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -20,7 +21,7 @@
     <StackPanel
         HorizontalAlignment="Center"
         Orientation="Vertical"
-        Margin="0 0 0 20">
+        >
         <TextBox
                     x:Name="NameTextBox"
                     Text="{Binding Name}"
@@ -47,7 +48,7 @@
             </Grid.ColumnDefinitions>
             <PasswordBox
                     x:Name="PasswordBox"
-                    materialDesign:HintAssist.Hint="Password"
+                    materialDesign:HintAssist.Hint="New password"
                     Visibility="{Binding PasswordBoxVisibility}"
                     Tag="password"
                     Style="{Binding PasswordBoxStyle}">
@@ -58,7 +59,7 @@
             <TextBox    
                     x:Name="PasswordTextBox"
                     Text="{Binding Password}"
-                    materialDesign:HintAssist.Hint="Password"
+                    materialDesign:HintAssist.Hint="New password"
                     Visibility="{Binding PasswordTextBoxVisibility}"
                     Style="{Binding PasswordTextBoxStyle}"/>
             <Button     
@@ -95,7 +96,7 @@
             </Grid.ColumnDefinitions>
             <PasswordBox
                     x:Name="ConfirmPasswordBox"
-                    materialDesign:HintAssist.Hint="Confirm password"
+                    materialDesign:HintAssist.Hint="Confirm new password"
                     Tag="confirmPassword"
                     Visibility="{Binding ConfirmPasswordBoxVisibility}"
                     Style="{Binding ConfirmPasswordBoxStyle}">
@@ -105,7 +106,7 @@
             </PasswordBox>
             <TextBox x:Name="ConfirmPasswordTextBox" 
                  Text="{Binding ConfirmPassword}"
-                 materialDesign:HintAssist.Hint="ConfirmPassword"
+                 materialDesign:HintAssist.Hint="Confirm new Password"
                  Visibility="{Binding ConfirmPasswordTextBoxVisibility}"
                  Style="{Binding ConfirmPasswordTextBoxStyle}"/>
 
