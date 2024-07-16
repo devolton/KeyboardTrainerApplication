@@ -1,21 +1,31 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Collections;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.XPath;
 
 namespace Encrypter
 {
-    public sealed partial class DevoltonEncrypter
+    public abstract class BaseDevoltonEncrypter
     {
+        protected BaseDevoltonEncrypter()
+        {
+            this._xorBitArrayForThirdBlock = XorBitArrayInit(false);
+            this._xorBitArrayForSecondBlock = XorBitArrayInit(true);
+            this._oneBytePermutationIndexDict = BitPermutationIndexDictInit();
+            this._twoBytePermutationIndexDict = TwoCharsBitPermutationIndexDictInit();
+            this._keyForZero = "\t\n\a";
+        }
+        protected string _keyForZero;
+        protected BitArray _xorBitArrayForThirdBlock;
+        protected BitArray _xorBitArrayForSecondBlock;
+        protected Dictionary<int, int> _oneBytePermutationIndexDict;
+        protected Dictionary<int, int> _twoBytePermutationIndexDict;
+        protected StringBuilder _sb;
+        protected int _key { get; set; }
+        protected bool _isStrKey { get; set; }
         //метод генерации делителя в зависимости от ключа 
-        private int GetDeliveder()
+        protected int GetDeliveder()
         {
             var sb = new StringBuilder(32);
-            string keyStr = Convert.ToString(_Key, 2);
+            string keyStr = Convert.ToString(_key, 2);
             string resultStr;
             int result;
             keyStr = EnlargeBinary(keyStr, true);
@@ -28,7 +38,7 @@ namespace Encrypter
 
 
         //метод трансформации String ключа в Int
-        private int TransformstionStrKeyToInt(string keyStr)
+        protected int TransformstionStrKeyToInt(string keyStr)
         {
             if (keyStr == "") return 2;
             int booferNumber = 0;
@@ -52,14 +62,14 @@ namespace Encrypter
             return booferNumber;
 
         }
-        private BitArray XorBitArrayInit(bool isSecondBlock)
+        protected BitArray XorBitArrayInit(bool isSecondBlock)
         {
 
             return (isSecondBlock) ? new BitArray(new bool[] { true, true, true, true, true, true, true, true }) :
                 new BitArray(new bool[] { true, false, true, false, true, false, true, false });
         }
 
-        private Dictionary<int, int> BitPermutationIndexDictInit()
+        protected Dictionary<int, int> BitPermutationIndexDictInit()
         {
             Dictionary<int, int> dict = new Dictionary<int, int>(30)
             {
@@ -73,7 +83,7 @@ namespace Encrypter
             return dict;
         }
 
-        private Dictionary<int, int> TwoCharsBitPermutationIndexDictInit()
+        protected Dictionary<int, int> TwoCharsBitPermutationIndexDictInit()
         {
             Dictionary<int, int> dict = new Dictionary<int, int>(30)
             {
@@ -86,7 +96,7 @@ namespace Encrypter
         }
 
         //метод перестановки битов
-        private string ReplaceBits(string str, bool isEncrypt)
+        protected string ReplaceBits(string str, bool isEncrypt)
         {
             var sb = new StringBuilder(str.Length);
             Dictionary<int, int> bitPermutationIndexDict = (str.Length == 32) ? _oneBytePermutationIndexDict : _twoBytePermutationIndexDict;
@@ -121,7 +131,7 @@ namespace Encrypter
         }
 
         //метод конвертации строки в BitArray
-        private BitArray FromBinaryStringToBitArray(string str)
+        protected BitArray FromBinaryStringToBitArray(string str)
         {
             if (string.IsNullOrEmpty(str)) throw new ArgumentException("Incorrect operation!", nameof(str));
 
@@ -145,7 +155,7 @@ namespace Encrypter
         }
 
         //метод конвертации BitArray в строку
-        private string FromBitArrayToBinaryString(BitArray bitArray)
+        protected string FromBitArrayToBinaryString(BitArray bitArray)
         {
             if (bitArray == null) throw new ArgumentException("Incorrect operation", nameof(bitArray));
             StringBuilder sb = new StringBuilder(bitArray.Length);
@@ -158,7 +168,7 @@ namespace Encrypter
 
 
         //метод разбивания символа в байты
-        private string[] GetBrokenIntPerByte(string str, bool isBytePair)
+        protected string[] GetBrokenIntPerByte(string str, bool isBytePair)
         {
             int bytesLength = (isBytePair) ? 8 : 4;
             string[] bytes = new string[bytesLength];
@@ -171,7 +181,7 @@ namespace Encrypter
             return bytes;
         }
         //метод удленнения бинарной строки до нужной длинны
-        private string EnlargeBinary(string binary, bool isEnlargeToByte)
+        protected string EnlargeBinary(string binary, bool isEnlargeToByte)
         {
             int length = (isEnlargeToByte) ? 32 : 8;
             if (binary.Length > length) throw new ArgumentException("Incorrect param!", nameof(length));
@@ -189,7 +199,7 @@ namespace Encrypter
         }
 
         //метод разбивания строки на части
-        private IEnumerable<string> GetSliced(string str, int size)
+        protected IEnumerable<string> GetSliced(string str, int size)
         {
             if (str.Length < size || size == 0)
             {
@@ -210,7 +220,7 @@ namespace Encrypter
         }
 
         //метод конвертации char в Int
-        private IEnumerable<int> GetIntCharValue(string str)
+        protected IEnumerable<int> GetIntCharValue(string str)
         {
             foreach (char ch in str)
             {
@@ -222,7 +232,7 @@ namespace Encrypter
 
 
         //метод поиска наиболее чаще всречаемого символа
-        private char GetTheMostFrequentlyOccurringCharacter(string str)
+        protected char GetTheMostFrequentlyOccurringCharacter(string str)
         {
             var charCount = str.Where(symbol => symbol != ' ').GroupBy(symbol => symbol).ToDictionary(symbol => symbol.Key, symbol => symbol.Count());
             return charCount.OrderByDescending(symbol => symbol.Value).First().Key;
@@ -230,7 +240,7 @@ namespace Encrypter
 
         }
         // метоод поиска наименне чаще встречаемого символа 
-        private char GetLeastFrequentlyOccurringCharacter(string str)
+        protected char GetLeastFrequentlyOccurringCharacter(string str)
         {
             var charCount = str.Where(symbol => symbol != ' ').GroupBy(symbol => symbol).ToDictionary(symbol => symbol.Key, symbol => symbol.Count());
             return charCount.OrderByDescending(symbol => symbol.Value).Last().Key;

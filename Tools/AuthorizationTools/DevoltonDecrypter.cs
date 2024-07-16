@@ -1,38 +1,28 @@
-﻿using System;
+﻿using Encrypter;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.WebSockets;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.XPath;
 
-namespace Encrypter
+namespace CourseProjectKeyboardApplication.Tools.AuthorizationTools
 {
-    public sealed class DevoltonEncrypter:BaseDevoltonEncrypter
+    public sealed class DevoltonDecrypter:BaseDevoltonEncrypter
     {
-        
-        private DevoltonEncrypter():base()
+        private static DevoltonDecrypter _instance;
+        private DevoltonDecrypter():base()
         {
             
-
         }
-        private static DevoltonEncrypter _instance { get; set; }
-        public static DevoltonEncrypter Instance()
+        public static DevoltonDecrypter Instance()
         {
-            _instance ??= new DevoltonEncrypter();
+            _instance ??= new DevoltonDecrypter();
             return _instance;
         }
-
-
-
-
-        //CeaserBlock - разбивает строку на части в зависимости от ключа и в каждом втором блоке смещает значение символа по ASCII таблице
-        private string EncryptCeasar(string str)
+        private string DecryptCeasar(string str)
         {
-            List<string> strItems = new List<string>(100);
+            List<string> strItems = new List<string>();
             foreach (var item in GetSliced(str, Math.Abs(_key)))
             {
                 strItems.Add(item);
@@ -45,22 +35,20 @@ namespace Encrypter
                 for (int i = 0; i < oneStr.Length; i++)
                 {
                     if (index % 2 == remainderIndex)
-                        _sb.Append((char)(oneStr[i] + _key));
+                        _sb.Append((char)(oneStr[i] - _key));
 
                     else
-                        _sb.Append((char)(oneStr[i] - _key));
+                        _sb.Append((char)(oneStr[i] + _key));
                 }
 
             }
+
             string result = _sb.ToString();
             _sb.Clear();
             return result;
+
         }
-
-
-
-        //EncryptMakiavelli - перестановка символов по индексу в зависимости от ключа
-        private string EncryptMakiavelli(string str)
+        private string DecryptMakiavelli(string str)
         {
             int replaceIndex = (_key >= 0) ? Math.Abs(_key) % 7 : Math.Abs(_key) % 7 + 2;
             var sb = new StringBuilder(str);
@@ -79,14 +67,8 @@ namespace Encrypter
                     counter++;
             }
             return sb.ToString();
-
         }
-
-      
-
-        //EncryptSeneca - разрезаем строку на части в зависимости от суммы количества символов который встречаются чаще и реже всех,
-        // каждую из частей режем еще на две части и меняем местами
-        private string EncryptSeneca(string str)
+        private string DecryptSeneca(string str)
         {
             _sb = new StringBuilder();
             var mostShowChar = GetTheMostFrequentlyOccurringCharacter(str);
@@ -101,6 +83,7 @@ namespace Encrypter
                 {
                     string currentSubstr = str.Substring(startIndex, i - startIndex + 1);
                     int middleIndex = currentSubstr.Length / 2;
+                    if (currentSubstr.Length % 2 == 1) middleIndex++;
                     string firstSubstrPart = currentSubstr.Substring(0, middleIndex);
                     string secondSubstrPart = currentSubstr.Substring(middleIndex);
                     _sb.Append(secondSubstrPart);
@@ -117,19 +100,10 @@ namespace Encrypter
             string result = _sb.ToString();
             _sb.Clear();
             return result;
-
         }
-
-       
-
-
-
-
-        //EncryptComod - разбиваем на части в зависимости от ключа и каждую врорую часть меняем задом-наперед
-
-        private string EncryptComod(string str)
+        private string DecryptComod(string str)
         {
-            var sliceSize = (_isStrKey) ? GetDeliveder() : GetDeliveder()+1;
+            var sliceSize = (_isStrKey) ? GetDeliveder() : GetDeliveder() + 1;
             if (sliceSize == 0) sliceSize = 4;
             var strList = GetSliced(str, sliceSize).ToArray();
 
@@ -146,55 +120,43 @@ namespace Encrypter
                     _sb.Append(strList[i]);
 
             }
-
             string result = _sb.ToString();
             _sb.Clear();
 
-
             return result;
         }
-
-       
-
-
-        //EncryptAvreliy - переводим каждый символ в 32битовое представление и разбиваем на байты. Второй и третий байт XOR 
-
-        private string EncryptAvreliy(string str)
+        private string DecryptAvreliy(string str)
         {
 
+            StringBuilder currentSb = new StringBuilder();
 
             string[] byteArr;
-            foreach (var c in GetIntCharValue(str))
+
+            foreach (var oneByte in GetSliced(str, 32))
             {
-                byteArr = GetBrokenIntPerByte(EnlargeBinary(Convert.ToString(c, 2), true), false);
+                byteArr = GetBrokenIntPerByte(oneByte, false);
                 BitArray secondBlock = FromBinaryStringToBitArray(byteArr[1]);
                 BitArray thirdBlock = FromBinaryStringToBitArray(byteArr[2]);
                 var xorSecondResult = secondBlock.Xor(_xorBitArrayForSecondBlock);
                 var xorThirdResult = thirdBlock.Xor(_xorBitArrayForThirdBlock);
-                _sb.Append(byteArr[0]);
-                _sb.Append(FromBitArrayToBinaryString(xorSecondResult));
-                _sb.Append(FromBitArrayToBinaryString(xorThirdResult));
-                _sb.Append(byteArr[3]);
+                currentSb.Append(byteArr[0]);
+                currentSb.Append(FromBitArrayToBinaryString(xorSecondResult));
+                currentSb.Append(FromBitArrayToBinaryString(xorThirdResult));
+                currentSb.Append(byteArr[3]);
+                _sb.Append((char)(Convert.ToInt32(currentSb.ToString(), 2)));
+                currentSb.Clear();
 
             }
-
             string result = _sb.ToString();
             _sb.Clear();
-
             return result;
         }
-
-    
-
-        //EncryptCicero- переставляем биты в одном символе 
-
-        private string EncryptCicero(string str)
+        private string DecryptCicero(string str)
         {
-
 
             foreach (var oneChar in GetSliced(str, 32))
             {
-                _sb.Append(ReplaceBits(oneChar, true));
+                _sb.Append(ReplaceBits(oneChar, false));
 
             }
             string result = _sb.ToString();
@@ -202,18 +164,12 @@ namespace Encrypter
             return result;
         }
 
-
-  
-
-
-        //EncryptEpicutetus - в певром байте каждого символа инвертируем первые 4 бита и меняем местами с второй частью,
-        //в третем байте инвертируем последние 4 бита и так же меняем местами с первой частью
-        private string EncryptEpictetus(string str)
+        private string DecryptEpictetus(string str)
         {
 
             foreach (var oneCharBytes in GetSliced(str, 32))
             {
-                var byteArr = GetBrokenIntPerByte(oneCharBytes, false); //4 блока по 1 байту
+                var byteArr = GetBrokenIntPerByte(oneCharBytes, false);
                 for (int i = 0; i < byteArr.Length; i++)
                 {
                     if (i % 2 == 0)
@@ -244,35 +200,29 @@ namespace Encrypter
             return result;
         }
 
-
-
-
-        //EncryptMaximus - меняем местами биты в двух рядом стоящих символах
-        private string EncryptMaximus(string str)
+        private string DecryptMaximus(string str)
         {
 
             foreach (var pairSymbolsBinary in GetSliced(str, 64))
             {
                 if (pairSymbolsBinary.Length == 32)
                 {
-
                     _sb.Append(pairSymbolsBinary);
                     break;
                 }
-                _sb.Append(ReplaceBits(pairSymbolsBinary, true));
+
+                _sb.Append(ReplaceBits(pairSymbolsBinary, false));
+
+
+
             }
             string result = _sb.ToString();
             _sb.Clear();
             return result;
-
         }
-
-       
-
-
-        //EncryptEpicurus - XOR каждый символ в ключем
-        private string EncryptEpicurus(string str)
+        private string DecryptEpicurus(string str)
         {
+
             foreach (var oneBinaryChar in GetSliced(str, 32))
             {
                 int oneBinaryInt = Convert.ToInt32(oneBinaryChar, 2);
@@ -287,117 +237,80 @@ namespace Encrypter
             _sb.Clear();
             return result;
         }
-
-
-     
-
-        //EncryptSchoprnhauer- разбиваем строку битов на 8 частей и перемешиваем 
-        private string EncryptSchopenhauer(string str)
+        private string DecryptSchopenhauer(string str)
         {
-
             var itemCollection = new List<string>();
             foreach (var item in GetSliced(str, str.Length / 8))
             {
                 itemCollection.Add(item);
             }
             _sb.Append(itemCollection[2]);
-            _sb.Append(itemCollection[7]);
+            _sb.Append(itemCollection[5]);
             _sb.Append(itemCollection[0]);
             _sb.Append(itemCollection[3]);
+            _sb.Append(itemCollection[7]);
             _sb.Append(itemCollection[6]);
-            _sb.Append(itemCollection[1]);
-            _sb.Append(itemCollection[5]);
             _sb.Append(itemCollection[4]);
+            _sb.Append(itemCollection[1]);
+
             string result = _sb.ToString();
             _sb.Clear();
+
             return result;
         }
-
-
-
-  
-
-        //EncryptBimark - каждый из 4 байтов одного символа возвращаем в Char
-        private string EncryptBismark(string str)
+        private string DecryptBismark(string str)
         {
 
-            foreach (var oneByte in GetSliced(str, 8))
+            foreach (var c in str)
             {
-                var charElement = (char)(Convert.ToInt32(oneByte, 2));
-                _sb.Append(charElement);
+                int binaryNum = (int)c;
+                string binaryChar = Convert.ToString(binaryNum, 2);
+                binaryChar = EnlargeBinary(binaryChar, false);
+                _sb.Append(binaryChar);
             }
-
-
             string result = _sb.ToString();
             _sb.Clear();
 
             return result;
-
         }
-
-   
-
-
-        private string EncryptFunc(string str)
+        private string DecryptFunc(string str)
         {
             if (str.Length == 0) return "";
             string result = str;
+            result = DecryptComod(result);
+            result = DecryptSeneca(result);
+            result = DecryptMakiavelli(result);
+            result = DecryptBismark(result);
+            result = DecryptSchopenhauer(result);
+            result = DecryptEpicurus(result);
+            result = DecryptMaximus(result);
+            result = DecryptEpictetus(result);
+            result = DecryptCicero(result);
+            result = DecryptAvreliy(result);
+            result = DecryptComod(result);
+            result = DecryptSeneca(result);
+            result = DecryptMakiavelli(result);
+            result = DecryptCeasar(result);
 
-            result = EncryptCeasar(result);
-            result = EncryptMakiavelli(result);
-            result = EncryptSeneca(result);
-            result = EncryptComod(result);
-            result = EncryptAvreliy(result);
-            result = EncryptCicero(result);
-            result = EncryptEpictetus(result);
-            result = EncryptMaximus(result);
-            result = EncryptEpicurus(result);
-            result = EncryptSchopenhauer(result);
-            result = EncryptBismark(result);
-            result = EncryptMakiavelli(result);
-            result = EncryptSeneca(result);
-            result = EncryptComod(result);
 
             return result;
         }
+        public string Decrypt(string str, string key)
+        {
+            _isStrKey = true;
+            _sb = new StringBuilder(Math.Abs(str.Length * 3));
+            _key = TransformstionStrKeyToInt(key);
+            return DecryptFunc(str);
 
-        
+        }
 
-
-
-
-        public string Encrypt(string str, int key)
+        public string Decrypt(string str, int key)
         {
             _isStrKey = false;
             _sb = new StringBuilder(Math.Abs(str.Length) * 3);
             _key = (key == 0) ? TransformstionStrKeyToInt(_keyForZero) : key;
 
-            return EncryptFunc(str);
+            return DecryptFunc(str);
         }
-
-        public string Encrypt(string str, string key)
-        {
-            _isStrKey = true;
-            _sb = new StringBuilder(Math.Abs(str.Length) * 3);
-            _key = TransformstionStrKeyToInt(key);
-            return EncryptFunc(str);
-
-        }
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 }

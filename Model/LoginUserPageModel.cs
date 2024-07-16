@@ -3,6 +3,7 @@ using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Tools;
+using CourseProjectKeyboardApplication.Tools.AuthorizationTools;
 using Encrypter;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
 using Microsoft.Win32;
@@ -18,12 +19,14 @@ namespace CourseProjectKeyboardApplication.Model
         private string _userPasswordRegistryKeyName;
         private string _userPasswordRegistryCodeKeyName;
         private DevoltonEncrypter _devoltonEncrypter;
+        private DevoltonDecrypter _devoltonDecrypter;
         private UserModel _userModel;
 
         public LoginUserPageModel()
         {
             InitRegistryInfo();
-            _devoltonEncrypter = DevoltonEncrypter.GetInstance();
+            _devoltonEncrypter = DevoltonEncrypter.Instance();
+            _devoltonDecrypter = DevoltonDecrypter.Instance();
             _userModel = DatabaseModelMediator.UserModel;
 
         }
@@ -119,7 +122,7 @@ namespace CourseProjectKeyboardApplication.Model
             {
                 string encryptPassword = Convert.ToString(obj);
                 if (encryptPassword != string.Empty)
-                    return _devoltonEncrypter.Decrypt(encryptPassword, GetKeyFromRegister());
+                    return _devoltonDecrypter.Decrypt(encryptPassword, GetKeyFromRegister());
             }
             return string.Empty;
 

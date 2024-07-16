@@ -241,7 +241,7 @@
                     <Storyboard Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)">
                         <ColorAnimation From="#e9ecef"
                                         To="White"
-                                        Duration="00:00:00.3"/>
+                                        Duration="00:00:00.1"/>
                     </Storyboard>
                 </BeginStoryboard>
                 <BeginStoryboard>
@@ -264,7 +264,7 @@
                     <Storyboard Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)">
                         <ColorAnimation From="White"
                         To="#e9ecef"
-                        Duration="00:00:00.3"/>
+                        Duration="00:00:00.1"/>
                     </Storyboard>
                 </BeginStoryboard>
                 <BeginStoryboard>
