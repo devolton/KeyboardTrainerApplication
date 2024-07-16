@@ -80,16 +80,12 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="CustomPopupBoxStyle" TargetType="materialDesign:PopupBox">
-        <Setter Property="Background" Value="Green"/>
-        <!-- Задайте фон -->
-        <Setter Property="BorderBrush" Value="DarkGray"/>
-        <!-- Задайте цвет границы -->
+        <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <!-- Задайте толщину границы -->
-        <!-- Другие настройки стиля по вашему выбору -->
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="FontSize" Value="20"/>
     </Style>
- 
+
 
 
 

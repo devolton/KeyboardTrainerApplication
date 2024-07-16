@@ -214,15 +214,68 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-<!--popupBox style-->
-    <Style x:Key="CusomPopupBoxButton" TargetType="Button">
+
+    <Style x:Key="CustomPopupBoxButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CustomAluminum}"/>
+            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
             <Setter Property="Foreground" Value="{StaticResource CustomCoal}"/>
         </Style.Setters>
         <Style.Triggers>
-            
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                        <ColorAnimation From="White" 
+                                        To="#212529"
+                                        Duration="00:00:00.1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)">
+                        <ColorAnimation From="#e9ecef"
+                                        To="White"
+                                        Duration="00:00:00.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)">
+                        <ColorAnimation From="#212529"
+                                        To="#eef4f6"
+                                        Duration="00:00:00.1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                        <ColorAnimation From="#212529"
+                                        To="White"
+                                        Duration="00:00:00.1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)">
+                        <ColorAnimation From="White"
+                        To="#e9ecef"
+                        Duration="00:00:00.3"/>
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)">
+                        <ColorAnimation From="#eef4f6"
+                        To="#212529"
+                        Duration="00:00:00.1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
         </Style.Triggers>
     </Style>
     <Style x:Key="CustomRepeatButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignPaperDarkButton}">
@@ -232,7 +285,6 @@
             <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
         </Style.Setters>
     </Style>
-
 
 
 </ResourceDictionary>

@@ -59,38 +59,42 @@
                     <materialDesign:PopupBox
                       Style="{StaticResource CustomPopupBoxStyle}"
                         x:Name="MainPopupBox"
+                        Focusable="False"
                         HorizontalAlignment="Right"
                         Margin="80 20 20 10"
                         StaysOpen="True"
-                        Height="50"
-                        
-                     >
+                        Height="50">
                         <StackPanel
                        Orientation="Vertical">
                             <Button
                                 x:Name="CertificatesButton"
                                 Click="CertificatesButton_Click"
                                 Content="My certificates"
+                                Style="{StaticResource CustomPopupBoxButton}"
                                 />
                             <Button
                                 x:Name="CertificationResultButton"
                                 Content="My certirfication results"
                                 Click="CertificationResultButton_Click"
+                                Style="{StaticResource CustomPopupBoxButton}"
                                     />
                             <Button 
                                 x:Name="EducationalResultsButton"
                                 Content="My educational results"
                                 Click="EducationalResultsButton_Click"
+                                Style="{StaticResource CustomPopupBoxButton}"
                                 />
                             <Button
                                 x:Name="EditProfileButton"
                                 Content="Edit profile"
                                 Click="EditProfileButton_Click"
+                                Style="{StaticResource CustomPopupBoxButton}"
                                 />
                             <Button 
                                 x:Name="ExitButton"
                                 Content="Exit"
-                                Click="ExitButton_Click"/>
+                                Click="ExitButton_Click"
+                                Style="{StaticResource CustomPopupBoxButton}"/>
                        
 
 
