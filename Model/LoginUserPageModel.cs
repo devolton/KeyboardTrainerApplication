@@ -33,8 +33,9 @@ namespace CourseProjectKeyboardApplication.Model
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
         public bool IsValidPassword(string password) => AuthorizationFieldsValidator.IsValidPassword(password);
         public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
-        public void InitUserInUserController(User user)
+        public async Task InitUserInUserController(User user)
         {
+            await UserController.GetUserFromRestApiServer(1);
             UserController.CurrentUser = user;
         }
         private void InitRegistryInfo()

@@ -74,7 +74,6 @@
     </Resource>
     <Resource Include="Resources\Images\CertificateConditionTarget.png" />
     <Resource Include="Resources\Images\CertificateIcon.png" />
-    <Resource Include="Resources\Images\CertificateTemp.png" />
     <Resource Include="Resources\Images\coding.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

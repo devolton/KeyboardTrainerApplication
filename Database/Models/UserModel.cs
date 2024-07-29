@@ -13,7 +13,7 @@ using System.Xml;
 
 namespace CourseProjectKeyboardApplication.Database.Models
 {
-    public class UserModel:BaseTypingTutorModel,IEnumerable<User>
+    public class UserModel:BaseTypingTutorModel
     {
         private DbSet<User> _users;
 
@@ -53,10 +53,6 @@ namespace CourseProjectKeyboardApplication.Database.Models
             return successOperationCode;
 
         }
-        public bool IsThereUserInDatabase(int Id)
-        {
-            return _users.Any(oneUser => oneUser.Id.Equals(Id));
-        }
         public int RemoveUser(int id)
         {
             int successOperationCode = 0;
@@ -87,14 +83,6 @@ namespace CourseProjectKeyboardApplication.Database.Models
             && oneUser.Password == shaPassword);
         }
 
-        public IEnumerator<User> GetEnumerator()
-        {
-            return _users.AsEnumerable().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
+      
     }
 }

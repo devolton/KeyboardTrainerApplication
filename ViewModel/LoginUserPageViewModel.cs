@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.View.Windows;
 using CourseProjectKeyboardApplication.ViewModel.Commands;
@@ -51,7 +52,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _passwordBoxInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPagePasswordBox"];
             LoginOrEmail = _model.GetLoginFromRegister();
             Password = _model.GetPasswordFromRegister();
-            if (LoginOrEmail!=string.Empty && Password != string.Empty)
+            if (LoginOrEmail != string.Empty && Password != string.Empty)
             {
                 IsChecked = true;
             }
@@ -157,7 +158,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //commnands
         #region
-        private void OnLoginUserCommand(object parameter)
+        private async void OnLoginUserCommand(object parameter)
         {
             if (!_model.IsUserExist(LoginOrEmail))
             {
@@ -172,7 +173,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 return;
             }
             _isValidUser = true;
-            _model.InitUserInUserController(user);
+            await _model.InitUserInUserController(user);
             OpenMainWindow();
         }
 
@@ -250,20 +251,20 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private Task ChangeLoginTextBoxAsync()
         {
-           return Task.Run(async () =>
-            {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    LoginTextBoxStyle = _loginInvalidStyle;
+            return Task.Run(async () =>
+             {
+                 Application.Current.Dispatcher.Invoke(() =>
+                 {
+                     LoginTextBoxStyle = _loginInvalidStyle;
 
-                });
-                await Task.Delay(1500);
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    LoginTextBoxStyle = _loginDefaultStyle;
-                });
+                 });
+                 await Task.Delay(1500);
+                 Application.Current.Dispatcher.Invoke(() =>
+                 {
+                     LoginTextBoxStyle = _loginDefaultStyle;
+                 });
 
-            });
+             });
         }
         private Task ChangePasswordBoxStyleAsync()
         {

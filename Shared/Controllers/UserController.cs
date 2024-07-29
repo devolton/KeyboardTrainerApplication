@@ -1,4 +1,5 @@
-﻿using CourseProjectKeyboardApplication.Database.Entities;
+﻿using CourseProjectKeyboardApplication.ApiClients;
+using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using Microsoft.EntityFrameworkCore.Update.Internal;
@@ -18,15 +19,30 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         public static EnglishLayoutLesson CurrentLesson { get; set; }
         private static EducationUserProgressModel _educModel;
         private static EnglishLayoutLessonModel _lessonsModel;
+        private static UserApiClient _client;
         static UserController()
         {
             _educModel = DatabaseModelMediator.EducationUserProgressModel;
             _lessonsModel = DatabaseModelMediator.EnglishLayoutLessonModel;
+            _client =new UserApiClient(ApiClientProvider.HttpClient,ApiClientProvider.JsonSerializerOptions);
+            
+
         }
         public static EducationUsersProgress CurrentUserEducationProgress
         {
             get;
             set;
+        }
+        //beta
+        public static async Task GetUserFromRestApiServer(int id)
+        {
+            var user = await _client.GetUserByIdAsync(id);
+            if (user is not null)
+            {
+                MessageBox.Show(user.EducationUsersProgresses.Count.ToString());
+            }
+            else
+                MessageBox.Show("No content!");
         }
         public static void UpdateCurrentEducationUserProgress(bool isLessCompleted, bool isWithoutMistakeCompleted, bool isSpeedCompleted)
         {
@@ -43,7 +59,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 CurrentUserEducationProgress.IsSpeedCompleted = isSpeedCompleted;
             }
 
-            //сделать сохранение в бд по таймеру и при срабатывании события Close
+            
             try
             {
                 _educModel.SaveChanges(); // using timer or destructor
@@ -75,7 +91,6 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 User = CurrentUser
             };
             var updateEducUser = _educModel.AddNewEducationUserProgress(newEducProgress);
-            //_educModel.SaveChanges();
             return updateEducUser;
 
         }
