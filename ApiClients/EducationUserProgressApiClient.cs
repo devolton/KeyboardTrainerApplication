@@ -15,7 +15,7 @@ namespace CourseProjectKeyboardApplication.ApiClients
         private readonly HttpClient _httpClient;
         private readonly JsonSerializerOptions _jsonOptions;
         private readonly string _apiKey;
-        public EducationUserProgressApiClient(HttpClient httpClient, JsonSerializerOptions jsonOptions)
+        public EducationUserProgressApiClient(HttpClient httpClient, JsonSerializerOptions jsonOptions = null)
         {
             _httpClient =httpClient;
             _jsonOptions = jsonOptions;

@@ -13,6 +13,8 @@ using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.ApiClients;
+using CourseProjectKeyboardApplication.Shared.Providers;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -45,7 +47,8 @@ namespace CourseProjectKeyboardApplication.Model
             _timer.AutoReset = false;
             _timer.Elapsed += Timer_Elapsed;
             InitKeyValueDictionaries();
-            _testTextCollection = DatabaseModelMediator.EnglishTypingTestTextModel.GetAllTexts().ToList();
+            InitTextCollectionAsync();
+            //_testTextCollection = DatabaseModelMediator.EnglishTypingTestTextModel.GetAllTexts().ToList();
             _random = new Random();
             
 
@@ -90,8 +93,14 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
         }
+        private async Task InitTextCollectionAsync()
+        {
+            var textCollection = await ApiClientProvider.EnglishTypingTestTextApiClient.GetAllTextsAsync();
+            _testTextCollection = textCollection.ToList();
+        }
         public void SetupTest()
         {
+
             int randomIndex = _random.Next(_testTextCollection.Count);
             _currentText = _testTextCollection[randomIndex].Text;
             _currentSymbolIndex = 0;

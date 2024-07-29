@@ -2,6 +2,7 @@
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,10 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         public static EnglishLayoutLesson CurrentLesson { get; set; }
         private static EducationUserProgressModel _educModel;
         private static EnglishLayoutLessonModel _lessonsModel;
-        private static UserApiClient _client;
         static UserController()
         {
             _educModel = DatabaseModelMediator.EducationUserProgressModel;
             _lessonsModel = DatabaseModelMediator.EnglishLayoutLessonModel;
-            _client =new UserApiClient(ApiClientProvider.HttpClient,ApiClientProvider.JsonSerializerOptions);
             
 
         }
@@ -36,7 +35,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         //beta
         public static async Task GetUserFromRestApiServer(int id)
         {
-            var user = await _client.GetUserByIdAsync(id);
+            var user = await ApiClientProvider.UserApiClient.GetUserByIdAsync(id);
             if (user is not null)
             {
                 MessageBox.Show(user.EducationUsersProgresses.Count.ToString());

@@ -16,7 +16,7 @@ namespace CourseProjectKeyboardApplication.ApiClients
         private readonly HttpClient _httpClient;
         private readonly JsonSerializerOptions _jsonOptions;
         private readonly string _apiKey;
-        public EnglishLayoutLessonApiClient(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions)
+        public EnglishLayoutLessonApiClient(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions = null)
         {
             _httpClient = httpClient;
             _jsonOptions = jsonSerializerOptions;
