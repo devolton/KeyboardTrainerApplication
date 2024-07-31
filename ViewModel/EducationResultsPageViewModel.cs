@@ -105,7 +105,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// команда инициализации
         /// </summary>
         /// <param name="param">MainStackPanel</param>
-        private void OnInitializationCommand(object param)  //возможно разбить на мелкие функции
+        private async void OnInitializationCommand(object param)  //возможно разбить на мелкие функции
         {
             _mainStackPanel = param as StackPanel;
             _isCurrentLesson = true;
@@ -114,7 +114,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             LevelProgressHeaderStr = _model.GetCurrentLevelHeaderStr();
             ValueProgressBar = _model.GetPercentOfCompletedLessons();
             LanguageLayoutTypeHeaderStr = _model.GetLanguageLayoutTypeHeaderStr();
-            var levelsCollection = _model.GetLevels();
+            var levelsCollection =await _model.GetLevelsAsync();
             foreach (var oneLevel in levelsCollection)
             {
                 var lessonsCollection = oneLevel.Lessons.OrderBy(oneLesson => oneLesson.Ordinal);

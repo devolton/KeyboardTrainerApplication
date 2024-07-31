@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
-using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,8 @@ namespace CourseProjectKeyboardApplication.Model
 
         public TypingTestResultPageModel()
         {
-           
-            
+
+
         }
         //вычисление процента точности печати и перевод его в валидную строку
         public string GetAccuracyPercentStr()
@@ -53,8 +54,8 @@ namespace CourseProjectKeyboardApplication.Model
                 LayoutType = Shared.Enums.LayoutType.English,
                 Speed = _typingSpeed
             };
-            DatabaseModelMediator.TypingTestResultModel.AddNewTypingTestResult(newTest);
-            DatabaseModelMediator.TypingTestResultModel.SaveChanges(); //remove 
+            TypingTestResultService.AddNewTypingTestAsync(newTest); // maybe don't working!
+            //DatabaseModelProvider.TypingTestResultModel.AddNewTypingTestResult(newTest);
         }
     }
 }

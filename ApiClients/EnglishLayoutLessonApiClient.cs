@@ -22,6 +22,17 @@ namespace CourseProjectKeyboardApplication.ApiClients
             _jsonOptions = jsonSerializerOptions;
             _apiKey = "EnglishLayoutLesson";
         }
+        public async Task<IEnumerable<EnglishLayoutLesson>?> GetLessonsAsync()
+        {
+            var response = await _httpClient.GetAsync($"{_apiKey}");
+            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonStr = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<IEnumerable<EnglishLayoutLesson>>(jsonStr,_jsonOptions);
+            }
+            return null;
+        }
         public async Task<IEnumerable<EnglishLayoutLesson>?> GetLessonsByLevelIdAsync(int levelId)
         {
             var response = await _httpClient.GetAsync($"{_apiKey}/{levelId}");

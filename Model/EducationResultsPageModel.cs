@@ -1,8 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
-using CourseProjectKeyboardApplication.Shared.Mediators;
-
+using CourseProjectKeyboardApplication.Shared.Providers;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -12,18 +11,15 @@ namespace CourseProjectKeyboardApplication.Model
         private int _commonLevelCount;
         private string _languageLayoutType = "English layout";
         private EducationUserProgressModel _educationUserProgressModel;
-        private EnglishLayoutLevelModel _englishLayoutLevelModel;
         private User _currentUser;
         private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection;
 
        
         public EducationResultsPageModel()
         {
-            _educationUserProgressModel = DatabaseModelMediator.EducationUserProgressModel;
-            _englishLayoutLevelModel= DatabaseModelMediator.EnglishLayoutLevelModel;
-            _currentUser = UserController.CurrentUser;
-            GetLevels();
-            InitAllLevelCount();
+            _educationUserProgressModel = DatabaseModelProvider.EducationUserProgressModel;
+            _currentUser = UserController.CurrentUser;  
+            InitAllLevelCountAsync();
  
         }
         /// <summary>
@@ -44,8 +40,7 @@ namespace CourseProjectKeyboardApplication.Model
         {
             var completedLessonCount = _educationUserProgressModel.GetUsersEducationProgress(_currentUser.Id).Count();
             var commonLessonsCount = 0;
-            var levelsCollection = _englishLayoutLevelModel.GetLevels();
-            foreach(var level in levelsCollection)
+            foreach(var level in _englishLayoutLevelsCollection)
             {
                 commonLessonsCount += level.Lessons.Count;
             }
@@ -64,18 +59,18 @@ namespace CourseProjectKeyboardApplication.Model
         /// Get current english layout levels colletion 
         /// </summary>
         /// <returns>User english layout levels collection</returns>
-        public IEnumerable<EnglishLayoutLevel> GetLevels()
+        public async Task<IEnumerable<EnglishLayoutLevel>> GetLevelsAsync()
         {
-           
-            _englishLayoutLevelsCollection??= _englishLayoutLevelModel.GetLevels();
+            _englishLayoutLevelsCollection ??= await ApiClientProvider.EnglishLayoutLevelApiClient.GetAllLevelsAsync();
             return _englishLayoutLevelsCollection;
         }
 
         /// <summary>
         /// Initial all level count
         /// </summary>
-        private void InitAllLevelCount()
+        private async void InitAllLevelCountAsync()
         {
+           await GetLevelsAsync();
             _commonLevelCount = _englishLayoutLevelsCollection.Count();
         }
 

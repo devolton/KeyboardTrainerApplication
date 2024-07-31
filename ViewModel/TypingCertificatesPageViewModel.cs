@@ -91,9 +91,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             _model.DisplayTestPage();
         }
-        private void OnDrawInfoCommand(object param)
+        private async void OnDrawInfoCommand(object param)
         {
-            _model.InitBestUserTestResult();
+             await _model.InitBestUserTestResult();
             try
             {
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;

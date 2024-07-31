@@ -1,7 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
-using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Tools;
 using CourseProjectKeyboardApplication.Tools.AuthorizationTools;
 using Encrypter;
@@ -27,7 +27,7 @@ namespace CourseProjectKeyboardApplication.Model
             InitRegistryInfo();
             _devoltonEncrypter = DevoltonEncrypter.Instance();
             _devoltonDecrypter = DevoltonDecrypter.Instance();
-            _userModel = DatabaseModelMediator.UserModel;
+            _userModel = DatabaseModelProvider.UserModel;
 
         }
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
@@ -35,7 +35,7 @@ namespace CourseProjectKeyboardApplication.Model
         public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
         public async Task InitUserInUserController(User user)
         {
-            await UserController.GetUserFromRestApiServer(1);
+            
             UserController.CurrentUser = user;
         }
         private void InitRegistryInfo()

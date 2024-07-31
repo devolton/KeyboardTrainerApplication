@@ -1,5 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Database.Models;
-using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Tools;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace CourseProjectKeyboardApplication.Model
         protected bool _isUniqueLogin = false;
         public RegistrationFormModel()
         {
-            _userModel = DatabaseModelMediator.UserModel;
+            _userModel = DatabaseModelProvider.UserModel;
         }
         public bool IsUniqueEmail() => _isUniqueEmail;
         public bool IsUniqueLogin() => _isUniqueLogin;

@@ -2,7 +2,8 @@
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Enums;
-using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System.Globalization;
@@ -18,7 +19,7 @@ namespace CourseProjectKeyboardApplication.Model
         private SeriesCollection _typingUserStatisticSeriesCollection;
         private LineSeries _typingAccuracyLineSeries;
         private LineSeries _typingSpeedLineSeries;
-        private TypingTestResultModel _typingTestResultModel;
+        //private TypingTestResultModel _typingTestResultModel;
         private List<TypingTestResult> _userTypingTestsCollection;
         public TypingCertificationResultPageModel()
         {
@@ -38,7 +39,7 @@ namespace CourseProjectKeyboardApplication.Model
             };
             _typingSpeedLineSeries.Values = new ChartValues<int>();
             _typingAccuracyLineSeries.Values = new ChartValues<double>();
-            _typingTestResultModel = DatabaseModelMediator.TypingTestResultModel;
+            //_typingTestResultModel = DatabaseModelProvider.TypingTestResultModel;
 
 
 
@@ -111,9 +112,9 @@ namespace CourseProjectKeyboardApplication.Model
             }
             return chartValues;
         }
-        public void InitTypingTests()
+        public async Task InitTypingTests()
         {
-            _userTypingTestsCollection = _typingTestResultModel.GetTypingTestResultsByUserId(UserController.CurrentUser.Id).ToList();
+            _userTypingTestsCollection =  (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id))?.ToList();
         }
 
         /// <summary>

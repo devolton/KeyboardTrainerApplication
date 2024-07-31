@@ -1,8 +1,8 @@
 ﻿using CourseProjectKeyboardApplication.ApiClients;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
-using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 using System;
 using System.Collections.Generic;
@@ -19,12 +19,13 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         public static User CurrentUser { get; set; }
         public static EnglishLayoutLesson CurrentLesson { get; set; }
         private static EducationUserProgressModel _educModel;
-        private static EnglishLayoutLessonModel _lessonsModel;
+      
+
         static UserController()
         {
-            _educModel = DatabaseModelMediator.EducationUserProgressModel;
-            _lessonsModel = DatabaseModelMediator.EnglishLayoutLessonModel;
-            
+            _educModel = DatabaseModelProvider.EducationUserProgressModel;
+           
+
 
         }
         public static EducationUsersProgress CurrentUserEducationProgress
@@ -58,7 +59,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 CurrentUserEducationProgress.IsSpeedCompleted = isSpeedCompleted;
             }
 
-            
+
             try
             {
                 _educModel.SaveChanges(); // using timer or destructor
@@ -93,9 +94,14 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
             return updateEducUser;
 
         }
+        public static async Task InitLessons()
+        {
+             await EnglishLayoutLessonsService.InitLessonsCollectionAsync();
+        }
         public static void ChangeCurrentUserLesson()
         {
-            var nextLesson = _lessonsModel.GetNextLesson(CurrentLesson);
+
+            var nextLesson = EnglishLayoutLessonsService.GetNextLesson(CurrentLesson);
             if (nextLesson != null)
             {
                 CurrentUser.EnglishLayoutLesson = nextLesson;

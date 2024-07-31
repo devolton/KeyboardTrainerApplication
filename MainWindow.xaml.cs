@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.View.Windows;
 using System.Diagnostics;
@@ -95,7 +96,7 @@ namespace CourseProjectKeyboardApplication
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DatabaseModelMediator.EducationUserProgressModel.SaveChanges();
+            DatabaseModelProvider.EducationUserProgressModel.SaveChanges();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

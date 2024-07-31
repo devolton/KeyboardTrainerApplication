@@ -27,6 +27,7 @@ namespace CourseProjectKeyboardApplication.Model
             _lessTwoMistakeText = $"less than {_LESS_TWO_DELIMITER} typos";
             _withoutMistakeText = "exercise without typos";
             _speedText = $"speed more than {_SPEED_DELIMITER} wpm";
+            UserController.InitLessons();
         }
 
         /// <summary>

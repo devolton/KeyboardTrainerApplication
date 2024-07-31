@@ -68,9 +68,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
         }
 
-        private void InitStatBlock(int selectedIndex)
+        private  async void InitStatBlock(int selectedIndex)
         {
-            _model.InitTypingTests();
+            await _model.InitTypingTests();
             var statCollection = _model.GetSortTypingResultList((TypingStatisticsPeriodTime)selectedIndex, true);
                 StatStackPanel.Children.Clear();
                 foreach (var item in statCollection)
