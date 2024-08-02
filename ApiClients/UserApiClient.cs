@@ -2,7 +2,9 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 namespace CourseProjectKeyboardApplication.ApiClients
 {
@@ -67,7 +69,15 @@ namespace CourseProjectKeyboardApplication.ApiClients
         // Метод для добавления нового пользователя
         public async Task AddNewUserAsync(User newUser)
         {
-            var response = await _httpClient.PostAsJsonAsync($"{_apiKey}", newUser);
+            var jsonOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 64,
+            };
+
+            var jsonContent = JsonSerializer.Serialize(newUser, jsonOptions);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{_apiKey}", content);
 
             response.EnsureSuccessStatusCode();
         }
@@ -75,9 +85,11 @@ namespace CourseProjectKeyboardApplication.ApiClients
 
         public async Task<int> UpdateUserAsync(User user)
         {
-            var response = await _httpClient.PutAsJsonAsync($"{_apiKey}/{user.Id}", user);
-
             var successCode = 0;
+            var jsonContent = JsonSerializer.Serialize(user, _jsonOptions);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"{_apiKey}/{user.Id}", content);
+            response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)
             {
                 ++successCode;
@@ -123,10 +135,31 @@ namespace CourseProjectKeyboardApplication.ApiClients
         }
         public async Task<bool> IsUserExistByEmailAsync(string email)
         {
-            var response = await _httpClient.GetAsync($"{_apiKey}/IsUserExistByEmail/{email}");
-            response.EnsureSuccessStatusCode();
-            var isExist = await response.Content.ReadFromJsonAsync<bool>();
-            return isExist;
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_apiKey}/IsUserExistByEmail/{email}");
+                response.EnsureSuccessStatusCode();
+                var isExist = await response.Content.ReadFromJsonAsync<bool>();
+                return isExist;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> IsUserExistByLoginAsync(string login)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_apiKey}/IsUserExistByLogin/{login}");
+                response.EnsureSuccessStatusCode();
+                bool isExist = await response.Content.ReadFromJsonAsync<bool>();
+                return isExist;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

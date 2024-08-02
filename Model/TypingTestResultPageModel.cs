@@ -35,15 +35,15 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return _typingSpeed.ToString();
         }
-        public void InitStat()
+        public  void InitStat()
         {
             _allSymbolsCount = TypingTestResultController.AllSymbolCount;
             _misclickCount = TypingTestResultController.MiscliskCount;
             _typingSpeed = TypingTestResultController.TypingSpeed;
             _accuracyPercent = FULL_PERCENT - ((double)_allSymbolsCount / (double)_misclickCount);
-            SaveInDb();
+             AddNewResult();
         }
-        private void SaveInDb()
+        private  void AddNewResult()
         {
             var newTest = new TypingTestResult
             {
@@ -55,7 +55,7 @@ namespace CourseProjectKeyboardApplication.Model
                 Speed = _typingSpeed
             };
             TypingTestResultService.AddNewTypingTestAsync(newTest); // maybe don't working!
-            //DatabaseModelProvider.TypingTestResultModel.AddNewTypingTestResult(newTest);
+     
         }
     }
 }

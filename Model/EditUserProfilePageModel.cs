@@ -12,6 +12,7 @@ using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
 using CourseProjectKeyboardApplication.ViewModel;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
@@ -37,7 +38,6 @@ namespace CourseProjectKeyboardApplication.Model
             {
                 Filter = _openFileDialogImageFilter
             };
-            _userModel = DatabaseModelProvider.UserModel;
 
 
         }
@@ -92,12 +92,12 @@ namespace CourseProjectKeyboardApplication.Model
             {
                 _user.Password = PasswordSHA256Encrypter.EncryptPassword(updatePassword);
             }
-            _userModel.SaveChangesAsync();
+            UserService.UpdateUser(_user);
         }
-        public override bool IsUniqueCredentials(string email, string login)
+        public override async Task<bool> IsUniqueCredentialsAsync(string email, string login)
         {
-            _isUniqueEmail = _oldEmail == email || _userModel.IsUniqueEmail(email);
-            _isUniqueLogin = _oldLogin == login || _userModel.IsUniqueLogin(login);
+            _isUniqueEmail = _oldEmail == email || (await UserService.IsUniqueEmailAsync(email));
+            _isUniqueLogin = _oldLogin == login || (await UserService.IsUniqueLoginAsync(login));
             return _isUniqueEmail && _isUniqueLogin;
         }
         private void UpdateUserAvatarPath(string avatarPath)

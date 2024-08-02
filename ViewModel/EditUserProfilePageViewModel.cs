@@ -205,19 +205,26 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
-        private void OnSaveChangeCommand(object param)
+        private async void OnSaveChangeCommand(object param)
         {
-            if (_model.IsUniqueCredentials(Email, Login))
+            if (await _model.IsUniqueCredentialsAsync(Email, Login))
             {
                 _model.SaveUpdateUser(Name, Login, Email, Password);
             }
             else if (!_model.IsUniqueEmail())
             {
-                ChangeEmailTextBoxStyleAsync();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ChangeEmailTextBoxStyleAsync();
+                });
+
             }
             else if (!_model.IsUniqueLogin())
             {
-                ChangeLoginTextBoxStyleAsync();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ChangeLoginTextBoxStyleAsync();
+                });
             }
 
 

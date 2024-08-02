@@ -26,7 +26,6 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         }
         public static UserModel UserModel => _userModel;
         public static EducationUserProgressModel EducationUserProgressModel => _educationProgressModel;
-        public static TypingTestResultModel TypingTestResultModel => _typingTestResultModel;
        
     }
 }

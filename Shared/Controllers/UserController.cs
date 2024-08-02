@@ -25,8 +25,6 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         {
             _educModel = DatabaseModelProvider.EducationUserProgressModel;
            
-
-
         }
         public static EducationUsersProgress CurrentUserEducationProgress
         {

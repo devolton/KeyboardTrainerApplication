@@ -19,13 +19,11 @@ namespace CourseProjectKeyboardApplication.Model
 {
     public class TypingCertificatesPageModel
     {
-        //private TypingTestResultModel _typingTestResultModel;
         private TypingTestResult? _bestUserTest;
         private RenderTargetBitmap _certificate;
 
         public TypingCertificatesPageModel()
         {
-            //_typingTestResultModel = DatabaseModelProvider.TypingTestResultModel;
         }
         public void DisplayTestPage()
         {
@@ -69,7 +67,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public async Task InitBestUserTestResult()
         {
-            //_bestUserTest = _typingTestResultModel.GetBestUserTestResult(UserController.CurrentUser.Id);
+            
             _bestUserTest = await TypingTestResultService.GetBestUserTestAsync(UserController.CurrentUser.Id);
 
         }

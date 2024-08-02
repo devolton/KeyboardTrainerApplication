@@ -96,7 +96,7 @@ namespace CourseProjectKeyboardApplication
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DatabaseModelProvider.EducationUserProgressModel.SaveChanges();
+           //adding save changes in Database (remote server)
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

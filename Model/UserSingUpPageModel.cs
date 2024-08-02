@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
 using Microsoft.EntityFrameworkCore;
@@ -31,8 +32,7 @@ namespace CourseProjectKeyboardApplication.Model
                 AvatarPath=""
 
             };
-            _userModel.AddNewUser(user);
-            _userModel.SaveChangesAsync();
+            UserService.AddNewUserAsync(user);
             return user;
         }
 

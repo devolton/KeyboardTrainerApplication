@@ -19,7 +19,6 @@ namespace CourseProjectKeyboardApplication.Model
         private SeriesCollection _typingUserStatisticSeriesCollection;
         private LineSeries _typingAccuracyLineSeries;
         private LineSeries _typingSpeedLineSeries;
-        //private TypingTestResultModel _typingTestResultModel;
         private List<TypingTestResult> _userTypingTestsCollection;
         public TypingCertificationResultPageModel()
         {
@@ -39,7 +38,7 @@ namespace CourseProjectKeyboardApplication.Model
             };
             _typingSpeedLineSeries.Values = new ChartValues<int>();
             _typingAccuracyLineSeries.Values = new ChartValues<double>();
-            //_typingTestResultModel = DatabaseModelProvider.TypingTestResultModel;
+
 
 
 
@@ -53,13 +52,13 @@ namespace CourseProjectKeyboardApplication.Model
         /// [SECOND] - List containing the date for passing these tests</returns>
         public Tuple<SeriesCollection, List<string>> GetStatistics(TypingStatisticsPeriodTime periodTime)
         {
-            List<TypingTestResult> selectedResults = GetSortTypingResultList(periodTime,false);
-           
+            List<TypingTestResult> selectedResults = GetSortTypingResultList(periodTime, false);
+
             var seriesCollection = InitSeriesCollection(selectedResults);
             var dateList = new List<string>();
             foreach (var item in selectedResults)
             {
-                dateList.Add(item.Date.ToString("dd MMM yyyy",new CultureInfo("en-US")));
+                dateList.Add(item.Date.ToString("dd MMM yyyy", new CultureInfo("en-US")));
             }
             return Tuple.Create(seriesCollection, dateList);
         }
@@ -114,7 +113,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public async Task InitTypingTests()
         {
-            _userTypingTestsCollection =  (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id))?.ToList();
+            _userTypingTestsCollection = (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id))?.ToList();
         }
 
         /// <summary>
@@ -123,13 +122,14 @@ namespace CourseProjectKeyboardApplication.Model
         /// <param name="periodTime"></param>
         /// <param name="isForTable"></param>
         /// <returns>Get sort TypingTestResults list</returns>
-        public List<TypingTestResult> GetSortTypingResultList(TypingStatisticsPeriodTime periodTime,bool isForTable)
+        public List<TypingTestResult> GetSortTypingResultList(TypingStatisticsPeriodTime periodTime, bool isForTable)
         {
-            
-            List<TypingTestResult> selectedResults;
+
+            List<TypingTestResult> selectedResults = null;
             int currentDay = DateTime.Now.Day;
             int currentMonth = DateTime.Now.Month;
             int currentYear = DateTime.Now.Year;
+
             switch (periodTime)
             {
                 case TypingStatisticsPeriodTime.AllTime:
@@ -145,9 +145,9 @@ namespace CourseProjectKeyboardApplication.Model
                     }
                 case TypingStatisticsPeriodTime.Day:
                     {
-     
+
                         selectedResults = _userTypingTestsCollection.FindAll(element => element.Date.Day.Equals(currentDay)
-                        && element.Date.Month.Equals(currentMonth) 
+                        && element.Date.Month.Equals(currentMonth)
                         && element.Date.Year.Equals(currentYear));
                         break;
                     }
@@ -166,7 +166,7 @@ namespace CourseProjectKeyboardApplication.Model
                 {
                     return selectedResults;
                 }
-                    
+
 
             }
             if (isForTable)
@@ -175,8 +175,10 @@ namespace CourseProjectKeyboardApplication.Model
                 return selectedResults;
             }
             selectedResults.Sort((first, second) => first.Date.CompareTo(second.Date));
+
             return selectedResults;
         }
+
 
 
 

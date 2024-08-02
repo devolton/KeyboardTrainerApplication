@@ -33,9 +33,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
      
         //метод регестрации пользователя 
-        private void OnTryRegisterUser(object param = null)
+        private async void OnTryRegisterUser(object param = null)
         {
-            if (_model.IsUniqueCredentials(UserEmail, UserLogin))
+            if (await _model.IsUniqueCredentialsAsync(UserEmail, UserLogin))
             {
                var newUser= _model.RegisterUser(UserName, UserLogin, UserEmail, Password);
                 if(newUser is null)

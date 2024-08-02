@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,11 @@ namespace CourseProjectKeyboardApplication.Model
 {
     public abstract class RegistrationFormModel
     {
-        protected UserModel _userModel;
         protected bool _isUniqueEmail = false;
         protected bool _isUniqueLogin = false;
         public RegistrationFormModel()
         {
-            _userModel = DatabaseModelProvider.UserModel;
+
         }
         public bool IsUniqueEmail() => _isUniqueEmail;
         public bool IsUniqueLogin() => _isUniqueLogin;
@@ -25,10 +25,10 @@ namespace CourseProjectKeyboardApplication.Model
         public bool IsValidPassword(string password) => AuthorizationFieldsValidator.IsValidPassword(password);
         public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
-        public virtual bool IsUniqueCredentials(string email, string login)
+        public virtual async Task<bool> IsUniqueCredentialsAsync(string email, string login)
         {
-            _isUniqueEmail = _userModel.IsUniqueEmail(email);
-            _isUniqueLogin = _userModel.IsUniqueLogin(login);
+            _isUniqueEmail = await UserService.IsUniqueEmailAsync(email);
+            _isUniqueLogin = await UserService.IsUniqueLoginAsync(login);
             return _isUniqueLogin && _isUniqueEmail;
         }
     }

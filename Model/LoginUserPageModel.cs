@@ -2,6 +2,7 @@
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
 using CourseProjectKeyboardApplication.Tools.AuthorizationTools;
 using Encrypter;
@@ -20,14 +21,13 @@ namespace CourseProjectKeyboardApplication.Model
         private string _userPasswordRegistryCodeKeyName;
         private DevoltonEncrypter _devoltonEncrypter;
         private DevoltonDecrypter _devoltonDecrypter;
-        private UserModel _userModel;
+
 
         public LoginUserPageModel()
         {
             InitRegistryInfo();
             _devoltonEncrypter = DevoltonEncrypter.Instance();
             _devoltonDecrypter = DevoltonDecrypter.Instance();
-            _userModel = DatabaseModelProvider.UserModel;
 
         }
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
@@ -35,7 +35,7 @@ namespace CourseProjectKeyboardApplication.Model
         public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
         public async Task InitUserInUserController(User user)
         {
-            
+
             UserController.CurrentUser = user;
         }
         private void InitRegistryInfo()
@@ -53,9 +53,10 @@ namespace CourseProjectKeyboardApplication.Model
         /// </summary>
         /// <param name="emailOrLogin">Login or email entered by the user</param>
         /// <returns></returns>
-        public bool IsUserExist(string emailOrLogin)
+        public async Task<bool> IsUserExist(string emailOrLogin)
         {
-            return _userModel.IsUserExistByEmail(emailOrLogin) || _userModel.IsUserExistByLogin(emailOrLogin);
+            return await UserService.IsUserExistByLoginOrEmail(emailOrLogin);
+            
         }
         /// <summary>
         /// Get user by login (or email) and password 
@@ -63,19 +64,20 @@ namespace CourseProjectKeyboardApplication.Model
         /// <param name="loginOrEmail">User login or email</param>
         /// <param name="password">user password</param>
         /// <returns></returns>
-        public User? GetUserByLoginOrEmailAndPassword(string loginOrEmail, string password)
+        public async Task<User?> GetUserByLoginOrEmailAndPassword(string loginOrEmail, string password)
         {
             var encryptSha256Password = PasswordSHA256Encrypter.EncryptPassword(password);
-            return _userModel.GetUserByLoginOrEmailAndPassword(loginOrEmail, encryptSha256Password);
+            return await UserService.GetUserByLoginOrEmailAndPasswordAsync(loginOrEmail, encryptSha256Password);
+            
         }
         /// <summary>
         /// Writing users credentials to quickly enter the application when logging in
         /// </summary>
         /// <param name="login">User login</param>
         /// <param name="password">User password</param>
-        public void WriteDataInRegister(string login, string password)
+        public  void WriteDataInRegister(string login, string password)
         {
-            Task.Run(() =>
+             Task.Run(() =>
             {
                 string sha256KeyCode = PasswordSHA256Encrypter.EncryptPassword(password);
                 _applicationSubKey.SetValue(_userLoginRegistryKeyName, login);
@@ -87,15 +89,15 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Write credentials in register is user pressed 'Remember me' button and user data is valid
         /// </summary>
-        public void WriteNakedDataInRegister()
+        public  void WriteNakedDataInRegister()
         {
-            Task.Run(() =>
-            {
-                _applicationSubKey.SetValue(_userLoginRegistryKeyName, string.Empty);
-                _applicationSubKey.SetValue(_userPasswordRegistryCodeKeyName, string.Empty);
-                _applicationSubKey.SetValue(_userPasswordRegistryKeyName, string.Empty);
+             Task.Run(() =>
+             {
+                 _applicationSubKey.SetValue(_userLoginRegistryKeyName, string.Empty);
+                 _applicationSubKey.SetValue(_userPasswordRegistryCodeKeyName, string.Empty);
+                 _applicationSubKey.SetValue(_userPasswordRegistryKeyName, string.Empty);
 
-            });
+             });
         }
         /// <summary>
         /// Get login from register if the user saved it earlier

@@ -160,16 +160,24 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private async void OnLoginUserCommand(object parameter)
         {
-            if (!_model.IsUserExist(LoginOrEmail))
+            if (!await _model.IsUserExist(LoginOrEmail))
             {
-                ChangeLoginTextBoxAsync();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ChangeLoginTextBoxAsync();
+                });
+                
                 return;
 
             }
-            User? user = _model.GetUserByLoginOrEmailAndPassword(LoginOrEmail, Password);
+            User? user = await _model.GetUserByLoginOrEmailAndPassword(LoginOrEmail, Password);
             if (user is null)
             {
-                ChangePasswordBoxStyleAsync();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ChangePasswordBoxStyleAsync();
+                });
+                
                 return;
             }
             _isValidUser = true;
@@ -181,9 +189,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnWriteInRegisterCommand(object parameter)
         {
             if (_isChecked && _isValidUser)
-                _model.WriteDataInRegister(LoginOrEmail, Password);
+                 _model.WriteDataInRegister(LoginOrEmail, Password);
             else
-                _model.WriteNakedDataInRegister();
+                 _model.WriteNakedDataInRegister();
 
         }
         private void OnPasswordVisibilityCommand(object obj)
