@@ -30,7 +30,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private LoginUserPageModel _model = new LoginUserPageModel();
         //state fields
         private bool _isChecked = false;
-        private bool _isValidUser = false;
         private bool _isButtonEnable;
         private bool _isPasswordVisible = false;
         // user credentiels fields
@@ -42,7 +41,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
 
             _multiCommand.Add(new RelayCommand(OnLoginUserCommand, CanExecuteButtonCommand));
-            _multiCommand.Add(new RelayCommand(OnWriteInRegisterCommand));
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _loginDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPageTextBox"];
             LoginTextBoxStyle = _loginDefaultStyle;
@@ -166,7 +164,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 {
                     ChangeLoginTextBoxAsync();
                 });
-                
+
                 return;
 
             }
@@ -177,23 +175,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 {
                     ChangePasswordBoxStyleAsync();
                 });
-                
+
                 return;
             }
-            _isValidUser = true;
+            _model.WriteInRegister(LoginOrEmail,Password,_isChecked);
             await _model.InitUserInUserController(user);
             OpenMainWindow();
         }
 
 
-        private void OnWriteInRegisterCommand(object parameter)
-        {
-            if (_isChecked && _isValidUser)
-                 _model.WriteDataInRegister(LoginOrEmail, Password);
-            else
-                 _model.WriteNakedDataInRegister();
-
-        }
         private void OnPasswordVisibilityCommand(object obj)
         {
             if (_isPasswordVisible)

@@ -8,6 +8,7 @@ using CourseProjectKeyboardApplication.Tools.AuthorizationTools;
 using Encrypter;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
 using Microsoft.Win32;
+using System.Windows;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -21,6 +22,8 @@ namespace CourseProjectKeyboardApplication.Model
         private string _userPasswordRegistryCodeKeyName;
         private DevoltonEncrypter _devoltonEncrypter;
         private DevoltonDecrypter _devoltonDecrypter;
+
+        private bool _isValidUser = false;
 
 
         public LoginUserPageModel()
@@ -67,7 +70,12 @@ namespace CourseProjectKeyboardApplication.Model
         public async Task<User?> GetUserByLoginOrEmailAndPassword(string loginOrEmail, string password)
         {
             var encryptSha256Password = PasswordSHA256Encrypter.EncryptPassword(password);
-            return await UserService.GetUserByLoginOrEmailAndPasswordAsync(loginOrEmail, encryptSha256Password);
+            User? user= await UserService.GetUserByLoginOrEmailAndPasswordAsync(loginOrEmail, encryptSha256Password);
+            if(user is not null)
+            {
+                _isValidUser = true;
+            }
+            return user;
             
         }
         /// <summary>
@@ -75,7 +83,18 @@ namespace CourseProjectKeyboardApplication.Model
         /// </summary>
         /// <param name="login">User login</param>
         /// <param name="password">User password</param>
-        public  void WriteDataInRegister(string login, string password)
+        
+        public void WriteInRegister(string loginOrEmail,string password, bool isChecked)
+        {
+            if (_isValidUser)
+            {
+                if (isChecked)
+                    WriteDataInRegister(loginOrEmail, password);
+                else
+                   WriteNakedDataInRegister();
+            }
+        }
+        private  void WriteDataInRegister(string login, string password)
         {
              Task.Run(() =>
             {
@@ -89,7 +108,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Write credentials in register is user pressed 'Remember me' button and user data is valid
         /// </summary>
-        public  void WriteNakedDataInRegister()
+        private void WriteNakedDataInRegister()
         {
              Task.Run(() =>
              {

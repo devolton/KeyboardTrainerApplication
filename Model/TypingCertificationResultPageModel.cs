@@ -113,7 +113,12 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public async Task InitTypingTests()
         {
-            _userTypingTestsCollection = (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id))?.ToList();
+            var tempTypingTestCollection = await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id);
+            if (_userTypingTestsCollection is not null)
+                _userTypingTestsCollection = tempTypingTestCollection.ToList();
+            else
+                _userTypingTestsCollection = new List<TypingTestResult>();
+
         }
 
         /// <summary>
@@ -158,7 +163,7 @@ namespace CourseProjectKeyboardApplication.Model
                     }
 
             }
-            if (selectedResults.Count > 10)
+            if (selectedResults is not null && selectedResults.Count > 10)
             {
                 selectedResults.Sort((first, second) => second.Speed.CompareTo(first.Speed));
                 selectedResults = selectedResults.GetRange(0, 10);
@@ -171,7 +176,7 @@ namespace CourseProjectKeyboardApplication.Model
             }
             if (isForTable)
             {
-                selectedResults.Sort((first, second) => second.Speed.CompareTo(first.Speed));
+                selectedResults?.Sort((first, second) => second.Speed.CompareTo(first.Speed));
                 return selectedResults;
             }
             selectedResults.Sort((first, second) => first.Date.CompareTo(second.Date));

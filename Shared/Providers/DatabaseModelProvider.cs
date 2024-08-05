@@ -11,20 +11,13 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
 {
     public static class DatabaseModelProvider
     {
-        private static UserModel _userModel;
         private static EducationUserProgressModel _educationProgressModel;
-        private static TypingTestResultModel _typingTestResultModel;
-        private static EnglishLayoutLessonModel _lessonsModel;
         static DatabaseModelProvider()
         {
 
-            _userModel = new UserModel();
             _educationProgressModel = new EducationUserProgressModel();
-            _typingTestResultModel = new TypingTestResultModel();
-            _lessonsModel = new EnglishLayoutLessonModel();
 
         }
-        public static UserModel UserModel => _userModel;
         public static EducationUserProgressModel EducationUserProgressModel => _educationProgressModel;
        
     }

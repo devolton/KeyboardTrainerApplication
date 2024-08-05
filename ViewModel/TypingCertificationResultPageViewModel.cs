@@ -15,7 +15,7 @@ using CourseProjectKeyboardApplication.Shared.Enums;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
-    public class TypingCertificationResultPageViewModel:ViewModelBase
+    public class TypingCertificationResultPageViewModel : ViewModelBase
     {
         private StackPanel _statStackPanel;
         private ICommand _drawStatisticsCommand;
@@ -24,11 +24,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private static TypingCertificationResultPageViewModel _instance;
         private int _dateRangeSelectedIndex = 0;
         private TypingCertificationResultPageModel _model;
+
         private TypingCertificationResultPageViewModel()
         {
             _model = new();
             _drawStatisticsCommand = new RelayCommand(OnDrawStatisticsCommand);
             _statStackPanel = new StackPanel();
+            
 
         }
         public static TypingCertificationResultPageViewModel Instance()
@@ -39,11 +41,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //properties
         #region
         public ICommand DrawStatisticsCommand => _drawStatisticsCommand;
-        public SeriesCollection SeriesCollection {
+        public SeriesCollection SeriesCollection
+        {
             get { return _seriesCollection; }
             set
             {
-                _seriesCollection= value; 
+                _seriesCollection = value;
                 OnPropertyChanged(nameof(SeriesCollection));
             }
         }
@@ -56,38 +59,45 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(DateRangeSelectedIndex));
             }
         }
-        //разобратся с инитом 
+
         public StackPanel StatStackPanel
         {
             get { return _statStackPanel; }
-             set
+            set
             {
-                _statStackPanel= value;
-                InitStatBlock(0);
+                _statStackPanel = value;
+                InitStatBlockAsync();
                 OnPropertyChanged(nameof(StatStackPanel));
             }
         }
+        private async Task InitStatBlockAsync()
+        {
+            await InitStatBlock(0);
+        }
 
-        private async void InitStatBlock(int selectedIndex)
+
+        // исправить инициализацию 
+        private async Task InitStatBlock(int selectedIndex)
         {
             await _model.InitTypingTests();
             var statCollection = _model.GetSortTypingResultList((TypingStatisticsPeriodTime)selectedIndex, true);
-                StatStackPanel.Children.Clear();
-                foreach (var item in statCollection)
+            StatStackPanel.Children.Clear();
+            foreach (var item in statCollection)
+            {
+                StatStackPanel.Children.Add(new TypingStatLine()
                 {
-                    StatStackPanel.Children.Add(new TypingStatLine()
-                    {
-                        SpeedUnitValue = "wpm",
-                        SpeedValue = item.Speed.ToString(),
-                        AccuracyUnitValue = "%",
-                        AccuracyValue = item.AccuracyPercent.ToString("#.#"),
-                        DateValue = item.Date.ToString("dd MMM yyyy", new CultureInfo("en-US"))
-                    }); ;
-                }
-          
+                    SpeedUnitValue = "wpm",
+                    SpeedValue = item.Speed.ToString(),
+                    AccuracyUnitValue = "%",
+                    AccuracyValue = item.AccuracyPercent.ToString("#.#"),
+                    DateValue = item.Date.ToString("dd MMM yyyy", new CultureInfo("en-US"))
+                }); ;
+            }
+
         }
 
-        public IEnumerable<string> TypingDateCollection {
+        public IEnumerable<string> TypingDateCollection
+        {
             get { return _typingDateCollection; }
             set
             {
@@ -98,16 +108,16 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //command
         #region
-        private void OnDrawStatisticsCommand(object param)
+        private async void OnDrawStatisticsCommand(object param)
         {
             var statTuple = _model.GetStatistics((TypingStatisticsPeriodTime)DateRangeSelectedIndex);
             SeriesCollection = statTuple.Item1;
             TypingDateCollection = statTuple.Item2;
-            InitStatBlock(DateRangeSelectedIndex);
+            await InitStatBlock(DateRangeSelectedIndex);
 
         }
         #endregion
- 
-       
+
+
     }
 }
