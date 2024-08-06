@@ -97,7 +97,7 @@ namespace CourseProjectKeyboardApplication
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //await EducationUsersProgressService.SaveAddedEducationUsersResultAsync();
+            await EducationUsersProgressService.SaveAddedEducationUsersResultAsync();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

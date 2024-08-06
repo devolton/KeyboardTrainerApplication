@@ -1,5 +1,4 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
-using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Providers;

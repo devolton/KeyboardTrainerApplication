@@ -34,7 +34,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         public static async Task SaveAddedEducationUsersResultAsync()
         {
             if (_addedNewEducationUsersProgressCollection is not null && _addedNewEducationUsersProgressCollection.Count != 0)
-                _apiClient.AddEductionUsersProgressRangeAsync(_addedNewEducationUsersProgressCollection);
+               await _apiClient.AddEductionUsersProgressRangeAsync(_addedNewEducationUsersProgressCollection);
         }
         public static void AddNewEducationUsersProgressLocal(EducationUsersProgress newEducationUsersProgress)
         {
