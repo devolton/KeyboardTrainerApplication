@@ -2,6 +2,7 @@
 using CourseProjectKeyboardApplication.Database.Models;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -10,17 +11,14 @@ namespace CourseProjectKeyboardApplication.Model
 
         private int _commonLevelCount;
         private string _languageLayoutType = "English layout";
-        private EducationUserProgressModel _educationUserProgressModel;
-        private User _currentUser;
+        private int _commonLessonsCount = 0;
         private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection;
 
-       
+
         public EducationResultsPageModel()
         {
-            _educationUserProgressModel = DatabaseModelProvider.EducationUserProgressModel;
-            _currentUser = UserController.CurrentUser;  
             InitAllLevelCountAsync();
- 
+
         }
         /// <summary>
         /// Get actual user education progress str(current level and common levels count) to educationResultsPage header
@@ -28,23 +26,26 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns></returns>
         public string GetCurrentLevelHeaderStr()
         {
-            
+
             int currentLevelCounter = UserController.CurrentUser.EnglishLayoutLevel.Ordinal;
             return $"Level {currentLevelCounter} from {_commonLevelCount}";
         }
+
         /// <summary>
         /// Get actual user education progress percent of completed lessons count
         /// </summary>
         /// <returns></returns>
-        public double GetPercentOfCompletedLessons()
+        public async Task<double> GetPercentOfCompletedLessonsAsync()
         {
-            var completedLessonCount = _educationUserProgressModel.GetUsersEducationProgress(_currentUser.Id).Count();
-            var commonLessonsCount = 0;
-            foreach(var level in _englishLayoutLevelsCollection)
+            var completedLessonsCount = (await EducationUsersProgressService.GetEducationUsersProgressesByUserIdAsync(UserController.CurrentUser.Id))?.Count() ?? 0;
+            if (_commonLessonsCount == 0)
             {
-                commonLessonsCount += level.Lessons.Count;
+                foreach (var level in _englishLayoutLevelsCollection)
+                {
+                    _commonLessonsCount += level.Lessons.Count;
+                }
             }
-            return((double)completedLessonCount / (double)commonLessonsCount) * 100;
+            return ((double)completedLessonsCount / (double)_commonLessonsCount) * 100;
 
         }
         /// <summary>
@@ -70,14 +71,14 @@ namespace CourseProjectKeyboardApplication.Model
         /// </summary>
         private async void InitAllLevelCountAsync()
         {
-           await GetLevelsAsync();
+            await GetLevelsAsync();
             _commonLevelCount = _englishLayoutLevelsCollection.Count();
         }
 
 
-       
-        
- 
+
+
+
     }
 
 }

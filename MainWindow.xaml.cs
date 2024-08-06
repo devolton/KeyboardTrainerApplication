@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.View.Windows;
 using System.Diagnostics;
@@ -94,9 +95,9 @@ namespace CourseProjectKeyboardApplication
             FrameMediator.DisplayEditUserProfilPage();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           //adding save changes in Database (remote server)
+            //await EducationUsersProgressService.SaveAddedEducationUsersResultAsync();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

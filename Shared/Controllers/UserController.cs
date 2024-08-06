@@ -18,12 +18,10 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
     {
         public static User CurrentUser { get; set; }
         public static EnglishLayoutLesson CurrentLesson { get; set; }
-        private static EducationUserProgressModel _educModel;
       
 
         static UserController()
         {
-            _educModel = DatabaseModelProvider.EducationUserProgressModel;
            
         }
         public static EducationUsersProgress CurrentUserEducationProgress
@@ -31,17 +29,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
             get;
             set;
         }
-        //beta
-        public static async Task GetUserFromRestApiServer(int id)
-        {
-            var user = await ApiClientProvider.UserApiClient.GetUserByIdAsync(id);
-            if (user is not null)
-            {
-                MessageBox.Show(user.EducationUsersProgresses.Count.ToString());
-            }
-            else
-                MessageBox.Show("No content!");
-        }
+
         public static void UpdateCurrentEducationUserProgress(bool isLessCompleted, bool isWithoutMistakeCompleted, bool isSpeedCompleted)
         {
             if (isLessCompleted)
@@ -57,20 +45,11 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 CurrentUserEducationProgress.IsSpeedCompleted = isSpeedCompleted;
             }
 
-
-            try
-            {
-                _educModel.SaveChanges(); // using timer or destructor
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
         public static void SetNextEducationUserProgeress()
         {
 
-            CurrentUserEducationProgress = _educModel.GetNextEducationProgress(CurrentUserEducationProgress);
+            CurrentUserEducationProgress = EducationUsersProgressService.GetNextEducationProgress(CurrentUserEducationProgress);
             CurrentLesson = CurrentUserEducationProgress?.EnglishLayoutLesson;
 
         }
@@ -78,6 +57,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
         {
             EducationUsersProgress newEducProgress = new EducationUsersProgress
             {
+                Id = EducationUsersProgressService.GetIdOfLastEducationProgressElement()+1,
                 IsLessThanTwoErrorsCompleted = false,
                 IsSpeedCompleted = false,
                 IsWithoutErrorsCompleted = false,
@@ -88,8 +68,8 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 UserId = CurrentUser.Id,
                 User = CurrentUser
             };
-            var updateEducUser = _educModel.AddNewEducationUserProgress(newEducProgress);
-            return updateEducUser;
+            EducationUsersProgressService.AddNewEducationUsersProgressLocal(newEducProgress);
+            return newEducProgress;
 
         }
         public static async Task InitLessons()

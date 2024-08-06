@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.ApiClients
@@ -34,12 +35,28 @@ namespace CourseProjectKeyboardApplication.ApiClients
         }
         public async Task AddEducationUsersProgressAsync(EducationUsersProgress educationUsersProgress)
         {
-            var response = await _httpClient.PostAsJsonAsync($"{_apiKey}", educationUsersProgress);
+            var jsonOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 64,
+            };
+
+            var jsonContent = JsonSerializer.Serialize(educationUsersProgress, jsonOptions);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{_apiKey}", content);
             response.EnsureSuccessStatusCode();
         }
         public async Task AddEductionUsersProgressRangeAsync(IEnumerable<EducationUsersProgress> educationUsersProgressesCollection)
         {
-            var response = await _httpClient.PostAsJsonAsync($"{_apiKey}/AddRange", educationUsersProgressesCollection);
+            var jsonOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 64,
+            };
+
+            var jsonContent = JsonSerializer.Serialize(educationUsersProgressesCollection, jsonOptions);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{_apiKey}", content);
             response.EnsureSuccessStatusCode();
         }
     }

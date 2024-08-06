@@ -163,24 +163,26 @@ namespace CourseProjectKeyboardApplication.Model
                     }
 
             }
-            if (selectedResults is not null && selectedResults.Count > 10)
+            if (selectedResults is not null)
             {
-                selectedResults.Sort((first, second) => second.Speed.CompareTo(first.Speed));
-                selectedResults = selectedResults.GetRange(0, 10);
+                if (selectedResults.Count > 10)
+                {
+                    selectedResults.Sort((first, second) => second.Speed.CompareTo(first.Speed));
+                    selectedResults = selectedResults.GetRange(0, 10);
+                    if (isForTable)
+                    {
+                        return selectedResults;
+                    }
+
+
+                }
                 if (isForTable)
                 {
+                    selectedResults?.Sort((first, second) => second.Speed.CompareTo(first.Speed));
                     return selectedResults;
                 }
-
-
+                selectedResults.Sort((first, second) => first.Date.CompareTo(second.Date));
             }
-            if (isForTable)
-            {
-                selectedResults?.Sort((first, second) => second.Speed.CompareTo(first.Speed));
-                return selectedResults;
-            }
-            selectedResults.Sort((first, second) => first.Date.CompareTo(second.Date));
-
             return selectedResults;
         }
 

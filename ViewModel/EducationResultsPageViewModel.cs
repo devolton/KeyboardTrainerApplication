@@ -3,6 +3,7 @@ using CourseProjectKeyboardApplication.Interfaces;
 using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.View.CustomControls.EducationResults;
 using System;
 using System.Collections.Generic;
@@ -109,12 +110,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             _mainStackPanel = param as StackPanel;
             _isCurrentLesson = true;
-            if (MainStackPanel.Children.Count >2) 
+            if (MainStackPanel.Children.Count > 2)
                 MainStackPanel.Children.RemoveRange(2, MainStackPanel.Children.Count - 2);
             LevelProgressHeaderStr = _model.GetCurrentLevelHeaderStr();
-            ValueProgressBar = _model.GetPercentOfCompletedLessons();
             LanguageLayoutTypeHeaderStr = _model.GetLanguageLayoutTypeHeaderStr();
-            var levelsCollection =await _model.GetLevelsAsync();
+            var levelsCollection = await _model.GetLevelsAsync();
             foreach (var oneLevel in levelsCollection)
             {
                 var lessonsCollection = oneLevel.Lessons.OrderBy(oneLesson => oneLesson.Ordinal);
@@ -128,8 +128,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
                 foreach (var oneLesson in lessonsCollection)
                 {
-                    var currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == UserController.CurrentUser.Id);
-                    
+                    //change because it's govnocode
+                    EducationUsersProgress? currentEducUserProgress = EducationUsersProgressService.GetEducationProgressByLessonId(oneLesson.Id);
+                    if (currentEducUserProgress is null)
+                    {
+                        currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == UserController.CurrentUser.Id);
+                    }
                     if (currentEducUserProgress != null)
                     {
 
@@ -148,15 +152,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                         {
                             var lockButton = CreateEducationResultsLockButton(oneLesson);
                             lessonBodyWrapPanel?.Children.Add(lockButton);
-                            
+
                         }
                     }
                 }
-               
+
                 MainStackPanel.Children.Add(educationResultLessonBlock);
 
             }
-            ValueProgressBar = _model.GetPercentOfCompletedLessons();
+            ValueProgressBar = await _model.GetPercentOfCompletedLessonsAsync();
 
 
 
@@ -237,7 +241,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private EducationResultsLockButton CreateEducationResultsLockButton(EnglishLayoutLesson lesson)
         {
-           return new EducationResultsLockButton(lesson);
+            return new EducationResultsLockButton(lesson);
         }
     }
 }
