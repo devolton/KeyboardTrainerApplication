@@ -12,21 +12,27 @@ namespace CourseProjectKeyboardApplication.Shared.Services
     public static class TypingTestResultService
     {
         private static TypingTestResultApiClient _apiClient;
+        private static List<TypingTestResult> _typingTestResultCollecton;
+        private static List<TypingTestResult> _addedTypingTestResultCollection;
         static TypingTestResultService()
         {
             _apiClient = ApiClientProvider.TypingTestResultApiClient;
+            _addedTypingTestResultCollection = new List<TypingTestResult>(50);
         }
         public static async Task<IEnumerable<TypingTestResult>?> GetTypingTestResultsByUserIdAsync(int userId)
         {
-            return await _apiClient.GetTestsByUserIdAsync(userId);
+            _typingTestResultCollecton ??= (await _apiClient.GetTestsByUserIdAsync(userId)).ToList();
+            return _typingTestResultCollecton;
         }
-        public static async Task<TypingTestResult?> GetBestUserTestAsync(int userId)
+        public static TypingTestResult? GetBestUserTestAsync(int userId)
         {
-            return await _apiClient.GetBestUserTestAsync(userId);
+            return _typingTestResultCollecton.Where(oneResult => oneResult.UserId.Equals(userId))?.OrderByDescending(oneResult => oneResult.Speed).FirstOrDefault();
         }
         public static async Task AddNewTypingTestAsync(TypingTestResult newTypingTestResult)
         {
+            _typingTestResultCollecton.Add(newTypingTestResult);    
             _apiClient.AddNewTypingTestResultAsync(newTypingTestResult);
         }
+
     }
 }

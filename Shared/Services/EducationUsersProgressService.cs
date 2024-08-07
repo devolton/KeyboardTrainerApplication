@@ -2,6 +2,7 @@
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,10 @@ namespace CourseProjectKeyboardApplication.Shared.Services
             _addedNewEducationUsersProgressCollection = new List<EducationUsersProgress>(100);
 
         }
+        public static async Task InitEducationUserProgressCollection(int userId)
+        {
+           _educationUserProgressesCollection =  (await _apiClient.GetEducationUsersProgressesByUserIdAsync(userId))?.ToList();
+        }
         public static async Task<IEnumerable<EducationUsersProgress>?> GetEducationUsersProgressesByUserIdAsync(int userId)
         {
             _educationUserProgressesCollection ??= (await _apiClient.GetEducationUsersProgressesByUserIdAsync(userId))?.ToList();
@@ -34,7 +39,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         public static async Task SaveAddedEducationUsersResultAsync()
         {
             if (_addedNewEducationUsersProgressCollection is not null && _addedNewEducationUsersProgressCollection.Count != 0)
-               await _apiClient.AddEductionUsersProgressRangeAsync(_addedNewEducationUsersProgressCollection);
+                await _apiClient.AddEductionUsersProgressRangeAsync(_addedNewEducationUsersProgressCollection);
         }
         public static void AddNewEducationUsersProgressLocal(EducationUsersProgress newEducationUsersProgress)
         {
@@ -47,7 +52,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         }
         public static int GetIdOfLastEducationProgressElement()
         {
-            return _educationUserProgressesCollection.LastOrDefault()?.Id ?? 0;
+            return _educationUserProgressesCollection?.LastOrDefault()?.Id ?? 0;
         }
         public static EducationUsersProgress? GetEducationProgressByLessonId(int lessonId)
         {

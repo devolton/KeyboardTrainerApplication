@@ -66,17 +66,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             set
             {
                 _statStackPanel = value;
-                InitStatBlockAsync();
                 OnPropertyChanged(nameof(StatStackPanel));
             }
         }
-        private async Task InitStatBlockAsync()
-        {
-            await InitStatBlock(0);
-        }
 
 
-        // исправить инициализацию 
         private async Task InitStatBlock(int selectedIndex)
         {
             await _model.InitTypingTests();
@@ -110,10 +104,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private async void OnDrawStatisticsCommand(object param)
         {
+            await InitStatBlock(DateRangeSelectedIndex);
             var statTuple = _model.GetStatistics((TypingStatisticsPeriodTime)DateRangeSelectedIndex);
             SeriesCollection = statTuple.Item1;
             TypingDateCollection = statTuple.Item2;
-            await InitStatBlock(DateRangeSelectedIndex);
+            
 
         }
         #endregion

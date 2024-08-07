@@ -112,12 +112,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public async Task InitTypingTests()
         {
-            var tempTypingTestCollection = await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id);
-            if (_userTypingTestsCollection is not null)
-                _userTypingTestsCollection = tempTypingTestCollection.ToList();
-            else
-                _userTypingTestsCollection = new List<TypingTestResult>();
-
+            _userTypingTestsCollection = (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id))?.ToList() ?? new();
         }
 
         /// <summary>

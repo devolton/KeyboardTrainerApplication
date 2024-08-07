@@ -1,6 +1,8 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.View.Pages;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -50,14 +52,18 @@ namespace CourseProjectKeyboardApplication.ApiClients
         {
             var jsonOptions = new JsonSerializerOptions
             {
+               
                 ReferenceHandler = ReferenceHandler.Preserve,
                 MaxDepth = 64,
             };
 
             var jsonContent = JsonSerializer.Serialize(educationUsersProgressesCollection, jsonOptions);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"{_apiKey}", content);
+            var response = await _httpClient.PostAsync($"{_apiKey}/AddRange", content);
             response.EnsureSuccessStatusCode();
+            using StreamWriter sw = new("D:\\C#WinForms\\CourseProjectKeyboardApplication\\AsyncLogger.txt");
+            await sw.WriteLineAsync(response.StatusCode.ToString());
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
@@ -36,17 +37,18 @@ namespace CourseProjectKeyboardApplication
 
         public MainWindow()
         {
-           
+
             InitializeComponent();
-           
+
             _typingTestPage = new TypingTestPage();
-            
-           
+
+
 
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private async void ExitButton_Click(object sender, RoutedEventArgs e)
         {
+            await SaveChangesAsync();
             Process.GetCurrentProcess().Kill();
 
         }
@@ -97,31 +99,37 @@ namespace CourseProjectKeyboardApplication
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            await SaveChangesAsync();
+        }
+        private async Task SaveChangesAsync()
+        {
+
             await EducationUsersProgressService.SaveAddedEducationUsersResultAsync();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitPageS();
+            InitPages();
         }
-        private Task InitPageS()
+        private Task InitPages()
         {
-          return  Task.Run(() =>
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    _learnPage = new LearnPage();
-                    _typingTutorPage = new TypingTutorPage();
-                    _typingCertificatesPage = new TypingCertificatesPage();
-                    _typingCertificationResultsPage = new TypingCertificationResultsPage();
-                    _educationResultsPage = new EducationResultsPage();
-                    _editUserProfilPage = new EditUserProfilPage();
-                    _typingTestResultPage = new TypingTestResultPage();
-                    _typingTutorResultPage = new TypingTutorResultPage();
+            return Task.Run(() =>
+              {
+                  Dispatcher.Invoke(() =>
+                  {
+                      _learnPage = new LearnPage();
+                      _typingTutorPage = new TypingTutorPage();
+                      _typingCertificatesPage = new TypingCertificatesPage();
+                      _typingCertificationResultsPage = new TypingCertificationResultsPage();
+                      _educationResultsPage = new EducationResultsPage();
+                      _editUserProfilPage = new EditUserProfilPage();
+                      _typingTestResultPage = new TypingTestResultPage();
+                      _typingTutorResultPage = new TypingTutorResultPage();
 
 
-                    FrameMediator.MainFrame = MainFrame;
-                    FrameMediator.InitPages(new List<Page>() {
+                      FrameMediator.MainFrame = MainFrame;
+                      FrameMediator.InitPages(new List<Page>() {
                 _typingTutorPage,
                 _learnPage,
                 _typingTestPage,
@@ -132,13 +140,13 @@ namespace CourseProjectKeyboardApplication
                 _typingTutorResultPage,
                 _typingTestResultPage
 
-            });
+              });
 
-                });
+                  });
 
 
 
-            });
+              });
         }
     }
 }

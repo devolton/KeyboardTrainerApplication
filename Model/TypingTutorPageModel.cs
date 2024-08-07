@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.View.Pages;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,7 @@ namespace CourseProjectKeyboardApplication.Model
 
             _currentFocusWordIndex = 0;
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
+            EducationUsersProgressService.InitEducationUserProgressCollection(UserController.CurrentUser.Id);
             InitKeyValueDictionaries();
             _stopwatcher = new Stopwatch();
             _errorBrush = System.Windows.Media.Brushes.Red;

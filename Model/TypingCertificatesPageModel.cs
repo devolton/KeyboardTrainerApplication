@@ -64,10 +64,10 @@ namespace CourseProjectKeyboardApplication.Model
         {
             return (_bestUserTest is null) ? "0" : _bestUserTest.AccuracyPercent.ToString("0.0");
         }
-        public async Task InitBestUserTestResult()
+        public  void InitBestUserTestResult()
         {
             
-            _bestUserTest = await TypingTestResultService.GetBestUserTestAsync(UserController.CurrentUser.Id);
+            _bestUserTest =  TypingTestResultService.GetBestUserTestAsync(UserController.CurrentUser.Id);
 
         }
 
