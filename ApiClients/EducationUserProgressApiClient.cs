@@ -48,6 +48,20 @@ namespace CourseProjectKeyboardApplication.ApiClients
             var response = await _httpClient.PostAsync($"{_apiKey}", content);
             response.EnsureSuccessStatusCode();
         }
+        public async Task UpdateRangeEducationUsersProgress(IEnumerable<EducationUsersProgress> educationUsersProgressCollection)
+        {
+            var jsonOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 64,
+            };
+
+            var jsonContent = JsonSerializer.Serialize(educationUsersProgressCollection, jsonOptions);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"{_apiKey}/UpdateRange", content);
+            response.EnsureSuccessStatusCode();
+           
+        }
         public async Task AddEductionUsersProgressRangeAsync(IEnumerable<EducationUsersProgress> educationUsersProgressesCollection)
         {
             var jsonOptions = new JsonSerializerOptions

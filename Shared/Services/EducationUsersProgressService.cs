@@ -17,15 +17,17 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         private static EducationUserProgressApiClient _apiClient;
         private static List<EducationUsersProgress> _educationUserProgressesCollection;
         private static List<EducationUsersProgress> _addedNewEducationUsersProgressCollection;
+        private static List<EducationUsersProgress> _updatedEducationUsersProgressCollection;
         static EducationUsersProgressService()
         {
             _apiClient = ApiClientProvider.EducationUserProgressApiClient;
             _addedNewEducationUsersProgressCollection = new List<EducationUsersProgress>(100);
+            _updatedEducationUsersProgressCollection = new List<EducationUsersProgress>(100);
 
         }
         public static async Task InitEducationUserProgressCollection(int userId)
         {
-           _educationUserProgressesCollection =  (await _apiClient.GetEducationUsersProgressesByUserIdAsync(userId))?.ToList();
+            _educationUserProgressesCollection = (await _apiClient.GetEducationUsersProgressesByUserIdAsync(userId))?.ToList();
         }
         public static async Task<IEnumerable<EducationUsersProgress>?> GetEducationUsersProgressesByUserIdAsync(int userId)
         {
@@ -38,8 +40,30 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         }
         public static async Task SaveAddedEducationUsersResultAsync()
         {
-            if (_addedNewEducationUsersProgressCollection is not null && _addedNewEducationUsersProgressCollection.Count != 0)
-                await _apiClient.AddEductionUsersProgressRangeAsync(_addedNewEducationUsersProgressCollection);
+            try
+            {
+                if (_addedNewEducationUsersProgressCollection is not null && _addedNewEducationUsersProgressCollection.Count != 0)
+                {
+
+                    var addTask = _apiClient.AddEductionUsersProgressRangeAsync(_addedNewEducationUsersProgressCollection);
+                    Task updateTask = Task.CompletedTask;
+                    if (_updatedEducationUsersProgressCollection is not null && _updatedEducationUsersProgressCollection.Count != 0)
+                    {
+                        updateTask = _apiClient.UpdateRangeEducationUsersProgress(_updatedEducationUsersProgressCollection);
+                    }
+
+                    await Task.WhenAll(addTask, updateTask);
+                }
+                else if (_updatedEducationUsersProgressCollection is not null && _updatedEducationUsersProgressCollection.Count != 0)
+                {
+                    await _apiClient.UpdateRangeEducationUsersProgress(_updatedEducationUsersProgressCollection);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public static void AddNewEducationUsersProgressLocal(EducationUsersProgress newEducationUsersProgress)
         {
@@ -68,5 +92,27 @@ namespace CourseProjectKeyboardApplication.Shared.Services
             }
 
         }
+        public static void UpdateEducationUserProgressLocal(EducationUsersProgress updatedEducationUsersProgress, bool isLessCompleted, bool isWithoutMistakeCompleted, bool isSpeedCompleted)
+        {
+            var currentEducationUsersProgress = _educationUserProgressesCollection.FirstOrDefault(oneEducProg => oneEducProg.Id == updatedEducationUsersProgress.Id);
+            if (currentEducationUsersProgress is not null)
+            {
+                if (isLessCompleted)
+                {
+                    currentEducationUsersProgress.IsLessThanTwoErrorsCompleted = isLessCompleted;
+                }
+                if (isWithoutMistakeCompleted)
+                {
+                    currentEducationUsersProgress.IsWithoutErrorsCompleted = isWithoutMistakeCompleted;
+                }
+                if (isSpeedCompleted)
+                {
+                    currentEducationUsersProgress.IsSpeedCompleted = isSpeedCompleted;
+                }
+                _updatedEducationUsersProgressCollection.Add(currentEducationUsersProgress);
+            }
+
+        }
+        
     }
 }

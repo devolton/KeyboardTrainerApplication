@@ -1,6 +1,7 @@
 ﻿
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,7 +87,7 @@ namespace CourseProjectKeyboardApplication.Model
                 UserController.ChangeCurrentUserLesson();
 
             }
-            UserController.UpdateCurrentEducationUserProgress(isLessTwoCompleted, isWithoutMistakeCompleted,isSpeedCompleted);
+            EducationUsersProgressService.UpdateEducationUserProgressLocal(UserController.CurrentUserEducationProgress,isLessTwoCompleted, isWithoutMistakeCompleted, isSpeedCompleted);
             
 
            

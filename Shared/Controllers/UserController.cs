@@ -29,22 +29,6 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
             set;
         }
 
-        public static void UpdateCurrentEducationUserProgress(bool isLessCompleted, bool isWithoutMistakeCompleted, bool isSpeedCompleted)
-        {
-            if (isLessCompleted)
-            {
-                CurrentUserEducationProgress.IsLessThanTwoErrorsCompleted = isLessCompleted;
-            }
-            if (isWithoutMistakeCompleted)
-            {
-                CurrentUserEducationProgress.IsWithoutErrorsCompleted = isWithoutMistakeCompleted;
-            }
-            if (isSpeedCompleted)
-            {
-                CurrentUserEducationProgress.IsSpeedCompleted = isSpeedCompleted;
-            }
-
-        }
         public static void SetNextEducationUserProgeress()
         {
 
