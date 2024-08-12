@@ -6,6 +6,8 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows;
+
 namespace CourseProjectKeyboardApplication.ApiClients
 {
     public class UserApiClient
@@ -69,21 +71,28 @@ namespace CourseProjectKeyboardApplication.ApiClients
         // Метод для добавления нового пользователя
         public async Task<User?> AddNewUserAsync(User newUser)
         {
-            var jsonOptions = new JsonSerializerOptions
+            try
             {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 64,
-            };
+                var jsonOptions = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    MaxDepth = 64,
+                };
 
-            var jsonContent = JsonSerializer.Serialize(newUser, jsonOptions);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"{_apiKey}", content);
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
+                var jsonContent = JsonSerializer.Serialize(newUser, jsonOptions);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"{_apiKey}", content);
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonStr = await response.Content.ReadAsStringAsync();
+                    var user = JsonSerializer.Deserialize<User>(jsonStr, _jsonOptions);
+                    return user;
+                }
+            }
+            catch(Exception ex)
             {
-                var jsonStr = await response.Content.ReadAsStringAsync();
-                var user = JsonSerializer.Deserialize<User>(jsonStr, _jsonOptions);
-                return user;
+                return null;
             }
             return null;
 

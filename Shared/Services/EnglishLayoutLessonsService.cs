@@ -39,7 +39,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
                 InitNewUserLesson();
             }
         }
-        public static EnglishLayoutLesson? GetLessonById(int id)
+        private static EnglishLayoutLesson? GetLessonById(int id)
         {
             return _lessonsCollection.FirstOrDefault(oneLesson => oneLesson.Id == id);
         }

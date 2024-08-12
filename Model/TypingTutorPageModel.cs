@@ -142,18 +142,12 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns>List of run elements</returns>
         public List<Run> GetLearnStrRuns()
         {
-            //maybe remove reset method and reset data when lesson is starting
-            //UserController.CurrentLesson ??= (UserController.CurrentUser.EnglishLayoutLesson is null)
-            //    ? EnglishLayoutLessonsService.GetLessonById(UserController.CurrentUser.EnglishLayoutLessonId)
-            //    : UserController.CurrentUser.EnglishLayoutLesson;
-            //_currentLearnString = UserController.CurrentLesson.Text;
-            #region
 
             UserController.CurrentLesson ??= UserController.CurrentUser.EnglishLayoutLesson;
             _currentLearnString = UserController.CurrentLesson.Text;
             _progressBarMaxValue = _currentLearnString.Length;
             _wordsCount = GetWordsCount();
-            #endregion
+          
             _lettersRunsList.Clear();
             for (int i = 0; i < _currentLearnString.Length; i++)
             {

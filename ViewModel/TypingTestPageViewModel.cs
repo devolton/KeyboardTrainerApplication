@@ -18,8 +18,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
     {
         private static TypingTestPageViewModel _instance;
         private TypingTestPageModel _model;
-        private bool _isTestStarted;
-        private bool _isFirstKeyPushed;
+        private bool _isShiftWasPushedBefore = false;
+        private bool _isTestStarted = false;
+        private bool _isFirstKeyPushed = false;
         private TextBlock _textBlock;
         private Visibility _startButtonVisibility;
         private Visibility _hidePanesVisibility;
@@ -39,8 +40,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _model = TypingTestPageModel.Instance();
             HidePanelVisibility = Visibility.Visible;
             StartButtonVisibility = Visibility.Visible;
-            _isTestStarted = false;
-            _isFirstKeyPushed = false;
             _startLessonCommand = new RelayCommand(OnStartTestCommand, CanExecuteStartTestCommand);
             _testSetupCommand = new RelayCommand(OnTestSetupCommand);
             _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteKeyCommand);
@@ -49,6 +48,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _infoBlockRightBodyText = _model.GetRightInfoBodyText();
             _infoBlockLeftHeaderText = _model.GetLeftInfoHeaderText();
             _infoBlockLeftBodyText = _model.GetLeftInfoBodyText();
+            _firstPartNearAchivementTableText = _model.GetFirstPartNearAchivementTebleText();
+            _secondPartNearAchivementTebleText = _model.GetSecondPartNearAchivementTableText();
 
         }
         public static TypingTestPageViewModel Instance()
@@ -171,7 +172,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             Key key = (Key)param;
             if (_model.IsFocusCharUppercase())
             {
-                if (IsShiftPushed() && _model.IsValidPushedButton(key, true))
+                if ((IsShiftPushed() || _isShiftWasPushedBefore) && _model.IsValidPushedButton(key, true))
                 {
                     if (key.Equals(Key.Space))
                         _model.IncrementWordsTypingCount();
@@ -181,7 +182,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 else
                 {
                     if (IsShiftPushed())
+                    {
+                       _isShiftWasPushedBefore = true;
+                        Task.Run(async () =>
+                        {
+                            await Task.Delay(1000);
+                            _isShiftWasPushedBefore = false;
+                        });
                         return;
+                    }
                     _model.SetSymbolRunStyle(false);
                     _model.IncrementMissclickCount();
 
@@ -190,7 +199,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             else
             {
                 if (IsShiftPushed())
+                {
+                    _isShiftWasPushedBefore = true;
+                    Task.Run(async () =>
+                    {
+                        await Task.Delay(1000);
+                        _isShiftWasPushedBefore = false;
+                    });
                     return;
+                }
                 if (_model.IsValidPushedButton(key, false))
                 {
                     if (key.Equals(Key.Space))

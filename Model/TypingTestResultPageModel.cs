@@ -50,11 +50,11 @@ namespace CourseProjectKeyboardApplication.Model
                 Date = DateTime.Now,
                 User = UserController.CurrentUser,
                 UserId = UserController.CurrentUser.Id,
-                AccuracyPercent = _accuracyPercent,
+                AccuracyPercent = Math.Round(_accuracyPercent,2),
                 LayoutType = Shared.Enums.LayoutType.English,
                 Speed = _typingSpeed
             };
-            TypingTestResultService.AddNewTypingTestAsync(newTest); // maybe don't working!
+            TypingTestResultService.AddNewTypingTestLocal(newTest);
      
         }
     }

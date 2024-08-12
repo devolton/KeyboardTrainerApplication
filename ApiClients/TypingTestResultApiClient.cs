@@ -73,5 +73,18 @@ namespace CourseProjectKeyboardApplication.ApiClients
             response.EnsureSuccessStatusCode();
 
         }
+        public async Task AddRangeTypingTestsAsync(IEnumerable<TypingTestResult> typingTestResultsCollection)
+        {
+            var jsonOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 64,
+            };
+
+            var jsonContent = JsonSerializer.Serialize(typingTestResultsCollection, jsonOptions);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"{_apiKey}/AddRange", content);
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

@@ -48,7 +48,6 @@ namespace CourseProjectKeyboardApplication.Model
             _timer.Elapsed += Timer_Elapsed;
             InitKeyValueDictionaries();
             InitTextCollectionAsync();
-            //_testTextCollection = DatabaseModelMediator.EnglishTypingTestTextModel.GetAllTexts().ToList();
             _random = new Random();
             
 
@@ -171,6 +170,8 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public string GetLeftInfoHeaderText() => _infoBlockLeftHeaderText;
         public string GetRightInfoHeaderText() => _infoBlockRightHeaderText;
+        public string GetFirstPartNearAchivementTebleText() => _firstPartNearAchivementTableText;
+        public string GetSecondPartNearAchivementTableText() => _secondPartNearAchivementTebleText;
         public string GetLeftInfoBodyText() => _infoBlockLeftBodyText;
         public string GetRightInfoBodyText() => _infoBlockRightBodyText;
         public void IncrementMissclickCount() => ++_misclickCount;

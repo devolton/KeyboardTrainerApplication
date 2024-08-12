@@ -104,7 +104,10 @@ namespace CourseProjectKeyboardApplication
         private async Task SaveChangesAsync()
         {
 
-            await EducationUsersProgressService.SaveAddedEducationUsersResultAsync();
+            var educSaveTask = EducationUsersProgressService.SaveAddedEducationUsersResultAsync();
+            var testSaveTask = Task.CompletedTask;
+            testSaveTask = TypingTestResultService.SaveNewTypingTestAsync();
+            await Task.WhenAll(educSaveTask, testSaveTask);
 
         }
 
