@@ -143,6 +143,10 @@ namespace CourseProjectKeyboardApplication.Model
         public List<Run> GetLearnStrRuns()
         {
             //maybe remove reset method and reset data when lesson is starting
+            //UserController.CurrentLesson ??= (UserController.CurrentUser.EnglishLayoutLesson is null)
+            //    ? EnglishLayoutLessonsService.GetLessonById(UserController.CurrentUser.EnglishLayoutLessonId)
+            //    : UserController.CurrentUser.EnglishLayoutLesson;
+            //_currentLearnString = UserController.CurrentLesson.Text;
             #region
 
             UserController.CurrentLesson ??= UserController.CurrentUser.EnglishLayoutLesson;

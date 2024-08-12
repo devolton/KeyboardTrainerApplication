@@ -19,7 +19,7 @@ namespace CourseProjectKeyboardApplication.Model
           
         }
 
-        public User RegisterUser(string name,string login,string email, string password)
+        public async Task<User> RegisterUser(string name,string login,string email, string password)
         {
             var user = new User
             {
@@ -32,7 +32,7 @@ namespace CourseProjectKeyboardApplication.Model
                 AvatarPath=""
 
             };
-            UserService.AddNewUserAsync(user);
+            user = await UserService.AddNewUserAsync(user);
             return user;
         }
 

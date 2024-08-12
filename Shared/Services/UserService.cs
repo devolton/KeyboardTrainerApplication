@@ -36,9 +36,9 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         {
             await _apiClient.UpdateUserAsync(user);
         }
-        public static async Task AddNewUserAsync(User newUser)
+        public static async Task<User?> AddNewUserAsync(User newUser)
         {
-            await _apiClient.AddNewUserAsync(newUser);
+           return await _apiClient.AddNewUserAsync(newUser);
         }
     }
 }

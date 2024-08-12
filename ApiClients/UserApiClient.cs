@@ -67,7 +67,7 @@ namespace CourseProjectKeyboardApplication.ApiClients
         }
 
         // Метод для добавления нового пользователя
-        public async Task AddNewUserAsync(User newUser)
+        public async Task<User?> AddNewUserAsync(User newUser)
         {
             var jsonOptions = new JsonSerializerOptions
             {
@@ -78,8 +78,15 @@ namespace CourseProjectKeyboardApplication.ApiClients
             var jsonContent = JsonSerializer.Serialize(newUser, jsonOptions);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync($"{_apiKey}", content);
-
             response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonStr = await response.Content.ReadAsStringAsync();
+                var user = JsonSerializer.Deserialize<User>(jsonStr, _jsonOptions);
+                return user;
+            }
+            return null;
+
         }
 
 

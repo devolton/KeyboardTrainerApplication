@@ -60,7 +60,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -109,10 +109,11 @@ namespace CourseProjectKeyboardApplication.Shared.Services
                 {
                     currentEducationUsersProgress.IsSpeedCompleted = isSpeedCompleted;
                 }
-                _updatedEducationUsersProgressCollection.Add(currentEducationUsersProgress);
+                if (!_addedNewEducationUsersProgressCollection.Contains(currentEducationUsersProgress))
+                    _updatedEducationUsersProgressCollection.Add(currentEducationUsersProgress);
             }
 
         }
-        
+
     }
 }

@@ -1,9 +1,11 @@
 ﻿using CourseProjectKeyboardApplication.ApiClients;
 using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,9 +36,21 @@ namespace CourseProjectKeyboardApplication.Shared.Services
                 var lessonsCollection = await _apiClient.GetLessonsAsync();
                 if (lessonsCollection is not null)
                     _lessonsCollection = lessonsCollection.ToList();
+                InitNewUserLesson();
             }
         }
+        public static EnglishLayoutLesson? GetLessonById(int id)
+        {
+            return _lessonsCollection.FirstOrDefault(oneLesson => oneLesson.Id == id);
+        }
+        private static void InitNewUserLesson()
+        {
+            UserController.CurrentLesson ??= (UserController.CurrentUser.EnglishLayoutLesson is null)
+               ? GetLessonById(UserController.CurrentUser.EnglishLayoutLessonId)
+               : UserController.CurrentUser.EnglishLayoutLesson;
 
+
+        }
 
     }
 }

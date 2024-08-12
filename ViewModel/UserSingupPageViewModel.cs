@@ -37,7 +37,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             if (await _model.IsUniqueCredentialsAsync(UserEmail, UserLogin))
             {
-               var newUser= _model.RegisterUser(UserName, UserLogin, UserEmail, Password);
+               var newUser= await _model.RegisterUser(UserName, UserLogin, UserEmail, Password);
                 if(newUser is null)
                 {
                     MessageBox.Show("Invalid registerUserOperation");
@@ -135,14 +135,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 _isConfirmPasswordVisible = false;
                 ConfirmPasswordBoxVisibility = Visibility.Visible;
                 ConfirmPasswordTextBoxVisibility = Visibility.Collapsed;
-                ConfirmPasswordTextDecorationCollection = null; 
+                ConfirmPasswordTextDecorationCollection = TextDecorations.Strikethrough; 
             }
             else
             {
                 _isConfirmPasswordVisible = true;
                 ConfirmPasswordBoxVisibility = Visibility.Collapsed;
                 ConfirmPasswordTextBoxVisibility = Visibility.Visible;
-                ConfirmPasswordTextDecorationCollection = TextDecorations.Strikethrough; 
+                ConfirmPasswordTextDecorationCollection = null; 
             }
 
 

@@ -75,8 +75,6 @@ namespace CourseProjectKeyboardApplication.ApiClients
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync($"{_apiKey}/AddRange", content);
             response.EnsureSuccessStatusCode();
-            using StreamWriter sw = new("D:\\C#WinForms\\CourseProjectKeyboardApplication\\AsyncLogger.txt");
-            await sw.WriteLineAsync(response.StatusCode.ToString());
 
         }
     }
