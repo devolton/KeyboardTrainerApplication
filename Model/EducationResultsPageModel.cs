@@ -61,7 +61,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns>User english layout levels collection</returns>
         public async Task<IEnumerable<EnglishLayoutLevel>> GetLevelsAsync()
         {
-            _englishLayoutLevelsCollection ??= await ApiClientProvider.EnglishLayoutLevelApiClient.GetAllLevelsAsync();
+            _englishLayoutLevelsCollection ??= await DbApiClientProvider.EnglishLayoutLevelApiClient.GetAllLevelsAsync();
             return _englishLayoutLevelsCollection;
         }
 

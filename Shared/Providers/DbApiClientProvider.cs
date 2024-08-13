@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Shared.Providers
 {
-    public static class ApiClientProvider
+    public static class DbApiClientProvider
     {
         private static HttpClient _httpClient;
         private static JsonSerializerOptions _jsonOptions;
@@ -21,7 +21,7 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         private static TypingTestResultApiClient _typingTestResultApiClient;
         private static EnglishLayoutLevelApiClient _englishLayoutLevelApiClient;
         private static EnglishLayoutLessonApiClient _englishLayoutLessonApiClient;
-        static ApiClientProvider()
+        static DbApiClientProvider()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri("https://localhost:7199/");
@@ -45,5 +45,10 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         public static EnglishLayoutLevelApiClient EnglishLayoutLevelApiClient => _englishLayoutLevelApiClient;
         public static EnglishLayoutLessonApiClient EnglishLayoutLessonApiClient => _englishLayoutLessonApiClient;
         public static TypingTestResultApiClient TypingTestResultApiClient => _typingTestResultApiClient;
+
+        public static void Dispose()
+        {
+            _httpClient.Dispose();
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         private static List<EducationUsersProgress> _updatedEducationUsersProgressCollection;
         static EducationUsersProgressService()
         {
-            _apiClient = ApiClientProvider.EducationUserProgressApiClient;
+            _apiClient = DbApiClientProvider.EducationUserProgressApiClient;
             _addedNewEducationUsersProgressCollection = new List<EducationUsersProgress>(100);
             _updatedEducationUsersProgressCollection = new List<EducationUsersProgress>(100);
 

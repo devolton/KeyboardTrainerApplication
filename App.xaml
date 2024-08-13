@@ -21,7 +21,6 @@
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomPasswordBox.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomUserControl.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <BitmapImage x:Key="AuthorizationLogo" UriSource="pack://application:,,,/Resources/Images/AuthorizationLogo.png"/>
             <BitmapImage x:Key="KeyboardSchemeEngImage" UriSource="pack://application:,,,/Resources/Images/KeyboardSchemeEng.png"/>
             <BitmapImage x:Key="StartLeftEngPosition" UriSource="pack://application:,,,/Resources/Images/StartLeftEng.png"/>
             <BitmapImage x:Key="StartRightEngPosition" UriSource="pack://application:,,,/Resources/Images/StartRightEng.png"/>
@@ -37,7 +36,6 @@
             <BitmapImage x:Key="CertificateConditionSilverMedal" UriSource="pack://application:,,,/Resources/Images/SilverMedal.png"/>
             <BitmapImage x:Key="GoldFlash" UriSource="pack://application:,,,/Resources/Images/GoldLightning.png"/>
             <BitmapImage x:Key="GoldTarget" UriSource="pack://application:,,,/Resources/Images/GoldTarget.png"/>
-            <BitmapImage x:Key="CertificateTemp" UriSource="pack://application:,,,/Resources/Images/CertificateTemp.png"/>
             <BitmapImage x:Key="CertificateIcon" UriSource="pack://application:,,,/Resources/Images/CertificateIcon.png"/>
             <BitmapImage x:Key="SilverTarget" UriSource="pack://application:,,,/Resources/Images/SilverTarget.png"/>
             <BitmapImage x:Key="SilverCalendar" UriSource="pack://application:,,,/Resources/Images/SilverCalendar.png"/>
@@ -50,11 +48,6 @@
             <BitmapImage x:Key="LightGrayStar" UriSource="pack://application:,,,/Resources/Images/LightGrayStar.png"/>
             <BitmapImage x:Key="LightGrayTarget" UriSource="pack://application:,,,/Resources/Images/LightGrayTarget.png"/>
             <BitmapImage x:Key="EditProfileIcon" UriSource="pack://application:,,,/Resources/Images/EditProfileIcon.png"/>
-            <BitmapImage x:Key="AuthorizationExitIcon" UriSource="pack://application:,,,/Resources/Images/AuthorizationExitIcon.png"/>
-            <BitmapImage x:Key="LoginUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/LoginUserWhiteIcon.png"/>
-            <BitmapImage x:Key="LoginUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/LoginUserBlueIcon.png"/>
-            <BitmapImage x:Key="SingUpUserWhiteIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserWhiteIcon.png"/>
-            <BitmapImage x:Key="SingUpUserBlueIcon" UriSource="pack://application:,,,/Resources/Images/SingInUserBlueIcon.png"/>
             <BitmapImage x:Key="CertificateTemplate" UriSource="pack://application:,,,/Resources/Images/EnglishTypingCertificate.png"/>
             <BitmapImage x:Key="CurrentLessonLeftArrow" UriSource="pack://application:,,,/Resources/Images/LeftArrow.png"/>
 

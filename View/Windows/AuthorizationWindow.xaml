@@ -6,15 +6,15 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Windows"
         mc:Ignorable="d"
+        x:Name="LoginWindow"
         Title="AuthorizationWindow"
            Height="600"
            Width="500"
            Background="{x:Null}"
            AllowsTransparency="True"
            WindowStyle="None"
-           WindowStartupLocation="CenterScreen"
-           Icon="{StaticResource AuthorizationLogo}" 
-        Loaded="Window_Loaded">
+           WindowStartupLocation="CenterScreen" 
+           Loaded="Window_Loaded">
     <materialDesign:Card
      x:Name="MainCard"
      UniformCornerRadius="50"
@@ -40,8 +40,7 @@
                             <Image x:Name="LoginNavigatorIconImage"
                                    Width="20"
                                    Height="20"
-                                   Margin="0 0 5 0"
-                                   Source="{StaticResource LoginUserWhiteIcon}"/>
+                                   Margin="0 0 5 0"/>
                             <TextBlock Text="Login"
                                        x:Name="LoginNavigatorButtonTextBlock"
                                        FontSize="20"
@@ -61,8 +60,7 @@
                             <Image x:Name="SingUpNavigatorIconImage"
                                    Width="20"
                                    Height="20"
-                                   Margin="0 0 5 0"
-                                Source="{StaticResource SingUpUserBlueIcon}"/>
+                                   Margin="0 0 5 0"/>
                             <TextBlock Text="Sing up"
                                        x:Name="SingUpNavigatorButtonTextBlock"
                                        FontSize="20"/>
@@ -84,8 +82,8 @@
                             Click="Button_Click">
                         <Button.Background>
                             <ImageBrush 
-                                Stretch="Fill"
-                                ImageSource="{StaticResource AuthorizationExitIcon}"/>
+                                x:Name="ExitImageBrush"
+                                Stretch="Fill"/>
                         </Button.Background>
                     </Button>
 

@@ -14,7 +14,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         private static UserApiClient _apiClient;
         static UserService()
         {
-            _apiClient = ApiClientProvider.UserApiClient;
+            _apiClient = DbApiClientProvider.UserApiClient;
         }
         public static async  Task<bool> IsUserExistByLoginOrEmail(string loginOrEmail)
         {

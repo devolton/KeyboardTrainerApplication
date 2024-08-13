@@ -94,7 +94,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         private async Task InitTextCollectionAsync()
         {
-            var textCollection = await ApiClientProvider.EnglishTypingTestTextApiClient.GetAllTextsAsync();
+            var textCollection = await DbApiClientProvider.EnglishTypingTestTextApiClient.GetAllTextsAsync();
             _testTextCollection = textCollection.ToList();
         }
         public void SetupTest()

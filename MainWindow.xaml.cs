@@ -49,6 +49,8 @@ namespace CourseProjectKeyboardApplication
         private async void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             await SaveChangesAsync();
+            DbApiClientProvider.Dispose();
+            ContentApiClientProvider.Dispose(); 
             Process.GetCurrentProcess().Kill();
 
         }
@@ -100,6 +102,8 @@ namespace CourseProjectKeyboardApplication
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await SaveChangesAsync();
+            DbApiClientProvider.Dispose();
+            ContentApiClientProvider.Dispose();
         }
         private async Task SaveChangesAsync()
         {

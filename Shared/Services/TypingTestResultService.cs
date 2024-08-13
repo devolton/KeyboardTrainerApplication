@@ -16,7 +16,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         private static List<TypingTestResult> _addedTypingTestResultCollection;
         static TypingTestResultService()
         {
-            _apiClient = ApiClientProvider.TypingTestResultApiClient;
+            _apiClient = DbApiClientProvider.TypingTestResultApiClient;
             _addedTypingTestResultCollection = new List<TypingTestResult>(50);
         }
         public static async Task<IEnumerable<TypingTestResult>?> GetTypingTestResultsByUserIdAsync(int userId)

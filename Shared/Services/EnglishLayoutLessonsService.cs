@@ -18,7 +18,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         private static List<EnglishLayoutLesson> _lessonsCollection;
         static EnglishLayoutLessonsService()
         {
-            _apiClient = ApiClientProvider.EnglishLayoutLessonApiClient;
+            _apiClient = DbApiClientProvider.EnglishLayoutLessonApiClient;
 
         }
         public static EnglishLayoutLesson? GetNextLesson(EnglishLayoutLesson currentLesson)

@@ -1,4 +1,6 @@
-﻿using CourseProjectKeyboardApplication.View.Pages;
+﻿using CourseProjectKeyboardApplication.ApiClients;
+using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,17 +33,21 @@ namespace CourseProjectKeyboardApplication.View.Windows
         private ImageSource _blueLoginIcon;
         private ImageSource _whiteSingUpIcon;
         private ImageSource _blueSingUpIcon;
+        private ImageSource _exitIconImageSource;
+        private ImageSource _windowIconImageSource;
+
+
+        private StaticImageApiClient _staticImageApiClient;
+
         public AuthorizationWindow()
         {
             InitializeComponent();
             _deepVioletBrush = (SolidColorBrush)Application.Current.Resources["CustomDeepBlueViolet"];
             _coalBrush = (SolidColorBrush)Application.Current.Resources["CustomCoal"];
             _whiteBrush = (SolidColorBrush)Application.Current.Resources["CustomWhite"];
-            _whiteLoginIcon = (ImageSource)Application.Current.Resources["LoginUserWhiteIcon"];
-            _blueLoginIcon = (ImageSource)Application.Current.Resources["LoginUserBlueIcon"];
-            _whiteSingUpIcon = (ImageSource)Application.Current.Resources["SingUpUserWhiteIcon"];
-            _blueSingUpIcon = (ImageSource)Application.Current.Resources["SingUpUserBlueIcon"];
-          
+            _staticImageApiClient = ContentApiClientProvider.StaticImageApiClient;
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,12 +56,25 @@ namespace CourseProjectKeyboardApplication.View.Windows
 
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            _windowIconImageSource = await _staticImageApiClient.GetImageSourceAsync("AuthorizationLogo.png");
+            LoginWindow.Icon = _windowIconImageSource;
             _userLoginPage = new UserLoginPage();
             _userSingInPage = new UserSingInPage();
             AuthorizationFrame.Content = _userLoginPage;
+            _whiteLoginIcon = await _staticImageApiClient.GetImageSourceAsync("LoginUserWhiteIcon.png");
+            _blueLoginIcon = await _staticImageApiClient.GetImageSourceAsync("LoginUserBlueIcon.png");
+            _whiteSingUpIcon = await _staticImageApiClient.GetImageSourceAsync("SingUpUserWhiteIcon.png");
+            _blueSingUpIcon = await _staticImageApiClient.GetImageSourceAsync("SingUpUserBlueIcon.png");
+            _exitIconImageSource = await _staticImageApiClient.GetImageSourceAsync("ExitIcon.png");
+            
 
+            LoginNavigatorIconImage.Source = _whiteLoginIcon;
+            SingUpNavigatorIconImage.Source = _blueSingUpIcon;
+            ExitImageBrush.ImageSource = _exitIconImageSource;
+           
+           
         }
 
         private void OnLoginNavigatorButtonClick(object sender, RoutedEventArgs e)
