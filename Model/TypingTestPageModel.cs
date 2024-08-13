@@ -116,12 +116,13 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public void StartTimer()
         {
+            _timer.Interval = _timerInterval;
             _timer.Start();
         } 
         public void TimerReset()
         {
             _timer.Stop();
-            _timer.Interval = _timerInterval;
+              
         }
         public bool IsFocusCharUppercase()
         {
