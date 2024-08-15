@@ -24,7 +24,7 @@
                 x:Name="SpeedBlock"
                 Style="{StaticResource SpeedLanguageLayotStatisticBlock}"
                 HeaderText="Speed"
-                IconSource="{StaticResource GoldFlash}"
+                IsSpeedBlock="True"
                 StatValue="{Binding TypingSpeed}"
                 StatUnitValue="wpm"
                 Margin="5 5 30 5"/>
@@ -32,7 +32,7 @@
                 x:Name="AccuracyBlock"
                 Style="{StaticResource AccuracyLanguageLayotStatisticBlock}"
                 HeaderText="Accuracy"
-                IconSource="{StaticResource GoldTarget}"
+                IsSpeedBlock="False"
                 StatValue="{Binding TypingAccuracy}"
                 StatUnitValue="%"
                  Margin="5 5 30 5"/>

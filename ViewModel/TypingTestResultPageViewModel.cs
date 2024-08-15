@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -19,6 +20,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _displayResultCommand;
         private ICommand _improveScoreCommand;
         private TypingTestResultPageModel _model;
+
+        private ImageSource _keyboardIconImageSource;
+
         public TypingTestResultPageViewModel()
         {
             _model = new TypingTestResultPageModel();
@@ -29,6 +33,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //properties
         #region 
         public ICommand DisplayResultCommand => _displayResultCommand;
+        public ICommand ImproveScoreCommand => _improveScoreCommand;
         public string SpeedValue
         {
             get { return _resultSpeed; }
@@ -38,7 +43,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(SpeedValue));
             }
         }
-        public ICommand ImproveScoreCommand => _improveScoreCommand;
+
         public string AccuracyPercent
         {
             get { return _accuracyPercent; }
@@ -48,12 +53,23 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(AccuracyPercent));
             }
         }
+        public ImageSource KeyboardIconImageSource
+        {
+            get => _keyboardIconImageSource;
+            set
+            {
+                _keyboardIconImageSource = value;
+                OnPropertyChanged(nameof(KeyboardIconImageSource));
+            }
+        }
+
         #endregion
         //commands
         #region
         private void OnDisplayResultCommand(object param)
         {
             _model.InitStat();
+            _model.GetKeyboardIconImageSource();
             try
             {
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;

@@ -15,6 +15,7 @@ using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.ApiClients;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -38,6 +39,12 @@ namespace CourseProjectKeyboardApplication.Model
         private string _infoBlockLeftBodyText = "There are many reasons why you might want to take a typing speed test. Perhaps you’re curious to find out how fast you can type, or maybe you want to see if you need to improve your accuracy. Either way, a typing speed test is a great way to estimate your progress. The average typing speed is 40 words per minute, so if you can beat that, you’re doing great!\r\n\r\nYou can take the test as many times as you like, and each time you’ll likely see your speed and accuracy improve. So why not give it a try today? You might be surprised at how fast you can type.";
         private string _firstPartNearAchivementTableText = "Do you know that you can get certified in keyboarding on any layout? That’s right — whether you’re a QWERTY fan or prefer DVORAK, there’s a certification test for you.";
         private string _secondPartNearAchivementTebleText = "You can take the test as many times as you want! Only the best score will count towards your certification, there’s no need to worry about making a mistake.";
+        private ImageSource _starImageSource;
+        private ImageSource _flashImageSource;
+        private ImageSource _targetImageSource;
+        private ImageSource _keyboardIconImageSource;
+
+
 
         private TypingTestPageModel()
         {
@@ -51,6 +58,26 @@ namespace CourseProjectKeyboardApplication.Model
             _random = new Random();
             
 
+        }
+        public ImageSource GetTargetImageSource()
+        {
+            _targetImageSource ??= AppImageSourceProvider.BlueTargetImageSource;
+            return _targetImageSource;
+        }
+        public ImageSource GetFlashImageSource()
+        {
+            _flashImageSource ??= AppImageSourceProvider.BlueFlashImageSource;
+            return _flashImageSource;
+        }
+        public ImageSource GetStarImageSource()
+        {
+            _starImageSource ??= AppImageSourceProvider.BlueStarImageSource;
+            return _starImageSource;
+        }
+        public ImageSource GetKeyboardIconImageSource()
+        {
+            _keyboardIconImageSource ??= AppImageSourceProvider.KeyboardIconImageSource;
+            return _keyboardIconImageSource;
         }
 
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)

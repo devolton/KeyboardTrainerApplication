@@ -1,6 +1,7 @@
 ﻿
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Interfaces;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,18 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
             get { return(string)GetValue(LessonNumberProperty);}
             set { SetValue(LessonNumberProperty, value); }
         }
+        public ImageSource LockIconImageSource { 
+            get { return(ImageSource)GetValue(LockIconImageSourceProperty);}
+            set { SetValue(LockIconImageSourceProperty,value);}
+        }
 
         public EnglishLayoutLesson EducationLesson { get; set; }
         public EducationUsersProgress EducationUserProgress { get; set; }
 
         public static readonly DependencyProperty LessonNumberProperty =
             DependencyProperty.Register("LessonNumber",typeof(string),typeof(EducationResultsLockButton),new PropertyMetadata(" "));
+        public static readonly DependencyProperty LockIconImageSourceProperty =
+            DependencyProperty.Register(nameof(LockIconImageSource),typeof(ImageSource),typeof(EducationResultsLockButton), new PropertyMetadata(null));
         public EducationResultsLockButton(EnglishLayoutLesson educationLesson, EducationUsersProgress educationUserProgress=null)
         {
             InitializeComponent();
@@ -41,6 +48,11 @@ namespace CourseProjectKeyboardApplication.View.CustomControls.EducationResults
             LessonNumber = educationLesson.Ordinal.ToString();
             DataContext = this;
             
+        }
+
+        private  void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            LockIconImageSource = AppImageSourceProvider.LockIconImageSource;
         }
     }
 }

@@ -161,14 +161,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             lessTwoMistakeAchivementBlock.AchivementText = _model.GetLessTwoMistakeText();
             if (_model.IsExecuteLessTwoErrorCondition())
             {
-                lessTwoMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldStar"] as BitmapImage;
+
+                lessTwoMistakeAchivementBlock.AchivementImageSource = _model.GetGoldStarImageSource();
                 lessTwoMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Orange;
                 LessTwoMissclickBrush = System.Windows.Media.Brushes.Orange;
 
             }
             else
             {
-                lessTwoMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["LightGrayStar"] as BitmapImage;
+                lessTwoMistakeAchivementBlock.AchivementImageSource = _model.GetLightGrayStarImageSource();
                 lessTwoMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Silver;
                 LessTwoMissclickBrush = System.Windows.Media.Brushes.Silver;
             }
@@ -180,14 +181,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
             withoutMistakeAchivementBlock.AchivementText = _model.GetWithoutMistakeText();
             if (_model.IsExecuteWithoutMisclickCondition())
             {
-                withoutMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldTarget"] as BitmapImage;
+                withoutMistakeAchivementBlock.AchivementImageSource = _model.GetGoldTargetImageSource();
                 withoutMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Green;
                 WithoutMissclickBrush = System.Windows.Media.Brushes.Green;
 
             }
             else
             {
-                withoutMistakeAchivementBlock.AchivementImageSource = Application.Current.Resources["LightGrayTarget"] as BitmapImage;
+                withoutMistakeAchivementBlock.AchivementImageSource = _model.GetLightGrayTargetImageSource();
                 withoutMistakeAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Silver;
                 WithoutMissclickBrush = System.Windows.Media.Brushes.Silver;
             }
@@ -202,13 +203,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
             if (_model.IsExecuteSpeedCondition())
             {
-                speedAchivementBlock.AchivementImageSource = Application.Current.Resources["GoldFlash"] as BitmapImage;
+                speedAchivementBlock.AchivementImageSource = _model.GetGoldFlashImageSource();
                 speedAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Blue;
                 SpeedBrush = System.Windows.Media.Brushes.Blue;
             }
             else
             {
-                speedAchivementBlock.AchivementImageSource = Application.Current.Resources["LightGrayFlash"] as BitmapImage;
+                speedAchivementBlock.AchivementImageSource = _model.GetLightGrayFlashImageSource();
                 speedAchivementBlock.AchivementTextForeground = System.Windows.Media.Brushes.Silver;
                 SpeedBrush = System.Windows.Media.Brushes.Silver;
             }

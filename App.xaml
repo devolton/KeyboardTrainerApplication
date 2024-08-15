@@ -21,39 +21,6 @@
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomPasswordBox.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/CustomStyles/CustomUserControl.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <BitmapImage x:Key="KeyboardSchemeEngImage" UriSource="pack://application:,,,/Resources/Images/KeyboardSchemeEng.png"/>
-            <BitmapImage x:Key="StartLeftEngPosition" UriSource="pack://application:,,,/Resources/Images/StartLeftEng.png"/>
-            <BitmapImage x:Key="StartRightEngPosition" UriSource="pack://application:,,,/Resources/Images/StartRightEng.png"/>
-            <BitmapImage x:Key="ApplicationLogo" UriSource="pack://application:,,,/Resources/Images/coding.png"/>
-            <BitmapImage x:Key="RepeateIcon" UriSource="pack://application:,,,/Resources/Images/RepeatIcon.png"/>
-            <BitmapImage x:Key="DevoltonLabsLogo" UriSource="pack://application:,,,/Resources/Images/DevoltonLabsLogo.png"/>
-            <BitmapImage x:Key="TempStudyImage" UriSource="pack://application:,,,/Resources/Images/Keyboard.png"/>
-            <BitmapImage x:Key="CertificateConditionStar" UriSource="pack://application:,,,/Resources/Images/CertificateConditionStar.png"/>
-            <BitmapImage x:Key="CertificateConditionTarget" UriSource="pack://application:,,,/Resources/Images/CertificateConditionTarget.png"/>
-            <BitmapImage x:Key="CertificateConditionLightning" UriSource="pack://application:,,,/Resources/Images/CertificateConditionLightning.png"/>
-            <BitmapImage x:Key="CertificateConditionPlatinumMedal" UriSource="pack://application:,,,/Resources/Images/PlatinumMedal.png"/>
-            <BitmapImage x:Key="CertificateConditionGoldMedal" UriSource="pack://application:,,,/Resources/Images/GoldMedal.png"/>
-            <BitmapImage x:Key="CertificateConditionSilverMedal" UriSource="pack://application:,,,/Resources/Images/SilverMedal.png"/>
-            <BitmapImage x:Key="GoldFlash" UriSource="pack://application:,,,/Resources/Images/GoldLightning.png"/>
-            <BitmapImage x:Key="GoldTarget" UriSource="pack://application:,,,/Resources/Images/GoldTarget.png"/>
-            <BitmapImage x:Key="CertificateIcon" UriSource="pack://application:,,,/Resources/Images/CertificateIcon.png"/>
-            <BitmapImage x:Key="SilverTarget" UriSource="pack://application:,,,/Resources/Images/SilverTarget.png"/>
-            <BitmapImage x:Key="SilverCalendar" UriSource="pack://application:,,,/Resources/Images/SilverCalendar.png"/>
-            <BitmapImage x:Key="SilverFlash" UriSource="pack://application:,,,/Resources/Images/SilverFlash.png"/>
-            <BitmapImage x:Key="StatIcon" UriSource="pack://application:,,,/Resources/Images/StatisticIcon.png"/>
-            <BitmapImage x:Key="StudyIcon" UriSource="pack://application:,,,/Resources/Images/StudyIcon.png"/>
-            <BitmapImage x:Key="LessonLockIcon" UriSource="pack://application:,,,/Resources/Images/LessonLockIcon.png"/>
-            <BitmapImage x:Key="GoldStar" UriSource="pack://application:,,,/Resources/Images/GoldStar.png"/>
-            <BitmapImage x:Key="LightGrayFlash" UriSource="pack://application:,,,/Resources/Images/LightGrayFlash.png"/>
-            <BitmapImage x:Key="LightGrayStar" UriSource="pack://application:,,,/Resources/Images/LightGrayStar.png"/>
-            <BitmapImage x:Key="LightGrayTarget" UriSource="pack://application:,,,/Resources/Images/LightGrayTarget.png"/>
-            <BitmapImage x:Key="EditProfileIcon" UriSource="pack://application:,,,/Resources/Images/EditProfileIcon.png"/>
-            <BitmapImage x:Key="CertificateTemplate" UriSource="pack://application:,,,/Resources/Images/EnglishTypingCertificate.png"/>
-            <BitmapImage x:Key="CurrentLessonLeftArrow" UriSource="pack://application:,,,/Resources/Images/LeftArrow.png"/>
-
-
-
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -33,7 +33,19 @@ namespace CourseProjectKeyboardApplication
         private EditUserProfilPage _editUserProfilPage;
         private TypingTestResultPage _typingTestResultPage;
         private TypingTutorResultPage _typingTutorResultPage;
-        private Stopwatch _stopwatch = new Stopwatch();
+
+
+        public ImageSource DevoltonLabsImageSource
+        {
+            get => (ImageSource)GetValue(DevoltonLabsImageSourceProperty);
+            set
+            {
+                SetValue(DevoltonLabsImageSourceProperty, value);
+            }
+
+        }
+        public static DependencyProperty DevoltonLabsImageSourceProperty =
+            DependencyProperty.Register(nameof(DevoltonLabsImageSource),typeof(ImageSource), typeof(MainWindow), new PropertyMetadata(null));
 
         public MainWindow()
         {
@@ -41,6 +53,7 @@ namespace CourseProjectKeyboardApplication
             InitializeComponent();
 
             _typingTestPage = new TypingTestPage();
+            DataContext = this;
 
 
 
@@ -50,7 +63,7 @@ namespace CourseProjectKeyboardApplication
         {
             await SaveChangesAsync();
             DbApiClientProvider.Dispose();
-            ContentApiClientProvider.Dispose(); 
+            ContentApiClientProvider.Dispose();
             Process.GetCurrentProcess().Kill();
 
         }
@@ -115,9 +128,11 @@ namespace CourseProjectKeyboardApplication
 
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitPages();
+            KeyboardApplicationWindow.Icon = AppImageSourceProvider.KeyboardAppIconImageSource;
+            await InitPages();
+            DevoltonLabsImageSource = AppImageSourceProvider.DevoltonLabsImageSource;
         }
         private Task InitPages()
         {

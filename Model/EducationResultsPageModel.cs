@@ -1,7 +1,9 @@
-﻿using CourseProjectKeyboardApplication.Database.Entities;
+﻿using CourseProjectKeyboardApplication.ApiClients;
+using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -12,12 +14,18 @@ namespace CourseProjectKeyboardApplication.Model
         private string _languageLayoutType = "English layout";
         private int _commonLessonsCount = 0;
         private IEnumerable<EnglishLayoutLevel> _englishLayoutLevelsCollection;
+        private ImageSource _studyIconImageSource;
 
 
         public EducationResultsPageModel()
         {
             InitAllLevelCountAsync();
 
+        }
+        public  ImageSource GetStudyIconImageSourceAsync()
+        {
+            _studyIconImageSource ??= AppImageSourceProvider.StudyIconImageSource;
+            return _studyIconImageSource;
         }
         /// <summary>
         /// Get actual user education progress str(current level and common levels count) to educationResultsPage header

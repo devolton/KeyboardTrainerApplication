@@ -6,7 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CourseProjectKeyboardApplication"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="MainWindow"
+        x:Name="KeyboardApplicationWindow"
         Height="750"
         Width="1300"
         Background="{x:Null}"
@@ -14,7 +15,6 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen" 
         Closing="Window_Closing"
-        Icon="{StaticResource ApplicationLogo}" 
         Loaded="Window_Loaded"
        
         >
@@ -33,7 +33,7 @@
                     <Image Width="200" 
                            Margin="20 0 0 7"
                            Height="70"
-                           Source="{StaticResource DevoltonLabsLogo}"
+                           Source="{Binding DevoltonLabsImageSource}"
                            />
                     <StackPanel
                         Height="100"

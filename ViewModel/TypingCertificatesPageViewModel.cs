@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.CustomControls;
 
 namespace CourseProjectKeyboardApplication.ViewModel
@@ -24,6 +26,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string _typingAccuracy = string.Empty;
         private bool _isSaveCertificateButtonEnabled = false;
 
+
+        private ImageSource _cerficateIconImageSource;
         private TypingCertificatesPageViewModel()
         {
             _model = new TypingCertificatesPageModel();
@@ -72,6 +76,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(CertificateSource));
             }
         }
+        public ImageSource CertificateIconImageSource
+        {
+            get => _cerficateIconImageSource;
+            set
+            {
+                _cerficateIconImageSource = value;
+                OnPropertyChanged(nameof(CertificateIconImageSource));
+            }
+        }
         public bool IsSaveCertificateButtonEnabled
         {
             get => _isSaveCertificateButtonEnabled;
@@ -81,6 +94,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(IsSaveCertificateButtonEnabled));
             }
         }
+
 
 
         #endregion
@@ -93,6 +107,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnDrawInfoCommand(object param)
         {
+            CertificateIconImageSource ??= _model.GetCertificateIconImageSource();
               _model.InitBestUserTestResult();
             try
             {

@@ -26,7 +26,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="{StaticResource TempStudyImage}"
+                <Image Source="{Binding KeyboardIconImageSource}"
                    Margin="10"/>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -99,19 +99,19 @@
                             SpeedLevelText="Platinum"
                             SpeedValueText="70 wpm"
                             AccuracyText="99.5 %"
-                            ImageSource="{StaticResource CertificateConditionPlatinumMedal}"
+                            MedalType="Platinum"
                             Grid.Row="1"/>
                         <cc:CertificateConditionTableBodyItem
                             SpeedLevelText="Gold"
                             SpeedValueText="50 wpm"
                             AccuracyText="98.5 %"
-                            ImageSource="{StaticResource CertificateConditionGoldMedal}"
+                            MedalType="Gold"
                             Grid.Row="2"/>
                         <cc:CertificateConditionTableBodyItem
                             SpeedLevelText="Silver"
                             SpeedValueText="40 wpm"
                             AccuracyText="96 %"
-                            ImageSource="{StaticResource CertificateConditionSilverMedal}"
+                            MedalType="Silver"
                             Grid.Row="3"/>
 
                     </Grid>

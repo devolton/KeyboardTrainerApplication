@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Providers;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -19,6 +20,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private static EditUserProfilePageViewModel _instance;
         private ImageSource _avatarSource;
         private ImageSource _defaultAvatar;
+        private ImageSource _editProfileIconImageSource;
         private bool _isSetDefaultAvatar = true;
         private bool _isRemoveAvatarButtonEnabled = false;
 
@@ -38,7 +40,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
             this.InitStyles();
-            _defaultAvatar = Application.Current.Resources["ApplicationLogo"] as ImageSource; ;
+            _editProfileIconImageSource = AppImageSourceProvider.EditProfileIconImageSource;
+            _defaultAvatar = _model.GetDefaultUserAvatarImageSource();
 
         }
 
@@ -88,6 +91,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _avatarSource = value;
                 OnPropertyChanged(nameof(AvatarSource));
+            }
+        }
+        public ImageSource EditProfileIconImageSource
+        {
+            get => _editProfileIconImageSource;
+            set
+            {
+                _editProfileIconImageSource = value;
+                OnPropertyChanged(nameof(EditProfileIconImageSource));
             }
         }
         public string Name

@@ -25,12 +25,19 @@ namespace CourseProjectKeyboardApplication.ApiClients
         }
         public async Task<ImageSource> GetImageSourceAsync(string fileName)
         {
-            var byteArray = await _apiClient.GetByteArrayAsync($"{_apiKey}/{fileName}");
-            using (var ms = new MemoryStream(byteArray))
+            try
             {
-                Image image = Image.FromStream(ms);
-                return ConvertToImageSource(image);
+                var byteArray = await _apiClient.GetByteArrayAsync($"{_apiKey}/{fileName}");
+                using (var ms = new MemoryStream(byteArray))
+                {
+                    Image image = Image.FromStream(ms);
+                    return ConvertToImageSource(image);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
 
         }

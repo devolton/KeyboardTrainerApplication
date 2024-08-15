@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Shared.Providers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace CourseProjectKeyboardApplication.Tools
         private static DrawingVisual _drawingVisual;
         private static Typeface _typeface;
         private static BitmapImage _certificateBitmapImage;
+        
         static CertificateGenerator()
         {
             _nameFontSize = 54;
@@ -37,7 +39,7 @@ namespace CourseProjectKeyboardApplication.Tools
         }
         public static RenderTargetBitmap RenderCertificate(string userName, string typingSpeed, string typingAccuracy, DateTime typingDate)
         {
-            _certificateBitmapImage = (BitmapImage)Application.Current.Resources["CertificateTemplate"];
+            _certificateBitmapImage??= (BitmapImage)AppImageSourceProvider.EnglishTypingCertificateTemplateImageSource;
 
             using (DrawingContext drawingContext = _drawingVisual.RenderOpen())
             {

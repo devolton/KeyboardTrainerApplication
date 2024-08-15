@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Shared.Providers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,6 +87,18 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         }
         public static readonly DependencyProperty StatUnitValueProperty =
             DependencyProperty.Register("StatUnitValue", typeof(string), typeof(LanguageLayotStatisticBlock), new PropertyMetadata("%"));
+        public bool IsSpeedBlock
+        {
+            get => (bool) GetValue(IsSpeedBlockProperty);
+            set
+            {
+                SetValue(IsSpeedBlockProperty, value);
+            }
+            
+
+        }
+        public static readonly DependencyProperty IsSpeedBlockProperty =
+            DependencyProperty.Register(nameof(IsSpeedBlock), typeof(bool), typeof(LanguageLayotStatisticBlock), new PropertyMetadata(true));
 
 
 
@@ -95,9 +108,15 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
         {
             InitializeComponent();
             DataContext = this;
-
-
             
+
+
+
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            IconSource = (IsSpeedBlock) ? AppImageSourceProvider.GoldFlashImageSource : AppImageSourceProvider.GoldTargetImageSource;
         }
     }
 }

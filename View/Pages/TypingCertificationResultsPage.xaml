@@ -18,7 +18,7 @@
                 <Image Width="70"
                  Height="70"
                  Margin="30 20 0 10"
-                 Source="{StaticResource StatIcon}"/>
+                 Source="{Binding StatIconImageSource}"/>
                 <TextBlock Text="Certification results"
                  TextAlignment="Left"
                      Padding="30 0 0 0"

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Shared.Enums;
+using CourseProjectKeyboardApplication.Shared.Providers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +46,17 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
             get { return (ImageSource)GetValue(ImageSourceProperty); }
             set { SetValue(ImageSourceProperty, value);}
         }
+        public MedalIconType MedalType
+        {
+            get => (MedalIconType)GetValue(MedalTypeProperty);
+            set
+            {
+                SetValue(MedalTypeProperty, value);
+            }
+
+        }
+        public static readonly DependencyProperty MedalTypeProperty =
+            DependencyProperty.Register(nameof(MedalType),typeof(MedalIconType),typeof(CertificateConditionTableBodyItem),new PropertyMetadata(MedalIconType.Silver));
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CertificateConditionTableBodyItem), new PropertyMetadata(null));
         public CertificateConditionTableBodyItem()
@@ -54,6 +67,32 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
 
             
           
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            switch (MedalType)
+            {
+                case MedalIconType.Silver:
+                    {
+                        ImageSource = AppImageSourceProvider.SilverMedalImageSource;
+                        break;
+                    }
+                case MedalIconType.Gold:
+                    {
+                        ImageSource = AppImageSourceProvider.GoldMedalImageSource;
+                        break;
+                    }
+                case MedalIconType.Platinum:
+                    {
+                        ImageSource = AppImageSourceProvider.PlatinumMedalImageSource;
+                        break;
+                    }
+            }
+
+
+
+
         }
     }
 }

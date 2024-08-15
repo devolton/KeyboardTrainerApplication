@@ -19,7 +19,7 @@
                 <Image Width="70"
                        Height="70"
                        Margin="120 20 0 10"
-                       Source="{StaticResource EditProfileIcon}"/>
+                       Source="{Binding EditProfileIconImageSource}"/>
                 <TextBlock Text="Edit profile"
                            TextAlignment="Left"
                            Padding="30 0 0 0"

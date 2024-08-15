@@ -27,7 +27,7 @@
                 <Image Width="70"
                        Height="70"
                        Margin="60 20 0 10"
-                       Source="{StaticResource StudyIcon}"/>
+                       Source="{Binding StudyIconImageSource}"/>
                 <TextBlock Text="Education results"
                            TextAlignment="Left"
                            Padding="30 0 0 0"

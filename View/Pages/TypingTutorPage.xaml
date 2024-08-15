@@ -39,7 +39,7 @@
                     Height="25"
                     Margin="5 0 25 0">
                 <Button.Background>
-                    <ImageBrush Stretch="Fill" ImageSource="{StaticResource RepeateIcon}"/>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding RepeatButtonImageSource}"/>
                 </Button.Background>
 
             </Button>

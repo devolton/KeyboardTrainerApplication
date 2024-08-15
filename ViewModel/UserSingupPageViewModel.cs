@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.Windows;
 using CourseProjectKeyboardApplication.ViewModel.Commands;
 using System.DirectoryServices.ActiveDirectory;
@@ -41,10 +42,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 if(newUser is null)
                 {
                     MessageBox.Show("Invalid registerUserOperation");
-                    //creating handler invalid registration operation
+                   
                     return;
                 }
                 ClearAllFields();
+                await AppImageSourceProvider.Init();
                 UserController.CurrentUser=newUser;
                 new MainWindow().Show();
 

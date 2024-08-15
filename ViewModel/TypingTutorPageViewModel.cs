@@ -18,6 +18,8 @@ using System.Windows.Interop;
 using System.Data.Entity.Core.Objects;
 using System.Drawing;
 using System.Windows.Shapes;
+using System.Windows.Media;
+using CourseProjectKeyboardApplication.Shared.Providers;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -35,6 +37,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private double _textSize;
 
         private TextBlock? _textBlock;
+
+        private ImageSource _repeatIconImageSource;
 
         private ICommand _startLessonCommand;
         private ICommand _restartLessonCommand;
@@ -58,6 +62,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _keyboardItemList = new List<IKeyboardItem>();
             _errorPressedKeyboardCollection = new List<IKeyboardItem>();
             _shiftKeyboardItemCollection = new List<IKeyboardItem>();
+
+            _repeatIconImageSource = AppImageSourceProvider.RepeatIconImageSource;
 
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
@@ -162,6 +168,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
+        public ImageSource RepeatButtonImageSource {
+            get => _repeatIconImageSource;
+            set
+            {
+                _repeatIconImageSource = value;
+                OnPropertyChanged(nameof(RepeatButtonImageSource));
+            }
+            }
 
         #endregion
 

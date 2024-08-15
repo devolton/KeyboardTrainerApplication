@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using CourseProjectKeyboardApplication.View.CustomControls;
 using System.Globalization;
 using CourseProjectKeyboardApplication.Shared.Enums;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -24,6 +25,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private static TypingCertificationResultPageViewModel _instance;
         private int _dateRangeSelectedIndex = 0;
         private TypingCertificationResultPageModel _model;
+
+        private ImageSource _statIconImageSource;
+        private ImageSource _silverTargetImageSource;
+        private ImageSource _silverFlashImageSource;
+        private ImageSource _silverCalendarImageSource;
+
 
         private TypingCertificationResultPageViewModel()
         {
@@ -69,11 +76,52 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(StatStackPanel));
             }
         }
+        public ImageSource StatIconImageSource
+        {
+            get => _statIconImageSource;
+            set
+            {
+                _statIconImageSource = value;
+                OnPropertyChanged(nameof(StatIconImageSource));
+            }
+        }
+        public ImageSource SilverTargetImageSource
+        {
+            get => _silverTargetImageSource;
+            set
+            {
+                _silverTargetImageSource = value;
+                OnPropertyChanged(nameof(SilverTargetImageSource));
+            }
+        }
+        public ImageSource SilverFlashImageSource
+        {
+            get => _silverFlashImageSource;
+            set
+            {
+                _silverFlashImageSource = value;
+                OnPropertyChanged(nameof(SilverFlashImageSource));
+            }
+        }
+        public ImageSource SilverCalendarImageSource
+        {
+            get => _silverCalendarImageSource;
+            set
+            {
+                _silverCalendarImageSource = value;
+                OnPropertyChanged(nameof(SilverCalendarImageSource));
+            }
+        }
 
 
         private async Task InitStatBlock(int selectedIndex)
         {
+
             await _model.InitTypingTests();
+            StatIconImageSource ??= _model.GetStatIconImageSource();
+            SilverCalendarImageSource ??= _model.GetSilverCalendarImageSource();
+            SilverFlashImageSource ??= _model.GetSilverFlashImageSource();
+            SilverTargetImageSource ??= _model.GetSilverTargetImageSource();
             var statCollection = _model.GetSortTypingResultList((TypingStatisticsPeriodTime)selectedIndex, true);
             StatStackPanel.Children.Clear();
             foreach (var item in statCollection)

@@ -1,13 +1,19 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Shared.Providers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class LearnPageViewModel:ViewModelBase
     {
+        private ImageSource _keyboardSchemeEngImageSource = AppImageSourceProvider.KeyboardSchemeEngImageSource;
+        private ImageSource _startLeftEngPositionImageSource = AppImageSourceProvider.StartLeftEngPositionImageSource;
+        private ImageSource _startRightEngPositionImageSource = AppImageSourceProvider.StartRightEngPositionImageSource;
+        private ImageSource _keyboardIconImageSource = AppImageSourceProvider.KeyboardIconImageSource;
         public string MainTitle { get; init; } = "Learn how to touch type";
         public string MainDescription { get; init; } = "Touch typing is all about the idea that each finger has its own area on the keyboard. Thanks to that fact you can type without looking at the keys. Practice regularly and your fingers will learn their location on the keyboard through muscle memory.";
         public string TypingPoseTitle { get; init; } = "Sitting posture for typing";
@@ -50,6 +56,42 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 "• Pass all typing lessons at Ratatype. It will help you to get above the average typing speed."
 
             };
+        }
+        public ImageSource KeyboardSchemeEngImageSource
+        {
+            get => _keyboardSchemeEngImageSource;
+            set
+            {
+                _keyboardSchemeEngImageSource = value;
+                OnPropertyChanged(nameof(KeyboardSchemeEngImageSource));
+            }
+        }
+        public ImageSource StartLeftEngPositionImageSource
+        {
+            get => _startLeftEngPositionImageSource;
+            set
+            {
+                _startLeftEngPositionImageSource = value;
+                OnPropertyChanged(nameof(StartLeftEngPositionImageSource));
+            }
+        }
+        public ImageSource StartRightEngPositionImageSource
+        {
+            get => _startRightEngPositionImageSource;
+            set
+            {
+                _startRightEngPositionImageSource = value;
+                OnPropertyChanged(nameof(StartRightEngPositionImageSource));
+            }
+        }
+        public ImageSource KeyboardIconImageSource
+        {
+            get => _keyboardIconImageSource;
+            set
+            {
+                _keyboardIconImageSource = value;
+                OnPropertyChanged(nameof(KeyboardIconImageSource));
+            }
         }
 
 

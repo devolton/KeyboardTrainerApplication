@@ -16,7 +16,7 @@
             Margin="10">
             <Image
                 x:Name="MainPageImage"
-                Source="{StaticResource TempStudyImage}"
+                Source="{Binding KeyboardIconImageSource}"
                 Width="80"
                 Height="80"/>
             <TextBlock x:Name="MainPageTitle"
@@ -29,7 +29,7 @@
                 />
             <Image x:Name="SittingImage"
                    Width="80"
-                   Source="{StaticResource TempStudyImage}"
+                   Source="{Binding KeyboardIconImageSouce}"
                    Height="80"/>
             <TextBlock 
                        x:Name="SittingTitle"
@@ -69,14 +69,14 @@
                 </Grid.ColumnDefinitions>
                 <Image x:Name="StartPosLeftImage"
                        Grid.Column="0"
-                       Source="{StaticResource StartLeftEngPosition}"
+                       Source="{Binding StartLeftEngPositionImageSource}"
                        Width="170"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Margin="5"/>
                 <Image x:Name="StartPosRightImage"
                        Grid.Column="1"
-                       Source="{StaticResource StartRightEngPosition}"
+                       Source="{Binding StartRightEngPositionImageSource}"
                        Width="170"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -89,7 +89,7 @@
                        Text="{Binding KeyboardSchemeTitle}"
                        Style="{StaticResource CustomLearnTitleTextBlock}"/>
                 <Image x:Name="KeyboardSchemeImage"
-                       Source="{StaticResource KeyboardSchemeEngImage}"
+                       Source="{Binding KeyboardSchemeEngImageSource}"
                        Width="600"/>
             <StackPanel
           x:Name="KeyboardSchemeStackPanel"
@@ -120,7 +120,7 @@
             <Image x:Name="FingerMovementImage"
                    Width="80"
                    Height="80"
-                   Source="{StaticResource TempStudyImage}"/>
+                   Source="{Binding KeyboardIconImageSource}"/>
             <TextBlock x:Name="FingerMovementTitleTextBlock"
                        Text="{Binding FingerMovementTitle}"
                        Style="{StaticResource CustomLearnTitleTextBlock}"/>
@@ -131,7 +131,7 @@
             <Image x:Name="TypingSpeedImage"
                    Width="80"
                    Height="80"
-                   Source="{StaticResource TempStudyImage}"/>
+                   Source="{Binding KeyboardIconImageSource}"/>
             <TextBlock x:Name="TypingSpeedTitle"
                        Text="{Binding TypingSpeedTitle}"
                        Style="{StaticResource CustomLearnTitleTextBlock}"/>

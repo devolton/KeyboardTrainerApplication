@@ -33,7 +33,7 @@
                        Margin="0 7 0 0"
                        Height="25"
                        Stretch="Fill"
-                       Source="{StaticResource CurrentLessonLeftArrow}"/>
+                       Source="{Binding LeftArrowImageSource}"/>
 
 
             </StackPanel>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
@@ -20,13 +21,19 @@ namespace CourseProjectKeyboardApplication.Model
     {
         private TypingTestResult? _bestUserTest;
         private RenderTargetBitmap _certificate;
-
+        private ImageSource _certificateIconImageSource;
+        
         public TypingCertificatesPageModel()
         {
         }
         public void DisplayTestPage()
         {
             FrameMediator.DisplayTypingTestPage();
+        }
+        public ImageSource GetCertificateIconImageSource()
+        {
+            _certificateIconImageSource ??= AppImageSourceProvider.CertificateIconImageSource;
+            return _certificateIconImageSource;
         }
         public RenderTargetBitmap? GetUserCertificate()
         {

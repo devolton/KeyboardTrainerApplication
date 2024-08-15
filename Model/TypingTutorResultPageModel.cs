@@ -1,6 +1,7 @@
 ﻿
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -22,7 +24,13 @@ namespace CourseProjectKeyboardApplication.Model
         private string _withoutMistakeText;
         private string _speedText;
         private string _resultStr = string.Empty;
-        
+        private ImageSource _goldStarImageSource;
+        private ImageSource _lightGrayStarImageSource;
+        private ImageSource _goldTargetImageSource;
+        private ImageSource _lightGrayTargetImageSource;
+        private ImageSource _goldFlashImageSource;
+        private ImageSource _lightGrayFlashImageSource;
+
         public TypingTutorResultPageModel()
         {
             _lessTwoMistakeText = $"less than {_LESS_TWO_DELIMITER} typos";
@@ -105,6 +113,31 @@ namespace CourseProjectKeyboardApplication.Model
         public string GetWithoutMistakeText() => _withoutMistakeText;
         public string GetSpeedText() => _speedText;
         public string GetLessonResultStr() => _resultStr;
+        public ImageSource GetGoldStarImageSource()
+        {
+            return _goldStarImageSource ??= AppImageSourceProvider.GoldStarImageSource;
+        }
+        public ImageSource GetLightGrayStarImageSource()
+        {
+            return _lightGrayStarImageSource ??= AppImageSourceProvider.LightGrayStarImageSource;
+        }
+        public ImageSource GetGoldFlashImageSource()
+        {
+            return _goldFlashImageSource ??= AppImageSourceProvider.GoldFlashImageSource;
+        }
+        public ImageSource GetLightGrayFlashImageSource()
+        {
+            return _lightGrayFlashImageSource ??= AppImageSourceProvider.LightGrayFlashImageSource;
+        }
+        public ImageSource GetGoldTargetImageSource()
+        {
+            return _goldTargetImageSource ??= AppImageSourceProvider.GoldTargetImageSource;
+
+        }
+        public ImageSource GetLightGrayTargetImageSource()
+        {
+            return _lightGrayTargetImageSource ??= AppImageSourceProvider.LightGrayTargetImageSource;
+        }
 
     }
 }

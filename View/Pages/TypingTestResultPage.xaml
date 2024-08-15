@@ -12,7 +12,7 @@
 
     <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Center">
-        <Image Source="{StaticResource TempStudyImage}"
+        <Image Source="{Binding KeyboardIconImageSource}"
                Width="150"
                Height="150"/>
         <TextBlock Text="Good job!"
@@ -26,7 +26,7 @@
                     x:Name="SpeedBlock"
                     Style="{StaticResource SpeedLanguageLayotStatisticBlock}"
                     HeaderText="Speed"
-                    IconSource="{StaticResource GoldFlash}"
+                    IsSpeedBlock="True"
                     StatValue="{Binding SpeedValue}"
                     StatUnitValue="wpm" 
                     Margin="5 5 30 5"/>
@@ -34,7 +34,7 @@
                     x:Name="AccuracyBlock"
                     Style="{StaticResource AccuracyLanguageLayotStatisticBlock}"
                     HeaderText="Accuracy"
-                    IconSource="{StaticResource GoldTarget}"
+                    IsSpeedBlock="False"
                     StatValue="{Binding AccuracyPercent}"
                     StatUnitValue="%"
                     Margin="5 5 30 5"/>

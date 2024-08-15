@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace CourseProjectKeyboardApplication.ViewModel
@@ -35,6 +37,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string _infoBlockLeftBodyText = string.Empty;
         private string _firstPartNearAchivementTableText = string.Empty;
         private string _secondPartNearAchivementTebleText = string.Empty;
+
+        private ImageSource _flashImageSource;
+        private ImageSource _targetImageSource;
+        private ImageSource _starImageSource;
+        private ImageSource _keyboardIconImageSource;
         private TypingTestPageViewModel()
         {
             _model = TypingTestPageModel.Instance();
@@ -50,6 +57,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _infoBlockLeftBodyText = _model.GetLeftInfoBodyText();
             _firstPartNearAchivementTableText = _model.GetFirstPartNearAchivementTebleText();
             _secondPartNearAchivementTebleText = _model.GetSecondPartNearAchivementTableText();
+           
 
         }
         public static TypingTestPageViewModel Instance()
@@ -136,6 +144,42 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(SecondPartNearAchivementTableText));
             }
         }
+        public ImageSource StarImageSource
+        {
+            get => _starImageSource;
+            set
+            {
+                _starImageSource = value;
+                OnPropertyChanged(nameof(StarImageSource));
+            }
+        }
+        public ImageSource FlashImageSource
+        {
+            get => _flashImageSource;
+            set
+            {
+                _flashImageSource = value;
+                OnPropertyChanged(nameof(FlashImageSource));
+            }
+        }
+        public ImageSource TargetImageSource
+        {
+            get => _targetImageSource;
+            set{
+                _targetImageSource = value;
+                OnPropertyChanged(nameof(TargetImageSource));
+
+            }
+        }
+        public ImageSource KeyboardIconImageSource
+        {
+            get => _keyboardIconImageSource;
+            set
+            {
+                _keyboardIconImageSource = value;
+                OnPropertyChanged(nameof(KeyboardIconImageSource));
+            }
+        }
 
         #endregion
         //commands
@@ -149,6 +193,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnTestSetupCommand(object param)
         {
+            TargetImageSource ??= _model.GetTargetImageSource();
+            FlashImageSource ??= _model.GetFlashImageSource();
+            StarImageSource ??= _model.GetStarImageSource();
+            KeyboardIconImageSource ??= _model.GetKeyboardIconImageSource();
             _textBlock = param as TextBlock;
             _model.ResetTestSettings();
             _model.SetupTest();

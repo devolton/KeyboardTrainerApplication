@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,15 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class CertificateConditionTableHeader : UserControl
     {
+        private TypingTestPageViewModel _viewModel;
         public CertificateConditionTableHeader()
         {
             InitializeComponent();
+            _viewModel = TypingTestPageViewModel.Instance();
+            DataContext = _viewModel;
+            
         }
+
+
     }
 }

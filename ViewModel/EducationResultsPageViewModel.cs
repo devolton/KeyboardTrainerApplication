@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -35,6 +36,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string _levelProgressHeaderStr = string.Empty;
         private string _languageLayoutTypeHeaderStr = string.Empty;
         private bool _isCurrentLesson = true;
+        private ImageSource _studyIconImageSource;
 
         private IEducationResultLessonButton _currentLessonButton;
         private EducationResultsPageViewModel()
@@ -98,6 +100,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(LanguageLayoutTypeHeaderStr));
             }
         }
+        public ImageSource StudyIconImageSource
+        {
+            get => _studyIconImageSource;
+            set
+            {
+                _studyIconImageSource = value;
+                OnPropertyChanged(nameof(StudyIconImageSource));
+            }
+        }
         #endregion
 
         //command
@@ -109,6 +120,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private async void OnInitializationCommand(object param)  //возможно разбить на мелкие функции
         {
             _mainStackPanel = param as StackPanel;
+      
+            StudyIconImageSource ??= _model.GetStudyIconImageSourceAsync();
             _isCurrentLesson = true;
             if (MainStackPanel.Children.Count > 2)
                 MainStackPanel.Children.RemoveRange(2, MainStackPanel.Children.Count - 2);

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -19,6 +20,11 @@ namespace CourseProjectKeyboardApplication.Model
         private LineSeries _typingAccuracyLineSeries;
         private LineSeries _typingSpeedLineSeries;
         private List<TypingTestResult> _userTypingTestsCollection;
+
+        private ImageSource _statIconImageSource;
+        private ImageSource _silverTargetImageSource;
+        private ImageSource _silverFlashImageSource;
+        private ImageSource _silverCalendarImageSource;
         public TypingCertificationResultPageModel()
         {
             _typingUserStatisticSeriesCollection = new SeriesCollection();
@@ -38,7 +44,7 @@ namespace CourseProjectKeyboardApplication.Model
             _typingSpeedLineSeries.Values = new ChartValues<int>();
             _typingAccuracyLineSeries.Values = new ChartValues<double>();
 
-
+         
 
 
         }
@@ -178,6 +184,28 @@ namespace CourseProjectKeyboardApplication.Model
                 selectedResults.Sort((first, second) => first.Date.CompareTo(second.Date));
             }
             return selectedResults;
+        }
+        public ImageSource GetStatIconImageSource()
+        {
+            _statIconImageSource ??= AppImageSourceProvider.StatisticIconImageSource;
+            return _statIconImageSource;
+        }
+        public ImageSource GetSilverTargetImageSource()
+        {
+            _silverTargetImageSource ??= AppImageSourceProvider.SilverTargetImageSource;
+            return _silverTargetImageSource;
+        }
+        public ImageSource GetSilverFlashImageSource()
+        {
+            _silverFlashImageSource ??= AppImageSourceProvider.SilverFlashImageSource;
+            return _silverFlashImageSource;
+
+        }
+        public ImageSource GetSilverCalendarImageSource()
+        {
+            _silverCalendarImageSource ??= AppImageSourceProvider.SilverCalendarImageSource;
+            return _silverCalendarImageSource;
+
         }
 
 

@@ -29,7 +29,7 @@ namespace CourseProjectKeyboardApplication.Model
         private string _oldLogin = string.Empty;
         private User _user;
         private BitmapImage _userAvatarBitmapImage;
-
+        private ImageSource _defaultUserAvatarImageSource;
         public EditUserProfilePageModel()
         {
             _openFileDialogImageFilter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*";
@@ -39,6 +39,11 @@ namespace CourseProjectKeyboardApplication.Model
             };
 
 
+        }
+        public ImageSource GetDefaultUserAvatarImageSource()
+        {
+            _defaultUserAvatarImageSource ??= AppImageSourceProvider.DefaultUserAvatarImageSource;
+            return _defaultUserAvatarImageSource;
         }
 
         public ImageSource? LoadNewAvatar()

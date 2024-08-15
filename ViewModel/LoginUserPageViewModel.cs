@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.View.Windows;
 using CourseProjectKeyboardApplication.ViewModel.Commands;
@@ -280,8 +281,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
             });
         }
-        private void OpenMainWindow()
+        private async void OpenMainWindow()
         {
+            await AppImageSourceProvider.Init();
             _mainWindow.Show();
             foreach (Window oneWindow in Application.Current.Windows)
             {

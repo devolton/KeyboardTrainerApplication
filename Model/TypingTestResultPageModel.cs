@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -19,6 +20,8 @@ namespace CourseProjectKeyboardApplication.Model
         private int _misclickCount = 0;
         private int _typingSpeed = 0;
         private double _accuracyPercent = 0;
+        private ImageSource _keyboardIconImageSource;
+     
 
         public TypingTestResultPageModel()
         {
@@ -31,9 +34,15 @@ namespace CourseProjectKeyboardApplication.Model
             return _accuracyPercent.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
 
         }
+      
         public string GetSpeedStr()
         {
             return _typingSpeed.ToString();
+        }
+        public ImageSource GetKeyboardIconImageSource()
+        {
+            _keyboardIconImageSource ??= AppImageSourceProvider.KeyboardIconImageSource;
+            return _keyboardIconImageSource;
         }
         public  void InitStat()
         {
