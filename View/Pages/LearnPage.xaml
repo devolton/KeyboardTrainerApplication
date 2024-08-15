@@ -29,7 +29,7 @@
                 />
             <Image x:Name="SittingImage"
                    Width="80"
-                   Source="{Binding KeyboardIconImageSouce}"
+                   Source="{Binding KeyboardIconImageSource}"
                    Height="80"/>
             <TextBlock 
                        x:Name="SittingTitle"

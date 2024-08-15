@@ -1,4 +1,5 @@
-﻿using CourseProjectKeyboardApplication.ViewModel;
+﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

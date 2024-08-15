@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+using CourseProjectKeyboardApplication.Tools.Converters;
 
 namespace CourseProjectKeyboardApplication.ApiClients
 {
@@ -31,7 +32,7 @@ namespace CourseProjectKeyboardApplication.ApiClients
                 using (var ms = new MemoryStream(byteArray))
                 {
                     Image image = Image.FromStream(ms);
-                    return ConvertToImageSource(image);
+                    return FromImageToImageSourceConverter.ConvertToImageSource(image);
 
                 }
             }
@@ -42,22 +43,5 @@ namespace CourseProjectKeyboardApplication.ApiClients
 
         }
 
-        //вынести в отдельный класс 
-        public static ImageSource ConvertToImageSource(Image image)
-        {
-            using (var memoryStream = new MemoryStream())
-            {
-                image.Save(memoryStream, ImageFormat.Png);
-                memoryStream.Position = 0;
-
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memoryStream;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-
-                return bitmapImage;
-            }
-        }
     }
 }

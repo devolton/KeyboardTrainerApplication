@@ -16,12 +16,15 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         private static HttpClient _httpClient;
 
         private static StaticImageApiClient _staticImageApiClient;
+        private static UserAvatarImageApiClient _userAvatarImageApiClient;
         public static StaticImageApiClient StaticImageApiClient => _staticImageApiClient;
+        public static UserAvatarImageApiClient UserAvatarImageApiClient => _userAvatarImageApiClient;
         static ContentApiClientProvider()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(@"https://localhost:7000/");
             _staticImageApiClient = new StaticImageApiClient(_httpClient);
+            _userAvatarImageApiClient = new UserAvatarImageApiClient(_httpClient);
 
 
         }

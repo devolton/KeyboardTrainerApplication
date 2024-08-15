@@ -28,8 +28,8 @@ namespace CourseProjectKeyboardApplication.Model
         private string _oldEmail = string.Empty;
         private string _oldLogin = string.Empty;
         private User _user;
-        private BitmapImage _userAvatarBitmapImage;
         private ImageSource _defaultUserAvatarImageSource;
+        private ImageSource _userAvatarImageSource;
         public EditUserProfilePageModel()
         {
             _openFileDialogImageFilter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*";
@@ -46,19 +46,15 @@ namespace CourseProjectKeyboardApplication.Model
             return _defaultUserAvatarImageSource;
         }
 
-        public ImageSource? LoadNewAvatar()
+        public async Task<ImageSource?> LoadNewAvatar()
         {
             if (_openFileDialog.ShowDialog() == true)
             {
-                var avatarFileName = Path.GetFileName(_openFileDialog.FileName); // имя файла 
-                string remoteAvatarPathBeforeRename = _remotePath + avatarFileName; //полный удаленный путь файла
-                File.Copy(_openFileDialog.FileName, remoteAvatarPathBeforeRename, true); // копирование файла в удаленный репозиторий 
-                string remoteAvatarPathAfterRename = GetRenamedUserAvatarPath(remoteAvatarPathBeforeRename);
-
-                var remoteRepositoryAvatarUri = new Uri(remoteAvatarPathAfterRename);
-                UpdateUserAvatarPath(remoteAvatarPathAfterRename);
-                _userAvatarBitmapImage = new BitmapImage(remoteRepositoryAvatarUri);
-                return _userAvatarBitmapImage;
+                string remoteAvatarFileName = await ContentApiClientProvider.UserAvatarImageApiClient.UploadFileAsync(_openFileDialog.FileName, _user.Login);
+                _userAvatarImageSource = await ContentApiClientProvider.UserAvatarImageApiClient.GetUserAvatarAsync(remoteAvatarFileName);
+                UpdateUserAvatarPath(remoteAvatarFileName);
+                UserService.UpdateUser(_user);
+                return _userAvatarImageSource;
             }
             return null;
 
@@ -66,6 +62,7 @@ namespace CourseProjectKeyboardApplication.Model
         public void RemoveAvatar()
         {
             UpdateUserAvatarPath(string.Empty);
+            UserService.UpdateUser(_user);
 
         }
         public User GetUserInfo()
@@ -75,16 +72,14 @@ namespace CourseProjectKeyboardApplication.Model
             _oldLogin = _user.Login;
             return _user;
         }
-        public ImageSource? GetUserAvatarSource()
+        public async Task<ImageSource?> GetUserAvatarSource()
         {
-            if(_user.AvatarPath != string.Empty)
+            if (_user.AvatarPath != string.Empty)
             {
-                if (File.Exists(_user.AvatarPath))
-                {
-                    return new BitmapImage(new Uri(_user.AvatarPath)); 
-                }
+                _userAvatarImageSource ??= await ContentApiClientProvider.UserAvatarImageApiClient.GetUserAvatarAsync(_user.AvatarPath);
+                return _userAvatarImageSource;
             }
-           
+
             return null;
         }
         public void SaveUpdateUser(string updateName, string updateLogin, string updateEmail, string updatePassword)
@@ -92,6 +87,7 @@ namespace CourseProjectKeyboardApplication.Model
             _user.Login = updateLogin;
             _user.Email = updateEmail;
             _user.Name = updateName;
+
             if (updatePassword != string.Empty)
             {
                 _user.Password = PasswordSHA256Encrypter.EncryptPassword(updatePassword);
@@ -109,18 +105,7 @@ namespace CourseProjectKeyboardApplication.Model
             _user.AvatarPath = avatarPath;
 
         }
-        private string GetRenamedUserAvatarPath(string remoteFilePathBeforeRename)
-        {
-            string newUserAvatarName = _user.Id.ToString()+"_" + Guid.NewGuid();//maybe update or using other 
-            string avatarFileExtension = Path.GetExtension(remoteFilePathBeforeRename);
-            string remoteAvatarPathAfterRename = Path.Combine(_remotePath, newUserAvatarName + avatarFileExtension);
-            if (File.Exists(remoteAvatarPathAfterRename))
-            {
-                //выполнять удаление аватара удаленно после того как user закрыл приложение
-            }
-            File.Move(remoteFilePathBeforeRename, remoteAvatarPathAfterRename);
-            return remoteAvatarPathAfterRename;
-        }
+      
 
 
     }

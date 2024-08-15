@@ -10,45 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Images\AuthorizationExitIcon.png" />
-    <None Remove="Resources\Images\AuthorizationLogo.png" />
-    <None Remove="Resources\Images\BlueVioletStar.png" />
-    <None Remove="Resources\Images\CertificateConditionFlash.png" />
-    <None Remove="Resources\Images\CertificateConditionLightning.png" />
-    <None Remove="Resources\Images\CertificateConditionStar.png" />
-    <None Remove="Resources\Images\CertificateConditionTarget.png" />
-    <None Remove="Resources\Images\CertificateIcon.png" />
-    <None Remove="Resources\Images\CertificateTemp.png" />
-    <None Remove="Resources\Images\coding.png" />
-    <None Remove="Resources\Images\DevoltonLabsLogo.png" />
-    <None Remove="Resources\Images\EditProfileIcon.png" />
-    <None Remove="Resources\Images\EnglishTypingCertificate.png" />
-    <None Remove="Resources\Images\ExitIcon.png" />
-    <None Remove="Resources\Images\GoldLightning.png" />
-    <None Remove="Resources\Images\GoldMedal.png" />
-    <None Remove="Resources\Images\GoldStar.png" />
-    <None Remove="Resources\Images\GoldTarget.png" />
-    <None Remove="Resources\Images\Keyboard.png" />
-    <None Remove="Resources\Images\KeyboardSchemeEng.png" />
-    <None Remove="Resources\Images\LeftArrow.png" />
-    <None Remove="Resources\Images\LessonLockIcon.png" />
-    <None Remove="Resources\Images\LightGrayFlash.png" />
-    <None Remove="Resources\Images\LightGrayStar.png" />
-    <None Remove="Resources\Images\LightGrayTarget.png" />
-    <None Remove="Resources\Images\LoginUserBlueIcon.png" />
-    <None Remove="Resources\Images\LoginUserWhiteIcon.png" />
-    <None Remove="Resources\Images\PlatinumMedal.png" />
-    <None Remove="Resources\Images\RepeatIcon.png" />
-    <None Remove="Resources\Images\SilverCalendar.png" />
-    <None Remove="Resources\Images\SilverFlash.png" />
-    <None Remove="Resources\Images\SilverMedal.png" />
-    <None Remove="Resources\Images\SilverTarget.png" />
-    <None Remove="Resources\Images\SingInUserBlueIcon.png" />
-    <None Remove="Resources\Images\SingInUserWhiteIcon.png" />
-    <None Remove="Resources\Images\StartLeftEng.png" />
-    <None Remove="Resources\Images\StartRightEng.png" />
-    <None Remove="Resources\Images\StatisticIcon.png" />
-    <None Remove="Resources\Images\StudyIcon.png" />
+    <Compile Remove="Resources\Images\**" />
+    <Compile Remove="Resources\UserAvatars\**" />
+    <EmbeddedResource Remove="Resources\Images\**" />
+    <EmbeddedResource Remove="Resources\UserAvatars\**" />
+    <None Remove="Resources\Images\**" />
+    <None Remove="Resources\UserAvatars\**" />
+    <Page Remove="Resources\Images\**" />
+    <Page Remove="Resources\UserAvatars\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModel\UserSingupPageViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,53 +36,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\Images\AuthorizationExitIcon.png" />
-    <Resource Include="Resources\Images\AuthorizationLogo.png" />
-    <Resource Include="Resources\Images\CertificateConditionLightning.png" />
-    <Resource Include="Resources\Images\CertificateConditionStar.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\CertificateConditionTarget.png" />
-    <Resource Include="Resources\Images\CertificateIcon.png" />
-    <Resource Include="Resources\Images\coding.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\DevoltonLabsLogo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\EditProfileIcon.png" />
-    <Resource Include="Resources\Images\EnglishTypingCertificate.png" />
-    <Resource Include="Resources\Images\ExitIcon.png" />
-    <Resource Include="Resources\Images\GoldLightning.png" />
-    <Resource Include="Resources\Images\GoldMedal.png" />
-    <Resource Include="Resources\Images\GoldStar.png" />
-    <Resource Include="Resources\Images\GoldTarget.png" />
-    <Resource Include="Resources\Images\Keyboard.png" />
-    <Resource Include="Resources\Images\KeyboardSchemeEng.png" />
-    <Resource Include="Resources\Images\LeftArrow.png" />
-    <Resource Include="Resources\Images\LessonLockIcon.png" />
-    <Resource Include="Resources\Images\LightGrayFlash.png" />
-    <Resource Include="Resources\Images\LightGrayStar.png" />
-    <Resource Include="Resources\Images\LightGrayTarget.png" />
-    <Resource Include="Resources\Images\LoginUserBlueIcon.png" />
-    <Resource Include="Resources\Images\LoginUserWhiteIcon.png" />
-    <Resource Include="Resources\Images\PlatinumMedal.png" />
-    <Resource Include="Resources\Images\RepeatIcon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\SilverCalendar.png" />
-    <Resource Include="Resources\Images\SilverFlash.png" />
-    <Resource Include="Resources\Images\SilverMedal.png" />
-    <Resource Include="Resources\Images\SilverTarget.png" />
-    <Resource Include="Resources\Images\SingInUserBlueIcon.png" />
-    <Resource Include="Resources\Images\SingInUserWhiteIcon.png" />
-    <Resource Include="Resources\Images\StartLeftEng.png" />
-    <Resource Include="Resources\Images\StartRightEng.png" />
-    <Resource Include="Resources\Images\StatisticIcon.png" />
-    <Resource Include="Resources\Images\StudyIcon.png" />
   </ItemGroup>
   
 

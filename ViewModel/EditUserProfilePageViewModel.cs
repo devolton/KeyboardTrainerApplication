@@ -205,9 +205,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _isSetDefaultAvatar = true;
             _model.RemoveAvatar();
         }
-        private void OnChangeAvatarCommmand(object param)
+        private async void OnChangeAvatarCommmand(object param)
         {
-            var newAvatarSource = _model.LoadNewAvatar();
+            var newAvatarSource =await _model.LoadNewAvatar();
             if (newAvatarSource != null)
             {
                 AvatarSource = newAvatarSource;
@@ -241,13 +241,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
-        private void OnLoadUserInfoCommand(object param)
+        private async void OnLoadUserInfoCommand(object param)
         {
             var user = _model.GetUserInfo();
             Login = user.Login;
             Name = user.Name;
             Email = user.Email;
-            var userAvatar = _model.GetUserAvatarSource();
+            var userAvatar = await _model.GetUserAvatarSource();
             if (userAvatar is null)
             {
                 AvatarSource = _defaultAvatar;
