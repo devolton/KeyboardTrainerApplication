@@ -40,8 +40,8 @@ namespace CourseProjectKeyboardApplication.Model
         private string _infoBlockLeftHeaderText = string.Empty;
         private string _infoBlockRightBodyText = string.Empty;
         private string _infoBlockLeftBodyText = string.Empty;
-        private string _firstPartNearAchivementTableText = string.Empty;
-        private string _secondPartNearAchivementTebleText = string.Empty;
+        private string _firstPartNearAchievementTableText = string.Empty;
+        private string _secondPartNearAchievementTableText = string.Empty;
         private ImageSource _starImageSource;
         private ImageSource _flashImageSource;
         private ImageSource _targetImageSource;
@@ -203,8 +203,8 @@ namespace CourseProjectKeyboardApplication.Model
         public string GetLeftInfoHeaderText() => _infoBlockLeftHeaderText;
         public string GetRightInfoHeaderText() => _infoBlockRightHeaderText;
         
-        public string GetFirstPartNearAchivementTebleText() => _firstPartNearAchivementTableText;
-        public string GetSecondPartNearAchivementTableText() => _secondPartNearAchivementTebleText;
+        public string GetFirstPartNearAchivementTebleText() => _firstPartNearAchievementTableText;
+        public string GetSecondPartNearAchivementTableText() => _secondPartNearAchievementTableText;
         public string GetLeftInfoBodyText() => _infoBlockLeftBodyText;
         public string GetRightInfoBodyText() => _infoBlockRightBodyText;
         public void IncrementMissclickCount() => ++_misclickCount;
@@ -242,50 +242,62 @@ namespace CourseProjectKeyboardApplication.Model
             if (jsonText is not null)
             {
                 Dictionary<string, string>? propValueDict = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonText);
+                Type targetType = _instance.GetType();
                 if (propValueDict is not null)
                 {
-                    foreach (var onePair in propValueDict)
+                    foreach(var onePair in propValueDict)
                     {
-                        //!!!govnocode
-                        switch (onePair.Key)
+                        FieldInfo fieldInfo = targetType.GetField($"_{onePair.Key}", BindingFlags.NonPublic | BindingFlags.Instance);
+                        if (fieldInfo is null)
+                            continue;
+                        if(fieldInfo.FieldType == typeof(string))
                         {
-                            case "InfoBlockRightHeaderText":
-                                {
-                                    _infoBlockRightHeaderText = onePair.Value;
-                                    break;
-                                }
-                            case "InfoBlockLeftHeaderText":
-                                {
-                                    _infoBlockLeftHeaderText = onePair.Value;
-                                    break;
-                                }
-                            case "InfoBlockRightBodyText":
-                                {
-                                   
-                                    _infoBlockRightBodyText = onePair.Value;
-                                    break;
-                                }
-                            case "InfoBlockLeftBodyText":
-                                {
-                                    
-                                    _infoBlockLeftBodyText = onePair.Value;
-                                    break;
-                                }
-                            case "FirstPartNearAchievementTableText":
-                                {
-                                    _firstPartNearAchivementTableText = onePair.Value;
-                                    break;
-                                }
-                            case "SecondPartNearAchievementTableText":
-                                {
-                                    _secondPartNearAchivementTebleText = onePair.Value;
-                                    break;
-                                }
-                            default:
-                                return;
+                            fieldInfo.SetValue(_instance, onePair.Value);
                         }
                     }
-                    
+
+                    //foreach (var onePair in propValueDict)
+                    //{
+                    //    //!!!govnocode
+                    //    switch (onePair.Key)
+                    //    {
+                    //        case "InfoBlockRightHeaderText":
+                    //            {
+                    //                _infoBlockRightHeaderText = onePair.Value;
+                    //                break;
+                    //            }
+                    //        case "InfoBlockLeftHeaderText":
+                    //            {
+                    //                _infoBlockLeftHeaderText = onePair.Value;
+                    //                break;
+                    //            }
+                    //        case "InfoBlockRightBodyText":
+                    //            {
+
+                    //                _infoBlockRightBodyText = onePair.Value;
+                    //                break;
+                    //            }
+                    //        case "InfoBlockLeftBodyText":
+                    //            {
+
+                    //                _infoBlockLeftBodyText = onePair.Value;
+                    //                break;
+                    //            }
+                    //        case "FirstPartNearAchievementTableText":
+                    //            {
+                    //                _firstPartNearAchivementTableText = onePair.Value;
+                    //                break;
+                    //            }
+                    //        case "SecondPartNearAchievementTableText":
+                    //            {
+                    //                _secondPartNearAchivementTebleText = onePair.Value;
+                    //                break;
+                    //            }
+                    //        default:
+                    //            return;
+                    //    }
+                    //}
+
                 }
 
             }
