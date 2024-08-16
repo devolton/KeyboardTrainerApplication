@@ -1,62 +1,218 @@
-﻿using CourseProjectKeyboardApplication.Shared.Providers;
+﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class LearnPageViewModel:ViewModelBase
     {
-        private ImageSource _keyboardSchemeEngImageSource = AppImageSourceProvider.KeyboardSchemeEngImageSource;
-        private ImageSource _startLeftEngPositionImageSource = AppImageSourceProvider.StartLeftEngPositionImageSource;
-        private ImageSource _startRightEngPositionImageSource = AppImageSourceProvider.StartRightEngPositionImageSource;
-        private ImageSource _keyboardIconImageSource = AppImageSourceProvider.KeyboardIconImageSource;
-        public string MainTitle { get; init; } = "Learn how to touch type";
-        public string MainDescription { get; init; } = "Touch typing is all about the idea that each finger has its own area on the keyboard. Thanks to that fact you can type without looking at the keys. Practice regularly and your fingers will learn their location on the keyboard through muscle memory.";
-        public string TypingPoseTitle { get; init; } = "Sitting posture for typing";
-        public List<string> TypingPoseRulesList { get; init; }
-        public string StartPositionTitle { get; init; } = "Home row position";
-        public string StartPositionDescription { get; init; } = "Curve your fingers a little and put them on the A S D F and J K L ; keys which are located in the middle row of the letter keys. This row is called HOME ROW because you always start from these keys and always return to them.\r\n\r\nF and J keys under your index fingers should have a raised line on them to aide in finding these keys without looking.";
-        public string KeyboardSchemeTitle { get; init; } = "Keyboard scheme";
-        public List<string> KeyboardSchemeRulesList { get; init; }
-        public string KeyboardSchemeDescription { get; init; } = "This method may seem inconvenient at first, but do not stop, eventually, you'll find out that you are typing quickly, easily, and conveniently. To achieve the maximum result, choose a touch typing course for your keyboard layout and in the desired language.";
-        public string FingerMovementTitle { get; init; } = "Fingers motion";
-        public string FingerMovementDescription { get; init; } = "Don't look at the keys when you type. Just slide your fingers around until they find the home row marking.\r\n\r\nLimit your hand and finger movement only to what is necessary to press a specific key. Keep your hands and fingers close to the base position. This improves typing speed and reduces stress on the hands.\r\n\r\nPay attention to ring fingers and little fingers, since they are considerably underdeveloped.";
-        public string TypingSpeedTitle { get; init; } = "Typing speed";
-        public List<string> TypingSpeedRulesList { get; init; }
-        public string TrainTimeTitle { get; init; } = "It's time to get some practice";
-        public string TrainTimeTestButtonText { get; init; } = "Speed test";
-        public string TrainTimeStudyButtonText { get; init; } = "Start learn";
+        private LearnPageModel _model;
+        private ImageSource _keyboardSchemeEngImageSource;
+        private ImageSource _startLeftEngPositionImageSource;
+        private ImageSource _startRightEngPositionImageSource;
+        private ImageSource _keyboardIconImageSource;
+        private ICommand _loadCommand;
+
+        private string _mainTitle = string.Empty;
+        private string _mainDescription = string.Empty;
+        private string _typingPoseTitle = string.Empty;
+        private List<string> _typingPoseRulesList = new();
+        private string _startPositionTitle = string.Empty;
+        private string _startPositionDescription = string.Empty;
+        private string _keyboardSchemeTitle = string.Empty;
+        private List<string> _keyboardSchemeRulesList = new();
+        private string _keyboardSchemeDescription = string.Empty;
+        private string _fingerMovementTitle = string.Empty;
+        private string _fingerMovementDescription = string.Empty;
+        private string _typingSpeedTitle = string.Empty;
+        private List<string> _typingSpeedRulesList = new();
+        private string _trainTimeTitle = string.Empty;
+        private string _trainTimeTestButtonText = string.Empty;
+        private string _trainTimeStudyButtonText = string.Empty;
+
+
+
         public LearnPageViewModel()
         {
-            TypingPoseRulesList = new List<string>() { "• Sit straight and remember to keep your back straight.",
-                "• Keep your elbows bent at the right angle.",
-                "• Face the screen with your head slightly tilted forward.",
-                "• Keep at least 45 - 70 cm of distance between your eyes and the screen.",
-                "• Еxpose the shoulder, arm, and wrist muscles to the least possible strain." +
-                "• The wrists can touch the tabletop in front of the keyboard." +
-                "• Never shift your body weight to the wrists by resting on them." };
-            KeyboardSchemeRulesList = new List<string>()
-            {
-                "• Hit keys only with the fingers for which they have been reserved.",
-                "• Always return to the starting position of the fingers 'ASDF – JKL;'.",
-                "• Establish and maintain a rhythm while typing. Your keystrokes should come at equal intervals.",
-                "• When typing, imagine the location of the symbol on the keyboard.",
-                "• The SHIFT key is always pressed by the pinky finger opposite to the one hitting the other key.",
-                "• Use the thumb of whichever hand is more convenient for you to press the Space bar."
-            };
-            TypingSpeedRulesList = new List<string>()
-            {
-                "• Do not rush when you just started learning. Speed up only when your fingers hit the right keys out of habit.",
-                "• Take your time when typing to avoid mistakes. The speed will pick up as you progress.",
-                "• Always scan the text a word or two in advance.",
-                "• Pass all typing lessons at Ratatype. It will help you to get above the average typing speed."
-
-            };
+            _loadCommand = new RelayCommand(OnLoadCommand);
+            InitModel();
+           
         }
+        //prop
+        #region
+        public ICommand LoadCommand => _loadCommand;
+        public string MainTitle {
+            get => _mainTitle;
+            private set
+            {
+                _mainTitle = value;
+                OnPropertyChanged(nameof(MainTitle));
+            }
+
+        }
+
+  
+
+        public string MainDescription
+        {
+            get => _mainDescription;
+            private set
+            {
+                _mainDescription = value;
+                OnPropertyChanged(nameof(MainDescription));
+            }
+        }
+
+        public string TypingPoseTitle
+        {
+            get => _typingPoseTitle;
+            private set
+            {
+                _typingPoseTitle = value;
+                OnPropertyChanged(nameof(TypingPoseTitle));
+            }
+        }
+
+        public List<string> TypingPoseRulesList
+        {
+            get => _typingPoseRulesList;
+            private set
+            {
+                _typingPoseRulesList = value;
+                OnPropertyChanged(nameof(TypingPoseRulesList));
+            }
+        }
+
+        public string StartPositionTitle
+        {
+            get => _startPositionTitle;
+            private set
+            {
+                _startPositionTitle = value;
+                OnPropertyChanged(nameof(StartPositionTitle));
+            }
+        }
+
+        public string StartPositionDescription
+        {
+            get => _startPositionDescription;
+            private set
+            {
+                _startPositionDescription = value;
+                OnPropertyChanged(nameof(StartPositionDescription));
+            }
+        }
+
+        public string KeyboardSchemeTitle
+        {
+            get => _keyboardSchemeTitle;
+            private set
+            {
+                _keyboardSchemeTitle = value;
+                OnPropertyChanged(nameof(KeyboardSchemeTitle));
+            }
+        }
+
+        public List<string> KeyboardSchemeRulesList
+        {
+            get => _keyboardSchemeRulesList;
+            private set
+            {
+                _keyboardSchemeRulesList = value;
+                OnPropertyChanged(nameof(KeyboardSchemeRulesList));
+            }
+        }
+
+        public string KeyboardSchemeDescription
+        {
+            get => _keyboardSchemeDescription;
+            private set
+            {
+                _keyboardSchemeDescription = value;
+                OnPropertyChanged(nameof(KeyboardSchemeDescription));
+            }
+        }
+
+        public string FingerMovementTitle
+        {
+            get => _fingerMovementTitle;
+            private set
+            {
+                _fingerMovementTitle = value;
+                OnPropertyChanged(nameof(FingerMovementTitle));
+            }
+        }
+
+        public string FingerMovementDescription
+        {
+            get => _fingerMovementDescription;
+            private set
+            {
+                _fingerMovementDescription = value;
+                OnPropertyChanged(nameof(FingerMovementDescription));
+            }
+        }
+
+        public string TypingSpeedTitle
+        {
+            get => _typingSpeedTitle;
+            private set
+            {
+                _typingSpeedTitle = value;
+                OnPropertyChanged(nameof(TypingSpeedTitle));
+            }
+        }
+
+        public List<string> TypingSpeedRulesList
+        {
+            get => _typingSpeedRulesList;
+            private set
+            {
+                _typingSpeedRulesList = value;
+                OnPropertyChanged(nameof(TypingSpeedRulesList));
+            }
+        }
+
+        public string TrainTimeTitle
+        {
+            get => _trainTimeTitle;
+            private set
+            {
+                _trainTimeTitle = value;
+                OnPropertyChanged(nameof(TrainTimeTitle));
+            }
+        }
+
+        public string TrainTimeTestButtonText
+        {
+            get => _trainTimeTestButtonText;
+            private set
+            {
+                _trainTimeTestButtonText = value;
+                OnPropertyChanged(nameof(TrainTimeTestButtonText));
+            }
+        }
+
+        public string TrainTimeStudyButtonText
+        {
+            get => _trainTimeStudyButtonText;
+            private set
+            {
+                _trainTimeStudyButtonText = value;
+                OnPropertyChanged(nameof(TrainTimeStudyButtonText));
+            }
+        }
+
+
+
         public ImageSource KeyboardSchemeEngImageSource
         {
             get => _keyboardSchemeEngImageSource;
@@ -92,6 +248,40 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 _keyboardIconImageSource = value;
                 OnPropertyChanged(nameof(KeyboardIconImageSource));
             }
+        }
+        #endregion
+        //command
+        #region
+        public void OnLoadCommand(object param)
+        {
+
+            MainTitle = _model.MainTitle;
+            MainDescription = _model.MainDescription;
+            TypingPoseTitle = _model.TypingPoseTitle;
+            TypingPoseRulesList = _model.TypingPoseRulesList;
+            StartPositionTitle = _model.StartPositionTitle;
+            StartPositionDescription = _model.StartPositionDescription;
+            KeyboardSchemeTitle = _model.KeyboardSchemeTitle;
+            KeyboardSchemeRulesList = _model.KeyboardSchemeRulesList;
+            KeyboardSchemeDescription = _model.KeyboardSchemeDescription;
+            FingerMovementTitle = _model.FingerMovementTitle;
+            FingerMovementDescription = _model.FingerMovementDescription;
+            TypingSpeedTitle = _model.TypingSpeedTitle;
+            TypingSpeedRulesList = _model.TypingSpeedRulesList;
+            TrainTimeTitle = _model.TrainTimeTitle;
+            TrainTimeTestButtonText = _model.TrainTimeTestButtonText;
+            TrainTimeStudyButtonText = _model.TrainTimeStudyButtonText;
+            KeyboardIconImageSource = _model.GetKeyboardIconImageSource();
+            KeyboardSchemeEngImageSource = _model.GetKeyboardSchemeEngImageSource();
+            StartLeftEngPositionImageSource = _model.GetStartLeftEngPositionImageSource();
+            StartRightEngPositionImageSource = _model.GetStartRightEngPositionImageSource();
+            
+
+        }
+        #endregion
+        private async Task InitModel()
+        {
+            _model = JsonSerializer.Deserialize<LearnPageModel>(await ContentApiClientProvider.JsonTextApiClient.GetPageJsonAsync(Shared.Enums.PageType.LearnPage));
         }
 
 

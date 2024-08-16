@@ -30,11 +30,7 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
             DataContext = _enLocalisation;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-    
 
-        }
 
         private void TestSpeedButton_Click(object sender, RoutedEventArgs e)
         {

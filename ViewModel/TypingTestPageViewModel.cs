@@ -19,6 +19,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
     public class TypingTestPageViewModel : ViewModelBase
     {
         private static TypingTestPageViewModel _instance;
+        private bool _isInit = true;
         private TypingTestPageModel _model;
         private bool _isShiftWasPushedBefore = false;
         private bool _isTestStarted = false;
@@ -31,12 +32,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _keyDownCommand;
         private ICommand _endTestCommand;
 
-        private string _infoBlockRightHeaderText = string.Empty;
-        private string _infoBlockLeftHeaderText = string.Empty;
-        private string _infoBlockRightBodyText = string.Empty;
-        private string _infoBlockLeftBodyText = string.Empty;
-        private string _firstPartNearAchivementTableText = string.Empty;
-        private string _secondPartNearAchivementTebleText = string.Empty;
+        private string? _infoBlockRightHeaderText = null;
+        private string? _infoBlockLeftHeaderText = null;
+        private string? _infoBlockRightBodyText = null;
+        private string? _infoBlockLeftBodyText = null;
+        private string? _firstPartNearAchivementTableText = null;
+        private string? _secondPartNearAchivementTebleText = null;
 
         private ImageSource _flashImageSource;
         private ImageSource _targetImageSource;
@@ -51,13 +52,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _testSetupCommand = new RelayCommand(OnTestSetupCommand);
             _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteKeyCommand);
             _endTestCommand = new RelayCommand(OnEndTestCommand);
-            _infoBlockRightHeaderText = _model.GetRightInfoHeaderText();
-            _infoBlockRightBodyText = _model.GetRightInfoBodyText();
-            _infoBlockLeftHeaderText = _model.GetLeftInfoHeaderText();
-            _infoBlockLeftBodyText = _model.GetLeftInfoBodyText();
-            _firstPartNearAchivementTableText = _model.GetFirstPartNearAchivementTebleText();
-            _secondPartNearAchivementTebleText = _model.GetSecondPartNearAchivementTableText();
-           
+
+
 
         }
         public static TypingTestPageViewModel Instance()
@@ -90,16 +86,16 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(HidePanelVisibility));
             }
         }
-        public string InfoBlockRightHeaderText
+        public string? InfoBlockRightHeaderText
         {
             get => _infoBlockRightHeaderText;
             set
             {
-                _infoBlockLeftBodyText = value;
+                _infoBlockRightHeaderText = value;
                 OnPropertyChanged(nameof(InfoBlockRightHeaderText));
             }
         }
-        public string InfoBlockLeftHeaderText
+        public string? InfoBlockLeftHeaderText
         {
             get => _infoBlockLeftHeaderText;
             set
@@ -108,7 +104,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(InfoBlockLeftHeaderText));
             }
         }
-        public string InfoBlockRightBodyText
+        public string? InfoBlockRightBodyText
         {
             get => _infoBlockRightBodyText;
             set
@@ -117,7 +113,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(InfoBlockRightBodyText));
             }
         }
-        public string InfoBlockLeftBodyText
+        public string? InfoBlockLeftBodyText
         {
             get => _infoBlockLeftBodyText;
             set
@@ -135,7 +131,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(FirstPartNearAchivementTableText));
             }
         }
-        public string SecondPartNearAchivementTableText
+        public string? SecondPartNearAchivementTableText
         {
             get => _secondPartNearAchivementTebleText;
             set
@@ -165,7 +161,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         public ImageSource TargetImageSource
         {
             get => _targetImageSource;
-            set{
+            set
+            {
                 _targetImageSource = value;
                 OnPropertyChanged(nameof(TargetImageSource));
 
@@ -193,10 +190,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnTestSetupCommand(object param)
         {
-            TargetImageSource ??= _model.GetTargetImageSource();
-            FlashImageSource ??= _model.GetFlashImageSource();
-            StarImageSource ??= _model.GetStarImageSource();
-            KeyboardIconImageSource ??= _model.GetKeyboardIconImageSource();
+            if (_isInit)
+                InitStaticContent();
             _textBlock = param as TextBlock;
             _model.ResetTestSettings();
             _model.SetupTest();
@@ -231,7 +226,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 {
                     if (IsShiftPushed())
                     {
-                       _isShiftWasPushedBefore = true;
+                        _isShiftWasPushedBefore = true;
                         Task.Run(async () =>
                         {
                             await Task.Delay(1000);
@@ -299,6 +294,20 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool IsShiftPushed()
         {
             return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
+        }
+        private void InitStaticContent()
+        {
+            TargetImageSource ??= _model.GetTargetImageSource();
+            FlashImageSource ??= _model.GetFlashImageSource();
+            StarImageSource ??= _model.GetStarImageSource();
+            InfoBlockRightHeaderText ??= _model.GetRightInfoHeaderText();
+            InfoBlockRightBodyText ??= _model.GetRightInfoBodyText();
+            InfoBlockLeftHeaderText ??= _model.GetLeftInfoHeaderText();
+            InfoBlockLeftBodyText ??= _model.GetLeftInfoBodyText(); ;
+            FirstPartNearAchivementTableText ??= _model.GetFirstPartNearAchivementTebleText();
+            SecondPartNearAchivementTableText ??= _model.GetSecondPartNearAchivementTableText();
+            KeyboardIconImageSource ??= _model.GetKeyboardIconImageSource();
+            _isInit = false;
         }
     }
 }

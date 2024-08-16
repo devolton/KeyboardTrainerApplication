@@ -16,6 +16,9 @@ using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.ApiClients;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System.Windows.Media;
+using System.Text.Json;
+using System.Reflection;
+
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -33,12 +36,12 @@ namespace CourseProjectKeyboardApplication.Model
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
         private List<EnglishTypingTestText> _testTextCollection;
         private Random _random;
-        private string _infoBlockRightHeaderText = "How is typing speedmeasured on DevoltonLabs?";
-        private string _infoBlockLeftHeaderText = "Why do I need to take a typing test?";
-        private string _infoBlockRightBodyText = "The most common way to measure typing speed is words per minute, or WPM. The 'word' is an average of 5 characters. To calculate WPM, simply take the number of words typed in a minute with no typos and divide by five. For example, if you type 100 characters in a minute including spaces, your typing speed would be 20 WPM. We all know how frustrating it is to make a typo in an important document.But did you know that typos can also have a major impact on your typing speed? That's why we don't allow you to continue typing if you have a typo in your test.You have to fix it to proceed with the WPM test.";
-        private string _infoBlockLeftBodyText = "There are many reasons why you might want to take a typing speed test. Perhaps you’re curious to find out how fast you can type, or maybe you want to see if you need to improve your accuracy. Either way, a typing speed test is a great way to estimate your progress. The average typing speed is 40 words per minute, so if you can beat that, you’re doing great!\r\n\r\nYou can take the test as many times as you like, and each time you’ll likely see your speed and accuracy improve. So why not give it a try today? You might be surprised at how fast you can type.";
-        private string _firstPartNearAchivementTableText = "Do you know that you can get certified in keyboarding on any layout? That’s right — whether you’re a QWERTY fan or prefer DVORAK, there’s a certification test for you.";
-        private string _secondPartNearAchivementTebleText = "You can take the test as many times as you want! Only the best score will count towards your certification, there’s no need to worry about making a mistake.";
+        private string _infoBlockRightHeaderText = string.Empty;
+        private string _infoBlockLeftHeaderText = string.Empty;
+        private string _infoBlockRightBodyText = string.Empty;
+        private string _infoBlockLeftBodyText = string.Empty;
+        private string _firstPartNearAchivementTableText = string.Empty;
+        private string _secondPartNearAchivementTebleText = string.Empty;
         private ImageSource _starImageSource;
         private ImageSource _flashImageSource;
         private ImageSource _targetImageSource;
@@ -54,9 +57,10 @@ namespace CourseProjectKeyboardApplication.Model
             _timer.AutoReset = false;
             _timer.Elapsed += Timer_Elapsed;
             InitKeyValueDictionaries();
+            InitStaticText();
             InitTextCollectionAsync();
             _random = new Random();
-            
+
 
         }
         public ImageSource GetTargetImageSource()
@@ -90,7 +94,7 @@ namespace CourseProjectKeyboardApplication.Model
                 FrameMediator.DisplayTypingTestResultPage();
 
             });
-            
+
 
         }
 
@@ -145,11 +149,11 @@ namespace CourseProjectKeyboardApplication.Model
         {
             _timer.Interval = _timerInterval;
             _timer.Start();
-        } 
+        }
         public void TimerReset()
         {
             _timer.Stop();
-              
+
         }
         public bool IsFocusCharUppercase()
         {
@@ -165,12 +169,12 @@ namespace CourseProjectKeyboardApplication.Model
 
 
         }
-        
+
         public void SetSymbolRunStyle(bool isValidPushed)
         {
             Task.Run(async () =>
             {
-                
+
 
                 _runsList[_currentSymbolIndex].Dispatcher.Invoke(() =>
                 {
@@ -192,12 +196,13 @@ namespace CourseProjectKeyboardApplication.Model
                         _runsList[_currentSymbolIndex].Foreground = System.Windows.Media.Brushes.SteelBlue;
                     });
                 }
-          
+
             });
 
         }
         public string GetLeftInfoHeaderText() => _infoBlockLeftHeaderText;
         public string GetRightInfoHeaderText() => _infoBlockRightHeaderText;
+        
         public string GetFirstPartNearAchivementTebleText() => _firstPartNearAchivementTableText;
         public string GetSecondPartNearAchivementTableText() => _secondPartNearAchivementTebleText;
         public string GetLeftInfoBodyText() => _infoBlockLeftBodyText;
@@ -228,11 +233,65 @@ namespace CourseProjectKeyboardApplication.Model
         private int GetTypingTutorSpeed()
         {
 
-            return (int)(((double)_wordsTypingCount / (_timerInterval/1000)*60));
+            return (int)(((double)_wordsTypingCount / (_timerInterval / 1000) * 60));
 
         }
-      
-       
-    
+        private async void InitStaticText()
+        {
+            var jsonText = await ContentApiClientProvider.JsonTextApiClient.GetPageJsonAsync(Shared.Enums.PageType.TypingTestPage);
+            if (jsonText is not null)
+            {
+                Dictionary<string, string>? propValueDict = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonText);
+                if (propValueDict is not null)
+                {
+                    foreach (var onePair in propValueDict)
+                    {
+                        //!!!govnocode
+                        switch (onePair.Key)
+                        {
+                            case "InfoBlockRightHeaderText":
+                                {
+                                    _infoBlockRightHeaderText = onePair.Value;
+                                    break;
+                                }
+                            case "InfoBlockLeftHeaderText":
+                                {
+                                    _infoBlockLeftHeaderText = onePair.Value;
+                                    break;
+                                }
+                            case "InfoBlockRightBodyText":
+                                {
+                                   
+                                    _infoBlockRightBodyText = onePair.Value;
+                                    break;
+                                }
+                            case "InfoBlockLeftBodyText":
+                                {
+                                    
+                                    _infoBlockLeftBodyText = onePair.Value;
+                                    break;
+                                }
+                            case "FirstPartNearAchievementTableText":
+                                {
+                                    _firstPartNearAchivementTableText = onePair.Value;
+                                    break;
+                                }
+                            case "SecondPartNearAchievementTableText":
+                                {
+                                    _secondPartNearAchivementTebleText = onePair.Value;
+                                    break;
+                                }
+                            default:
+                                return;
+                        }
+                    }
+                    
+                }
+
+            }
+        }
+
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Providers;
@@ -209,7 +210,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private bool CanExecuteButtonCommand(object parameter)
         {
-            //может не работать потому что эта команда вызывается только при изиминении LOGIN
+         
             return (_model.IsValidLogin(LoginOrEmail) || _model.IsValidEmail(LoginOrEmail)) && _model.IsValidPassword(Password);
         }
         private void UpdateButtonEnagleState()

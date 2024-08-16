@@ -52,7 +52,7 @@
         <TextBlock
               Style="{StaticResource TypingTestInfoHeaderTextBlock}"
                     x:Name="TypingTestRightInfoHeader"
-            Text="{Binding InfoBlockRightHeaderText}"
+                    Text="{Binding InfoBlockRightHeaderText}"
                     Grid.Column="1"
                     Grid.Row="0"/>
         <TextBlock
