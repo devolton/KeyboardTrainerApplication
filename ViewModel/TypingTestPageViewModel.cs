@@ -219,6 +219,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 {
                     if (key.Equals(Key.Space))
                         _model.IncrementWordsTypingCount();
+                    _model.IncrementPushedSymbolsCount();
                     _model.SetSymbolRunStyle(true);
 
                 }
@@ -255,6 +256,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 {
                     if (key.Equals(Key.Space))
                         _model.IncrementWordsTypingCount();
+                    _model.IncrementPushedSymbolsCount();
                     _model.SetSymbolRunStyle(true);
 
                 }

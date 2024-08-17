@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
@@ -17,7 +18,7 @@ namespace CourseProjectKeyboardApplication.Model
     public class TypingTestResultPageModel :ITypingTestResultPageModel
     {
         private const double FULL_PERCENT = 100;
-        private int _allSymbolsCount = 0;
+        private int _allPushedSymbolsCount = 0;
         private int _misclickCount = 0;
         private int _typingSpeed = 0;
         private double _accuracyPercent = 0;
@@ -47,10 +48,11 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public  void InitStat()
         {
-            _allSymbolsCount = TypingTestResultController.AllSymbolCount;
+            _allPushedSymbolsCount = TypingTestResultController.PushedSymbolsCount;
             _misclickCount = TypingTestResultController.MiscliskCount;
             _typingSpeed = TypingTestResultController.TypingSpeed;
-            _accuracyPercent = FULL_PERCENT - ((double)_allSymbolsCount / (double)_misclickCount);
+            MessageBox.Show("All pushed count: " + _allPushedSymbolsCount + " | MissCount: " + _misclickCount);
+            _accuracyPercent = ((double)_allPushedSymbolsCount / (double)(_misclickCount+_allPushedSymbolsCount))*FULL_PERCENT;
              AddNewResult();
         }
         private  void AddNewResult()

@@ -19,7 +19,7 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
                 _mislickCount = value;
             }
         }
-        public static int AllSymbolCount
+        public static int PushedSymbolsCount
         {
             get => _allSymbolsCount;
             set

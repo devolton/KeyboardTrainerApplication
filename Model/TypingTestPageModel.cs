@@ -30,6 +30,7 @@ namespace CourseProjectKeyboardApplication.Model
         private int _currentSymbolIndex;
         private int _timerInterval;
         private int _misclickCount;
+        private int _pushedSymbolsCount;
         private static TypingTestPageModel _instance;
         private string _currentText = string.Empty;
         private Dictionary<Key, string> _defaultKeyValueDictionary;
@@ -53,6 +54,7 @@ namespace CourseProjectKeyboardApplication.Model
         {
             _runsList = new List<Run>(_currentText.Length);
             _timerInterval = 30_000;
+            _pushedSymbolsCount = 0;
             _timer = new System.Timers.Timer(_timerInterval);
             _timer.AutoReset = false;
             _timer.Elapsed += Timer_Elapsed;
@@ -87,7 +89,7 @@ namespace CourseProjectKeyboardApplication.Model
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
             TypingTestResultController.MiscliskCount = _misclickCount;
-            TypingTestResultController.AllSymbolCount = _currentText.Length;
+            TypingTestResultController.PushedSymbolsCount = _pushedSymbolsCount;
             TypingTestResultController.TypingSpeed = GetTypingTutorSpeed();
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -142,6 +144,7 @@ namespace CourseProjectKeyboardApplication.Model
             _runsList.Clear();
             _wordsTypingCount = 1;
             _misclickCount = 0;
+            _pushedSymbolsCount = 0;
             _currentSymbolIndex = 0;
 
         }
@@ -208,6 +211,7 @@ namespace CourseProjectKeyboardApplication.Model
         public string GetLeftInfoBodyText() => _infoBlockLeftBodyText;
         public string GetRightInfoBodyText() => _infoBlockRightBodyText;
         public void IncrementMissclickCount() => ++_misclickCount;
+        public void IncrementPushedSymbolsCount() => ++_pushedSymbolsCount;
         public void IncrementWordsTypingCount() => _wordsTypingCount++;
         private void InitKeyValueDictionaries()
         {
