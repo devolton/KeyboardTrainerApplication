@@ -1,5 +1,6 @@
 ﻿
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
@@ -13,7 +14,7 @@ using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingTutorResultPageModel
+    public class TypingTutorResultPageModel : ITypingTutorResultPageModel
     {
         private const int _WITHOUT_MISCLICK_DELIMITER = 0;
         private const int _LESS_TWO_DELIMITER = 2;
@@ -81,8 +82,8 @@ namespace CourseProjectKeyboardApplication.Model
         /// </summary>
         
         public bool IsCurrentLessonNotLast()
-        {
-            return true;// придумать проверку
+        { 
+            return (UserController.CurrentLesson is not null) ? EnglishLayoutLessonsService.IsLessonNotLast(UserController.CurrentLesson) : true;
         }
         public void UpdateLessonData()
         {
@@ -103,7 +104,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Set Current EducationUserProgress to next 
         /// </summary>
-        public void SetNextEducationUserProgress() // maybe rename
+        public void SetNextEducationUserProgress() 
         {
             UserController.SetNextEducationUserProgeress();
 

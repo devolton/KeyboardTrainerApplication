@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
 using KeyboardApplicationToolsLibrary.AuthorizationTools;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class UserSingUpPageModel:RegistrationFormModel
+    public class UserSingUpPageModel:RegistrationFormModel,IUserSingUpPageModel
     {
         public UserSingUpPageModel()
         {

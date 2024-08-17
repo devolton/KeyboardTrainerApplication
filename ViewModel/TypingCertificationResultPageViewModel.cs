@@ -13,6 +13,7 @@ using CourseProjectKeyboardApplication.View.CustomControls;
 using System.Globalization;
 using CourseProjectKeyboardApplication.Shared.Enums;
 using System.Windows.Media;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -24,7 +25,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private IEnumerable<string> _typingDateCollection;
         private static TypingCertificationResultPageViewModel _instance;
         private int _dateRangeSelectedIndex = 0;
-        private TypingCertificationResultPageModel _model;
+        private ITypingCertificationResultPageModel _model;
 
         private ImageSource _statIconImageSource;
         private ImageSource _silverTargetImageSource;
@@ -34,7 +35,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         private TypingCertificationResultPageViewModel()
         {
-            _model = new();
+            _model = new TypingCertificationResultPageModel();
             _drawStatisticsCommand = new RelayCommand(OnDrawStatisticsCommand);
             _statStackPanel = new StackPanel();
             

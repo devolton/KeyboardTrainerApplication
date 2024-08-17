@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
@@ -17,7 +18,7 @@ using CourseProjectKeyboardApplication.Tools;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingCertificatesPageModel
+    public class TypingCertificatesPageModel :ITypingCertificatesPageModel
     {
         private TypingTestResult? _bestUserTest;
         private RenderTargetBitmap _certificate;

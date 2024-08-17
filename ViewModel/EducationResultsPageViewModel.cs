@@ -2,6 +2,7 @@
 using CourseProjectKeyboardApplication.Interfaces;
 using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.View.CustomControls.EducationResults;
@@ -20,7 +21,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class EducationResultsPageViewModel : ViewModelBase
     {
-        private EducationResultsPageModel _model;
+        private IEducationResultsPageModel _model;
 
         private static EducationResultsPageViewModel _instance;
         private StackPanel _mainStackPanel;

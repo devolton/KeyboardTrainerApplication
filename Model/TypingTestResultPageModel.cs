@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -13,7 +14,7 @@ using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingTestResultPageModel
+    public class TypingTestResultPageModel :ITypingTestResultPageModel
     {
         private const double FULL_PERCENT = 100;
         private int _allSymbolsCount = 0;

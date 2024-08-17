@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
@@ -20,10 +21,9 @@ using Microsoft.Win32;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class EditUserProfilePageModel : RegistrationFormModel
+    public class EditUserProfilePageModel : RegistrationFormModel,IEditUserProfilePageModel
     {
         private string _openFileDialogImageFilter;
-        private string _remotePath = @"D:\C#WinForms\CourseProjectKeyboardApplication\Resources\UserAvatars\\";
         private OpenFileDialog _openFileDialog;
         private string _oldEmail = string.Empty;
         private string _oldLogin = string.Empty;

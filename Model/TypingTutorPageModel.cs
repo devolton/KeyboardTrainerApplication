@@ -1,6 +1,8 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.View.Pages;
 using System;
@@ -16,11 +18,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingTutorPageModel
+    public class TypingTutorPageModel : ITypingTutorPageModel
     {
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
@@ -39,11 +42,11 @@ namespace CourseProjectKeyboardApplication.Model
         private System.Windows.Media.Brush _passedElementsBrush;
         private System.Windows.Media.Brush _expectedElementsBrush;
 
-        private static TypingTutorPageModel _instance;
+        private ImageSource _repeatIconImgageSource;
 
 
 
-        private TypingTutorPageModel()
+        public TypingTutorPageModel()
         {
 
             _currentFocusWordIndex = 0;
@@ -70,10 +73,9 @@ namespace CourseProjectKeyboardApplication.Model
         {
             _stopwatcher.Stop();
         }
-        public static TypingTutorPageModel Instance()
+        public ImageSource GetRepeatIconImageSource()
         {
-            _instance ??= new TypingTutorPageModel();
-            return _instance;
+            return _repeatIconImgageSource ??= AppImageSourceProvider.RepeatIconImageSource;
         }
         /// <summary>
         /// Get progress bar max value

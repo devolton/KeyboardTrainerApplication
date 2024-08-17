@@ -1,13 +1,14 @@
 ﻿using CourseProjectKeyboardApplication.ApiClients;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class EducationResultsPageModel
+    public class EducationResultsPageModel: IEducationResultsPageModel
     {
 
         private int _commonLevelCount;
@@ -76,7 +77,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Initial all level count
         /// </summary>
-        private async void InitAllLevelCountAsync()
+        private async Task InitAllLevelCountAsync()
         {
             await GetLevelsAsync();
             _commonLevelCount = _englishLayoutLevelsCollection.Count();

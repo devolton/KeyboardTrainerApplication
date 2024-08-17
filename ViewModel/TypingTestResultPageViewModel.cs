@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.View.CustomControls;
 using System;
@@ -19,7 +20,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string _accuracyPercent = string.Empty;
         private ICommand _displayResultCommand;
         private ICommand _improveScoreCommand;
-        private TypingTestResultPageModel _model;
+        private ITypingTestResultPageModel _model;
 
         private ImageSource _keyboardIconImageSource;
 
@@ -69,7 +70,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnDisplayResultCommand(object param)
         {
             _model.InitStat();
-            _model.GetKeyboardIconImageSource();
+           KeyboardIconImageSource ??= _model.GetKeyboardIconImageSource();
             try
             {
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;

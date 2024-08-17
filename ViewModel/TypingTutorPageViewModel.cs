@@ -20,6 +20,7 @@ using System.Drawing;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -49,21 +50,20 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool _isRepeatButtonEnabled;
 
         private static TypingTutorPageViewModel _instance;
-        private readonly TypingTutorPageModel _model;
+        private readonly ITypingTutorPageModel _model;
 
         private TypingTutorPageViewModel()
         {
+            _model = new TypingTutorPageModel();
             _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteOnKeyDownCommand);
             _generateRunsBlockCommand = new RelayCommand(OnGenarateRunsElements);
             _startLessonCommand = new RelayCommand(OnStartLessonExecuteCommand, CanExecuteStartLessonCommand);
             _restartLessonCommand = new RelayCommand(OnRestartLessonCommand, CanOnRepeatLessonCommandExecute);
             _keyUpCommand = new RelayCommand(OnKeyUpCommand, CanExecuteOnKeyDownCommand);
-            _model = TypingTutorPageModel.Instance();
+          
             _keyboardItemList = new List<IKeyboardItem>();
             _errorPressedKeyboardCollection = new List<IKeyboardItem>();
             _shiftKeyboardItemCollection = new List<IKeyboardItem>();
-
-            _repeatIconImageSource = AppImageSourceProvider.RepeatIconImageSource;
 
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
@@ -186,6 +186,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnGenarateRunsElements(object param)
         {
             _textBlock = param as TextBlock;
+            RepeatButtonImageSource ??= _model.GetRepeatIconImageSource();
 
             if (_textBlock is not null)
             {

@@ -10,13 +10,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class EditUserProfilePageViewModel : RegistrationFormViewModel
     {
-        private EditUserProfilePageModel _model;
+        private IEditUserProfilePageModel _model;
         private static EditUserProfilePageViewModel _instance;
         private ImageSource _avatarSource;
         private ImageSource _defaultAvatar;

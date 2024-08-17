@@ -1,4 +1,5 @@
-﻿using CourseProjectKeyboardApplication.Shared.Providers;
+﻿using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class LearnPageModel
+    public class LearnPageModel :ILearnPageModel
     {
         private ImageSource _keyboardSchemeEngImageSource;
         private ImageSource _startLeftEngPositionImageSource;

@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.Windows;
 using CourseProjectKeyboardApplication.ViewModel.Commands;
@@ -15,7 +16,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private readonly MultiCommand _singUpClickButtonMultiCommand;
         private readonly ICommand _passwordVisibilityCommand;
         private readonly ICommand _confirmPasswordVisibilityCommand;
-        private readonly UserSingUpPageModel _model;
+        private readonly IUserSingUpPageModel _model;
         public UserSingupPageViewModel()
         {
             _singUpClickButtonMultiCommand = new MultiCommand();

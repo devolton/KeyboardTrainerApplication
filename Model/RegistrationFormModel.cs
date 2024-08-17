@@ -1,4 +1,5 @@
 ﻿
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
@@ -11,7 +12,7 @@ using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public abstract class RegistrationFormModel
+    public abstract class RegistrationFormModel:IRegistrationFormModel
     {
         protected bool _isUniqueEmail = false;
         protected bool _isUniqueLogin = false;

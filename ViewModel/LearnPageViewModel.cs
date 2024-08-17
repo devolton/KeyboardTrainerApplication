@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 {
     public class LearnPageViewModel:ViewModelBase
     {
-        private LearnPageModel _model;
+        private ILearnPageModel _model;
         private ImageSource _keyboardSchemeEngImageSource;
         private ImageSource _startLeftEngPositionImageSource;
         private ImageSource _startRightEngPositionImageSource;

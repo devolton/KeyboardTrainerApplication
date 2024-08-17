@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using CourseProjectKeyboardApplication.Tools;
@@ -9,9 +10,9 @@ using KeyboardApplicationToolsLibrary.AuthorizationTools;
 using Microsoft.Win32;
 using System.Windows;
 
-namespace CourseProjectKeyboardApplication.Model
+namespace CourseProjectKeyboardApplication.Model 
 {
-    public class LoginUserPageModel
+    public class LoginUserPageModel: ILoginUserPageModel
     {
         private RegistryKey _currentUserRegistrieSubKey;
         private RegistryKey _applicationSubKey;

@@ -256,47 +256,6 @@ namespace CourseProjectKeyboardApplication.Model
                         }
                     }
 
-                    //foreach (var onePair in propValueDict)
-                    //{
-                    //    //!!!govnocode
-                    //    switch (onePair.Key)
-                    //    {
-                    //        case "InfoBlockRightHeaderText":
-                    //            {
-                    //                _infoBlockRightHeaderText = onePair.Value;
-                    //                break;
-                    //            }
-                    //        case "InfoBlockLeftHeaderText":
-                    //            {
-                    //                _infoBlockLeftHeaderText = onePair.Value;
-                    //                break;
-                    //            }
-                    //        case "InfoBlockRightBodyText":
-                    //            {
-
-                    //                _infoBlockRightBodyText = onePair.Value;
-                    //                break;
-                    //            }
-                    //        case "InfoBlockLeftBodyText":
-                    //            {
-
-                    //                _infoBlockLeftBodyText = onePair.Value;
-                    //                break;
-                    //            }
-                    //        case "FirstPartNearAchievementTableText":
-                    //            {
-                    //                _firstPartNearAchivementTableText = onePair.Value;
-                    //                break;
-                    //            }
-                    //        case "SecondPartNearAchievementTableText":
-                    //            {
-                    //                _secondPartNearAchivementTebleText = onePair.Value;
-                    //                break;
-                    //            }
-                    //        default:
-                    //            return;
-                    //    }
-                    //}
 
                 }
 

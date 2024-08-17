@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using System.Xml.XPath;
 using System.Runtime.CompilerServices;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -22,7 +23,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private SolidColorBrush _speedBrush;
 
         private static TypingTutorResultPageViewModel _instance;
-        private TypingTutorResultPageModel _model;
+        private ITypingTutorResultPageModel _model;
 
         private ICommand _loadedPageCommand;
         private ICommand _tryAgainLessonCommand;

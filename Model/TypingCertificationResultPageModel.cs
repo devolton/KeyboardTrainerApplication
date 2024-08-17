@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Enums;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using LiveCharts;
@@ -14,7 +15,7 @@ using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingCertificationResultPageModel
+    public class TypingCertificationResultPageModel: ITypingCertificationResultPageModel
     {
         private SeriesCollection _typingUserStatisticSeriesCollection;
         private LineSeries _typingAccuracyLineSeries;
@@ -68,54 +69,10 @@ namespace CourseProjectKeyboardApplication.Model
             return Tuple.Create(seriesCollection, dateList);
         }
 
-        /// <summary>
-        ///  Initialize seriesCollection for 
-        /// </summary>
-        /// <param name="statList">User typing test results list</param>
-        /// <returns> SeriesCollection that stores data about speed and accuracy of user typing test </returns>
-        private SeriesCollection InitSeriesCollection(List<TypingTestResult> statList)
-        {
-            _typingUserStatisticSeriesCollection.Clear();
-            _typingSpeedLineSeries.Values.Clear();
-            _typingAccuracyLineSeries.Values.Clear();
-            var speedChartValues = GetSpeedChartValues(statList);
-            var accuracyChartValues = GetAccuracyChartValues(statList);
-            _typingSpeedLineSeries.Values = speedChartValues;
-            _typingAccuracyLineSeries.Values = accuracyChartValues;
-            _typingUserStatisticSeriesCollection.Add(_typingSpeedLineSeries);
-            _typingUserStatisticSeriesCollection.Add(_typingAccuracyLineSeries);
-            return _typingUserStatisticSeriesCollection;
 
-        }
-        /// <summary>
-        /// Create ChartValues and fill it with typing speed data
-        /// </summary>
-        /// <param name="collection">Typing test results collection of current user</param>
-        /// <returns>ChartValues collection of typing speed data</returns>
-        private ChartValues<int> GetSpeedChartValues(List<TypingTestResult> collection)
-        {
-            var chartValues = new ChartValues<int>();
-            foreach (var stat in collection)
-            {
-                chartValues.Add(stat.Speed);
-            }
-            return chartValues;
-        }
 
-        /// <summary>
-        /// Create ChartValues and fill it with typing accuracy data
-        /// </summary>
-        /// <param name="collection">Typing test results collection of current user</param>
-        /// <returns>ChartValues collection of typing accuracy data</returns>
-        private ChartValues<double> GetAccuracyChartValues(List<TypingTestResult> collection)
-        {
-            var chartValues = new ChartValues<double>();
-            foreach (var stat in collection)
-            {
-                chartValues.Add(stat.AccuracyPercent);
-            }
-            return chartValues;
-        }
+
+        
         public async Task InitTypingTests()
         {
             _userTypingTestsCollection = (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id))?.ToList() ?? new();
@@ -209,7 +166,53 @@ namespace CourseProjectKeyboardApplication.Model
         }
 
 
+        /// <summary>
+        /// Create ChartValues and fill it with typing accuracy data
+        /// </summary>
+        /// <param name="collection">Typing test results collection of current user</param>
+        /// <returns>ChartValues collection of typing accuracy data</returns>
+        private ChartValues<double> GetAccuracyChartValues(List<TypingTestResult> collection)
+        {
+            var chartValues = new ChartValues<double>();
+            foreach (var stat in collection)
+            {
+                chartValues.Add(stat.AccuracyPercent);
+            }
+            return chartValues;
+        }
+        /// <summary>
+        /// Create ChartValues and fill it with typing speed data
+        /// </summary>
+        /// <param name="collection">Typing test results collection of current user</param>
+        /// <returns>ChartValues collection of typing speed data</returns>
+        private ChartValues<int> GetSpeedChartValues(List<TypingTestResult> collection)
+        {
+            var chartValues = new ChartValues<int>();
+            foreach (var stat in collection)
+            {
+                chartValues.Add(stat.Speed);
+            }
+            return chartValues;
+        }
+        /// <summary>
+        ///  Initialize seriesCollection for 
+        /// </summary>
+        /// <param name="statList">User typing test results list</param>
+        /// <returns> SeriesCollection that stores data about speed and accuracy of user typing test </returns>
+        private SeriesCollection InitSeriesCollection(List<TypingTestResult> statList)
+        {
+            _typingUserStatisticSeriesCollection.Clear();
+            _typingSpeedLineSeries.Values.Clear();
+            _typingAccuracyLineSeries.Values.Clear();
+            var speedChartValues = GetSpeedChartValues(statList);
+            var accuracyChartValues = GetAccuracyChartValues(statList);
+            _typingSpeedLineSeries.Values = speedChartValues;
+            _typingAccuracyLineSeries.Values = accuracyChartValues;
+            _typingUserStatisticSeriesCollection.Add(_typingSpeedLineSeries);
+            _typingUserStatisticSeriesCollection.Add(_typingAccuracyLineSeries);
+            return _typingUserStatisticSeriesCollection;
 
+        }
 
 
 

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.CustomControls;
 
@@ -17,7 +18,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
     public class TypingCertificatesPageViewModel : ViewModelBase
     {
         private static TypingCertificatesPageViewModel _instance;
-        private TypingCertificatesPageModel _model;
+        private ITypingCertificatesPageModel _model;
         private ICommand _improveResultCommand;
         private ICommand _drawInfoCommand;
         private ICommand _saveCertificateCommand;

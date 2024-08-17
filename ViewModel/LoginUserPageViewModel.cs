@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -28,7 +29,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //commands fields 
         private readonly MultiCommand _multiCommand = new MultiCommand();
         private readonly ICommand _passwordVisibilityCommand;
-        private LoginUserPageModel _model = new LoginUserPageModel();
+        private ILoginUserPageModel _model;
         //state fields
         private bool _isChecked = false;
         private bool _isButtonEnable;
@@ -40,7 +41,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         public LoginUserPageViewModel()
         {
-
+            _model = new LoginUserPageModel();
             _multiCommand.Add(new RelayCommand(OnLoginUserCommand, CanExecuteButtonCommand));
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _loginDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPageTextBox"];
