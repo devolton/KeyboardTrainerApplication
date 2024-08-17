@@ -27,12 +27,14 @@
             </StackPanel>
             <ccEditUserProfile:EditUserProfileAvatarBlock/>
             <ccEditUserProfile:EditUserProfileBodyBlock/>
-
-            <Button x:Name="SaveChangeButton"
+            <Grid >
+            <Button 
+                    Margin="5"
                     Command="{Binding SaveChangeCommand}"
                     IsEnabled="{Binding IsSaveButtonEnabled}"
                     Content="Save"
                     Style="{StaticResource CustomYellowTemplateButton}"/>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </Page>

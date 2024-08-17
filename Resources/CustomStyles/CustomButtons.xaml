@@ -3,6 +3,7 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                  
 >
+
     <!--template button style(common for application buttons)-->
     <Style x:Key="CustomTemplateButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
@@ -37,7 +38,7 @@
                 <BeginStoryboard>
                     <Storyboard Storyboard.TargetProperty="Margin">
                         <ThicknessAnimation Duration="00:00:00.5"
-                                            To="5 2.5 5 2.5"
+                                            To="5 7.5 5 7.5"
                                             AutoReverse="True"/>
                     </Storyboard>
                 </BeginStoryboard>
@@ -285,6 +286,7 @@
             <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
         </Style.Setters>
     </Style>
+
 
 
 </ResourceDictionary>

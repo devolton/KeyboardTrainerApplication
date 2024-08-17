@@ -156,8 +156,11 @@
             </Grid>
             <cc:TypingTestInfoBlock/>
             <Button
-             Margin="0 0 0 30"
+             Background="{StaticResource CustomDeepBlue}"
+             Foreground="{StaticResource CustomAluminum}"
              x:Name="TakeTestButton"
+             FontSize="18"
+             FontWeight="Thin"
              Width="200"
              Height="50"
              Content="Take a typing test"

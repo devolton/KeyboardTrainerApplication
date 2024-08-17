@@ -41,8 +41,10 @@
                     Style="{StaticResource CustomYellowTemplateButton}"/>
 
         </StackPanel>
+
+
         <Image Width="600"
-               Margin="30"
+                  Margin="30"
                Height="400"
                Stretch="Fill"
                Source="{Binding CertificateSource}">
@@ -54,11 +56,11 @@
             </Image.Effect>
         </Image>
         <Button 
+               
                 IsEnabled="{Binding IsSaveCertificateButtonEnabled}"
                 HorizontalAlignment="Right"
                 Content="Save"
                 Style="{StaticResource CustomVioletTemplateButton}"
                 Command="{Binding SaveCertificateCommand}"/>
-
     </StackPanel>
 </UserControl>
