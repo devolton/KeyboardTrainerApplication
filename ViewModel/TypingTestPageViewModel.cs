@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace CourseProjectKeyboardApplication.ViewModel
@@ -20,10 +21,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
     {
         private static TypingTestPageViewModel _instance;
         private bool _isInit = true;
+        private System.Timers.Timer _timer;
         private TypingTestPageModel _model;
         private bool _isShiftWasPushedBefore = false;
         private bool _isTestStarted = false;
         private bool _isFirstKeyPushed = false;
+
         private TextBlock _textBlock;
         private Visibility _startButtonVisibility;
         private Visibility _hidePanesVisibility;
@@ -31,6 +34,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _testSetupCommand;
         private ICommand _keyDownCommand;
         private ICommand _endTestCommand;
+        private ICommand _changeTimerValueCommand;
 
         private string? _infoBlockRightHeaderText = null;
         private string? _infoBlockLeftHeaderText = null;
@@ -38,6 +42,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string? _infoBlockLeftBodyText = null;
         private string? _firstPartNearAchivementTableText = null;
         private string? _secondPartNearAchivementTebleText = null;
+
+        private int _timerMinutesValue = 00;
+        private int _timerSecondsValue = 30;
+        private int _timeComboBoxSelectedIndex = 0;
 
         private ImageSource _flashImageSource;
         private ImageSource _targetImageSource;
@@ -52,10 +60,27 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _testSetupCommand = new RelayCommand(OnTestSetupCommand);
             _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteKeyCommand);
             _endTestCommand = new RelayCommand(OnEndTestCommand);
+            _changeTimerValueCommand = new RelayCommand(OnChangeTimerValueCommand);
+            _timer = new System.Timers.Timer(1000);
+            _timer.Elapsed += _timer_Elapsed;
 
 
 
         }
+
+        private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (_timerMinutesValue != 0)
+            {
+                TimerMinutesValue = (--_timerMinutesValue).ToString();
+                TimerSecondsValue = 59.ToString();
+
+            }
+            else
+                TimerSecondsValue = (--_timerSecondsValue).ToString();
+
+        }
+
         public static TypingTestPageViewModel Instance()
         {
             _instance ??= new TypingTestPageViewModel();
@@ -64,6 +89,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //properties
         #region
+        public ICommand ChangeTimeValueCommand => _changeTimerValueCommand;
         public ICommand TestSetupCommand => _testSetupCommand;
         public ICommand StartTestCommand => _startLessonCommand;
         public ICommand KeyDownCommand => _keyDownCommand;
@@ -140,6 +166,32 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(SecondPartNearAchivementTableText));
             }
         }
+        public string TimerMinutesValue
+        {
+            get
+            {
+                var currentValue = (_timerMinutesValue < 10) ? "0" + _timerMinutesValue.ToString() : _timerMinutesValue.ToString();
+                return currentValue;
+            }
+            set
+            {
+                _timerMinutesValue = int.Parse(value);
+                OnPropertyChanged(nameof(TimerMinutesValue));
+            }
+        }
+        public string TimerSecondsValue
+        {
+            get
+            {
+                var currentValue = (_timerSecondsValue < 10) ? "0" + _timerSecondsValue.ToString() : _timerSecondsValue.ToString();
+                return currentValue;
+            }
+            set
+            {
+                _timerSecondsValue = int.Parse(value);
+                OnPropertyChanged(nameof(TimerSecondsValue));
+            }
+        }
         public ImageSource StarImageSource
         {
             get => _starImageSource;
@@ -177,6 +229,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(KeyboardIconImageSource));
             }
         }
+        public int TimeComboBoxSelectedIndex
+        {
+            get => _timeComboBoxSelectedIndex;
+            set
+            {
+                _timeComboBoxSelectedIndex = value;
+                OnPropertyChanged(nameof(TimeComboBoxSelectedIndex));
+            }
+        }
 
         #endregion
         //commands
@@ -187,6 +248,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             StartButtonVisibility = Visibility.Hidden;
             _isTestStarted = true;
 
+        }
+        private void OnChangeTimerValueCommand(object param)
+        {
+            SetTimerBlock();
         }
         private void OnTestSetupCommand(object param)
         {
@@ -210,6 +275,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 _isFirstKeyPushed = true;
                 _model.StartTimer();
+                _timer.Start();
             }
 
             Key key = (Key)param;
@@ -278,6 +344,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _isTestStarted = false;
             _isFirstKeyPushed = false;
             _model.TimerReset();
+            SetTimerBlock();
+            TimerSecondsValue = _timerSecondsValue.ToString();
+            _timer.Stop();
 
         }
         #endregion
@@ -297,6 +366,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
         }
+
         private void InitStaticContent()
         {
             TargetImageSource ??= _model.GetTargetImageSource();
@@ -310,6 +380,21 @@ namespace CourseProjectKeyboardApplication.ViewModel
             SecondPartNearAchivementTableText ??= _model.GetSecondPartNearAchivementTableText();
             KeyboardIconImageSource ??= _model.GetKeyboardIconImageSource();
             _isInit = false;
+        }
+        private void SetTimerBlock()
+        {
+            if (TimeComboBoxSelectedIndex == 0)
+            {
+                TimerMinutesValue = 0.ToString();
+                TimerSecondsValue = 30.ToString();
+                _model.SetTimerInterval(30000);
+            }
+            else
+            {
+                TimerMinutesValue = 1.ToString();
+                TimerSecondsValue = 0.ToString();
+                _model.SetTimerInterval(60000);
+            }
         }
     }
 }

@@ -21,13 +21,13 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
     /// </summary>
     public partial class TypingTestPage : Page
     {
-        private TypingTestPageViewModel _typingTestPageViewModel;
+        private TypingTestPageViewModel _viewModel;
 
         public TypingTestPage()
         {
-            _typingTestPageViewModel = TypingTestPageViewModel.Instance();
+            _viewModel = TypingTestPageViewModel.Instance();
             InitializeComponent();
-            DataContext = _typingTestPageViewModel;
+            DataContext = _viewModel;
         }
 
         private void TakeTestButton_Click(object sender, RoutedEventArgs e)
@@ -39,19 +39,25 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
 
         private void Page_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            _typingTestPageViewModel.KeyDownCommand.Execute(e.Key);
+            _viewModel.KeyDownCommand.Execute(e.Key);
         }
 
 
 
         private void Page_LostFocus(object sender, RoutedEventArgs e)
         {
-            _typingTestPageViewModel.EndTestCommand.Execute(e);
+            _viewModel.EndTestCommand.Execute(e);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             TypingPage.Focus();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            _viewModel.ChangeTimeValueCommand.Execute(null);
         }
     }
 }

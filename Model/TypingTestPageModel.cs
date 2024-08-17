@@ -88,23 +88,28 @@ namespace CourseProjectKeyboardApplication.Model
 
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            TypingTestResultController.MiscliskCount = _misclickCount;
-            TypingTestResultController.PushedSymbolsCount = _pushedSymbolsCount;
-            TypingTestResultController.TypingSpeed = GetTypingTutorSpeed();
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                FrameMediator.DisplayTypingTestResultPage();
 
-            });
+                TypingTestResultController.MiscliskCount = _misclickCount;
+                TypingTestResultController.PushedSymbolsCount = _pushedSymbolsCount;
+                TypingTestResultController.TypingSpeed = GetTypingTutorSpeed();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    FrameMediator.DisplayTypingTestResultPage();
+
+                });
 
 
         }
-
+        //remove instance
 
         public static TypingTestPageModel Instance()
         {
             _instance ??= new TypingTestPageModel();
             return _instance;
+        }
+        public void SetTimerInterval(int milliseconds)
+        {
+            _timerInterval= milliseconds;
         }
         public List<Run> GetTextRuns()
         {
@@ -237,7 +242,7 @@ namespace CourseProjectKeyboardApplication.Model
         private int GetTypingTutorSpeed()
         {
 
-            return (int)(((double)_wordsTypingCount / (_timerInterval / 1000) * 60));
+            return (int)(((double)_wordsTypingCount / (_timerInterval /1000 ) * 60));
 
         }
         private async void InitStaticText()
