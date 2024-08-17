@@ -9,27 +9,13 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Database.Entities
 {
-    [Table("typingTestResults")]
     public class TypingTestResult
     {
-        [Key]
-        [Column("Id")]
         public int Id { get; set; }
-        [Required]
-        [Column("speed")]
         public int Speed { get; set; }
-        [Column("accuracy_percent")]
-        [Required]
         public double AccuracyPercent { get; set; }
-        [Required]
-        [Column("layout_type")]
         public LayoutType LayoutType { get; set; }
-        [Required]
-        [Column("date")]
         public DateTime Date { get; set;}
-        [Required]
-        [Column("user_id")]
-        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
         public virtual User User { get; set; } = null;
         public override string ToString()

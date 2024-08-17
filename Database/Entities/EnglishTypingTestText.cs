@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Database.Entities
 {
-    [Table("englishTypingTestText")]
     public class EnglishTypingTestText
     {
-        [Key]
-        [Column("Id")]
+
         public int Id { get; set; }
-        [Required]
-        [Column("text")]
         public string Text { get; set; }
     }
 }

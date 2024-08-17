@@ -8,38 +8,20 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Database.Entities
 {
-    [Table("educationUsersProgresses")]
     public class EducationUsersProgress
     {
-        [Key]
-        [Column("Id")]
         public int Id { get; set; }
 
-        [Required]
-        [Column("is_less_than_two_errors_completed")]
         public bool IsLessThanTwoErrorsCompleted { get; set; } = false;
 
-        [Required]
-        [Column("is_without_errors_completed")]
         public bool IsWithoutErrorsCompleted { get; set; } = false;
 
-        [Required]
-        [Column("id_speed_completed")]
         public bool IsSpeedCompleted { get; set; } = false;
 
-        [Required]
-        [Column("user_id")]
-        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
 
-        [Required]
-        [Column("english_layout_level_id")]
-        [ForeignKey(nameof(EnglishLayoutLevel))]
         public int EnglishLayoutLevelId { get; set; }
 
-        [Required]
-        [Column("english_layout_lesson_id")]
-        [ForeignKey(nameof(EnglishLayoutLesson))]
         public int EnglishLayoutLessonId { get; set; }
 
         public virtual User User { get; set; } = null;

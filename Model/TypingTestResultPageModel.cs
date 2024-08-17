@@ -51,7 +51,6 @@ namespace CourseProjectKeyboardApplication.Model
             _allPushedSymbolsCount = TypingTestResultController.PushedSymbolsCount;
             _misclickCount = TypingTestResultController.MiscliskCount;
             _typingSpeed = TypingTestResultController.TypingSpeed;
-            MessageBox.Show("All pushed count: " + _allPushedSymbolsCount + " | MissCount: " + _misclickCount);
             _accuracyPercent = ((double)_allPushedSymbolsCount / (double)(_misclickCount+_allPushedSymbolsCount))*FULL_PERCENT;
              AddNewResult();
         }
