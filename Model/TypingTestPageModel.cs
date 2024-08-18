@@ -18,11 +18,11 @@ using CourseProjectKeyboardApplication.Shared.Providers;
 using System.Windows.Media;
 using System.Text.Json;
 using System.Reflection;
-
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingTestPageModel
+    public class TypingTestPageModel:ITypingTestPageModel 
     {
         private List<Run> _runsList;
         private int _wordsTypingCount;
@@ -31,7 +31,7 @@ namespace CourseProjectKeyboardApplication.Model
         private int _timerInterval;
         private int _misclickCount;
         private int _pushedSymbolsCount;
-        private static TypingTestPageModel _instance;
+        
         private string _currentText = string.Empty;
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
@@ -50,7 +50,7 @@ namespace CourseProjectKeyboardApplication.Model
 
 
 
-        private TypingTestPageModel()
+        public TypingTestPageModel()
         {
             _runsList = new List<Run>(_currentText.Length);
             _timerInterval = 30_000;
@@ -100,13 +100,7 @@ namespace CourseProjectKeyboardApplication.Model
 
 
         }
-        //remove instance
-
-        public static TypingTestPageModel Instance()
-        {
-            _instance ??= new TypingTestPageModel();
-            return _instance;
-        }
+        
         public void SetTimerInterval(int milliseconds)
         {
             _timerInterval= milliseconds;
@@ -251,7 +245,7 @@ namespace CourseProjectKeyboardApplication.Model
             if (jsonText is not null)
             {
                 Dictionary<string, string>? propValueDict = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonText);
-                Type targetType = _instance.GetType();
+                Type targetType = this.GetType();
                 if (propValueDict is not null)
                 {
                     foreach(var onePair in propValueDict)
@@ -261,7 +255,7 @@ namespace CourseProjectKeyboardApplication.Model
                             continue;
                         if(fieldInfo.FieldType == typeof(string))
                         {
-                            fieldInfo.SetValue(_instance, onePair.Value);
+                            fieldInfo.SetValue(this, onePair.Value);
                         }
                     }
 

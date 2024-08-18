@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private static TypingTestPageViewModel _instance;
         private bool _isInit = true;
         private System.Timers.Timer _timer;
-        private TypingTestPageModel _model;
+        private ITypingTestPageModel _model;
         private bool _isShiftWasPushedBefore = false;
         private bool _isTestStarted = false;
         private bool _isFirstKeyPushed = false;
@@ -53,7 +54,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ImageSource _keyboardIconImageSource;
         private TypingTestPageViewModel()
         {
-            _model = TypingTestPageModel.Instance();
+            _model = new TypingTestPageModel();
             HidePanelVisibility = Visibility.Visible;
             StartButtonVisibility = Visibility.Visible;
             _startLessonCommand = new RelayCommand(OnStartTestCommand, CanExecuteStartTestCommand);
