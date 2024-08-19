@@ -16,19 +16,32 @@
 
     <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal"
+                    Margin="0 70 0 0">
         <TextBox x:Name="LoginTextBox"
                  Text="{Binding LoginOrEmail}"
                 Background="Transparent"
                  materialDesign:HintAssist.Hint="Login\Email"
                  Style="{Binding LoginTextBoxStyle}"/>
+            <Image
+                Width="17"
+                Height="17"
+                Tag="Login"
+                MouseEnter="InfoIcon_MouseEnter"
+                Source="{Binding InfoIconImageSource}"
+                Margin="5 7 0 0"
+                Cursor="Hand"/>
+        </StackPanel>
+        
 
-        <Grid       
+            <Grid       
              HorizontalAlignment="Left"
              Width="350"
              Margin="20 0 0 0"
              VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="295"/>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="LoginPasswordBox"
@@ -50,15 +63,25 @@
                      materialDesign:HintAssist.Hint="Password"
                      Visibility="{Binding PasswordTextBoxVisibility}"
                      Style="{StaticResource CustomDefaultLoginPageTextBox}"/>
+            <Image
+                Grid.Column="1"
+                Width="17"
+                Height="17"
+                Tag="Password"
+                MouseEnter="InfoIcon_MouseEnter"
+                Source="{Binding InfoIconImageSource}"
+                Margin="0 7 0 0"
+                Cursor="Hand"/>
             <Button x:Name="UserLoginPagePasswordVisibilityButton"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Command="{Binding PasswordVisibilityCommand}"
                     Background="Transparent"
                     BorderThickness="0"
-                    Margin="0 10 0 0 "
+                    Margin="0 7 0 0 "
                     Width="30"
                     Padding="0"
                     Height="30">
+
                 <Button.Content>
                     <TextBlock x:Name="UserLoginPagePasswordVisibilityIconTextBlock"
                        Text="👁"
@@ -70,6 +93,7 @@
                        Foreground="Silver"/>
                 </Button.Content>
             </Button>
+            
         </Grid>
         <CheckBox IsChecked="{Binding IsChecked}"
                   HorizontalAlignment="Center"

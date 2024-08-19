@@ -23,11 +23,12 @@
         Orientation="Vertical"
         >
         <TextBox
+                Grid.Column="0"
                     x:Name="NameTextBox"
                     Text="{Binding Name}"
                     materialDesign:HintAssist.Hint="Name"
                     Style="{Binding NameTextBoxStyle}"/>
-        <TextBox
+            <TextBox
                     x:Name="LoginTextBox"
                     Text="{Binding Login}"
                     materialDesign:HintAssist.Hint="Login"

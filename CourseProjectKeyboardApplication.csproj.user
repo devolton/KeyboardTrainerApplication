@@ -109,6 +109,9 @@
     <Compile Update="View\Windows\AuthorizationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Windows\NotificationWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Resources\CustomStyles\CustomKeyboardControlItemBlock.xaml">
@@ -244,6 +247,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\AuthorizationWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Windows\NotificationWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

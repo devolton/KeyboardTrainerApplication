@@ -11,6 +11,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using MaterialDesignThemes.Wpf;
+using CourseProjectKeyboardApplication.Shared.Mediators;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -29,6 +32,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //commands fields 
         private readonly MultiCommand _multiCommand = new MultiCommand();
         private readonly ICommand _passwordVisibilityCommand;
+        private readonly ICommand _notifyCommand;
         private ILoginUserPageModel _model;
         //state fields
         private bool _isChecked = false;
@@ -38,12 +42,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string _loginOrEmail;
         private string _password = string.Empty;
         private MainWindow _mainWindow;
+        private ImageSource _infoIconImageSource = AppImageSourceProvider.InfoIconImageSource;
 
         public LoginUserPageViewModel()
         {
             _model = new LoginUserPageModel();
             _multiCommand.Add(new RelayCommand(OnLoginUserCommand, CanExecuteButtonCommand));
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
+            _notifyCommand = new RelayCommand(OnNotifyCommand);
             _loginDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPageTextBox"];
             LoginTextBoxStyle = _loginDefaultStyle;
             _loginInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPageTextBox"];
@@ -64,7 +70,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //команда для выполнения нажатия кнопки
         public ICommand ButtonCommand => _multiCommand;
+        public ICommand NofityCommand => _notifyCommand;
+
         public ICommand PasswordVisibilityCommand => _passwordVisibilityCommand;
+        public ImageSource InfoIconImageSource
+        {
+            get => _infoIconImageSource;
+            set
+            {
+                _infoIconImageSource = value;
+                OnPropertyChanged(nameof(InfoIconImageSource));
+            }
+        }
         public bool IsChecked
         {
             get { return _isChecked; }
@@ -158,29 +175,49 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //commnands
         #region
+        private void OnNotifyCommand(object param)
+        {
+            if (param != null)
+            {
+                var notifyType = (NotifyType)param;
+                NotificationMediator.ShowNotificationWindow(notifyType);
+
+            }
+        }
         private async void OnLoginUserCommand(object parameter)
         {
-            if (!await _model.IsUserExist(LoginOrEmail))
+            var isUserExistAndStatusPair = await _model.IsUserExist(LoginOrEmail);
+            if (!isUserExistAndStatusPair.Key)
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                if (isUserExistAndStatusPair.Value == NotifyType.ServerRequestTimeout)
                 {
-                    ChangeLoginTextBoxAsync();
-                });
+                    NotificationMediator.ShowNotificationWindow(NotifyType.ServerRequestTimeout);
+                }
+                else
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ChangeLoginTextBoxAsync();
+                    });
+                    NotificationMediator.ShowNotificationWindow(NotifyType.UserNotFoundByLoginOrEmail);
+                }
 
                 return;
 
             }
             User? user = await _model.GetUserByLoginOrEmailAndPassword(LoginOrEmail, Password);
+
             if (user is null)
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     ChangePasswordBoxStyleAsync();
                 });
+                NotificationMediator.ShowNotificationWindow(NotifyType.IncorrectPassword);
 
                 return;
             }
-            _model.WriteInRegister(LoginOrEmail,Password,_isChecked);
+            _model.WriteInRegister(LoginOrEmail, Password, _isChecked);
             await _model.InitUserInUserController(user);
             OpenMainWindow();
         }
@@ -211,7 +248,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
         private bool CanExecuteButtonCommand(object parameter)
         {
-         
+
             return (_model.IsValidLogin(LoginOrEmail) || _model.IsValidEmail(LoginOrEmail)) && _model.IsValidPassword(Password);
         }
         private void UpdateButtonEnagleState()
@@ -253,9 +290,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return Task.Run(async () =>
              {
+
                  Application.Current.Dispatcher.Invoke(() =>
                  {
                      LoginTextBoxStyle = _loginInvalidStyle;
+
+
 
                  });
                  await Task.Delay(1500);
@@ -291,6 +331,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 if (oneWindow is AuthorizationWindow)
                 {
+                    var autorizationWindow = oneWindow as AuthorizationWindow;
+                    autorizationWindow.IsDisposableHttpClients = false;
                     oneWindow.Close();
                     return;
                 }

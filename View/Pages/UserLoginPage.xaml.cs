@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CourseProjectKeyboardApplication.ViewModel;
+using CourseProjectKeyboardApplication.Shared.Enums;
 
 namespace CourseProjectKeyboardApplication.View.Pages
 {
@@ -32,5 +33,15 @@ namespace CourseProjectKeyboardApplication.View.Pages
 
         }
 
+        private void InfoIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var image = sender as Image;
+            string tagValue = image.Tag as string;
+            if (tagValue is not null)
+            {
+                NotifyType notifyType = (tagValue == "Login") ? NotifyType.InvalidLogin : NotifyType.InvalidPassword;
+                _loginViewModel.NofityCommand.Execute(notifyType);
+            }
+        }
     }
 }

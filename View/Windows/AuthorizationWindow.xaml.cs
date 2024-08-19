@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.ApiClients;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.Pages;
 using System;
@@ -35,10 +36,11 @@ namespace CourseProjectKeyboardApplication.View.Windows
         private ImageSource _blueSingUpIcon;
         private ImageSource _exitIconImageSource;
         private ImageSource _windowIconImageSource;
+        public bool IsDisposableHttpClients = true;
 
 
         private StaticImageApiClient _staticImageApiClient;
-
+        
         public AuthorizationWindow()
         {
             InitializeComponent();
@@ -59,6 +61,7 @@ namespace CourseProjectKeyboardApplication.View.Windows
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _windowIconImageSource = await _staticImageApiClient.GetImageSourceAsync("AuthorizationLogo.png");
+            AppImageSourceProvider.InfoIconImageSource = await _staticImageApiClient.GetImageSourceAsync("InfoIcon.png");
             LoginWindow.Icon = _windowIconImageSource;
             _userLoginPage = new UserLoginPage();
             _userSingInPage = new UserSingInPage();
@@ -68,20 +71,21 @@ namespace CourseProjectKeyboardApplication.View.Windows
             _whiteSingUpIcon = await _staticImageApiClient.GetImageSourceAsync("SingUpUserWhiteIcon.png");
             _blueSingUpIcon = await _staticImageApiClient.GetImageSourceAsync("SingUpUserBlueIcon.png");
             _exitIconImageSource = await _staticImageApiClient.GetImageSourceAsync("ExitIcon.png");
-            
+
+
 
             LoginNavigatorIconImage.Source = _whiteLoginIcon;
             SingUpNavigatorIconImage.Source = _blueSingUpIcon;
             ExitImageBrush.ImageSource = _exitIconImageSource;
-           
-           
+
+
         }
 
         private void OnLoginNavigatorButtonClick(object sender, RoutedEventArgs e)
         {
             if (!_isLoginPageActive)
             {
-               
+
                 AuthorizationFrame.Content = _userLoginPage;
                 _isLoginPageActive = !_isLoginPageActive;
                 ChangeButtonsStyle();
@@ -95,7 +99,7 @@ namespace CourseProjectKeyboardApplication.View.Windows
         {
             if (_isLoginPageActive)
             {
-                
+
                 AuthorizationFrame.Content = _userSingInPage;
                 _isLoginPageActive = !_isLoginPageActive;
                 ChangeButtonsStyle();
@@ -124,7 +128,7 @@ namespace CourseProjectKeyboardApplication.View.Windows
                         SingUpNavigatorButtonTextBlock.TextDecorations = null;
 
                     });
-                  
+
                 }
                 else
                 {
@@ -143,12 +147,18 @@ namespace CourseProjectKeyboardApplication.View.Windows
                 }
 
             });
-          
+
 
         }
 
-
-
-
+        private void LoginWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
+           if(IsDisposableHttpClients)
+            {
+                DbApiClientProvider.Dispose();
+                ContentApiClientProvider.Dispose();
+            }
+        }
     }
 }

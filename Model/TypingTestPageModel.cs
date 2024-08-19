@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,7 +23,7 @@ using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingTestPageModel:ITypingTestPageModel 
+    public class TypingTestPageModel : ITypingTestPageModel
     {
         private List<Run> _runsList;
         private int _wordsTypingCount;
@@ -31,7 +32,7 @@ namespace CourseProjectKeyboardApplication.Model
         private int _timerInterval;
         private int _misclickCount;
         private int _pushedSymbolsCount;
-        
+
         private string _currentText = string.Empty;
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
@@ -89,21 +90,21 @@ namespace CourseProjectKeyboardApplication.Model
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
 
-                TypingTestResultController.MiscliskCount = _misclickCount;
-                TypingTestResultController.PushedSymbolsCount = _pushedSymbolsCount;
-                TypingTestResultController.TypingSpeed = GetTypingTutorSpeed();
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    FrameMediator.DisplayTypingTestResultPage();
+            TypingTestResultController.MiscliskCount = _misclickCount;
+            TypingTestResultController.PushedSymbolsCount = _pushedSymbolsCount;
+            TypingTestResultController.TypingSpeed = GetTypingTutorSpeed();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                FrameMediator.DisplayTypingTestResultPage();
 
-                });
+            });
 
 
         }
-        
+
         public void SetTimerInterval(int milliseconds)
         {
-            _timerInterval= milliseconds;
+            _timerInterval = milliseconds;
         }
         public List<Run> GetTextRuns()
         {
@@ -122,7 +123,10 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public bool IsEnglishLanguageSelected()
         {
-            return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
+            bool isEnglishLanguageSelected = InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
+            if (!isEnglishLanguageSelected)
+                NotificationMediator.ShowNotificationWindow(NotifyType.InvalidLanguageSelected);
+            return isEnglishLanguageSelected;
         }
         private async Task InitTextCollectionAsync()
         {
@@ -204,7 +208,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public string GetLeftInfoHeaderText() => _infoBlockLeftHeaderText;
         public string GetRightInfoHeaderText() => _infoBlockRightHeaderText;
-        
+
         public string GetFirstPartNearAchivementTebleText() => _firstPartNearAchievementTableText;
         public string GetSecondPartNearAchivementTableText() => _secondPartNearAchievementTableText;
         public string GetLeftInfoBodyText() => _infoBlockLeftBodyText;
@@ -236,7 +240,7 @@ namespace CourseProjectKeyboardApplication.Model
         private int GetTypingTutorSpeed()
         {
 
-            return (int)(((double)_wordsTypingCount / (_timerInterval /1000 ) * 60));
+            return (int)(((double)_wordsTypingCount / (_timerInterval / 1000) * 60));
 
         }
         private async void InitStaticText()
@@ -248,12 +252,12 @@ namespace CourseProjectKeyboardApplication.Model
                 Type targetType = this.GetType();
                 if (propValueDict is not null)
                 {
-                    foreach(var onePair in propValueDict)
+                    foreach (var onePair in propValueDict)
                     {
                         FieldInfo fieldInfo = targetType.GetField($"_{onePair.Key}", BindingFlags.NonPublic | BindingFlags.Instance);
                         if (fieldInfo is null)
                             continue;
-                        if(fieldInfo.FieldType == typeof(string))
+                        if (fieldInfo.FieldType == typeof(string))
                         {
                             fieldInfo.SetValue(this, onePair.Value);
                         }

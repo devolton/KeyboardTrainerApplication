@@ -44,7 +44,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string? _firstPartNearAchivementTableText = null;
         private string? _secondPartNearAchivementTebleText = null;
 
-        private int _timerMinutesValue = 00;
+        private int _timerMinutesValue = 0;
         private int _timerSecondsValue = 30;
         private int _timeComboBoxSelectedIndex = 0;
 

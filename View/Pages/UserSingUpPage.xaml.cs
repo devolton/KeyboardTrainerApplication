@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,13 +23,53 @@ namespace CourseProjectKeyboardApplication.View.Pages
     /// </summary>
     public partial class UserSingInPage : Page
     {
-        private UserSingupPageViewModel _userSingUpViewModel;
+        private UserSingupPageViewModel _viewModel;
         public UserSingInPage()
         {
             InitializeComponent();
-            _userSingUpViewModel = new UserSingupPageViewModel();
-            DataContext = _userSingUpViewModel;
+            _viewModel = new UserSingupPageViewModel();
+            DataContext = _viewModel;
         }
 
+        private void InfoIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Image img = sender as Image;
+            if (img is not null)
+            {
+                string tagValue= img.Tag as string;
+                if (!string.IsNullOrEmpty(tagValue)) {
+
+                    NotifyType notifyType = FromStrToNotifyType(tagValue);
+                    _viewModel.NotificationCommand.Execute(notifyType);
+                }
+            }
+            
+        }
+        private NotifyType FromStrToNotifyType(string tag)
+        {
+            switch (tag)
+            {
+                case "Login":
+                    {
+                        return NotifyType.InvalidLogin;
+                    }
+                case "Email":
+                    {
+                        return NotifyType.InvalidEmail;
+                    }
+                case "Password":
+                    {
+                        return NotifyType.InvalidPassword;
+                    }
+                case "Name":
+                    {
+                        return NotifyType.InvalidName;
+                    }
+                default:
+                    {
+                        return NotifyType.InvalidName;
+                    }
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
@@ -56,7 +57,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// </summary>
         /// <param name="emailOrLogin">Login or email entered by the user</param>
         /// <returns></returns>
-        public async Task<bool> IsUserExist(string emailOrLogin)
+        public async Task<KeyValuePair<bool,NotifyType>> IsUserExist(string emailOrLogin)
         {
             return await UserService.IsUserExistByLoginOrEmail(emailOrLogin);
             

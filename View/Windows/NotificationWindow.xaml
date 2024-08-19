@@ -1,0 +1,52 @@
+﻿<Window x:Class="CourseProjectKeyboardApplication.View.Windows.NotificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" 
+        mc:Ignorable="d"
+        Title="NotificationWindow"
+        Height="200"
+        Width="300"
+        Opacity="0.8"
+        Background="{x:Null}"
+        ShowInTaskbar="False"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Window.Style>
+        <Style TargetType="Window">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="0.8" Duration="0:0:0.7"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+            
+        </Style>
+    </Window.Style>
+
+    <materialDesign:Card
+         x:Name="NotificationMainCard"
+         UniformCornerRadius="50"
+         Margin="20"
+         Background="{DynamicResource MaterialDesignPaper}"
+ >
+        <TextBlock x:Name="NotificationTextBlock"
+                       FontSize="16"
+                       Margin="15"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource CustomCoal}"
+                       Text="{Binding Notification}"/>
+    </materialDesign:Card>
+</Window>

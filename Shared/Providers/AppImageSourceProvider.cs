@@ -42,7 +42,7 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         public static ImageSource BlueTargetImageSource { get; private set; }
         public static ImageSource KeyboardIconImageSource { get; private set; }
         public static ImageSource DefaultUserAvatarImageSource { get; private set; }
-
+        public static ImageSource InfoIconImageSource { get; set; }
         public static async Task Init()
         {
             KeyboardAppIconImageSource ??= await _staticImageApiClient.GetImageSourceAsync("KeyboardApplicationLogo.png");
@@ -75,6 +75,10 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
             PlatinumMedalImageSource ??= await _staticImageApiClient.GetImageSourceAsync("PlatinumMedal.png");
             SilverMedalImageSource ??= await _staticImageApiClient.GetImageSourceAsync("SilverMedal.png");
             DefaultUserAvatarImageSource ??= await _staticImageApiClient.GetImageSourceAsync("DefaultUserAvatar.png");
+            InfoIconImageSource ??= await _staticImageApiClient.GetImageSourceAsync("InfoIcon.png");
+ 
+            
+
 
 
         }

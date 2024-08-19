@@ -1,5 +1,6 @@
 ﻿
 using CourseProjectKeyboardApplication.Shared.Mediators;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -50,6 +52,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         protected Style _passwordTextBoxStyle;
         protected Style _confirmPasswordBoxStyle;
         protected Style _confirmPasswordTextBoxStyle;
+
+        protected ImageSource _infoIconImageSource;
 
         //properties
         #region 
@@ -136,6 +140,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(ConfirmPasswordTextDecorationCollection));
             }
         }
+        public ImageSource InfoIconImageSource
+        {
+            get => _infoIconImageSource;
+            set
+            {
+                _infoIconImageSource = value;
+                OnPropertyChanged(nameof(InfoIconImageSource));
+            }
+        }
 
         #endregion
         //methods
@@ -154,6 +167,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             PasswordTextBoxStyle = _defaultTextBoxStyle;
             ConfirmPasswordBoxStyle = _defaultPasswordBoxStyle;
             ConfirmPasswordTextBoxStyle = _defaultTextBoxStyle;
+            InfoIconImageSource = AppImageSourceProvider.InfoIconImageSource;
         }
         protected virtual void ClearAllFields()
         {

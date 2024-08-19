@@ -1,6 +1,8 @@
 ﻿using CourseProjectKeyboardApplication.ApiClients;
 using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Providers;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,15 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         {
             _apiClient = DbApiClientProvider.UserApiClient;
         }
-        public static async  Task<bool> IsUserExistByLoginOrEmail(string loginOrEmail)
+        public static async  Task<KeyValuePair<bool,NotifyType>> IsUserExistByLoginOrEmail(string loginOrEmail)
         {
-            return (await _apiClient.IsUserExistByEmailAsync(loginOrEmail)) || (await _apiClient.IsUserExistByLoginAsync(loginOrEmail));
+            var emailAndStatusPair = (await _apiClient.IsUserExistByEmailAsync(loginOrEmail));
+            var loginAndStatusPair = (await _apiClient.IsUserExistByLoginAsync(loginOrEmail));
+            bool isUserExistByEmail = emailAndStatusPair.Key;
+            bool isUserExistByLogin = loginAndStatusPair.Key;
+            NotifyType serverRequestStatus = (emailAndStatusPair.Value == NotifyType.ServerRequestTimeout || loginAndStatusPair.Value == NotifyType.ServerRequestTimeout) ? NotifyType.ServerRequestTimeout : NotifyType.ServerOk;
+
+            return new KeyValuePair<bool, NotifyType>((isUserExistByEmail || isUserExistByLogin), serverRequestStatus); 
         }
         public static async Task<User?> GetUserByLoginOrEmailAndPasswordAsync(string loginOrEmail, string encryptSha256Password)
         {

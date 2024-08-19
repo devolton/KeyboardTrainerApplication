@@ -1,6 +1,8 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.Windows;
 using CourseProjectKeyboardApplication.ViewModel.Commands;
@@ -16,12 +18,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private readonly MultiCommand _singUpClickButtonMultiCommand;
         private readonly ICommand _passwordVisibilityCommand;
         private readonly ICommand _confirmPasswordVisibilityCommand;
+        private readonly ICommand _notificationCommand;
         private readonly IUserSingUpPageModel _model;
         public UserSingupPageViewModel()
         {
             _singUpClickButtonMultiCommand = new MultiCommand();
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
             _confirmPasswordVisibilityCommand = new RelayCommand(OnConfirmPasswordVisibilityCommand);
+            _notificationCommand = new RelayCommand(OnNotificationCommand);
             _model = new UserSingUpPageModel();
             InitStyles();
             _singUpClickButtonMultiCommand.Add(new RelayCommand(OnTryRegisterUser, IsUserRegistrationCommandExecuted));
@@ -32,7 +36,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //commands
         #region
-
+        private void OnNotificationCommand(object param)
+        {
+            NotifyType notifyType = (NotifyType)param;
+            NotificationMediator.ShowNotificationWindow(notifyType);
+        }
      
         //метод регестрации пользователя 
         private async void OnTryRegisterUser(object param = null)
@@ -64,11 +72,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
             {
                 if (!_model.IsUniqueLogin())
                 {
+                    NotificationMediator.ShowNotificationWindow(NotifyType.NotUniqueLogin);
                     ChangeLoginTextBoxStyleAsync();
 
                 }
                 if (!_model.IsUniqueEmail())
                 {
+                    NotificationMediator.ShowNotificationWindow(NotifyType.NotUniqueEmail);
                     ChangeEmailTextBoxStyleAsync();
                 }
             }
@@ -164,6 +174,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //sing up proporties
         #region
+        public ICommand NotificationCommand => _notificationCommand;
         public ICommand SingUpClickCommand => _singUpClickButtonMultiCommand;
         public ICommand PasswordVisibilityCommand => _passwordVisibilityCommand;
         public ICommand ConfirmPasswordVisibilityCommand => _confirmPasswordVisibilityCommand;

@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -149,32 +150,32 @@ namespace CourseProjectKeyboardApplication.ApiClients
             var isExist = await response.Content.ReadFromJsonAsync<bool>();
             return isExist;
         }
-        public async Task<bool> IsUserExistByEmailAsync(string email)
+        public async Task<KeyValuePair<bool,NotifyType>> IsUserExistByEmailAsync(string email)
         {
             try
             {
                 var response = await _httpClient.GetAsync($"{_apiKey}/IsUserExistByEmail/{email}");
                 response.EnsureSuccessStatusCode();
                 var isExist = await response.Content.ReadFromJsonAsync<bool>();
-                return isExist;
+                return new KeyValuePair<bool, NotifyType>(isExist, NotifyType.ServerOk);
             }
             catch(Exception ex)
             {
-                return false;
+                return new KeyValuePair<bool, NotifyType>(false, NotifyType.ServerRequestTimeout);
             }
         }
-        public async Task<bool> IsUserExistByLoginAsync(string login)
+        public async Task<KeyValuePair<bool,NotifyType>> IsUserExistByLoginAsync(string login)
         {
             try
             {
                 var response = await _httpClient.GetAsync($"{_apiKey}/IsUserExistByLogin/{login}");
                 response.EnsureSuccessStatusCode();
                 bool isExist = await response.Content.ReadFromJsonAsync<bool>();
-                return isExist;
+                return new KeyValuePair<bool, NotifyType>(isExist, NotifyType.ServerOk);
             }
             catch(Exception ex)
             {
-                return false;
+                return new KeyValuePair<bool, NotifyType>(false, NotifyType.ServerRequestTimeout);
             }
         }
     }

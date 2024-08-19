@@ -1,4 +1,5 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces
         string GetLoginFromRegister();
         void WriteInRegister(string loginOrEmail, string password, bool isChecked);
         Task<User?> GetUserByLoginOrEmailAndPassword(string loginOrEmail, string password);
-        Task<bool> IsUserExist(string emailOrLogin);
+        Task<KeyValuePair<bool,NotifyType>> IsUserExist(string emailOrLogin);
         Task InitUserInUserController(User user);
         bool IsValidEmail(string email);
         bool IsValidLogin(string login);

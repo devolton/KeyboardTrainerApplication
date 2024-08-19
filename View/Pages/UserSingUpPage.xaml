@@ -17,29 +17,79 @@
         Margin="40 0 0 0"
         Orientation="Vertical"
         HorizontalAlignment="Center">
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="295"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
         <TextBox x:Name="SingInNameTextBox"
+                 Grid.Column="0"
                  Text="{Binding UserName}"
                  Background="Transparent"
                  materialDesign:HintAssist.Hint="Name"
                  Style="{Binding NameTextBoxStyle}"/>
-        <TextBox x:Name="SingInLoginTextBox"
+            <Image
+                Grid.Column="1"
+                Width="17"
+                Height="17"
+                Tag="Name"
+                MouseEnter="InfoIcon_MouseEnter"
+                Source="{Binding InfoIconImageSource}"
+                Margin="0 20 0 0"
+                Cursor="Hand"/>
+        </Grid>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="295"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SingInLoginTextBox"
+                     Grid.Column="0"
                  Text="{Binding UserLogin}"
                  Background="Transparent"
                  materialDesign:HintAssist.Hint="Login"
                  Style="{Binding LoginTextBoxStyle}"/>
-        <TextBox x:Name="SingInEmailTextBox"
+            <Image
+                Grid.Column="1"
+            Width="17"
+            Height="17"
+            Tag="Login"
+            Margin="0 20 0 0"
+             MouseEnter="InfoIcon_MouseEnter"
+            Source="{Binding InfoIconImageSource}"
+           
+            Cursor="Hand"/>
+        </Grid>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="295"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SingInEmailTextBox"
+                     Grid.Column="0"
                  Text="{Binding UserEmail}"
                  BorderBrush="Silver"
                  Background="Transparent"
                  materialDesign:HintAssist.Hint="Email"
                  Style="{Binding EmailTextBoxStyle}"/>
+            <Image
+                Grid.Column="1"
+           Width="17"
+           Height="17"
+           Tag="Email"
+          MouseEnter="InfoIcon_MouseEnter"
+           Source="{Binding InfoIconImageSource}"
+           Margin="0 20 0 0"
+           Cursor="Hand"/>
+        </Grid>
         <Grid 
                     HorizontalAlignment="Left"
                     Width="340"
                     Margin="0 10 0 10"
                     VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="290"/>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="SingInPasswordBox"
@@ -59,8 +109,17 @@
                      Background="Transparent"
                      materialDesign:HintAssist.Hint="Password"
                      Style="{Binding PasswordTextBoxStyle}"/>
+            <Image
+                Grid.Column="1"
+                Width="17"
+                Height="17"
+                Tag="Password"
+                MouseEnter="InfoIcon_MouseEnter"
+                Source="{Binding InfoIconImageSource}"
+                 Margin="0 10 0 0"
+                 Cursor="Hand"/>
             <Button x:Name="UserSingUpPagePasswordVisibilityButton"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Command="{Binding PasswordVisibilityCommand}"
                     Background="Transparent"
                     BorderThickness="0"
@@ -85,7 +144,8 @@
                     Width="340"
                     VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="290"/>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="SingInConfirmPasswordBox"

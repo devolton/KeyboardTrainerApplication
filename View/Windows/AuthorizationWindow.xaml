@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:CourseProjectKeyboardApplication.View.Windows"
+        
         mc:Ignorable="d"
         x:Name="LoginWindow"
         Title="AuthorizationWindow"
@@ -14,7 +15,8 @@
            AllowsTransparency="True"
            WindowStyle="None"
            WindowStartupLocation="CenterScreen" 
-           Loaded="Window_Loaded">
+           Loaded="Window_Loaded"
+           Closing="LoginWindow_Closing">
     <materialDesign:Card
      x:Name="MainCard"
      UniformCornerRadius="50"
