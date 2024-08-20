@@ -19,7 +19,6 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         public static ImageSource DevoltonLabsImageSource { get; private set; }
         public static ImageSource EditProfileIconImageSource { get; private set; }
         public static ImageSource CertificateIconImageSource { get; private set; }
-        public static ImageSource EnglishTypingCertificateTemplateImageSource { get; private set; }
         public static ImageSource KeyboardSchemeEngImageSource { get; private set; }
         public static ImageSource StartLeftEngPositionImageSource { get; private set; }
         public static ImageSource StartRightEngPositionImageSource { get; private set; }
@@ -56,7 +55,6 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
             DevoltonLabsImageSource ??= await _staticImageApiClient.GetImageSourceAsync("DevoltonLabsLogo.png");
             EditProfileIconImageSource ??= await _staticImageApiClient.GetImageSourceAsync("EditProfileIcon.png");
             CertificateIconImageSource ??= await _staticImageApiClient.GetImageSourceAsync("CertificateIcon.png");
-            EnglishTypingCertificateTemplateImageSource ??= await _staticImageApiClient.GetImageSourceAsync("EnglishTypingCertificate.png");
             KeyboardSchemeEngImageSource ??= await _staticImageApiClient.GetImageSourceAsync("KeyboardSchemeEng.png");
             StartLeftEngPositionImageSource ??= await _staticImageApiClient.GetImageSourceAsync("StartLeftEng.png");
             StartRightEngPositionImageSource ??= await _staticImageApiClient.GetImageSourceAsync("StartRightEng.png");

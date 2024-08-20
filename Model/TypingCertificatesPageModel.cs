@@ -50,45 +50,44 @@ namespace CourseProjectKeyboardApplication.Model
             _certificateIconImageSource ??= AppImageSourceProvider.CertificateIconImageSource;
             return _certificateIconImageSource;
         }
-        public RenderTargetBitmap? GetUserTestCertificate()
+        public async Task<RenderTargetBitmap?> GetUserTestCertificate()
         {
             if (_bestUserTest != null)
             {
                 if (IsPlatinumCertificateConditionMet())
                 {
-
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Platinum, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
                 else if (IsGoldCertificateConditionMet())
                 {
-
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Gold, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
                 else if (IsSilverCertificateConditionMet())
                 {
-
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Silver, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
                 else
                 {
-                    _testCertificate = CertificateGenerator.RenderCertificate(UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Blue, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
-                
+
             }
             return _testCertificate;
         }
-        public RenderTargetBitmap? GetCourseCompletionUserCertificate()
+        public async Task<RenderTargetBitmap?> GetCourseCompletionUserCertificate()
         {
-            _courseCompletionCertificate = CertificateGenerator.RenderCertificate("Beta", "10", "10", DateTime.Now);
             if (IsCourceCompletionPerfectlyConditoinMet())
             {
-                //render perclty
+                _courseCompletionCertificate = await CertificateGenerator.RenderCertificate(CourseComplitionCertificateType.Distinction, UserController.CurrentUser.Name);
             }
             else if (IsCourseCompletionConditionMet())
             {
-                //render default 
+                _courseCompletionCertificate = await CertificateGenerator.RenderCertificate(CourseComplitionCertificateType.WitnoutDistinction, UserController.CurrentUser.Name);
             }
             return _courseCompletionCertificate;
         }
-        //add variation of saving 
-        public void SaveImage(CertificateType certificateType )
+
+        public void SaveImage(CertificateType certificateType)
         {
             var certificateToSave = (certificateType == CertificateType.TestCertificate) ? _testCertificate : _courseCompletionCertificate;
 

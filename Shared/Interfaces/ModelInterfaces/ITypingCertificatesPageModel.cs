@@ -13,8 +13,8 @@ namespace CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces
     {
         void DisplayTestPage();
         ImageSource GetCertificateIconImageSource();
-        RenderTargetBitmap? GetUserTestCertificate();
-        RenderTargetBitmap? GetCourseCompletionUserCertificate();
+        Task<RenderTargetBitmap?> GetUserTestCertificate();
+        Task<RenderTargetBitmap?> GetCourseCompletionUserCertificate();
         void SaveImage(CertificateType certificateType);
         string GetTypingSpeed();
         string GetTypingAccuracy();

@@ -129,7 +129,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             _model.DisplayTestPage();
         }
-        private void OnDrawInfoCommand(object param)
+        private async void OnDrawInfoCommand(object param)
         {
             CertificateIconImageSource ??= _model.GetCertificateIconImageSource();
             _model.InitBestUserTestResult();
@@ -138,8 +138,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;
                 _typingAccuracy = _model.GetTypingAccuracy();
                 _typingSpeed = _model.GetTypingSpeed();
-                TestCertificateTargetBitmap = _model.GetUserTestCertificate();
-                CourseCompletionCertificateTargetBitmap = _model.GetCourseCompletionUserCertificate();
+                TestCertificateTargetBitmap =await _model.GetUserTestCertificate();
+                CourseCompletionCertificateTargetBitmap = await _model.GetCourseCompletionUserCertificate();
                 SpeedCertificateVisibility = (_testCertificateTargetBitmap is not null) ? Visibility.Visible : Visibility.Collapsed;
                 CourseCompletionCertificateVisibility = (_courseCompletionCertificateTargetBitmap is not null) ? Visibility.Visible : Visibility.Collapsed;
                 var speedBlock = elementPair.Key;
