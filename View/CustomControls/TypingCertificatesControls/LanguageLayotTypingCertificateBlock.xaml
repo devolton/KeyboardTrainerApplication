@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:enums ="clr-namespace:CourseProjectKeyboardApplication.Shared.Enums"
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingCertificatesPageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -11,6 +12,7 @@
 
 
     <StackPanel Orientation="Vertical"
+                
                 x:Name="LanguageLayotMainStackPanel"
                 VerticalAlignment="Center"
                 Margin="0 40 0 0">
@@ -44,10 +46,11 @@
 
 
         <Image Width="600"
-                  Margin="30"
+               Margin="30"
+               Visibility="{Binding SpeedCertificateVisibility}"
                Height="400"
                Stretch="Fill"
-               Source="{Binding CertificateSource}">
+               Source="{Binding TestCertificateTargetBitmap}">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="20" 
                                   Opacity="0.8"
@@ -55,12 +58,35 @@
                                   Color="Black"/>
             </Image.Effect>
         </Image>
-        <Button 
-               
-                IsEnabled="{Binding IsSaveCertificateButtonEnabled}"
+        <Button  
+                Visibility="{Binding SpeedCertificateVisibility }"
+                Tag="{x:Static enums:CertificateType.TestCertificate}"
                 HorizontalAlignment="Right"
                 Content="Save"
                 Style="{StaticResource CustomVioletTemplateButton}"
-                Command="{Binding SaveCertificateCommand}"/>
+                Command="{Binding SaveCertificateCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}"/>
+
+        <Image Width="600"
+               Margin="30"
+               Visibility="{Binding CourseCompletionCertificateVisibility}"
+               Height="400"
+               Stretch="Fill"
+               Source="{Binding CourseCompletionCertificateTargetBitmap}">
+            <Image.Effect>
+                <DropShadowEffect BlurRadius="20" 
+                          Opacity="0.8"
+                          Direction="300"
+                          Color="Black"/>
+            </Image.Effect>
+        </Image>
+        <Button  
+                Visibility="{Binding CourseCompletionCertificateVisibility}"
+                HorizontalAlignment="Right"
+                Tag="{x:Static enums:CertificateType.CourseCompletionCertificate}"
+                Content="Save"
+                Style="{StaticResource CustomYellowTemplateButton}"
+                Command="{Binding SaveCertificateCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=Tag}"/>
     </StackPanel>
 </UserControl>

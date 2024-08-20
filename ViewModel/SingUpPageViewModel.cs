@@ -63,7 +63,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 {
                     if (oneWindow is AuthorizationWindow)
                     {
-                        oneWindow.Close();
+                        var autorizationWindow = oneWindow as AuthorizationWindow;
+                        autorizationWindow.IsDisposableHttpClients = false;
+                        autorizationWindow.Close();
                         return;
                     }
                 }

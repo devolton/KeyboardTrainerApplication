@@ -43,6 +43,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         {
             return _lessonsCollection.Last().Id != englishLayoutLesson.Id;
         }
+        public static int GetLessonsCount() => _lessonsCollection.Count;
         private static EnglishLayoutLesson? GetLessonById(int id)
         {
             return _lessonsCollection.FirstOrDefault(oneLesson => oneLesson.Id == id);

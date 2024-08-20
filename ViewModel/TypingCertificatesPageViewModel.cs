@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.View.CustomControls;
@@ -22,10 +24,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _improveResultCommand;
         private ICommand _drawInfoCommand;
         private ICommand _saveCertificateCommand;
-        private RenderTargetBitmap? _certificateRenderTargetBitmap;
+        private RenderTargetBitmap? _testCertificateTargetBitmap;
+        private RenderTargetBitmap? _courseCompletionCertificateTargetBitmap;
         private string _typingSpeed = string.Empty;
         private string _typingAccuracy = string.Empty;
-        private bool _isSaveCertificateButtonEnabled = false;
+        private Visibility _testCertificateVisibility = Visibility.Collapsed;
+        private Visibility _courseCompletionCertificateVisibility = Visibility.Collapsed;
 
 
         private ImageSource _cerficateIconImageSource;
@@ -34,7 +38,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _model = new TypingCertificatesPageModel();
             _improveResultCommand = new RelayCommand(OnImproveResultCommand);
             _drawInfoCommand = new RelayCommand(OnDrawInfoCommand);
-            _saveCertificateCommand = new RelayCommand(OnSaveCertificateCommand,CanExecuteSaveCertificateCommand);
+            _saveCertificateCommand = new RelayCommand(OnSaveCertificateCommand, CanExecuteSaveCertificateCommand);
 
         }
         public static TypingCertificatesPageViewModel Instance()
@@ -68,13 +72,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
             }
         }
-        public RenderTargetBitmap CertificateSource
+        public RenderTargetBitmap? TestCertificateTargetBitmap
         {
-            get { return _certificateRenderTargetBitmap; }
+            get { return _testCertificateTargetBitmap; }
             private set
             {
-                _certificateRenderTargetBitmap = value;
-                OnPropertyChanged(nameof(CertificateSource));
+                _testCertificateTargetBitmap = value;
+                OnPropertyChanged(nameof(TestCertificateTargetBitmap));
             }
         }
         public ImageSource CertificateIconImageSource
@@ -86,13 +90,32 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 OnPropertyChanged(nameof(CertificateIconImageSource));
             }
         }
-        public bool IsSaveCertificateButtonEnabled
+
+        public Visibility SpeedCertificateVisibility
         {
-            get => _isSaveCertificateButtonEnabled;
+            get => _testCertificateVisibility;
             set
             {
-                _isSaveCertificateButtonEnabled = value;
-                OnPropertyChanged(nameof(IsSaveCertificateButtonEnabled));
+                _testCertificateVisibility = value;
+                OnPropertyChanged(nameof(SpeedCertificateVisibility));
+            }
+        }
+        public Visibility CourseCompletionCertificateVisibility
+        {
+            get => _courseCompletionCertificateVisibility;
+            set
+            {
+                _courseCompletionCertificateVisibility = value;
+                OnPropertyChanged(nameof(CourseCompletionCertificateVisibility));
+            }
+        }
+        public RenderTargetBitmap? CourseCompletionCertificateTargetBitmap
+        {
+            get => _courseCompletionCertificateTargetBitmap;
+            set
+            {
+                _courseCompletionCertificateTargetBitmap = value;
+                OnPropertyChanged(nameof(CourseCompletionCertificateTargetBitmap));
             }
         }
 
@@ -109,19 +132,22 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private void OnDrawInfoCommand(object param)
         {
             CertificateIconImageSource ??= _model.GetCertificateIconImageSource();
-              _model.InitBestUserTestResult();
+            _model.InitBestUserTestResult();
             try
             {
                 var elementPair = (KeyValuePair<LanguageLayotStatisticBlock, LanguageLayotStatisticBlock>)param;
                 _typingAccuracy = _model.GetTypingAccuracy();
-                _typingSpeed=_model.GetTypingSpeed();
-                _certificateRenderTargetBitmap= _model.GetUserCertificate();
-                IsSaveCertificateButtonEnabled = _certificateRenderTargetBitmap != null;
+                _typingSpeed = _model.GetTypingSpeed();
+                TestCertificateTargetBitmap = _model.GetUserTestCertificate();
+                CourseCompletionCertificateTargetBitmap = _model.GetCourseCompletionUserCertificate();
+                SpeedCertificateVisibility = (_testCertificateTargetBitmap is not null) ? Visibility.Visible : Visibility.Collapsed;
+                CourseCompletionCertificateVisibility = (_courseCompletionCertificateTargetBitmap is not null) ? Visibility.Visible : Visibility.Collapsed;
                 var speedBlock = elementPair.Key;
                 var accuracyBlock = elementPair.Value;
                 speedBlock.StatValue = TypingSpeed;
                 accuracyBlock.StatValue = TypingAccuracy;
-                CertificateSource = _certificateRenderTargetBitmap;
+                
+
             }
             catch (Exception ex)
             {
@@ -130,8 +156,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         private void OnSaveCertificateCommand(object param)
         {
-            _model.SaveImage();
-         
+            CertificateType certificateType = (CertificateType)param;
+            _model.SaveImage(certificateType);
+
         }
         #endregion
         //command predicate

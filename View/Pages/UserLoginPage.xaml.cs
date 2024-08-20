@@ -36,12 +36,8 @@ namespace CourseProjectKeyboardApplication.View.Pages
         private void InfoIcon_MouseEnter(object sender, MouseEventArgs e)
         {
             var image = sender as Image;
-            string tagValue = image.Tag as string;
-            if (tagValue is not null)
-            {
-                NotifyType notifyType = (tagValue == "Login") ? NotifyType.InvalidLogin : NotifyType.InvalidPassword;
-                _loginViewModel.NofityCommand.Execute(notifyType);
-            }
+            NotifyType notifyType = (NotifyType)image.Tag;
+            _loginViewModel.NofityCommand.Execute(notifyType);
         }
     }
 }

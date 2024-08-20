@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseProjectKeyboardApplication.Shared.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,9 @@ namespace CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces
     {
         void DisplayTestPage();
         ImageSource GetCertificateIconImageSource();
-        RenderTargetBitmap? GetUserCertificate();
-        void SaveImage();
+        RenderTargetBitmap? GetUserTestCertificate();
+        RenderTargetBitmap? GetCourseCompletionUserCertificate();
+        void SaveImage(CertificateType certificateType);
         string GetTypingSpeed();
         string GetTypingAccuracy();
         void InitBestUserTestResult();

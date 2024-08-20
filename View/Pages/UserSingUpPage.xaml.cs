@@ -36,40 +36,11 @@ namespace CourseProjectKeyboardApplication.View.Pages
             Image img = sender as Image;
             if (img is not null)
             {
-                string tagValue= img.Tag as string;
-                if (!string.IsNullOrEmpty(tagValue)) {
-
-                    NotifyType notifyType = FromStrToNotifyType(tagValue);
-                    _viewModel.NotificationCommand.Execute(notifyType);
-                }
+                NotifyType notifyType=(NotifyType) img.Tag;
+                _viewModel.NotificationCommand.Execute(notifyType);
             }
             
         }
-        private NotifyType FromStrToNotifyType(string tag)
-        {
-            switch (tag)
-            {
-                case "Login":
-                    {
-                        return NotifyType.InvalidLogin;
-                    }
-                case "Email":
-                    {
-                        return NotifyType.InvalidEmail;
-                    }
-                case "Password":
-                    {
-                        return NotifyType.InvalidPassword;
-                    }
-                case "Name":
-                    {
-                        return NotifyType.InvalidName;
-                    }
-                default:
-                    {
-                        return NotifyType.InvalidName;
-                    }
-            }
-        }
+       
     }
 }

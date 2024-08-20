@@ -114,6 +114,7 @@ namespace CourseProjectKeyboardApplication.Shared.Services
             }
 
         }
-
+        public static int GetEducationUsersProgressesCount() => _educationUserProgressesCollection.Count;
+        public static bool IsAllPerfectlyCompleted() => _educationUserProgressesCollection.All(oneEducProg => oneEducProg.IsSpeedCompleted && oneEducProg.IsWithoutErrorsCompleted && oneEducProg.IsLessThanTwoErrorsCompleted);
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
@@ -18,14 +19,27 @@ using CourseProjectKeyboardApplication.Tools;
 
 namespace CourseProjectKeyboardApplication.Model
 {
-    public class TypingCertificatesPageModel :ITypingCertificatesPageModel
+    public class TypingCertificatesPageModel : ITypingCertificatesPageModel
     {
         private TypingTestResult? _bestUserTest;
-        private RenderTargetBitmap _certificate;
+        private RenderTargetBitmap _testCertificate;
+        private RenderTargetBitmap _courseCompletionCertificate;
         private ImageSource _certificateIconImageSource;
-        
+        private SaveFileDialog _saveFileDialog;
+        private const int _PLATINUM_CERTIFICATE_SPEED_CONDITION = 70;
+        private const int _GOLD_CERTIFICATE_SPEED_CONDITION = 50;
+        private const int _SILVER_CERTIFICATE_SPEED_CONDITION = 40;
+        private const double _PLATINUM_CERTIFICATE_ACCURACY_CONDITION = 99.5;
+        private const double _GOLD_CERTIFICATE_ACCURACY_CONDITION = 98.7;
+        private const double _SILVER_CERTIFICATE_ACCURACY_CONDITION = 96;
         public TypingCertificatesPageModel()
         {
+            _saveFileDialog = new SaveFileDialog()
+            {
+                Filter = "PNG Files|*.png|All Files|*.*",
+                DefaultExt = "png"
+
+            };
         }
         public void DisplayTestPage()
         {
@@ -36,23 +50,66 @@ namespace CourseProjectKeyboardApplication.Model
             _certificateIconImageSource ??= AppImageSourceProvider.CertificateIconImageSource;
             return _certificateIconImageSource;
         }
-        public RenderTargetBitmap? GetUserCertificate()
+        public RenderTargetBitmap? GetUserTestCertificate()
         {
             if (_bestUserTest != null)
-                _certificate= CertificateGenerator.RenderCertificate(UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
-            return _certificate;
-        }
-        public void SaveImage()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "PNG Files|*.png|All Files|*.*",
-                DefaultExt = "png"
-            };
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                SaveRenderTargetBitmapToPng(_certificate, saveFileDialog.FileName);
+                if (IsPlatinumCertificateConditionMet())
+                {
+
+                }
+                else if (IsGoldCertificateConditionMet())
+                {
+
+                }
+                else if (IsSilverCertificateConditionMet())
+                {
+
+                }
+                else
+                {
+                    _testCertificate = CertificateGenerator.RenderCertificate(UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
+                }
+                
             }
+            return _testCertificate;
+        }
+        public RenderTargetBitmap? GetCourseCompletionUserCertificate()
+        {
+            _courseCompletionCertificate = CertificateGenerator.RenderCertificate("Beta", "10", "10", DateTime.Now);
+            if (IsCourceCompletionPerfectlyConditoinMet())
+            {
+                //render perclty
+            }
+            else if (IsCourseCompletionConditionMet())
+            {
+                //render default 
+            }
+            return _courseCompletionCertificate;
+        }
+        //add variation of saving 
+        public void SaveImage(CertificateType certificateType )
+        {
+            var certificateToSave = (certificateType == CertificateType.TestCertificate) ? _testCertificate : _courseCompletionCertificate;
+
+            if (_saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                SaveRenderTargetBitmapToPng(certificateToSave, _saveFileDialog.FileName);
+            }
+        }
+        public string GetTypingSpeed()
+        {
+            return (_bestUserTest is null) ? "0" : _bestUserTest.Speed.ToString();
+        }
+        public string GetTypingAccuracy()
+        {
+            return (_bestUserTest is null) ? "0" : _bestUserTest.AccuracyPercent.ToString("0.0");
+        }
+        public void InitBestUserTestResult()
+        {
+
+            _bestUserTest = TypingTestResultService.GetBestUserTestAsync(UserController.CurrentUser.Id);
+
         }
         private void SaveRenderTargetBitmapToPng(RenderTargetBitmap renderTargetBitmap, string filename)
         {
@@ -64,20 +121,27 @@ namespace CourseProjectKeyboardApplication.Model
                 pngEncoder.Save(fs);
             }
         }
-        public string GetTypingSpeed()
+        private bool IsPlatinumCertificateConditionMet()
         {
-            return (_bestUserTest is null) ? "0" : _bestUserTest.Speed.ToString();
+            return _bestUserTest.Speed >= _PLATINUM_CERTIFICATE_SPEED_CONDITION && _bestUserTest.AccuracyPercent >= _PLATINUM_CERTIFICATE_ACCURACY_CONDITION;
         }
-        public string GetTypingAccuracy()
+        private bool IsGoldCertificateConditionMet()
         {
-            return (_bestUserTest is null) ? "0" : _bestUserTest.AccuracyPercent.ToString("0.0");
+            return _bestUserTest.Speed >= _GOLD_CERTIFICATE_SPEED_CONDITION && _bestUserTest.AccuracyPercent >= _GOLD_CERTIFICATE_ACCURACY_CONDITION;
         }
-        public  void InitBestUserTestResult()
+        private bool IsSilverCertificateConditionMet()
         {
-            
-            _bestUserTest =  TypingTestResultService.GetBestUserTestAsync(UserController.CurrentUser.Id);
+            return _bestUserTest.Speed >= _SILVER_CERTIFICATE_SPEED_CONDITION && _bestUserTest.AccuracyPercent >= _SILVER_CERTIFICATE_ACCURACY_CONDITION;
+        }
+        private bool IsCourceCompletionPerfectlyConditoinMet()
+        {
+            return IsCourseCompletionConditionMet() && EducationUsersProgressService.IsAllPerfectlyCompleted();
+        }
+        private bool IsCourseCompletionConditionMet()
+        {
+            return EnglishLayoutLessonsService.GetLessonsCount() == EducationUsersProgressService.GetEducationUsersProgressesCount();
+        }
 
-        }
 
     }
 }
