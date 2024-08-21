@@ -54,6 +54,9 @@
                        Panel.ZIndex="1"
                        Visibility="{Binding StartButtonVisibility}"
                       />
+            <Grid Panel.ZIndex="2"
+                  Width="130"
+                  Height="50">
             <Button
                 Command="{Binding StartTestCommand}"
                 Focusable="False"
@@ -62,6 +65,18 @@
                 Content="Click To Start"
                 Style="{StaticResource CustomTypingTestStartButton}"
                 Panel.ZIndex="2"/>
+                <Border Background="Transparent"
+                        BorderThickness="0"
+                    >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <i:InvokeCommandAction Command="{Binding ShowNotificationWindowCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Border>
+            </Grid>
+            
+
         </Grid>
     </Border>
 </UserControl>

@@ -173,6 +173,7 @@
                                  Duration="00:00:00.1"
                                  To="10 10 10 10"/>
                     </Storyboard>
+
                 </BeginStoryboard>
             </EventTrigger>
 

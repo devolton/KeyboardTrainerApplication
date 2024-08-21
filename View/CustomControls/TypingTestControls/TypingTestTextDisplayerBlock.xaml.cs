@@ -21,12 +21,12 @@ namespace CourseProjectKeyboardApplication.View.CustomControls
     /// </summary>
     public partial class TypingTestTextDisplayerBlock : UserControl
     {
-        private TypingTestPageViewModel _typingTestViewModel;
+        private TypingTestPageViewModel _viewModel;
         public TypingTestTextDisplayerBlock()
         {
-            _typingTestViewModel = TypingTestPageViewModel.Instance();
+            _viewModel = TypingTestPageViewModel.Instance();
             InitializeComponent();
-            DataContext = _typingTestViewModel;
+            DataContext = _viewModel;
         }
 
     }

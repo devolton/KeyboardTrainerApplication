@@ -1,5 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Model;
+using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
@@ -13,8 +15,6 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -36,6 +36,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _keyDownCommand;
         private ICommand _endTestCommand;
         private ICommand _changeTimerValueCommand;
+        private ICommand _showNotificatoinWindowCommand;
 
         private string? _infoBlockRightHeaderText = null;
         private string? _infoBlockLeftHeaderText = null;
@@ -62,6 +63,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _keyDownCommand = new RelayCommand(OnKeyDownCommand, CanExecuteKeyCommand);
             _endTestCommand = new RelayCommand(OnEndTestCommand);
             _changeTimerValueCommand = new RelayCommand(OnChangeTimerValueCommand);
+            _showNotificatoinWindowCommand = new RelayCommand(OnShowNotificationCommand, CanExecuteShowNotificationWindow);
             _timer = new System.Timers.Timer(1000);
             _timer.Elapsed += _timer_Elapsed;
 
@@ -90,6 +92,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //properties
         #region
+        public ICommand ShowNotificationWindowCommand => _showNotificatoinWindowCommand;
         public ICommand ChangeTimeValueCommand => _changeTimerValueCommand;
         public ICommand TestSetupCommand => _testSetupCommand;
         public ICommand StartTestCommand => _startLessonCommand;
@@ -350,10 +353,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _timer.Stop();
 
         }
+        private void OnShowNotificationCommand(object param)
+        {
+            NotificationMediator.ShowNotificationWindow(NotifyType.InvalidLanguageSelected);
+        }
         #endregion
 
         //predicate commands
         #region
+        private bool CanExecuteShowNotificationWindow(object param)
+        {
+            return !_model.IsEnglishLanguageSelected();
+        }
         private bool CanExecuteKeyCommand(object param)
         {
             return _isTestStarted;

@@ -65,7 +65,7 @@ namespace CourseProjectKeyboardApplication.Tools
                 double nameXCoordinate= (_testCertificateBitmapImage.Width - nameFormattedText.Width) / 2;
                 drawingContext.DrawText(nameFormattedText, new Point(nameXCoordinate, 355)); 
                 drawingContext.DrawText(typingSpeedFormattedText, new Point(692, 430));
-                drawingContext.DrawText(typingAccuracyFormattedText, new Point(615, 460));
+                drawingContext.DrawText(typingAccuracyFormattedText, new Point(615, 465));
                 drawingContext.DrawText(typingDateFormattedText, new Point(215, 565));
             }
             RenderTargetBitmap certificateRenderTargetBitmap = new RenderTargetBitmap((int)_testCertificateBitmapImage.Width, (int) _testCertificateBitmapImage.Height, 96, 96, PixelFormats.Default);

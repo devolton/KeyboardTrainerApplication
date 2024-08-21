@@ -70,6 +70,7 @@
                                 x:Name="CertificatesButton"
                                 Click="CertificatesButton_Click"
                                 Content="My certificates"
+                                Cursor="Hand"
                                 Style="{StaticResource CustomPopupBoxButton}"
                                 />
                             <Button

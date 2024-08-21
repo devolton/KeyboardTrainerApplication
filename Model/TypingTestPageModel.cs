@@ -123,10 +123,8 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public bool IsEnglishLanguageSelected()
         {
-            bool isEnglishLanguageSelected = InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
-            if (!isEnglishLanguageSelected)
-                NotificationMediator.ShowNotificationWindow(NotifyType.InvalidLanguageSelected);
-            return isEnglishLanguageSelected;
+             return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
+            
         }
         private async Task InitTextCollectionAsync()
         {
