@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Model;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ImageSource _startRightEngPositionImageSource;
         private ImageSource _keyboardIconImageSource;
         private ICommand _loadCommand;
+        private ICommand _openTypingTestPageCommand;
+        private ICommand _openTypingTutorPageCommand;
 
         private string _mainTitle = string.Empty;
         private string _mainDescription = string.Empty;
@@ -44,12 +47,19 @@ namespace CourseProjectKeyboardApplication.ViewModel
         public LearnPageViewModel()
         {
             _loadCommand = new RelayCommand(OnLoadCommand);
+            _openTypingTestPageCommand = new RelayCommand(OnOpenTypingTestPageCommand);
+            _openTypingTutorPageCommand = new RelayCommand(OnOpenTypingTutorPageCommand);
             InitModel();
            
         }
+
+
+
         //prop
         #region
         public ICommand LoadCommand => _loadCommand;
+        public ICommand OpenTypingTestPageCommand => _openTypingTestPageCommand;
+        public ICommand OpenTypingTutorPageCommand => _openTypingTutorPageCommand;
         public string MainTitle {
             get => _mainTitle;
             private set
@@ -253,6 +263,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //command
         #region
+        private void OnOpenTypingTestPageCommand(object param)
+        {
+            FrameMediator.DisplayTypingTestPage();
+        }
+
+        private void OnOpenTypingTutorPageCommand(object param)
+        {
+            FrameMediator.DisplayTypingTutorPage();
+        }
         public void OnLoadCommand(object param)
         {
 

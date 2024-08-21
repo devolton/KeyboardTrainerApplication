@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
     {
         private static HttpClient _httpClient;
         private static JsonSerializerOptions _jsonOptions;
-
+        private static string? _token = string.Empty;
 
         private static EnglishTypingTestTextApiClient _englishTypingTextApiClient;
         private static UserApiClient _userApiClient;
@@ -45,6 +46,11 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         public static EnglishLayoutLevelApiClient EnglishLayoutLevelApiClient => _englishLayoutLevelApiClient;
         public static EnglishLayoutLessonApiClient EnglishLayoutLessonApiClient => _englishLayoutLessonApiClient;
         public static TypingTestResultApiClient TypingTestResultApiClient => _typingTestResultApiClient;
+        public static void InitJwtToken(string? token)
+        {
+            _token = token;
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+        }
 
         public static void Dispose()
         {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -26,6 +27,7 @@ namespace CourseProjectKeyboardApplication.ApiClients
         }
         public async Task<IEnumerable<EducationUsersProgress>?> GetEducationUsersProgressesByUserIdAsync(int userId)
         {
+          
             var response = await _httpClient.GetAsync($"{_apiKey}/{userId}");
             response.EnsureSuccessStatusCode();
             if (response.IsSuccessStatusCode)

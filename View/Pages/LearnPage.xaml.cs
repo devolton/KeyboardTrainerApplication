@@ -32,17 +32,6 @@ namespace CourseProjectKeyboardApplication.AppPages.Pages
 
 
 
-        private void TestSpeedButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayTypingTestPage();
 
-
-        }
-
-        private void StartLearnButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameMediator.DisplayTypingTutorPage();
-
-        }
     }
 }

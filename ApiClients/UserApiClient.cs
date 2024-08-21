@@ -1,5 +1,6 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Enums;
+using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -27,21 +28,31 @@ namespace CourseProjectKeyboardApplication.ApiClients
         // Метод для получения пользователя по логину/емейлу и паролю
         public async Task<User?> GetUserByLoginOrEmailAndPasswordAsync(string loginOrEmail, string shaPassword)
         {
-            var response = await _httpClient.GetAsync($"{_apiKey}/LoginOrEmailAndPassword?loginOrEmail={loginOrEmail}&shaPassword={shaPassword}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var jsonStr = await response.Content.ReadAsStringAsync();
-                var user = JsonSerializer.Deserialize<User>(jsonStr, _jsonOptions);
-                return user;
+                var response = await _httpClient.GetAsync($"{_apiKey}/LoginOrEmailAndPassword?loginOrEmail={loginOrEmail}&shaPassword={shaPassword}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonStr = await response.Content.ReadAsStringAsync();
+                    var userTokenPair = JsonSerializer.Deserialize<KeyValuePair<User, string>>(jsonStr, _jsonOptions);
+                    User? user = userTokenPair.Key;
+                    string? token = userTokenPair.Value;
+                    DbApiClientProvider.InitJwtToken(token); //инициализируем токен 
+                    return user;
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+                else
+                {
+                    throw new HttpRequestException($"Unexpected status code: {response.StatusCode}");
+                }
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            catch(Exception ex)
             {
                 return null;
-            }
-            else
-            {
-                throw new HttpRequestException($"Unexpected status code: {response.StatusCode}");
             }
         }
 
@@ -87,7 +98,10 @@ namespace CourseProjectKeyboardApplication.ApiClients
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonStr = await response.Content.ReadAsStringAsync();
-                    var user = JsonSerializer.Deserialize<User>(jsonStr, _jsonOptions);
+                    var userTokenPair = JsonSerializer.Deserialize<KeyValuePair<User,string?>>(jsonStr, _jsonOptions);
+                    string? token = userTokenPair.Value;
+                    User? user = userTokenPair.Key;
+                    DbApiClientProvider.InitJwtToken(token);
                     return user;
                 }
             }

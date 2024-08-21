@@ -171,11 +171,11 @@
                     </Grid.ColumnDefinitions>
                 <Button x:Name="StartLearnButton"
                         Grid.Column="0"
-                        Click="StartLearnButton_Click"
+                        Command="{Binding OpenTypingTutorPageCommand}"
                         Style="{StaticResource CustomVioletTemplateButton}"
                         Content="{Binding TrainTimeStudyButtonText}"/>
                 <Button x:Name="TestSpeedButton"
-                        Click="TestSpeedButton_Click"
+                        Command="{Binding OpenTypingTestPageCommand}"
                         Grid.Column="1"
                      Style="{StaticResource CustomYellowTemplateButton}"
                         Content="{Binding TrainTimeTestButtonText}"/>
