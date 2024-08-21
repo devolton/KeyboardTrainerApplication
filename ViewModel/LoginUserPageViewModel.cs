@@ -32,7 +32,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //commands fields 
         private readonly MultiCommand _multiCommand = new MultiCommand();
         private readonly ICommand _passwordVisibilityCommand;
-        private readonly ICommand _notifyCommand;
         private ILoginUserPageModel _model;
         //state fields
         private bool _isChecked = false;
@@ -42,14 +41,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string _loginOrEmail;
         private string _password = string.Empty;
         private MainWindow _mainWindow;
-        private ImageSource _infoIconImageSource = AppImageSourceProvider.InfoIconImageSource;
+
 
         public LoginUserPageViewModel()
         {
             _model = new LoginUserPageModel();
             _multiCommand.Add(new RelayCommand(OnLoginUserCommand, CanExecuteButtonCommand));
             _passwordVisibilityCommand = new RelayCommand(OnPasswordVisibilityCommand);
-            _notifyCommand = new RelayCommand(OnNotifyCommand);
             _loginDefaultStyle = (Style)Application.Current.Resources["CustomDefaultLoginPageTextBox"];
             LoginTextBoxStyle = _loginDefaultStyle;
             _loginInvalidStyle = (Style)Application.Current.Resources["CustomInvalidLoginPageTextBox"];
@@ -70,18 +68,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //команда для выполнения нажатия кнопки
         public ICommand ButtonCommand => _multiCommand;
-        public ICommand NofityCommand => _notifyCommand;
 
         public ICommand PasswordVisibilityCommand => _passwordVisibilityCommand;
-        public ImageSource InfoIconImageSource
-        {
-            get => _infoIconImageSource;
-            set
-            {
-                _infoIconImageSource = value;
-                OnPropertyChanged(nameof(InfoIconImageSource));
-            }
-        }
         public bool IsChecked
         {
             get { return _isChecked; }
@@ -175,15 +163,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //commnands
         #region
-        private void OnNotifyCommand(object param)
-        {
-            if (param != null)
-            {
-                var notifyType = (NotifyType)param;
-                NotificationMediator.ShowNotificationWindow(notifyType);
-
-            }
-        }
         private async void OnLoginUserCommand(object parameter)
         {
             var isUserExistAndStatusPair = await _model.IsUserExist(LoginOrEmail);

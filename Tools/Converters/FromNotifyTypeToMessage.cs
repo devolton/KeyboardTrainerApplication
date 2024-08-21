@@ -26,7 +26,7 @@ namespace CourseProjectKeyboardApplication.Tools.Converters
             _serverRequestTimeoutMessage = "The request to the server timed out. Please check your internet connection and try again later";
             _notUniqueEmailMessage = "The email address is already registered. Please use a different email address.";
             _notUniqueLoginMessage = "The login is already in use. Please choose a different login";
-            _userNotFoundMessage = "No user found with the provided username or email. Please check your input.";
+            _userNotFoundMessage = "No user found with the provided login or email. Please check your input.";
             _invalidLoginMessage = "Please enter a username that is 3 to 16 characters long and contains only letters, numbers, and underscores.";
             _invalidPasswordMessage = "Please enter a password that is 8 to 32 characters long, includes at least one uppercase letter and one number, and contains only letters, numbers, and underscores.";
             _invalidEmailMessage = "Please enter a valid email address, e.g., 'example@domain.com', with up to 24 characters before the '@' symbol and up to 10 characters for the domain.";

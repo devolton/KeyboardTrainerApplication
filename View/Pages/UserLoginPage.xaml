@@ -19,19 +19,11 @@
                 HorizontalAlignment="Center">
         <StackPanel Orientation="Horizontal"
                     Margin="0 70 0 0">
-        <TextBox x:Name="LoginTextBox"
+            <TextBox x:Name="LoginTextBox"
                  Text="{Binding LoginOrEmail}"
                 Background="Transparent"
                  materialDesign:HintAssist.Hint="Login\Email"
                  Style="{Binding LoginTextBoxStyle}"/>
-            <Image
-                Width="17"
-                Height="17"
-                Tag="{x:Static enums:NotifyType.InvalidLogin}"
-                MouseEnter="InfoIcon_MouseEnter"
-                Source="{Binding InfoIconImageSource}"
-                Margin="5 7 0 0"
-                Cursor="Hand"/>
         </StackPanel>
         
 
@@ -42,7 +34,6 @@
              VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="295"/>
-                <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <PasswordBox x:Name="LoginPasswordBox"
@@ -64,17 +55,8 @@
                      materialDesign:HintAssist.Hint="Password"
                      Visibility="{Binding PasswordTextBoxVisibility}"
                      Style="{StaticResource CustomDefaultLoginPageTextBox}"/>
-            <Image
-                Grid.Column="1"
-                Width="17"
-                Height="17"
-                Tag="{x:Static enums:NotifyType.InvalidPassword}"
-                MouseEnter="InfoIcon_MouseEnter"
-                Source="{Binding InfoIconImageSource}"
-                Margin="0 7 0 0"
-                Cursor="Hand"/>
             <Button x:Name="UserLoginPagePasswordVisibilityButton"
-                    Grid.Column="2"
+                    Grid.Column="1"
                     Command="{Binding PasswordVisibilityCommand}"
                     Background="Transparent"
                     BorderThickness="0"

@@ -33,11 +33,5 @@ namespace CourseProjectKeyboardApplication.View.Pages
 
         }
 
-        private void InfoIcon_MouseEnter(object sender, MouseEventArgs e)
-        {
-            var image = sender as Image;
-            NotifyType notifyType = (NotifyType)image.Tag;
-            _loginViewModel.NofityCommand.Execute(notifyType);
-        }
     }
 }

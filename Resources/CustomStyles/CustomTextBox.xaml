@@ -30,7 +30,7 @@
             <Setter Property="Margin" Value="20 0 0 25"/>
             <Setter Property="Foreground" Value="{StaticResource CustomCoal}"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Width" Value="295"/>
+            <Setter Property="Width" Value="303"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="BorderBrush" Value="Silver"/>
         </Style.Setters>
@@ -44,7 +44,7 @@
             <Setter Property="Foreground" Value="DarkRed"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="BorderBrush" Value="DarkRed"/>
-            <Setter Property="Width" Value="295"/>
+            <Setter Property="Width" Value="303"/>
             <Setter Property="FontSize" Value="16"/>
         </Style.Setters>
         <Style.Triggers>
