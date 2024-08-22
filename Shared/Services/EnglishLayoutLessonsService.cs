@@ -21,6 +21,12 @@ namespace CourseProjectKeyboardApplication.Shared.Services
             _apiClient = DbApiClientProvider.EnglishLayoutLessonApiClient;
 
         }
+
+        /// <summary>
+        /// Get EnglishLayoutLesson which comes after current one
+        /// </summary>
+        /// <param name="currentLesson">Current EnglishLayoutLesson entity</param>
+        /// <returns>Next EnglishLayoutLesson</returns>
         public static EnglishLayoutLesson? GetNextLesson(EnglishLayoutLesson currentLesson)
         {
             if (_lessonsCollection is null)
@@ -29,6 +35,11 @@ namespace CourseProjectKeyboardApplication.Shared.Services
             }
             return _lessonsCollection.Where(oneLesson => oneLesson.Id > currentLesson.Id)?.OrderBy(oneLesson => oneLesson.Id).FirstOrDefault();
         }
+
+        /// <summary>
+        /// Initializing EnglishLayoutLessons collection
+        /// </summary>
+        /// <returns></returns>
         public static async Task InitLessonsCollectionAsync()
         {
             if (_apiClient is not null)
@@ -39,6 +50,12 @@ namespace CourseProjectKeyboardApplication.Shared.Services
                 InitNewUserLesson();
             }
         }
+
+        /// <summary>
+        /// Check is current lesson NOT last in collection
+        /// </summary>
+        /// <param name="englishLayoutLesson">Current EnglishLayoutLesson</param>
+        /// <returns></returns>
         public static bool IsLessonNotLast(EnglishLayoutLesson englishLayoutLesson)
         {
             return _lessonsCollection.Last().Id != englishLayoutLesson.Id;
@@ -50,9 +67,9 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         }
         private static void InitNewUserLesson()
         {
-            UserController.CurrentLesson ??= (UserController.CurrentUser.EnglishLayoutLesson is null)
-               ? GetLessonById(UserController.CurrentUser.EnglishLayoutLessonId)
-               : UserController.CurrentUser.EnglishLayoutLesson;
+            KeyboardAppEducationProgressController.CurrentLesson ??= (KeyboardAppEducationProgressController.CurrentUser.EnglishLayoutLesson is null)
+               ? GetLessonById(KeyboardAppEducationProgressController.CurrentUser.EnglishLayoutLessonId)
+               : KeyboardAppEducationProgressController.CurrentUser.EnglishLayoutLesson;
 
 
         }

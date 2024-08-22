@@ -13,13 +13,13 @@ using System.Windows;
 
 namespace CourseProjectKeyboardApplication.Shared.Controllers
 {
-    public static class UserController
+    public static class KeyboardAppEducationProgressController
     {
         public static User CurrentUser { get; set; }
         public static EnglishLayoutLesson CurrentLesson { get; set; }
       
 
-        static UserController()
+        static KeyboardAppEducationProgressController()
         {
            
         }
@@ -29,6 +29,9 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
             set;
         }
 
+        /// <summary>
+        /// Set next EducationUsersProgress in CurrentEducationUsersProgress and update CurrentLesson 
+        /// </summary>
         public static void SetNextEducationUserProgeress()
         {
 
@@ -36,6 +39,10 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
             CurrentLesson = CurrentUserEducationProgress?.EnglishLayoutLesson;
 
         }
+        /// <summary>
+        /// Creating new EducationUsersProgrees and delegating adding to EducationUsersProgressService
+        /// </summary>
+        /// <returns>New created EducationUsersProgress entity</returns>
         public static EducationUsersProgress CreateNewEducationUsersProgresses()
         {
             EducationUsersProgress newEducProgress = new EducationUsersProgress
@@ -55,10 +62,17 @@ namespace CourseProjectKeyboardApplication.Shared.Controllers
             return newEducProgress;
 
         }
+        /// <summary>
+        /// Delegating initializing EnglishLayoutLesson collection to EnglishLayoutLessonsService 
+        /// </summary>
+        /// <returns></returns>
         public static async Task InitLessons()
         {
              await EnglishLayoutLessonsService.InitLessonsCollectionAsync();
         }
+        /// <summary>
+        /// Update current lesson and level of user
+        /// </summary>
         public static void ChangeCurrentUserLesson()
         {
 

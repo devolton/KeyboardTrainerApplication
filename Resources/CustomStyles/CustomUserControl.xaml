@@ -10,7 +10,6 @@
                                   Duration="00:00:00.1"
                                   To="0 0 0 3"/>
                     </Storyboard>
-                    
                 </BeginStoryboard>
                 <BeginStoryboard>
                     <Storyboard Storyboard.TargetProperty="Padding">

@@ -1,5 +1,4 @@
-﻿using CourseProjectKeyboardApplication.Model;
-using CourseProjectKeyboardApplication.Shared.Enums;
+﻿using CourseProjectKeyboardApplication.Shared.Enums;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System;
 using System.Collections.Generic;
@@ -51,6 +50,15 @@ namespace CourseProjectKeyboardApplication.Tools
         
 
         }
+        /// <summary>
+        /// Rendering Test certificate based on data and template
+        /// </summary>
+        /// <param name="testCertificateType">Type of test certificate</param>
+        /// <param name="userName">Name of user</param>
+        /// <param name="typingSpeed">Typing test speed value</param>
+        /// <param name="typingAccuracy">Typing test accuracy percent value</param>
+        /// <param name="typingDate">Typing test date</param>
+        /// <returns>Rendered test certificate</returns>
         public static async Task<RenderTargetBitmap> RenderCertificate(TestCertificateType testCertificateType,string userName, string typingSpeed, string typingAccuracy, DateTime typingDate)
         {
             _testCertificateBitmapImage ??= await GetCertificateTemplateBitmapImage(testCertificateType);
@@ -72,6 +80,13 @@ namespace CourseProjectKeyboardApplication.Tools
             certificateRenderTargetBitmap.Render(_drawingVisual);
             return certificateRenderTargetBitmap;
         }
+
+        /// <summary>
+        /// Rendering CourseComplation certificate based on data and template
+        /// </summary>
+        /// <param name="courseCertificateType">Type of CourseComplation certificate</param>
+        /// <param name="userName">Name of user</param>
+        /// <returns>Rendered CourseComplation certificate</returns>
         public static async Task<RenderTargetBitmap> RenderCertificate(CourseComplitionCertificateType courseCertificateType, string userName)
         {
             _courseCompletedCertificateBitpamImage ??= await GetCertificateTemplateBitmapImage(courseCertificateType);
@@ -89,6 +104,14 @@ namespace CourseProjectKeyboardApplication.Tools
             return certificateRenderTargetBitmap;
         }
 
+        /// <summary>
+        /// Create FormattedText for certificate render method
+        /// </summary>
+        /// <param name="text">Text for render</param>
+        /// <param name="typeface">Font options</param>
+        /// <param name="fontSize">Font size</param>
+        /// <param name="foreground">Foreground color</param>
+        /// <returns>Formated text entity</returns>
         private static FormattedText GetFormatedText(string text, Typeface typeface, int fontSize, SolidColorBrush foreground)
         {
             return new FormattedText(text, System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, foreground);

@@ -1,16 +1,12 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
-using CourseProjectKeyboardApplication.View.Pages;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace CourseProjectKeyboardApplication.ApiClients
 {
@@ -25,6 +21,11 @@ namespace CourseProjectKeyboardApplication.ApiClients
             _jsonOptions = jsonOptions;
             _apiKey = "EducationUserProgress";
         }
+        /// <summary>
+        /// Send a request to the server and try get collection of EducationUsersProgress by user id
+        /// </summary>
+        /// <param name="userId">User ID value</param>
+        /// <returns></returns>
         public async Task<IEnumerable<EducationUsersProgress>?> GetEducationUsersProgressesByUserIdAsync(int userId)
         {
           
@@ -37,46 +38,83 @@ namespace CourseProjectKeyboardApplication.ApiClients
             }
             return null;
         }
+        /// <summary>
+        /// Send a request to the server to try add new EducatonUsersProgress
+        /// </summary>
+        /// <param name="educationUsersProgress">Created EducationUsersProgress</param>
+        /// <returns></returns>
         public async Task AddEducationUsersProgressAsync(EducationUsersProgress educationUsersProgress)
         {
-            var jsonOptions = new JsonSerializerOptions
+            try
             {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 64,
-            };
+                var jsonOptions = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    MaxDepth = 64,
+                };
 
-            var jsonContent = JsonSerializer.Serialize(educationUsersProgress, jsonOptions);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"{_apiKey}", content);
-            response.EnsureSuccessStatusCode();
+                var jsonContent = JsonSerializer.Serialize(educationUsersProgress, jsonOptions);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"{_apiKey}", content);
+                response.EnsureSuccessStatusCode();
+            }
+            catch(Exception ex)
+            {
+                
+                return;
+            }
         }
+        /// <summary>
+        /// Send a request to the server to try update existing EducationUsersProgress
+        /// </summary>
+        /// <param name="educationUsersProgressCollection">EducationUsersProgressElement for update</param>
+        /// <returns></returns>
         public async Task UpdateRangeEducationUsersProgress(IEnumerable<EducationUsersProgress> educationUsersProgressCollection)
         {
-            var jsonOptions = new JsonSerializerOptions
+            try
             {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 64,
-            };
+                var jsonOptions = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    MaxDepth = 64,
+                };
 
-            var jsonContent = JsonSerializer.Serialize(educationUsersProgressCollection, jsonOptions);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync($"{_apiKey}/UpdateRange", content);
-            response.EnsureSuccessStatusCode();
+                var jsonContent = JsonSerializer.Serialize(educationUsersProgressCollection, jsonOptions);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PutAsync($"{_apiKey}/UpdateRange", content);
+                response.EnsureSuccessStatusCode();
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
            
         }
+        /// <summary>
+        /// Send a request to server to try add collection of new EducationUsersProgress 
+        /// </summary>
+        /// <param name="educationUsersProgressesCollection">Collection of new EducatonUsersProgress elements</param>
+        /// <returns></returns>
         public async Task AddEductionUsersProgressRangeAsync(IEnumerable<EducationUsersProgress> educationUsersProgressesCollection)
         {
-            var jsonOptions = new JsonSerializerOptions
+            try
             {
-               
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 64,
-            };
+                var jsonOptions = new JsonSerializerOptions
+                {
 
-            var jsonContent = JsonSerializer.Serialize(educationUsersProgressesCollection, jsonOptions);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"{_apiKey}/AddRange", content);
-            response.EnsureSuccessStatusCode();
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    MaxDepth = 64,
+                };
+
+                var jsonContent = JsonSerializer.Serialize(educationUsersProgressesCollection, jsonOptions);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"{_apiKey}/AddRange", content);
+                response.EnsureSuccessStatusCode();
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
 
         }
     }

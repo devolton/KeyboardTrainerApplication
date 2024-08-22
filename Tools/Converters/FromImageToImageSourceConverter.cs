@@ -13,6 +13,11 @@ namespace CourseProjectKeyboardApplication.Tools.Converters
 {
     public static class FromImageToImageSourceConverter
     {
+        /// <summary>
+        /// Convert png image to ImageSource
+        /// </summary>
+        /// <param name="image">Image which we want convert</param>
+        /// <returns>Image source which base in image</returns>
         public static ImageSource ConvertToImageSource(Image image)
         {
             using (var memoryStream = new MemoryStream())

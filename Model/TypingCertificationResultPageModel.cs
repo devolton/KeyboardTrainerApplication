@@ -72,10 +72,13 @@ namespace CourseProjectKeyboardApplication.Model
 
 
 
-        
+        /// <summary>
+        /// Initializing typingTest collection
+        /// </summary>
+        /// <returns></returns>
         public async Task InitTypingTests()
         {
-            _userTypingTestsCollection = (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(UserController.CurrentUser.Id))?.ToList() ?? new();
+            _userTypingTestsCollection = (await TypingTestResultService.GetTypingTestResultsByUserIdAsync(KeyboardAppEducationProgressController.CurrentUser.Id))?.ToList() ?? new();
         }
 
         /// <summary>

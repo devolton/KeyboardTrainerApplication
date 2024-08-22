@@ -3,6 +3,9 @@ using System.Text;
 
 namespace Encrypter
 {
+    /// <summary>
+    /// It's base abstract class of Devolton custom enctypter
+    /// </summary>
     public abstract class BaseDevoltonEncrypter
     {
         protected BaseDevoltonEncrypter()

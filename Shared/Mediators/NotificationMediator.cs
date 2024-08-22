@@ -14,6 +14,12 @@ namespace CourseProjectKeyboardApplication.Shared.Mediators
     public static class NotificationMediator
     {
         private static bool _notificationWindowWorking = false;
+
+        /// <summary>
+        /// Method recieved NotifyType, show Notification window and closing it
+        /// </summary>
+        /// <param name="notifyType">Type of notification which we want show</param>
+        /// <returns></returns>
         public static async Task ShowNotificationWindow(NotifyType notifyType)
         {
             if (_notificationWindowWorking)

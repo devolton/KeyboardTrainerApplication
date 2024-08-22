@@ -18,6 +18,12 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         {
             _apiClient = DbApiClientProvider.UserApiClient;
         }
+
+        /// <summary>
+        /// Check is user with current login or email exist and check connection to server
+        /// </summary>
+        /// <param name="loginOrEmail">Login or email of user</param>
+        /// <returns>KeyValuePair(isUserExist and Notification type)</returns>
         public static async  Task<KeyValuePair<bool,NotifyType>> IsUserExistByLoginOrEmail(string loginOrEmail)
         {
             var emailAndStatusPair = (await _apiClient.IsUserExistByEmailAsync(loginOrEmail));
@@ -28,6 +34,12 @@ namespace CourseProjectKeyboardApplication.Shared.Services
 
             return new KeyValuePair<bool, NotifyType>((isUserExistByEmail || isUserExistByLogin), serverRequestStatus); 
         }
+        /// <summary>
+        /// Get user entity if user with current credentials exist
+        /// </summary>
+        /// <param name="loginOrEmail">Login or email of user</param>
+        /// <param name="encryptSha256Password">SHA-256 user password</param>
+        /// <returns>User entity if exist or NULL</returns>
         public static async Task<User?> GetUserByLoginOrEmailAndPasswordAsync(string loginOrEmail, string encryptSha256Password)
         {
             return await _apiClient.GetUserByLoginOrEmailAndPasswordAsync(loginOrEmail, encryptSha256Password);

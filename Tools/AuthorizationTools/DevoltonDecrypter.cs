@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Tools.AuthorizationTools
 {
+    /// <summary>
+    /// This is Decrypter class of Devolton custom Enctypter 
+    /// </summary>
     public sealed class DevoltonDecrypter:BaseDevoltonEncrypter
     {
         private static DevoltonDecrypter _instance;

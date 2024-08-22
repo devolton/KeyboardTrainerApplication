@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Shared.Enums
 {
+    /// <summary>
+    /// Type of notification message
+    /// </summary>
     public enum NotifyType
     {
         NotUniqueLogin,

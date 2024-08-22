@@ -22,10 +22,17 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public bool IsUniqueEmail() => _isUniqueEmail;
         public bool IsUniqueLogin() => _isUniqueLogin;
+
         public bool IsValidName(string name) => AuthorizationFieldsValidator.IsValidName(name);
         public bool IsValidPassword(string password) => AuthorizationFieldsValidator.IsValidPassword(password);
         public bool IsValidEmail(string email) => AuthorizationFieldsValidator.IsValidEmail(email);
         public bool IsValidLogin(string login) => AuthorizationFieldsValidator.IsValidLogin(login);
+        /// <summary>
+        /// Check credentials for uniquness
+        /// </summary>
+        /// <param name="email">User email</param>
+        /// <param name="login">User login</param>
+        /// <returns>Is valid credentials</returns>
         public virtual async Task<bool> IsUniqueCredentialsAsync(string email, string login)
         {
             _isUniqueEmail = await UserService.IsUniqueEmailAsync(email);

@@ -151,6 +151,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //command
         #region
+        /// <summary>
+        /// Command of drawing user tests statistic
+        /// </summary>
+        /// <param name="param"></param>
         private async void OnDrawStatisticsCommand(object param)
         {
             await InitStatBlock(DateRangeSelectedIndex);

@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Managers;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -30,13 +31,19 @@ namespace CourseProjectKeyboardApplication.Model
 
 
         }
-        //вычисление процента точности печати и перевод его в валидную строку
+        /// <summary>
+        /// Calculating the percentage of printing accuracy and converting it into a valid string
+        /// </summary>
+        /// <returns></returns>
         public string GetAccuracyPercentStr()
         {
             return _accuracyPercent.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
 
         }
-      
+        /// <summary>
+        /// Calculating the typing speed and converting it into  string
+        /// </summary>
+        /// <returns></returns>
         public string GetSpeedStr()
         {
             return _typingSpeed.ToString();
@@ -48,19 +55,22 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public  void InitStat()
         {
-            _allPushedSymbolsCount = TypingTestResultController.PushedSymbolsCount;
-            _misclickCount = TypingTestResultController.MiscliskCount;
-            _typingSpeed = TypingTestResultController.TypingSpeed;
+            _allPushedSymbolsCount = TypingTestResultManager.PushedSymbolsCount;
+            _misclickCount = TypingTestResultManager.MiscliskCount;
+            _typingSpeed = TypingTestResultManager.TypingSpeed;
             _accuracyPercent = ((double)_allPushedSymbolsCount / (double)(_misclickCount+_allPushedSymbolsCount))*FULL_PERCENT;
              AddNewResult();
         }
+        /// <summary>
+        /// Update TypingTestResult fields and delegete adding
+        /// </summary>
         private  void AddNewResult()
         {
             var newTest = new TypingTestResult
             {
                 Date = DateTime.Now,
-                User = UserController.CurrentUser,
-                UserId = UserController.CurrentUser.Id,
+                User = KeyboardAppEducationProgressController.CurrentUser,
+                UserId = KeyboardAppEducationProgressController.CurrentUser.Id,
                 AccuracyPercent = Math.Round(_accuracyPercent,2),
                 LayoutType = Shared.Enums.LayoutType.English,
                 Speed = _typingSpeed

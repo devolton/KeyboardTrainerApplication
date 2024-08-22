@@ -25,19 +25,41 @@ namespace CourseProjectKeyboardApplication.Shared.Services
             _updatedEducationUsersProgressCollection = new List<EducationUsersProgress>(100);
 
         }
+        /// <summary>
+        /// Async initializing EducationUserProgress collection 
+        /// </summary>
+        /// <param name="userId">User id which EducationUserProgress collection we want get</param>
+        /// <returns></returns>
         public static async Task InitEducationUserProgressCollection(int userId)
         {
             _educationUserProgressesCollection = (await _apiClient.GetEducationUsersProgressesByUserIdAsync(userId))?.ToList();
         }
+
+        /// <summary>
+        /// This methor return EducationUsersProgress collection 
+        /// </summary>
+        /// <param name="userId">User id </param>
+        /// <returns></returns>
         public static async Task<IEnumerable<EducationUsersProgress>?> GetEducationUsersProgressesByUserIdAsync(int userId)
         {
             _educationUserProgressesCollection ??= (await _apiClient.GetEducationUsersProgressesByUserIdAsync(userId))?.ToList();
             return _educationUserProgressesCollection;
         }
+
+        /// <summary>
+        /// Delegating adding operation of new EducationUsersProgress to Api client 
+        /// </summary>
+        /// <param name="educationUsersProgress">Created EducationUsersProgress entity</param>
+        /// <returns></returns>
         public static async Task AddNewEducationUsersProgressAsync(EducationUsersProgress educationUsersProgress)
         {
             _apiClient.AddEducationUsersProgressAsync(educationUsersProgress);
         }
+
+        /// <summary>
+        /// Delegeting adding and updating operations to ApiClient 
+        /// </summary>
+        /// <returns></returns>
         public static async Task SaveAddedEducationUsersResultAsync()
         {
             try
@@ -65,26 +87,47 @@ namespace CourseProjectKeyboardApplication.Shared.Services
                 MessageBox.Show(ex.Message);
             }
         }
+        /// <summary>
+        /// Adding new created EducationUsersProgress in local collections
+        /// </summary>
+        /// <param name="newEducationUsersProgress">Created EducationUsersProgress entity</param>
         public static void AddNewEducationUsersProgressLocal(EducationUsersProgress newEducationUsersProgress)
         {
             _addedNewEducationUsersProgressCollection.Add(newEducationUsersProgress);
             _educationUserProgressesCollection.Add(newEducationUsersProgress);
         }
+
+        /// <summary>
+        /// Get EducaionUsersProgress which comes after current one
+        /// </summary>
+        /// <param name="currentProgress">Current EducationUsersProgress entity</param>
+        /// <returns> Next EducatoinUsersProgress entity or NULL</returns>
         public static EducationUsersProgress? GetNextEducationProgress(EducationUsersProgress currentProgress)
         {
             return _educationUserProgressesCollection.Where(oneProg => oneProg.Id > currentProgress.Id)?.OrderBy(oneProg => oneProg.Id).FirstOrDefault();
         }
+
+        /// <summary>
+        /// Get Id of last EducationUsersProgress in local collection
+        /// </summary>
+        /// <returns>Id of last EducationUsersProgress in local collection</returns>
         public static int GetIdOfLastEducationProgressElement()
         {
             return _educationUserProgressesCollection?.LastOrDefault()?.Id ?? 0;
         }
+
+        /// <summary>
+        /// Get EducationUsersProgress entity by lesson id 
+        /// </summary>
+        /// <param name="lessonId">EnglisLayoutLesson Id</param>
+        /// <returns>EducationUsersProgress entity or NULL</returns>
         public static EducationUsersProgress? GetEducationProgressByLessonId(int lessonId)
         {
             try
             {
-                var result = _educationUserProgressesCollection.FirstOrDefault(oneEducProgress => oneEducProgress.EnglishLayoutLessonId == lessonId
-                && oneEducProgress.UserId == UserController.CurrentUser.Id);
-                return result;
+                return _educationUserProgressesCollection.FirstOrDefault(oneEducProgress => oneEducProgress.EnglishLayoutLessonId == lessonId
+                && oneEducProgress.UserId == KeyboardAppEducationProgressController.CurrentUser.Id);
+                
             }
             catch (Exception ex)
             {
@@ -92,6 +135,12 @@ namespace CourseProjectKeyboardApplication.Shared.Services
             }
 
         }
+        /// <summary>
+        /// Update local EducationUsersProgress entity
+        /// </summary>
+        /// <param name="isLessCompleted">Is user completed LessThanTwoMissclick condition</param>
+        /// <param name="isWithoutMistakeCompleted">Is user completed WhithoutMistate condition</param>
+        /// <param name="isSpeedCompleted">Is user completed Speed condition</param>
         public static void UpdateEducationUserProgressLocal(EducationUsersProgress updatedEducationUsersProgress, bool isLessCompleted, bool isWithoutMistakeCompleted, bool isSpeedCompleted)
         {
             var currentEducationUsersProgress = _educationUserProgressesCollection.FirstOrDefault(oneEducProg => oneEducProg.Id == updatedEducationUsersProgress.Id);

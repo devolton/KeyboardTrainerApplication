@@ -7,8 +7,6 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace CourseProjectKeyboardApplication.ApiClients
 {
@@ -18,14 +16,19 @@ namespace CourseProjectKeyboardApplication.ApiClients
         private readonly JsonSerializerOptions _jsonOptions;
         private readonly string _apiKey;
 
-        public UserApiClient(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions=null)
+        public UserApiClient(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions = null)
         {
             _httpClient = httpClient;
             _jsonOptions = jsonSerializerOptions;
             _apiKey = "User";
         }
 
-        // Метод для получения пользователя по логину/емейлу и паролю
+        /// <summary>
+        /// Send a request to try get User entity by login or email and password and JWT-token if user with current credentials
+        /// </summary>
+        /// <param name="loginOrEmail">Login or email</param>
+        /// <param name="shaPassword">password which is encrypted by SHA-256</param>
+        /// <returns>User entity or NULL</returns>
         public async Task<User?> GetUserByLoginOrEmailAndPasswordAsync(string loginOrEmail, string shaPassword)
         {
             try
@@ -41,46 +44,48 @@ namespace CourseProjectKeyboardApplication.ApiClients
                     DbApiClientProvider.InitJwtToken(token); //инициализируем токен 
                     return user;
                 }
-                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    return null;
-                }
-                else
-                {
-                    throw new HttpRequestException($"Unexpected status code: {response.StatusCode}");
-                }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return null;
+                
             }
+            return null;
         }
 
 
-       
 
-        // Метод для получения пользователя по ID
+
+        /// <summary>
+        /// Send a request to server to try get User by Id
+        /// </summary>
+        /// <param name="id">User id</param>
+        /// <returns>User entity or NULL</returns>
         public async Task<User?> GetUserByIdAsync(int id)
         {
-            var response = await _httpClient.GetAsync($"{_apiKey}/{id}");
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_apiKey}/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonStr = await response.Content.ReadAsStringAsync();
+                    var user = JsonSerializer.Deserialize<User>(jsonStr, _jsonOptions);
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
 
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonStr = await response.Content.ReadAsStringAsync();
-                var user = JsonSerializer.Deserialize<User>(jsonStr, _jsonOptions);
-                return user;
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                return null;
-            }
-            else
-            {
-                throw new HttpRequestException($"Unexpected status code: {response.StatusCode}");
-            }
+            return null;
+
         }
 
-        // Метод для добавления нового пользователя
+        /// <summary>
+        /// Send a request to server and try create new User. If user create successfully, method return User entity and initialize JWT token
+        /// </summary>
+        /// <param name="newUser">User entity which we want add</param>
+        /// <returns>User entity or NULL</returns>
         public async Task<User?> AddNewUserAsync(User newUser)
         {
             try
@@ -98,73 +103,123 @@ namespace CourseProjectKeyboardApplication.ApiClients
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonStr = await response.Content.ReadAsStringAsync();
-                    var userTokenPair = JsonSerializer.Deserialize<KeyValuePair<User,string?>>(jsonStr, _jsonOptions);
+                    var userTokenPair = JsonSerializer.Deserialize<KeyValuePair<User, string?>>(jsonStr, _jsonOptions);
                     string? token = userTokenPair.Value;
                     User? user = userTokenPair.Key;
                     DbApiClientProvider.InitJwtToken(token);
                     return user;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return null;
+
             }
             return null;
 
         }
 
-
+        /// <summary>
+        /// Send a reques to server to try update existing User
+        /// </summary>
+        /// <param name="user">User entity which we want update</param>
+        /// <returns>Success operation code(1-success, 0 - failed )</returns>
         public async Task<int> UpdateUserAsync(User user)
         {
             var successCode = 0;
-            var jsonContent = JsonSerializer.Serialize(user, _jsonOptions);
-            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync($"{_apiKey}/{user.Id}", content);
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
+            try
             {
-                ++successCode;
+
+                var jsonContent = JsonSerializer.Serialize(user, _jsonOptions);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PutAsync($"{_apiKey}/{user.Id}", content);
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    ++successCode;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
             return successCode;
+
         }
 
-        // Метод для удаления пользователя
+        /// <summary>
+        /// Send a request to remove existing user
+        /// </summary>
+        /// <param name="id">User id</param>
+        /// <returns>Successs operation code(1 - success, 0 - failed) </returns>
         public async Task<int> RemoveUserAsync(int id)
         {
             int successCode = 0;
-            var response = await _httpClient.DeleteAsync($"{_apiKey} /{id}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                successCode++;
+                var response = await _httpClient.DeleteAsync($"{_apiKey} /{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    successCode++;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
             }
             return successCode;
         }
 
-        // Метод для проверки уникальности email
+        /// <summary>
+        /// Send a request to server to check email for uniqueness
+        /// </summary>
+        /// <param name="email">Email which we will check for uniqueness</param>
+        /// <returns>Is current email unique</returns>
         public async Task<bool> IsUniqueEmailAsync(string email)
         {
-            var response = await _httpClient.GetAsync($"{_apiKey}/IsUniqueEmail/{email}");
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_apiKey}/IsUniqueEmail/{email}");
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<bool>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<bool>();
+                }
             }
-            else
+            catch(Exception ex)
             {
-                throw new HttpRequestException($"Unexpected status code: {response.StatusCode}");
+
             }
+            return false;
         }
 
-        // Метод для проверки уникальности логина
+        /// <summary>
+        /// Send a request to server to check login for uniqueness
+        /// </summary>
+        /// <param name="login">Login which we will check for uniqueness</param>
+        /// <returns>Is current login unique</returns>
         public async Task<bool> IsUniqueLoginAsync(string login)
         {
-            var response = await _httpClient.GetAsync($"{_apiKey}/IsUniqueLogin/{login}");
-            response.EnsureSuccessStatusCode();
-            var isExist = await response.Content.ReadFromJsonAsync<bool>();
-            return isExist;
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_apiKey}/IsUniqueLogin/{login}");
+                response.EnsureSuccessStatusCode();
+                var isExist = await response.Content.ReadFromJsonAsync<bool>();
+                return isExist;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return false;
         }
-        public async Task<KeyValuePair<bool,NotifyType>> IsUserExistByEmailAsync(string email)
+        /// <summary>
+        /// Send a reques to server to try check to check if a user with a given email exists and check if there is a connection to the server
+        /// </summary>
+        /// <param name="email">Email which we will check for existing</param>
+        /// <returns>KeyValuePair of bool result (is user with current email exist) and NotifiType(Server connection is ok or no)</returns>
+        public async Task<KeyValuePair<bool, NotifyType>> IsUserExistByEmailAsync(string email)
         {
             try
             {
@@ -173,12 +228,17 @@ namespace CourseProjectKeyboardApplication.ApiClients
                 var isExist = await response.Content.ReadFromJsonAsync<bool>();
                 return new KeyValuePair<bool, NotifyType>(isExist, NotifyType.ServerOk);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new KeyValuePair<bool, NotifyType>(false, NotifyType.ServerRequestTimeout);
             }
         }
-        public async Task<KeyValuePair<bool,NotifyType>> IsUserExistByLoginAsync(string login)
+        /// <summary>
+        /// Send a reques to server to try check to check if a user with a given login exists and check if there is a connection to the server
+        /// </summary>
+        /// <param name="login">Login which we will check for existing</param>
+        /// <returns>KeyValuePair of bool result (is user with current login exist) and NotifiType(Server connection is ok or no)</returns>
+        public async Task<KeyValuePair<bool, NotifyType>> IsUserExistByLoginAsync(string login)
         {
             try
             {
@@ -187,7 +247,7 @@ namespace CourseProjectKeyboardApplication.ApiClients
                 bool isExist = await response.Content.ReadFromJsonAsync<bool>();
                 return new KeyValuePair<bool, NotifyType>(isExist, NotifyType.ServerOk);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new KeyValuePair<bool, NotifyType>(false, NotifyType.ServerRequestTimeout);
             }

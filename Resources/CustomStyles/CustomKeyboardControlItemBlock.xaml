@@ -10,7 +10,6 @@
             <Setter Property="BorderBrushValue" Value="#adb5bd"/>
             <Setter Property="MarginValue" Value="3"/>
             <Setter Property="ShadowEffectOpacity" Value="0"/>
-
         </Style.Setters>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=IsErrorPushedKeyboardItem}" Value="True">

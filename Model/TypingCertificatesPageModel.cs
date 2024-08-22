@@ -41,52 +41,69 @@ namespace CourseProjectKeyboardApplication.Model
 
             };
         }
+        /// <summary>
+        /// Delegete show typing test page to FrameMediator 
+        /// </summary>
         public void DisplayTestPage()
         {
             FrameMediator.DisplayTypingTestPage();
         }
+
         public ImageSource GetCertificateIconImageSource()
         {
             _certificateIconImageSource ??= AppImageSourceProvider.CertificateIconImageSource;
             return _certificateIconImageSource;
         }
+
+        /// <summary>
+        /// Get created certificate for user typing test result 
+        /// </summary>
+        /// <returns>RenderTargetBitmap certificate</returns>
         public async Task<RenderTargetBitmap?> GetUserTestCertificate()
         {
             if (_bestUserTest != null)
             {
                 if (IsPlatinumCertificateConditionMet())
                 {
-                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Platinum, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Platinum, KeyboardAppEducationProgressController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
                 else if (IsGoldCertificateConditionMet())
                 {
-                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Gold, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Gold, KeyboardAppEducationProgressController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
                 else if (IsSilverCertificateConditionMet())
                 {
-                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Silver, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Silver, KeyboardAppEducationProgressController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
                 else
                 {
-                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Blue, UserController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
+                    _testCertificate = await CertificateGenerator.RenderCertificate(TestCertificateType.Blue, KeyboardAppEducationProgressController.CurrentUser.Name, _bestUserTest.Speed.ToString(), _bestUserTest.AccuracyPercent.ToString("0.0"), _bestUserTest.Date);
                 }
 
             }
             return _testCertificate;
         }
+
+        /// <summary>
+        /// Get created certificate for course completion  
+        /// </summary>
+        /// <returns>RenderTargetBitmap certificate</returns>
         public async Task<RenderTargetBitmap?> GetCourseCompletionUserCertificate()
         {
             if (IsCourceCompletionPerfectlyConditoinMet())
             {
-                _courseCompletionCertificate = await CertificateGenerator.RenderCertificate(CourseComplitionCertificateType.Distinction, UserController.CurrentUser.Name);
+                _courseCompletionCertificate = await CertificateGenerator.RenderCertificate(CourseComplitionCertificateType.Distinction, KeyboardAppEducationProgressController.CurrentUser.Name);
             }
             else if (IsCourseCompletionConditionMet())
             {
-                _courseCompletionCertificate = await CertificateGenerator.RenderCertificate(CourseComplitionCertificateType.WitnoutDistinction, UserController.CurrentUser.Name);
+                _courseCompletionCertificate = await CertificateGenerator.RenderCertificate(CourseComplitionCertificateType.WitnoutDistinction, KeyboardAppEducationProgressController.CurrentUser.Name);
             }
             return _courseCompletionCertificate;
         }
-
+        /// <summary>
+        /// Save certificate to local storage
+        /// </summary>
+        /// <param name="certificateType">Type of certificat</param>
         public void SaveImage(CertificateType certificateType)
         {
             var certificateToSave = (certificateType == CertificateType.TestCertificate) ? _testCertificate : _courseCompletionCertificate;
@@ -96,20 +113,37 @@ namespace CourseProjectKeyboardApplication.Model
                 SaveRenderTargetBitmapToPng(certificateToSave, _saveFileDialog.FileName);
             }
         }
+        /// <summary>
+        /// Get user best typing speed
+        /// </summary>
+        /// <returns>Best typing speed string</returns>
         public string GetTypingSpeed()
         {
             return (_bestUserTest is null) ? "0" : _bestUserTest.Speed.ToString();
         }
+
+        /// <summary>
+        /// Get best user typing accuracy
+        /// </summary>
+        /// <returns>Best accuracy string</returns>
         public string GetTypingAccuracy()
         {
             return (_bestUserTest is null) ? "0" : _bestUserTest.AccuracyPercent.ToString("0.0");
         }
+        /// <summary>
+        /// Initializing best user test 
+        /// </summary>
         public void InitBestUserTestResult()
         {
 
-            _bestUserTest = TypingTestResultService.GetBestUserTestAsync(UserController.CurrentUser.Id);
+            _bestUserTest = TypingTestResultService.GetBestUserTestAsync(KeyboardAppEducationProgressController.CurrentUser.Id);
 
         }
+        /// <summary>
+        /// Method which conver renderTargetBitmap to png and saving to path
+        /// </summary>
+        /// <param name="renderTargetBitmap">RenderTargetBitmap image which we want save</param>
+        /// <param name="filename">Image name which we want</param>
         private void SaveRenderTargetBitmapToPng(RenderTargetBitmap renderTargetBitmap, string filename)
         {
             PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
@@ -120,6 +154,7 @@ namespace CourseProjectKeyboardApplication.Model
                 pngEncoder.Save(fs);
             }
         }
+
         private bool IsPlatinumCertificateConditionMet()
         {
             return _bestUserTest.Speed >= _PLATINUM_CERTIFICATE_SPEED_CONDITION && _bestUserTest.AccuracyPercent >= _PLATINUM_CERTIFICATE_ACCURACY_CONDITION;

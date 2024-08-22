@@ -11,7 +11,10 @@ using System.Xml.XPath;
 
 namespace Encrypter
 {
-    public sealed class DevoltonEncrypter:BaseDevoltonEncrypter
+    /// <summary>
+    /// This is Devolton custom Dectypter
+    /// </summary>
+    public class DevoltonEncrypter:BaseDevoltonEncrypter
     {
         
         private DevoltonEncrypter():base()

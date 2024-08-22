@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Shared.Enums
 {
+    /// <summary>
+    /// Type of keyboard application certificate
+    /// </summary>
     public enum CertificateType
     {
         TestCertificate =0,

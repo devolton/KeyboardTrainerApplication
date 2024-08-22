@@ -2,17 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace CourseProjectKeyboardApplication.ApiClients
 {
@@ -24,6 +19,13 @@ namespace CourseProjectKeyboardApplication.ApiClients
         {
             _apiClient = httpClient;
         }
+
+        /// <summary>
+        /// Send a request to server to try upload user avatar image
+        /// </summary>
+        /// <param name="filePath">Path the avatar that the user want to upload</param>
+        /// <param name="userLogin">User login</param>
+        /// <returns>Remote avatar file name with extension</returns>
         public async Task<string> UploadFileAsync(string filePath, string userLogin)
         {
 
@@ -47,7 +49,12 @@ namespace CourseProjectKeyboardApplication.ApiClients
             }
             return string.Empty;
         }
-        public async Task<ImageSource> GetUserAvatarAsync(string fileName)
+        /// <summary>
+        /// Send a request to server to get user avatar image source
+        /// </summary>
+        /// <param name="fileName">Name of user avatar with extension</param>
+        /// <returns>User avatar image source of NULL</returns>
+        public async Task<ImageSource?> GetUserAvatarAsync(string fileName)
         {
             try
             {
@@ -65,8 +72,6 @@ namespace CourseProjectKeyboardApplication.ApiClients
             }
 
         }
-
-  
 
 
 

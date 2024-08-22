@@ -109,7 +109,7 @@ namespace CourseProjectKeyboardApplication
 
         private void EditProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameMediator.DisplayEditUserProfilPage();
+            FrameMediator.DisplayEditUserProfilePage();
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -118,6 +118,10 @@ namespace CourseProjectKeyboardApplication
             DbApiClientProvider.Dispose();
             ContentApiClientProvider.Dispose();
         }
+        /// <summary>
+        /// Save changes in remote server database when application closing
+        /// </summary>
+        /// <returns></returns>
         private async Task SaveChangesAsync()
         {
 
@@ -134,6 +138,10 @@ namespace CourseProjectKeyboardApplication
             await InitPages();
             DevoltonLabsImageSource = AppImageSourceProvider.DevoltonLabsImageSource;
         }
+        /// <summary>
+        /// Asyn initializing pages
+        /// </summary>
+        /// <returns></returns>
         private Task InitPages()
         {
             return Task.Run(() =>

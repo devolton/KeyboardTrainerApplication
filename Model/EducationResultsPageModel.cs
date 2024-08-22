@@ -23,6 +23,10 @@ namespace CourseProjectKeyboardApplication.Model
             InitAllLevelCountAsync();
 
         }
+        /// <summary>
+        /// Get study icon image source 
+        /// </summary>
+        /// <returns>Study icon ImageSouce</returns>
         public  ImageSource GetStudyIconImageSourceAsync()
         {
             _studyIconImageSource ??= AppImageSourceProvider.StudyIconImageSource;
@@ -31,21 +35,21 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Get actual user education progress str(current level and common levels count) to educationResultsPage header
         /// </summary>
-        /// <returns></returns>
+        /// <returns>String of current level header </returns>
         public string GetCurrentLevelHeaderStr()
         {
 
-            int currentLevelCounter = UserController.CurrentUser.EnglishLayoutLevel.Ordinal;
+            int currentLevelCounter = KeyboardAppEducationProgressController.CurrentUser.EnglishLayoutLevel.Ordinal;
             return $"Level {currentLevelCounter} from {_commonLevelCount}";
         }
 
         /// <summary>
         /// Get actual user education progress percent of completed lessons count
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Get percent of completed lessons</returns>
         public async Task<double> GetPercentOfCompletedLessonsAsync()
         {
-            var completedLessonsCount = (await EducationUsersProgressService.GetEducationUsersProgressesByUserIdAsync(UserController.CurrentUser.Id))?.Count() ?? 0;
+            var completedLessonsCount = (await EducationUsersProgressService.GetEducationUsersProgressesByUserIdAsync(KeyboardAppEducationProgressController.CurrentUser.Id))?.Count() ?? 0;
             if (_commonLessonsCount == 0)
             {
                 foreach (var level in _englishLayoutLevelsCollection)
@@ -59,7 +63,7 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Get current language layout str 
         /// </summary>
-        /// <returns>Percent of completed lessons</returns>
+        /// <returns></returns>
         public string GetLanguageLayoutTypeHeaderStr()
         {
             return _languageLayoutType;

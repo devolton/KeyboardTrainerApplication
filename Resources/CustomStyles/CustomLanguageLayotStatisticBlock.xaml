@@ -28,5 +28,4 @@
             <Setter Property="Width" Value="620"/>
         </Style.Setters>
     </Style>
-
 </ResourceDictionary>

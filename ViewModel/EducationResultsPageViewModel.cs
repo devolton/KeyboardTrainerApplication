@@ -45,7 +45,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _model = new EducationResultsPageModel();
             _initializationCommand = new RelayCommand(OnInitializationCommand);
             _continueEducationCommand = new RelayCommand(OnContinueEducationCommand);
-            _startLessonCommand = new RelayCommand(OnStartLessonCommand, CanStartLessonCommandExecute);
+            _startLessonCommand = new RelayCommand(OnStartLessonCommand);
             _lessonButtonUserElementStyle = (Style)Application.Current.Resources["EducationLessonUserControl"];
 
         }
@@ -115,7 +115,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         //command
         #region
         /// <summary>
-        /// команда инициализации
+        /// Intializing page 
         /// </summary>
         /// <param name="param">MainStackPanel</param>
         private async void OnInitializationCommand(object param)  //возможно разбить на мелкие функции
@@ -142,11 +142,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
                 foreach (var oneLesson in lessonsCollection)
                 {
-                    //change because it's govnocode
                     EducationUsersProgress? currentEducUserProgress = EducationUsersProgressService.GetEducationProgressByLessonId(oneLesson.Id);
                     if (currentEducUserProgress is null)
                     {
-                        currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == UserController.CurrentUser.Id);
+                        currentEducUserProgress = oneLesson.EducationUsersProgresses.FirstOrDefault(oneEducProg => oneEducProg.UserId == KeyboardAppEducationProgressController.CurrentUser.Id);
                     }
                     if (currentEducUserProgress != null)
                     {
@@ -181,7 +180,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
-        //комадна продолжения обучения(continue button)
+       /// <summary>
+       /// Command for continue education which redirect user to TypingTutor page
+       /// </summary>
+       /// <param name="param">NULL</param>
         private void OnContinueEducationCommand(object param)
         {
             if (_currentLessonButton != null)
@@ -190,7 +192,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
-        //команда начала урока(клик по урокy)
+        /// <summary>
+        /// Command for starting lesson which user selected and redirect to TypingTutor page
+        /// </summary>
+        /// <param name="param"></param>
         private void OnStartLessonCommand(object param)
         {
             IEducationResultLessonButton button = param as IEducationResultLessonButton;
@@ -199,41 +204,34 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 FrameMediator.DisplayTypingTutorPage();
 
             }
-            else
-            {
-                MessageBox.Show("Button is null!");
-            }
+
 
         }
         #endregion
 
-        //command predicate
-        #region 
-        private bool CanUpdateHeaderCommandExecute(object param)
-        {
-            return true;
-        }
-        private bool CanStartLessonCommandExecute(object param)
-        {
-            return true;
-        }
-
-        #endregion
+        /// <summary>
+        /// Setting up lesson options and delegating to StartLessonCommand
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LessonButton_MouseClick(object sender, MouseButtonEventArgs e)
         {
             var button = sender as IEducationResultLessonButton;
             if (button != null)
             {
                 _currentLessonButton = button;
-                UserController.CurrentUserEducationProgress = button.EducationUserProgress;
-                UserController.CurrentLesson = button.EducationLesson;
+                KeyboardAppEducationProgressController.CurrentUserEducationProgress = button.EducationUserProgress;
+                KeyboardAppEducationProgressController.CurrentLesson = button.EducationLesson;
                 StartLessonCommand.Execute(button);
             }
-            else
-            {
-                MessageBox.Show("Button is null", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
+
+        /// <summary>
+        /// Genatate EducationResultsLessonNumberButton
+        /// </summary>
+        /// <param name="lesson">EnglishLayoutLesson entity which will be bound to this button</param>
+        /// <param name="educationUsersProgress">EducationUsersProgress which will be bound to this button</param>
+        /// <returns>EducationResultsLesssonNumberButton entity</returns>
         private EducationResultsLessonNumberButton CreateEducationResultLessonNumberButton(EnglishLayoutLesson lesson, EducationUsersProgress educationUsersProgress)
         {
             var lessonButton = new EducationResultsLessonNumberButton(lesson, educationUsersProgress);
@@ -244,6 +242,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
             lessonButton.SpeedCircleBackground = (educationUsersProgress.IsSpeedCompleted) ? System.Windows.Media.Brushes.Blue : System.Windows.Media.Brushes.Silver;
             return lessonButton;
         }
+
+        /// <summary>
+        /// Genarate EducationResultsCurrentLessonButton
+        /// </summary>
+        /// <param name="lesson">EnglishLayoutLesson entity which will be bound to this button</param>
+        /// <returns>EducationResultsCurrentButton entity</returns>
         private EducationResultsCurrentLessonButton CreateEducationResultCurrentButton(EnglishLayoutLesson lesson)
         {
             var currentButton = new EducationResultsCurrentLessonButton(lesson);
@@ -253,6 +257,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _currentLessonButton = currentButton;
             return currentButton;
         }
+        /// <summary>
+        /// Genarate EducationResultLockButton
+        /// </summary>
+        /// <param name="lesson">EnglishLayoutLesson entity which will be bound to this button</param>
+        /// <returns></returns>
         private EducationResultsLockButton CreateEducationResultsLockButton(EnglishLayoutLesson lesson)
         {
             return new EducationResultsLockButton(lesson);

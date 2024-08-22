@@ -199,6 +199,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //command 
         #region
+        /// <summary>
+        /// Command for delete user avatar
+        /// </summary>
+        /// <param name="param">NULL</param>
         private void OnRemoveAvatarCommand(object param)
         {
             AvatarSource = _defaultAvatar;
@@ -206,6 +210,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _isSetDefaultAvatar = true;
             _model.RemoveAvatar();
         }
+
+        /// <summary>
+        /// Command for change user avatar
+        /// </summary>
+        /// <param name="param">NULL</param>
         private async void OnChangeAvatarCommmand(object param)
         {
             var newAvatarSource =await _model.LoadNewAvatar();
@@ -218,6 +227,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
+
+        /// <summary>
+        /// Command for saving changes to user field values
+        /// </summary>
+        /// <param name="param">NULL</param>
         private async void OnSaveChangeCommand(object param)
         {
             if (await _model.IsUniqueCredentialsAsync(Email, Login))
@@ -242,6 +256,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
+        /// <summary>
+        /// Command of initialize content and fields when page is loaded
+        /// </summary>
+        /// <param name="param">NULL</param>
         private async void OnLoadUserInfoCommand(object param)
         {
             var user = _model.GetUserInfo();
@@ -262,6 +280,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
+        /// <summary>
+        /// Command which change ComfirmPasswordBox visibility
+        /// </summary>
+        /// <param name="param">NULL</param>
         protected override void OnConfirmPasswordVisibilityCommand(object param)
         {
             if (_isConfirmPasswordVisible)
@@ -282,7 +304,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
-
+        /// <summary>
+        /// Command which change PasswordBox visibility
+        /// </summary>
+        /// <param name="param">NULL</param>
         protected override void OnPasswordVisibilityCommand(object param)
         {
             if (_isPasswordVisible)
@@ -305,10 +330,20 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //command predicate
         #region 
+        /// <summary>
+        /// Checks whether the avatar can be deleted
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         private bool CanRemoveAvatarCommandExecute(object param)
         {
             return !_isSetDefaultAvatar;
         }
+        /// <summary>
+        /// Checks data for validation before updating user fields 
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         private bool CanSaveChangeCommandExecute(object param)
         {
             return _model.IsValidName(Name) && _model.IsValidEmail(Email) && _model.IsValidLogin(Login) && ((_model.IsValidPassword(Password)

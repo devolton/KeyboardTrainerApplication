@@ -32,21 +32,40 @@ namespace CourseProjectKeyboardApplication.Model
         public string TrainTimeTestButtonText { get; init; }
         public string TrainTimeStudyButtonText { get; init; }
 
+        /// <summary>
+        /// Get keyboard scheme image source 
+        /// </summary>
+        /// <returns></returns>
         public ImageSource GetKeyboardSchemeEngImageSource()
         {
             _keyboardSchemeEngImageSource ??= AppImageSourceProvider.KeyboardSchemeEngImageSource;
             return _keyboardSchemeEngImageSource;
         }
+
+        /// <summary>
+        /// get start left position image source
+        /// </summary>
+        /// <returns></returns>
         public ImageSource GetStartLeftEngPositionImageSource()
         {
             _startLeftEngPositionImageSource ??= AppImageSourceProvider.StartLeftEngPositionImageSource;
             return _startLeftEngPositionImageSource;
         }
+
+        /// <summary>
+        /// get start right position image source
+        /// </summary>
+        /// <returns></returns>
         public ImageSource GetStartRightEngPositionImageSource()
         {
             _startRightEngPositionImageSource ??= AppImageSourceProvider.StartRightEngPositionImageSource;
             return _startRightEngPositionImageSource;
         }
+
+        /// <summary>
+        /// get keyboard icon image source
+        /// </summary>
+        /// <returns></returns>
         public ImageSource GetKeyboardIconImageSource()
         {
             _keyboardIconImageSource ??= AppImageSourceProvider.KeyboardIconImageSource;

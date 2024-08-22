@@ -38,7 +38,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _model = new TypingCertificatesPageModel();
             _improveResultCommand = new RelayCommand(OnImproveResultCommand);
             _drawInfoCommand = new RelayCommand(OnDrawInfoCommand);
-            _saveCertificateCommand = new RelayCommand(OnSaveCertificateCommand, CanExecuteSaveCertificateCommand);
+            _saveCertificateCommand = new RelayCommand(OnSaveCertificateCommand);
 
         }
         public static TypingCertificatesPageViewModel Instance()
@@ -125,10 +125,20 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //command
         #region
+
+
+        /// <summary>
+        /// Command of displaying Test page
+        /// </summary>
+        /// <param name="param"></param>
         private void OnImproveResultCommand(object param)
         {
             _model.DisplayTestPage();
         }
+        /// <summary>
+        /// Command of drawing user test statistic 
+        /// </summary>
+        /// <param name="param"></param>
         private async void OnDrawInfoCommand(object param)
         {
             CertificateIconImageSource ??= _model.GetCertificateIconImageSource();
@@ -154,6 +164,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 return;
             }
         }
+
+        /// <summary>
+        /// Command of saving certificate in local user storage
+        /// </summary>
+        /// <param name="param"></param>
         private void OnSaveCertificateCommand(object param)
         {
             CertificateType certificateType = (CertificateType)param;
@@ -161,12 +176,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
         #endregion
-        //command predicate
-        #region
-        private bool CanExecuteSaveCertificateCommand(object param)
-        {
-            return true;
-        }
-        #endregion
+        
     }
 }

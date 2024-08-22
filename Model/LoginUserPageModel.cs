@@ -40,8 +40,11 @@ namespace CourseProjectKeyboardApplication.Model
         public async Task InitUserInUserController(User user)
         {
 
-            UserController.CurrentUser = user;
+            KeyboardAppEducationProgressController.CurrentUser = user;
         }
+        /// <summary>
+        /// Init register information
+        /// </summary>
         private void InitRegistryInfo()
         {
             _currentUserRegistrieSubKey = Registry.CurrentUser;
@@ -82,8 +85,9 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Writing users credentials to quickly enter the application when logging in
         /// </summary>
-        /// <param name="login">User login</param>
+        /// <param name="loginOrEmail">User login or email</param>
         /// <param name="password">User password</param>
+        /// <param name="isChecked">Is user pushed 'Remember me'</param>
         
         public void WriteInRegister(string loginOrEmail,string password, bool isChecked)
         {
@@ -95,12 +99,17 @@ namespace CourseProjectKeyboardApplication.Model
                    WriteNakedDataInRegister();
             }
         }
-        private  void WriteDataInRegister(string login, string password)
+        /// <summary>
+        /// Write credentials in register async 
+        /// </summary>
+        /// <param name="loginOrEmail">User login or email</param>
+        /// <param name="password">User password</param>
+        private  void WriteDataInRegister(string loginOrEmail, string password)
         {
              Task.Run(() =>
             {
                 string sha256KeyCode = PasswordSHA256Encrypter.EncryptPassword(password);
-                _applicationSubKey.SetValue(_userLoginRegistryKeyName, login);
+                _applicationSubKey.SetValue(_userLoginRegistryKeyName, loginOrEmail);
                 _applicationSubKey.SetValue(_userPasswordRegistryCodeKeyName, sha256KeyCode);
                 _applicationSubKey.SetValue(_userPasswordRegistryKeyName, _devoltonEncrypter.Encrypt(password, sha256KeyCode));
 

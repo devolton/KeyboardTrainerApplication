@@ -163,6 +163,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //commnands
         #region
+        /// <summary>
+        /// Command for try login user
+        /// </summary>
+        /// <param name="parameter"></param>
         private async void OnLoginUserCommand(object parameter)
         {
             var isUserExistAndStatusPair = await _model.IsUserExist(LoginOrEmail);
@@ -201,8 +205,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             OpenMainWindow();
         }
 
-
-        private void OnPasswordVisibilityCommand(object obj)
+        /// <summary>
+        /// Command which change PasswordBox visibility
+        /// </summary>
+        /// <param name="param">NULL</param>
+        private void OnPasswordVisibilityCommand(object param)
         {
             if (_isPasswordVisible)
             {
@@ -302,6 +309,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
             });
         }
+
+        /// <summary>
+        /// Opening main window 
+        /// </summary>
         private async void OpenMainWindow()
         {
             await AppImageSourceProvider.Init();

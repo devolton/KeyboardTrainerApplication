@@ -19,7 +19,14 @@ namespace CourseProjectKeyboardApplication.Model
         {
           
         }
-
+        /// <summary>
+        /// Init user field and delegete to adding new user
+        /// </summary>
+        /// <param name="name">User name</param>
+        /// <param name="login">User login</param>
+        /// <param name="email">User email</param>
+        /// <param name="password">User password</param>
+        /// <returns></returns>
         public async Task<User> RegisterUser(string name,string login,string email, string password)
         {
             var user = new User

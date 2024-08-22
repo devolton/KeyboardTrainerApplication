@@ -8,7 +8,6 @@
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}"
               CornerRadius="15">
-
                         <Grid x:Name="PART_Track">
                             <Rectangle x:Name="PART_Indicator"
                      HorizontalAlignment="Left"

@@ -108,15 +108,29 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //command
         #region
+
+        /// <summary>
+        /// Command of started lesson again and displaying TypingTutor page
+        /// </summary>
+        /// <param name="param"></param>
         private void OnTryAgainLessonCommand(object param)
         {
             FrameMediator.DisplayTypingTutorPage();
         }
+
+        /// <summary>
+        /// Command of started next lesson and displaying TypingTutor page
+        /// </summary>
+        /// <param name="param"></param>
         private void OnNextLessonCommand(object param)
         {
             _model.SetNextEducationUserProgress();
             FrameMediator.DisplayTypingTutorPage();
         }
+        /// <summary>
+        /// Command of init blocks
+        /// </summary>
+        /// <param name="param"></param>
         private void OnLoadedPageCommand(object param)
         {
             _model.InitData();
@@ -124,10 +138,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
             if(AchivementStackPanel != null)
             {
                 InitAchivementStackPanel();
-            }
-            else
-            {
-                MessageBox.Show("Achivement stack panel is null!");
             }
         }
 
@@ -139,6 +149,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             return _model.IsCurrentLessonNotLast();
         }
         #endregion
+
+        /// <summary>
+        /// Initializing Test result blocks
+        /// </summary>
         private void InitAchivementStackPanel()
         {
 
@@ -156,6 +170,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
         }
         //Achivement blocks methods generator
         #region 
+        
+
+        /// <summary>
+        /// Genarating LessTwoMistake AchivementBlock
+        /// </summary>
+        /// <returns>AchivementBlock entity</returns>
         private AchivementBlock GetLessTwoMistakeAchivementBlock()
         {
             var lessTwoMistakeAchivementBlock = new AchivementBlock();
@@ -176,6 +196,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
             return lessTwoMistakeAchivementBlock;
         }
+
+        /// <summary>
+        /// Genarating WhithoutMistake AchivementBlock
+        /// </summary>
+        /// <returns>AchivementBlock entity</returns>
         private AchivementBlock GetWithoutMistakeAchivementBlock()
         {
             var withoutMistakeAchivementBlock= new AchivementBlock();
@@ -196,6 +221,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
             return withoutMistakeAchivementBlock;
         }
+        /// <summary>
+        /// Genarating Speed AchivementBlock
+        /// </summary>
+        /// <returns>AchivementBlock entity</returns>
         private AchivementBlock GetSpeedAchivementBlock()
         {
             var speedAchivementBlock = new AchivementBlock();

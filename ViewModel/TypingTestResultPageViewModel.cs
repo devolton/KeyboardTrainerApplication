@@ -67,6 +67,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //commands
         #region
+        /// <summary>
+        /// Command of init and displaying test results
+        /// </summary>
+        /// <param name="param"></param>
         private void OnDisplayResultCommand(object param)
         {
             _model.InitStat();
@@ -87,6 +91,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
             }
+        /// <summary>
+        /// Command of displaying TypingTest page
+        /// </summary>
+        /// <param name="param"></param>
         private void  OnImproveScoreCommand(object param)
         {
 

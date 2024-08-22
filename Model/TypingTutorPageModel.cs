@@ -1,6 +1,7 @@
 ﻿using CourseProjectKeyboardApplication.AppPages.Pages;
 using CourseProjectKeyboardApplication.Shared.Controllers;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Managers;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Services;
@@ -27,7 +28,7 @@ namespace CourseProjectKeyboardApplication.Model
     {
         private Dictionary<Key, string> _defaultKeyValueDictionary;
         private Dictionary<Key, string> _shiftPressedKeyValueDictionary;
-        private const int _LARGE_FONT_SIZE_VALUE = 30;
+        private const int _LARGE_FONT_SIZE_VALUE = 36;
         private const int _SMALL_FONT_SIZE_VALUE = 24;
         private int _typingTutorSpeed;
         private string _currentLearnString = string.Empty;
@@ -51,7 +52,7 @@ namespace CourseProjectKeyboardApplication.Model
 
             _currentFocusWordIndex = 0;
             _lettersRunsList = new List<Run>(_currentLearnString.Length);
-            EducationUsersProgressService.InitEducationUserProgressCollection(UserController.CurrentUser.Id);
+            EducationUsersProgressService.InitEducationUserProgressCollection(KeyboardAppEducationProgressController.CurrentUser.Id);
             InitKeyValueDictionaries();
             _stopwatcher = new Stopwatch();
             _errorBrush = System.Windows.Media.Brushes.Red;
@@ -133,6 +134,10 @@ namespace CourseProjectKeyboardApplication.Model
 
 
         }
+        /// <summary>
+        /// Check is user select english layout 
+        /// </summary>
+        /// <returns></returns>
         public bool IsEnglishLanguageSelected()
         {
             return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
@@ -145,8 +150,8 @@ namespace CourseProjectKeyboardApplication.Model
         public List<Run> GetLearnStrRuns()
         {
 
-            UserController.CurrentLesson ??= UserController.CurrentUser.EnglishLayoutLesson;
-            _currentLearnString = UserController.CurrentLesson.Text;
+            KeyboardAppEducationProgressController.CurrentLesson ??= KeyboardAppEducationProgressController.CurrentUser.EnglishLayoutLesson;
+            _currentLearnString = KeyboardAppEducationProgressController.CurrentLesson.Text;
             _progressBarMaxValue = _currentLearnString.Length;
             _wordsCount = GetWordsCount();
           
@@ -173,8 +178,8 @@ namespace CourseProjectKeyboardApplication.Model
             {
                 _stopwatcher.Stop();
                 _typingTutorSpeed = GetTypingTutorSpeed();
-                TypingTutorResultController.TypingTutorSpeed = _typingTutorSpeed;
-                TypingTutorResultController.MisclickCount = _missClickCounter;
+                TypingTutorResultManager.TypingTutorSpeed = _typingTutorSpeed;
+                TypingTutorResultManager.MisclickCount = _missClickCounter;
                 FrameMediator.DisplayTypingTutorResultPage();
                 return;
             }
@@ -213,7 +218,7 @@ namespace CourseProjectKeyboardApplication.Model
         {
             _missClickCounter++;
         }
-        public double GetCurrentTextSize() //сделать боллее гибким 
+        public double GetCurrentTextSize() 
         {
             if (_wordsCount > 13 || _wordsCount < 11)
             {

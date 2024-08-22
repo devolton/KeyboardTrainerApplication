@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Tools
 {
+    /// <summary>
+    /// This class provides field validation
+    /// </summary>
     public static  class AuthorizationFieldsValidator
     {
         private static Regex _loginRegex;

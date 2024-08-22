@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Shared.Providers
 {
+    /// <summary>
+    ///  This class provides centralized access to the API clients that works with the server to provide content
+    /// </summary>
     public static class ContentApiClientProvider 
     {
         private static HttpClient _httpClient;

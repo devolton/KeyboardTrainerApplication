@@ -180,6 +180,7 @@
 
         </Style.Triggers>
     </Style>
+    <!--custom start test button-->
     <Style x:Key="CustomTypingTestStartButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
             <Setter Property="Foreground" Value="{StaticResource MaterialDesignPaper}"/>
@@ -216,7 +217,7 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-
+<!--popup box button style-->
     <Style x:Key="CustomPopupBoxButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Style.Setters>
             <Setter Property="Background" Value="Transparent"/>
@@ -280,6 +281,7 @@
 
         </Style.Triggers>
     </Style>
+    <!--custom repeate button style-->
     <Style x:Key="CustomRepeatButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignPaperDarkButton}">
         <Style.Setters>
             <Setter Property="BorderThickness" Value="0"/>

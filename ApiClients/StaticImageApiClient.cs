@@ -24,6 +24,11 @@ namespace CourseProjectKeyboardApplication.ApiClients
 
 
         }
+        /// <summary>
+        /// Send request to server to try get ImageSource by image name(with extentions)
+        /// </summary>
+        /// <param name="fileName">Image name with extensions which we want to receive</param>
+        /// <returns>ImageSource or NULL</returns>
         public async Task<ImageSource> GetImageSourceAsync(string fileName)
         {
             try

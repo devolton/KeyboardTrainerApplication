@@ -43,7 +43,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private string _trainTimeStudyButtonText = string.Empty;
 
 
-
         public LearnPageViewModel()
         {
             _loadCommand = new RelayCommand(OnLoadCommand);

@@ -20,6 +20,12 @@ namespace CourseProjectKeyboardApplication.ApiClients
             _apiClient = httpClient;
             _apiKey = "TextContent";
         }
+
+        /// <summary>
+        /// Send request to server to try get JSON of page static text content
+        /// </summary>
+        /// <param name="pageType">Type of page the text of which we want to receive </param>
+        /// <returns>JSON string of page text content</returns>
         public async Task<string?> GetPageJsonAsync(PageType pageType)
         {
             try

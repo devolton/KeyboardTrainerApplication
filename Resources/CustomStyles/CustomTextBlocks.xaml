@@ -12,7 +12,6 @@
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="10 10 10 50"/>
-
         </Style.Setters>
         <Style.Triggers>
 
@@ -85,8 +84,5 @@
         <Setter Property="Padding" Value="5"/>
         <Setter Property="FontSize" Value="20"/>
     </Style>
-
-
-
 
 </ResourceDictionary>

@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using CourseProjectKeyboardApplication.Shared.Enums;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Threading;
 using System.Timers;
-using CourseProjectKeyboardApplication.View.Pages;
 using CourseProjectKeyboardApplication.Shared.Mediators;
 using CourseProjectKeyboardApplication.Database.Entities;
-using CourseProjectKeyboardApplication.Shared.Controllers;
-using CourseProjectKeyboardApplication.ApiClients;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using System.Windows.Media;
 using System.Text.Json;
 using System.Reflection;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Managers;
 
 namespace CourseProjectKeyboardApplication.Model
 {
@@ -87,12 +82,17 @@ namespace CourseProjectKeyboardApplication.Model
             return _keyboardIconImageSource;
         }
 
+        /// <summary>
+        /// Initializing typing test results values and open Typing test result page 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
 
-            TypingTestResultController.MiscliskCount = _misclickCount;
-            TypingTestResultController.PushedSymbolsCount = _pushedSymbolsCount;
-            TypingTestResultController.TypingSpeed = GetTypingTutorSpeed();
+            TypingTestResultManager.MiscliskCount = _misclickCount;
+            TypingTestResultManager.PushedSymbolsCount = _pushedSymbolsCount;
+            TypingTestResultManager.TypingSpeed = GetTypingTutorSpeed();
             Application.Current.Dispatcher.Invoke(() =>
             {
                 FrameMediator.DisplayTypingTestResultPage();
@@ -102,10 +102,18 @@ namespace CourseProjectKeyboardApplication.Model
 
         }
 
+        /// <summary>
+        /// Set interval for timer
+        /// </summary>
+        /// <param name="milliseconds">Millisecond of interval value</param>
         public void SetTimerInterval(int milliseconds)
         {
             _timerInterval = milliseconds;
         }
+        /// <summary>
+        /// Get Run element after current Run element
+        /// </summary>
+        /// <returns></returns>
         public List<Run> GetTextRuns()
         {
             _runsList.Clear();
@@ -121,16 +129,27 @@ namespace CourseProjectKeyboardApplication.Model
 
             return _runsList;
         }
+        /// <summary>
+        /// Check is user select Engilish layout in PC
+        /// </summary>
+        /// <returns></returns>
         public bool IsEnglishLanguageSelected()
         {
              return InputLanguageManager.Current.CurrentInputLanguage.EnglishName.Contains("English");
             
         }
+        /// <summary>
+        /// Initializing text collectoin
+        /// </summary>
+        /// <returns></returns>
         private async Task InitTextCollectionAsync()
         {
             var textCollection = await DbApiClientProvider.EnglishTypingTestTextApiClient.GetAllTextsAsync();
             _testTextCollection = textCollection.ToList();
         }
+        /// <summary>
+        /// Setup test options
+        /// </summary>
         public void SetupTest()
         {
 
@@ -140,6 +159,9 @@ namespace CourseProjectKeyboardApplication.Model
             _wordsTypingCount = 1;
             _misclickCount = 0;
         }
+        /// <summary>
+        /// Reset test options
+        /// </summary>
         public void ResetTestSettings()
         {
             _runsList.Clear();
@@ -149,20 +171,36 @@ namespace CourseProjectKeyboardApplication.Model
             _currentSymbolIndex = 0;
 
         }
+        /// <summary>
+        /// Start timer
+        /// </summary>
         public void StartTimer()
         {
             _timer.Interval = _timerInterval;
             _timer.Start();
         }
+        /// <summary>
+        /// Stop timer
+        /// </summary>
         public void TimerReset()
         {
             _timer.Stop();
 
         }
+        /// <summary>
+        /// check if the current element is uppercase
+        /// </summary>
+        /// <returns></returns>
         public bool IsFocusCharUppercase()
         {
             return _shiftPressedKeyValueDictionary.Any(onePair => onePair.Value.Equals(_currentText[_currentSymbolIndex].ToString()));
         }
+        /// <summary>
+        /// Check if user pushed valid keyboard button
+        /// </summary>
+        /// <param name="pushedKey">Key of pushed button</param>
+        /// <param name="isShiftPushed">Is pushed button is SHIFT</param>
+        /// <returns></returns>
         public bool IsValidPushedButton(Key pushedKey, bool isShiftPushed)
         {
             if (isShiftPushed)
@@ -173,7 +211,10 @@ namespace CourseProjectKeyboardApplication.Model
 
 
         }
-
+        /// <summary>
+        /// Set style for Run element 
+        /// </summary>
+        /// <param name="isValidPushed">Is pushed button is valid</param>
         public void SetSymbolRunStyle(bool isValidPushed)
         {
             Task.Run(async () =>
@@ -211,8 +252,19 @@ namespace CourseProjectKeyboardApplication.Model
         public string GetSecondPartNearAchivementTableText() => _secondPartNearAchievementTableText;
         public string GetLeftInfoBodyText() => _infoBlockLeftBodyText;
         public string GetRightInfoBodyText() => _infoBlockRightBodyText;
+        /// <summary>
+        /// Increment missclick count
+        /// </summary>
+        /// <returns></returns>
         public void IncrementMissclickCount() => ++_misclickCount;
+        /// <summary>
+        /// Increment symbols count which user pushed 
+        /// </summary>
         public void IncrementPushedSymbolsCount() => ++_pushedSymbolsCount;
+
+        /// <summary>
+        /// Increment words count
+        /// </summary>
         public void IncrementWordsTypingCount() => _wordsTypingCount++;
         private void InitKeyValueDictionaries()
         {
@@ -235,12 +287,19 @@ namespace CourseProjectKeyboardApplication.Model
 
             };
         }
+        /// <summary>
+        /// Culculate of typing tutor speed 
+        /// </summary>
+        /// <returns></returns>
         private int GetTypingTutorSpeed()
         {
 
             return (int)(((double)_wordsTypingCount / (_timerInterval / 1000) * 60));
 
         }
+        /// <summary>
+        /// Init text proporties with using reflaction
+        /// </summary>
         private async void InitStaticText()
         {
             var jsonText = await ContentApiClientProvider.JsonTextApiClient.GetPageJsonAsync(Shared.Enums.PageType.TypingTestPage);

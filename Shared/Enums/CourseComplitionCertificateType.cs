@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseProjectKeyboardApplication.Model
+namespace CourseProjectKeyboardApplication.Shared.Enums
 {
+    /// <summary>
+    /// Type of keyboard application course complition certificate
+    /// </summary>
     public enum CourseComplitionCertificateType
     {
         WitnoutDistinction,

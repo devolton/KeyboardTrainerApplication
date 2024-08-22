@@ -36,13 +36,20 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //commands
         #region
+        /// <summary>
+        /// Command of displaying notification page
+        /// </summary>
+        /// <param name="param"></param>
         private void OnNotificationCommand(object param)
         {
             NotifyType notifyType = (NotifyType)param;
             NotificationMediator.ShowNotificationWindow(notifyType);
         }
      
-        //метод регестрации пользователя 
+        /// <summary>
+        /// Command of trying registration oparation new user
+        /// </summary>
+        /// <param name="param"></param>
         private async void OnTryRegisterUser(object param = null)
         {
             if (await _model.IsUniqueCredentialsAsync(UserEmail, UserLogin))
@@ -56,7 +63,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
                 ClearAllFields();
                 await AppImageSourceProvider.Init();
-                UserController.CurrentUser=newUser;
+                KeyboardAppEducationProgressController.CurrentUser=newUser;
                 new MainWindow().Show();
 
                 foreach (Window oneWindow in Application.Current.Windows)

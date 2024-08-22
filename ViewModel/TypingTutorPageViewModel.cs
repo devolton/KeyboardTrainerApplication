@@ -182,7 +182,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         //Commands
         #region
-
+        /// <summary>
+        /// Command of genarate Runs elements (letters ) when page is loaded
+        /// </summary>
+        /// <param name="param"></param>
         private void OnGenarateRunsElements(object param)
         {
             _textBlock = param as TextBlock;
@@ -197,6 +200,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             ProgressBarMaxValue = _model.GetProgressBarMaxValue();
             TextSize = _model.GetCurrentTextSize();
         }
+        /// <summary>
+        /// Command when user pushed restart button
+        /// </summary>
+        /// <param name="param"></param>
         private void OnRestartLessonCommand(object param)
         {
             ProgressBarValue = 0;
@@ -205,6 +212,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             IsLessonStarter = false;
 
         }
+        /// <summary>
+        /// Command when user start lesson and pushed keyboard button
+        /// </summary>
+        /// <param name="param">Key of pushed button</param>
         private void OnKeyDownCommand(object param)
         {
 
@@ -252,6 +263,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
+        /// <summary>
+        /// Command when user push 'Start Lesson' 
+        /// </summary>
+        /// <param name="param"></param>
         private void OnStartLessonExecuteCommand(object param)
         {
             _isLessonStarted = true;
@@ -268,6 +283,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
             _model.StartMeasureTime();//запускаем секундомер
         }
+
+        /// <summary>
+        /// Command when user released the keyboard button
+        /// </summary>
+        /// <param name="param"></param>
         private void OnKeyUpCommand(object param)
         {
 
@@ -309,14 +329,18 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return _model.IsEnglishLanguageSelected();
         }
+
+
+        #endregion
+        /// <summary>
+        /// Change visibility of panel and button
+        /// </summary>
         private void IsHiginglockVisible()
         {
             IsHigingPanelVisible = (CanExecuteOnKeyDownCommand(null)) ? Visibility.Hidden : Visibility.Visible;
             IsStartButtonVisible = (CanExecuteOnKeyDownCommand(null)) ? Visibility.Hidden : Visibility.Visible;
 
         }
-
-        #endregion
 
 
         private void InitKeyboardItemList()
@@ -331,6 +355,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
             _shiftKeyboardItemCollection = _keyboardItemList.Where(oneKey => oneKey.KeyTag.Contains("Shift")).ToList();
         }
+        /// <summary>
+        /// Work when user pressed SHIFT button
+        /// </summary>
         private void ShiftKeyDownHandler()
         {
             ChangeFocusForShift(true);
@@ -342,6 +369,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
             SetFocusInKeyboardItem();
         }
+        /// <summary>
+        /// Set focus style for Keyboard item
+        /// </summary>
         private void SetFocusInKeyboardItem()
         {
             var currentTag = _model.GetCurrentKeyTag();
@@ -350,7 +380,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 focusElement.IsFocusKeyboardItem = true;
 
         }
-
+        /// <summary>
+        /// Set error style for keyboard item
+        /// </summary>
+        /// <param name="keyTag">Keyboard button tag</param>
         private void SetErrorStyleInKeyboardItem(string keyTag)
         {
             IKeyboardItem errorElement = null;
@@ -367,12 +400,20 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
         }
+
+        /// <summary>
+        /// Delete focus style
+        /// </summary>
         private void RemoveFocusStyle()
         {
             var focusElement = _keyboardItemList.FirstOrDefault(oneElement => oneElement.IsFocusKeyboardItem);
             if (focusElement is not null)
                 focusElement.IsFocusKeyboardItem = false;
         }
+
+        /// <summary>
+        /// Delete error style
+        /// </summary>
         private void RemoveErrorStyle()
         {
             foreach (var item in _errorPressedKeyboardCollection)
@@ -383,6 +424,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _errorPressedKeyboardCollection.Clear();
             _model.RemoveRunErrorStyle();
         }
+        
         private void ChangeFocusForShift(bool isFocused)
         {
 

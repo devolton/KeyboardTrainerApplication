@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseProjectKeyboardApplication.Shared.Controllers
+namespace CourseProjectKeyboardApplication.Shared.Managers
 {
-    public static class TypingTestResultController
+    public static class TypingTestResultManager
     {
         private static int _mislickCount = 0;
         private static int _allSymbolsCount = 0;

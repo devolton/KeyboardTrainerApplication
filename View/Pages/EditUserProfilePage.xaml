@@ -28,8 +28,8 @@
             <ccEditUserProfile:EditUserProfileAvatarBlock/>
             <ccEditUserProfile:EditUserProfileBodyBlock/>
             <Grid >
-            <Button 
-                    Margin="5"
+                <Button 
+                   
                     Command="{Binding SaveChangeCommand}"
                     IsEnabled="{Binding IsSaveButtonEnabled}"
                     Content="Save"

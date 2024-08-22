@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.Shared.Providers
 {
+    /// <summary>
+    /// This class provides centralized access to the API clients that works with the server which cooperate with database
+    /// </summary>
     public static class DbApiClientProvider
     {
         private static HttpClient _httpClient;
@@ -46,6 +49,11 @@ namespace CourseProjectKeyboardApplication.Shared.Providers
         public static EnglishLayoutLevelApiClient EnglishLayoutLevelApiClient => _englishLayoutLevelApiClient;
         public static EnglishLayoutLessonApiClient EnglishLayoutLessonApiClient => _englishLayoutLessonApiClient;
         public static TypingTestResultApiClient TypingTestResultApiClient => _typingTestResultApiClient;
+
+        /// <summary>
+        /// Initializing Jwt token in HttpClient header
+        /// </summary>
+        /// <param name="token">Jwt token</param>
         public static void InitJwtToken(string? token)
         {
             _token = token;

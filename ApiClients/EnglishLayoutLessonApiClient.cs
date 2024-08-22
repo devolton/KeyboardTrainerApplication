@@ -1,13 +1,10 @@
 ﻿using CourseProjectKeyboardApplication.Database.Entities;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace CourseProjectKeyboardApplication.ApiClients
 {
@@ -22,34 +19,69 @@ namespace CourseProjectKeyboardApplication.ApiClients
             _jsonOptions = jsonSerializerOptions;
             _apiKey = "EnglishLayoutLesson";
         }
+        /// <summary>
+        /// Send request to server to try get collecton of EnglishLayoutLesson elements
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<EnglishLayoutLesson>?> GetLessonsAsync()
         {
-            var response = await _httpClient.GetAsync($"{_apiKey}");
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<IEnumerable<EnglishLayoutLesson>>(jsonStr,_jsonOptions);
+                var response = await _httpClient.GetAsync($"{_apiKey}");
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonStr = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<IEnumerable<EnglishLayoutLesson>>(jsonStr, _jsonOptions);
+                }
+            }
+            catch(Exception ex)
+            {
+                return null;
             }
             return null;
         }
+        /// <summary>
+        /// Send request to server to get EnglishLayoutLesson collection by EnglishLayoutLevel ID
+        /// </summary>
+        /// <param name="levelId">EnglishLayoutLevel ID param</param>
+        /// <returns></returns>
         public async Task<IEnumerable<EnglishLayoutLesson>?> GetLessonsByLevelIdAsync(int levelId)
         {
-            var response = await _httpClient.GetAsync($"{_apiKey}/{levelId}");
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<IEnumerable<EnglishLayoutLesson>>(jsonStr, _jsonOptions);
+                var response = await _httpClient.GetAsync($"{_apiKey}/{levelId}");
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonStr = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<IEnumerable<EnglishLayoutLesson>>(jsonStr, _jsonOptions);
 
+                }
+                return null;
             }
-            return null;
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
+        /// <summary>
+        /// Send a request to server to try update existing EnglishLayoutLesson element
+        /// </summary>
+        /// <param name="updatedLesson">Existing EnglishLayoutLesson element for update</param>
+        /// <returns></returns>
         public async Task UpdateLessonAsync(EnglishLayoutLesson updatedLesson)
         {
-            int id = updatedLesson.Id;
-            var response = await _httpClient.PutAsJsonAsync($"{_apiKey}/{id}/{updatedLesson}", updatedLesson);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                int id = updatedLesson.Id;
+                var response = await _httpClient.PutAsJsonAsync($"{_apiKey}/{id}/{updatedLesson}", updatedLesson);
+                response.EnsureSuccessStatusCode();
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
 
         }
 

@@ -71,19 +71,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
-        private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
-        {
-            if (_timerMinutesValue != 0)
-            {
-                TimerMinutesValue = (--_timerMinutesValue).ToString();
-                TimerSecondsValue = 59.ToString();
-
-            }
-            else
-                TimerSecondsValue = (--_timerSecondsValue).ToString();
-
-        }
-
         public static TypingTestPageViewModel Instance()
         {
             _instance ??= new TypingTestPageViewModel();
@@ -246,6 +233,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #endregion
         //commands
         #region
+        /// <summary>
+        /// Command when user starting test
+        /// </summary>
+        /// <param name="param"></param>
         private void OnStartTestCommand(object param)
         {
             HidePanelVisibility = Visibility.Hidden;
@@ -253,10 +244,19 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _isTestStarted = true;
 
         }
+        /// <summary>
+        /// Command when user change timer value
+        /// </summary>
+        /// <param name="param"></param>
         private void OnChangeTimerValueCommand(object param)
         {
             SetTimerBlock();
         }
+
+        /// <summary>
+        /// Command of setup test options
+        /// </summary>
+        /// <param name="param"></param>
         private void OnTestSetupCommand(object param)
         {
             if (_isInit)
@@ -273,6 +273,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
+        
+        /// <summary>
+        /// Command when user started test and pushed keyboard button
+        /// </summary>
+        /// <param name="param"></param>
         private void OnKeyDownCommand(object param)
         {
             if (!_isFirstKeyPushed)
@@ -341,6 +346,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
+        /// <summary>
+        /// Command of ending test
+        /// </summary>
+        /// <param name="param"></param>
         private void OnEndTestCommand(object param)
         {
             StartButtonVisibility = Visibility.Visible;
@@ -353,6 +362,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _timer.Stop();
 
         }
+
+        /// <summary>
+        /// Command of displaying Notification window
+        /// </summary>
+        /// <param name="param"></param>
         private void OnShowNotificationCommand(object param)
         {
             NotificationMediator.ShowNotificationWindow(NotifyType.InvalidLanguageSelected);
@@ -369,11 +383,16 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return _isTestStarted;
         }
+     
         private bool CanExecuteStartTestCommand(object param)
         {
             return _model.IsEnglishLanguageSelected();
         }
         #endregion
+        /// <summary>
+        /// Check is pushed button is SHIFT
+        /// </summary>
+        /// <returns></returns>
         private bool IsShiftPushed()
         {
             return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
@@ -393,6 +412,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
             KeyboardIconImageSource ??= _model.GetKeyboardIconImageSource();
             _isInit = false;
         }
+        /// <summary>
+        /// Set timer block value 
+        /// </summary>
         private void SetTimerBlock()
         {
             if (TimeComboBoxSelectedIndex == 0)
@@ -407,6 +429,23 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 TimerSecondsValue = 0.ToString();
                 _model.SetTimerInterval(60000);
             }
+        }
+        /// <summary>
+        /// Change visible timer value 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (_timerMinutesValue != 0)
+            {
+                TimerMinutesValue = (--_timerMinutesValue).ToString();
+                TimerSecondsValue = 59.ToString();
+
+            }
+            else
+                TimerSecondsValue = (--_timerSecondsValue).ToString();
+
         }
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseProjectKeyboardApplication.Shared.Controllers
+namespace CourseProjectKeyboardApplication.Shared.Managers
 {
-    public static class TypingTutorResultController
-    { 
+    public static class TypingTutorResultManager
+    {
         private static int _misclickCount = 0;
         private static int _typingTutorSpeed = 0;
         public static int MisclickCount
