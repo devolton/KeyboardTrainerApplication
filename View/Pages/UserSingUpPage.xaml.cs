@@ -41,6 +41,13 @@ namespace CourseProjectKeyboardApplication.View.Pages
             }
             
         }
-       
+
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                _viewModel.SingUpClickCommand.Execute(null);
+            }
+        }
     }
 }

@@ -12,7 +12,8 @@
       d:DataContext="{d:DesignInstance Type=vm:LoginUserPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="340" d:DesignWidth="400"
-      Title="UserLoginPage">
+      Title="UserLoginPage"
+      KeyDown="Page_KeyDown">
 
 
     <StackPanel Orientation="Vertical"
@@ -100,7 +101,7 @@
                 Width="180"
                 Height="60"
                 IsEnabled="{Binding IsButtonEnable}"
-                Command="{Binding ButtonCommand}"
+                Command="{Binding TryLoginUserCommand}"
                 CommandParameter="{Binding ElementName=LoginPasswordBox}"
                 Background="{StaticResource CustomDeepBlue}"/>
 

@@ -67,7 +67,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         #region
 
         //команда для выполнения нажатия кнопки
-        public ICommand ButtonCommand => _multiCommand;
+        public ICommand TryLoginUserCommand => _multiCommand;
 
         public ICommand PasswordVisibilityCommand => _passwordVisibilityCommand;
         public bool IsChecked

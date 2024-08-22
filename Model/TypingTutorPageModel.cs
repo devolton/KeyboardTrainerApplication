@@ -220,11 +220,7 @@ namespace CourseProjectKeyboardApplication.Model
         }
         public double GetCurrentTextSize() 
         {
-            if (_wordsCount > 13 || _wordsCount < 11)
-            {
                 return _SMALL_FONT_SIZE_VALUE;
-            }
-            return _LARGE_FONT_SIZE_VALUE;
         }
 
         private void InitKeyValueDictionaries()

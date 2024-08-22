@@ -15,11 +15,7 @@
       LostFocus="Page_LostFocus"
       PreviewKeyDown="Page_PreviewKeyDown"
       KeyUp="Page_KeyUp">
-    <!--<i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadUserInfoCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>-->
+
 
     <StackPanel x:Name="MainStackPanel">
         <cc:TextDisplayerBlock/>
