@@ -26,12 +26,12 @@ namespace CourseProjectKeyboardApplication.Model
         private RenderTargetBitmap _courseCompletionCertificate;
         private ImageSource _certificateIconImageSource;
         private SaveFileDialog _saveFileDialog;
-        private const int _PLATINUM_CERTIFICATE_SPEED_CONDITION = 70;
-        private const int _GOLD_CERTIFICATE_SPEED_CONDITION = 50;
+        private const int _PLATINUM_CERTIFICATE_SPEED_CONDITION = 60;
+        private const int _GOLD_CERTIFICATE_SPEED_CONDITION = 55;
         private const int _SILVER_CERTIFICATE_SPEED_CONDITION = 40;
-        private const double _PLATINUM_CERTIFICATE_ACCURACY_CONDITION = 99.5;
-        private const double _GOLD_CERTIFICATE_ACCURACY_CONDITION = 98.7;
-        private const double _SILVER_CERTIFICATE_ACCURACY_CONDITION = 96;
+        private const double _PLATINUM_CERTIFICATE_ACCURACY_CONDITION = 96;
+        private const double _GOLD_CERTIFICATE_ACCURACY_CONDITION = 92.5;
+        private const double _SILVER_CERTIFICATE_ACCURACY_CONDITION = 88;
         public TypingCertificatesPageModel()
         {
             _saveFileDialog = new SaveFileDialog()

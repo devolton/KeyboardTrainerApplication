@@ -133,20 +133,20 @@
                             Grid.Row="0"/>
                         <cc:CertificateConditionTableBodyItem 
                             SpeedLevelText="Platinum"
-                            SpeedValueText="70 wpm"
-                            AccuracyText="99.5 %"
+                            SpeedValueText="60 wpm"
+                            AccuracyText="96%"
                             MedalType="Platinum"
                             Grid.Row="1"/>
                         <cc:CertificateConditionTableBodyItem
                             SpeedLevelText="Gold"
-                            SpeedValueText="50 wpm"
-                            AccuracyText="98.5 %"
+                            SpeedValueText="55 wpm"
+                            AccuracyText="92.5 %"
                             MedalType="Gold"
                             Grid.Row="2"/>
                         <cc:CertificateConditionTableBodyItem
                             SpeedLevelText="Silver"
                             SpeedValueText="40 wpm"
-                            AccuracyText="96 %"
+                            AccuracyText="88 %"
                             MedalType="Silver"
                             Grid.Row="3"/>
 
