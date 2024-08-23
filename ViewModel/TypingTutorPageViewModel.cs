@@ -247,6 +247,12 @@ namespace CourseProjectKeyboardApplication.ViewModel
                         _model.AddMissclickCount();
                     }
                 }
+                else
+                {
+                    SetErrorStyleInKeyboardItem(keyTag);
+                    _model.SetRunErrorStyle();
+                    _model.AddMissclickCount();
+                }
             }
             else
             {
@@ -257,7 +263,6 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
                 else
                 {
-
                     if (!IsShiftPushed())
                     {
                         _model.AddMissclickCount();
@@ -378,14 +383,23 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// </summary>
         private void ShiftKeyDownHandler()
         {
-            ChangeFocusForShift(true);
-            foreach (var oneKeyElement in _keyboardItemList)
+            Task.Run(() =>
             {
-                var keyElement = oneKeyElement as KeyboardItemTextBlock;
-                if (keyElement is not null)
-                    oneKeyElement.TextValue = oneKeyElement.KeyTag[1].ToString();
-            }
-            SetFocusInKeyboardItem();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ChangeFocusForShift(true);
+                    foreach (var oneKeyElement in _keyboardItemList)
+                    {
+                        var keyElement = oneKeyElement as KeyboardItemTextBlock;
+                        if (keyElement is not null)
+                            oneKeyElement.TextValue = oneKeyElement.KeyTag[1].ToString();
+                    }
+                    SetFocusInKeyboardItem();
+
+                });
+               
+            });
+           
         }
         /// <summary>
         /// Set focus style for Keyboard item
@@ -404,19 +418,27 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// <param name="keyTag">Keyboard button tag</param>
         private void SetErrorStyleInKeyboardItem(string keyTag)
         {
-            IKeyboardItem errorElement = null;
-            if (keyTag is not null)
-                errorElement = _keyboardItemList.FirstOrDefault(oneKey => oneKey.KeyTag.Contains(keyTag));
-            if (errorElement is not null)
-            {
-                errorElement.IsErrorPushedKeyboardItem = true;
-                _errorPressedKeyboardCollection.Add(errorElement);
-            }
+            Task.Run(() => {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    IKeyboardItem errorElement = null;
+                    if (keyTag is not null)
+                        errorElement = _keyboardItemList.FirstOrDefault(oneKey => oneKey.KeyTag.Contains(keyTag));
+                    if (errorElement is not null)
+                    {
+                        errorElement.IsErrorPushedKeyboardItem = true;
+                        _errorPressedKeyboardCollection.Add(errorElement);
+                    }
+                });
+            });
+          
 
         }
         private bool IsShiftPushed()
         {
-            return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
+          
+            var state= Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+            return state;
         }
 
         /// <summary>

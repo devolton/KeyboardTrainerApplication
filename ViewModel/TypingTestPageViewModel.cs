@@ -325,7 +325,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
                         await Task.Delay(1000);
                         _isShiftWasPushedBefore = false;
                     });
-                    return;
+                    
                 }
                 if (_model.IsValidPushedButton(key, false))
                 {
@@ -395,7 +395,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// <returns></returns>
         private bool IsShiftPushed()
         {
-            return Keyboard.GetKeyStates(Key.LeftShift) == KeyStates.Down || Keyboard.GetKeyStates(Key.RightShift) == KeyStates.Down;
+            return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift); 
         }
 
         private void InitStaticContent()
