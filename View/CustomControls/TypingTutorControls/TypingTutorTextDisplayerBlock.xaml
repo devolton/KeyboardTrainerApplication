@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cc="clr-namespace:CourseProjectKeyboardApplication.View.CustomControls"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingTutorPageViewModel}"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewmodel="clr-namespace:CourseProjectKeyboardApplication.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:TypingTutorPageViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1100">
     <Border Margin="0 0 0 50"
@@ -50,7 +51,19 @@
                        Visibility="{Binding IsHigingPanelVisible}"
                            
                />
-            <Button
+            <Grid Panel.ZIndex="2"
+                  Width="130"
+                  Height="50"
+                  Cursor="Hand">
+                <Border Background="Transparent"
+                        BorderThickness="0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <i:InvokeCommandAction Command="{Binding ShowNotificationWindowCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Border>
+                <Button
                     Focusable="False"
                     IsEnabled="True"
                     Content="Click To Start"
@@ -58,6 +71,7 @@
                     Style="{StaticResource CustomTypingTestStartButton}"
                     Panel.ZIndex="2"
                     Visibility="{Binding IsStartButtonVisible}"/>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

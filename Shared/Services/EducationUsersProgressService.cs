@@ -75,16 +75,19 @@ namespace CourseProjectKeyboardApplication.Shared.Services
                     }
 
                     await Task.WhenAll(addTask, updateTask);
+                    _addedNewEducationUsersProgressCollection.Clear();
+                    _updatedEducationUsersProgressCollection.Clear();
                 }
                 else if (_updatedEducationUsersProgressCollection is not null && _updatedEducationUsersProgressCollection.Count != 0)
                 {
                     await _apiClient.UpdateRangeEducationUsersProgress(_updatedEducationUsersProgressCollection);
+                    _updatedEducationUsersProgressCollection.Clear(); 
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+      
             }
         }
         /// <summary>

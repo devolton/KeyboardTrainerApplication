@@ -33,6 +33,8 @@ namespace CourseProjectKeyboardApplication
         private EditUserProfilPage _editUserProfilPage;
         private TypingTestResultPage _typingTestResultPage;
         private TypingTutorResultPage _typingTutorResultPage;
+        private System.Timers.Timer _saveTimer;
+        private const double _TIMER_INTERVAL = 240_000;
 
 
         public ImageSource DevoltonLabsImageSource
@@ -54,9 +56,25 @@ namespace CourseProjectKeyboardApplication
 
             _typingTestPage = new TypingTestPage();
             DataContext = this;
+            _saveTimer = new(_TIMER_INTERVAL);
+            _saveTimer.Start();
+            _saveTimer.AutoReset = true;
+            _saveTimer.Elapsed += _saveTimer_Elapsed;
 
 
 
+
+        }
+
+        private async void _saveTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            await SaveChangesAsync(); 
+        }
+
+        private void TimerStop()
+        {
+            _saveTimer.Stop();
+            _saveTimer.Dispose();
         }
 
         private async void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -64,6 +82,7 @@ namespace CourseProjectKeyboardApplication
             await SaveChangesAsync();
             DbApiClientProvider.Dispose();
             ContentApiClientProvider.Dispose();
+            TimerStop();
             Process.GetCurrentProcess().Kill();
 
         }
@@ -117,6 +136,7 @@ namespace CourseProjectKeyboardApplication
             await SaveChangesAsync();
             DbApiClientProvider.Dispose();
             ContentApiClientProvider.Dispose();
+            TimerStop();
         }
         /// <summary>
         /// Save changes in remote server database when application closing

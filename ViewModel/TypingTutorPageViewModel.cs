@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using CourseProjectKeyboardApplication.Shared.Providers;
 using CourseProjectKeyboardApplication.Shared.Interfaces.ModelInterfaces;
+using CourseProjectKeyboardApplication.Shared.Mediators;
 
 namespace CourseProjectKeyboardApplication.ViewModel
 {
@@ -46,6 +47,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ICommand _keyDownCommand;
         private ICommand _keyUpCommand;
         private ICommand _generateRunsBlockCommand;
+        private ICommand _showNotificationWindowCommand;
+
         private bool _isLessonStarted;
         private bool _isRepeatButtonEnabled;
 
@@ -60,7 +63,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _startLessonCommand = new RelayCommand(OnStartLessonExecuteCommand, CanExecuteStartLessonCommand);
             _restartLessonCommand = new RelayCommand(OnRestartLessonCommand, CanOnRepeatLessonCommandExecute);
             _keyUpCommand = new RelayCommand(OnKeyUpCommand, CanExecuteOnKeyDownCommand);
-          
+            _showNotificationWindowCommand = new RelayCommand(OnShowNotificationWindowCommand,CanExecuteShowNotificationWindow);
             _keyboardItemList = new List<IKeyboardItem>();
             _errorPressedKeyboardCollection = new List<IKeyboardItem>();
             _shiftKeyboardItemCollection = new List<IKeyboardItem>();
@@ -75,6 +78,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
+
+
         public static TypingTutorPageViewModel Instance()
         {
             _instance ??= new TypingTutorPageViewModel();
@@ -108,6 +113,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         public ICommand KeyDownCommand => _keyDownCommand;
         public ICommand KeyUpCommand => _keyUpCommand;
         public ICommand GenerateRunsBlocksCommand => _generateRunsBlockCommand;
+        public ICommand ShowNotificationWindowCommand => _showNotificationWindowCommand;
         public Visibility IsStartButtonVisible
         {
             get { return _isStartButtonVisible; }
@@ -312,6 +318,14 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
         }
 
+        /// <summary>
+        /// Show notification window 
+        /// </summary>
+        /// <returns></returns>
+        private void OnShowNotificationWindowCommand(object obj)
+        {
+            NotificationMediator.ShowNotificationWindow(Shared.Enums.NotifyType.InvalidLanguageSelected);
+        }
 
         #endregion
 
@@ -328,6 +342,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool CanExecuteStartLessonCommand(object param)
         {
             return _model.IsEnglishLanguageSelected();
+        }
+        private bool CanExecuteShowNotificationWindow(object obj)
+        {
+            return !_model.IsEnglishLanguageSelected();
         }
 
 

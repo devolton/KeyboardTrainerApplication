@@ -65,8 +65,11 @@ namespace CourseProjectKeyboardApplication.Shared.Services
         /// <returns></returns>
         public static async Task SaveNewTypingTestAsync()
         {
-            
+            if (_addedTypingTestResultCollection is not null && _addedTypingTestResultCollection.Count() != 0)
+            {
                 await _apiClient.AddRangeTypingTestsAsync(_addedTypingTestResultCollection);
+                _addedTypingTestResultCollection.Clear();
+            }
         }
 
     }

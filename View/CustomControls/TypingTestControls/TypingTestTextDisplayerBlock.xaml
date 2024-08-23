@@ -56,7 +56,8 @@
                       />
             <Grid Panel.ZIndex="2"
                   Width="130"
-                  Height="50">
+                  Height="50"
+                  Cursor="Hand">
             <Button
                 Command="{Binding StartTestCommand}"
                 Focusable="False"
