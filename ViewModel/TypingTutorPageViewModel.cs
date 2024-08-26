@@ -30,9 +30,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private List<IKeyboardItem> _keyboardItemList;
         private List<IKeyboardItem> _errorPressedKeyboardCollection;
         private List<IKeyboardItem> _shiftKeyboardItemCollection;
+        private IEnumerable<Key> _keyWithoutNoneCollection;
         private Grid _keyboardGrid;
         private Visibility _isStartButtonVisible;
         private Visibility _isHidingPanelVisible;
+
 
         private double _progressBarValue;
         private double _progressBarMaxValue;
@@ -63,11 +65,11 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _startLessonCommand = new RelayCommand(OnStartLessonExecuteCommand, CanExecuteStartLessonCommand);
             _restartLessonCommand = new RelayCommand(OnRestartLessonCommand, CanOnRepeatLessonCommandExecute);
             _keyUpCommand = new RelayCommand(OnKeyUpCommand, CanExecuteOnKeyDownCommand);
-            _showNotificationWindowCommand = new RelayCommand(OnShowNotificationWindowCommand,CanExecuteShowNotificationWindow);
+            _showNotificationWindowCommand = new RelayCommand(OnShowNotificationWindowCommand, CanExecuteShowNotificationWindow);
             _keyboardItemList = new List<IKeyboardItem>();
             _errorPressedKeyboardCollection = new List<IKeyboardItem>();
             _shiftKeyboardItemCollection = new List<IKeyboardItem>();
-
+            _keyWithoutNoneCollection = Enum.GetValues(typeof(Key)).Cast<Key>().Where(oneKey => oneKey != Key.None);
             _isLessonStarted = false;
             IsRepeatButtonEnabled = false;
             _textSize = 24;
@@ -174,14 +176,15 @@ namespace CourseProjectKeyboardApplication.ViewModel
             }
 
         }
-        public ImageSource RepeatButtonImageSource {
+        public ImageSource RepeatButtonImageSource
+        {
             get => _repeatIconImageSource;
             set
             {
                 _repeatIconImageSource = value;
                 OnPropertyChanged(nameof(RepeatButtonImageSource));
             }
-            }
+        }
 
         #endregion
 
@@ -230,46 +233,54 @@ namespace CourseProjectKeyboardApplication.ViewModel
             if (IsShiftPushed())
             {
                 ShiftKeyDownHandler();
-
-
-                if (_model.IsFocusCharUppercase() && IsShiftPushed())
-                {
-
-                    if (_model.IsValidPushedButton(key, true))
-                    {
-                        ProgressBarValue++;
-                        _model.ChangeFocusToNextRun();
-                    }
-                    else
-                    {
-                        SetErrorStyleInKeyboardItem(keyTag);
-                        _model.SetRunErrorStyle();
-                        _model.AddMissclickCount();
-                    }
-                }
-                else
-                {
-                    SetErrorStyleInKeyboardItem(keyTag);
-                    _model.SetRunErrorStyle();
-                    _model.AddMissclickCount();
-                }
             }
-            else
+
+            if (_model.IsFocusCharUppercase())
             {
-                if (_model.IsValidPushedButton(key, false) && !IsShiftPushed())
+
+                if (_model.IsValidPushedButton(key, true) && IsShiftPushed())
                 {
                     ProgressBarValue++;
                     _model.ChangeFocusToNextRun();
                 }
                 else
                 {
-                    if (!IsShiftPushed())
+                    int pressedKey = _keyWithoutNoneCollection.Count(oneKey => Keyboard.IsKeyDown(oneKey));
+                    if (IsShiftPushed() && pressedKey > 1)
+                    {
+                        SetErrorStyleInKeyboardItem(keyTag);
+                        _model.SetRunErrorStyle();
+                        _model.AddMissclickCount();
+                    }
+                    
+                }
+            }
+            else
+            {
+                if (IsShiftPushed())
+                {
+                    int pressedKey = _keyWithoutNoneCollection.Count(oneKey => Keyboard.IsKeyDown(oneKey));
+                    if (pressedKey > 1)
+                    {
+                        SetErrorStyleInKeyboardItem(keyTag);
+                        _model.SetRunErrorStyle();
+                        _model.AddMissclickCount();
+                    }
+                }
+                else
+                {
+                    if (_model.IsValidPushedButton(key, false))
+                    {
+                        ProgressBarValue++;
+                        _model.ChangeFocusToNextRun();
+                    }
+                    else
                     {
                         _model.AddMissclickCount();
                         SetErrorStyleInKeyboardItem(keyTag);
                         _model.SetRunErrorStyle();
-                    }
 
+                    }
                 }
             }
 
@@ -397,9 +408,9 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     SetFocusInKeyboardItem();
 
                 });
-               
+
             });
-           
+
         }
         /// <summary>
         /// Set focus style for Keyboard item
@@ -418,7 +429,8 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// <param name="keyTag">Keyboard button tag</param>
         private void SetErrorStyleInKeyboardItem(string keyTag)
         {
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     IKeyboardItem errorElement = null;
@@ -431,13 +443,13 @@ namespace CourseProjectKeyboardApplication.ViewModel
                     }
                 });
             });
-          
+
 
         }
         private bool IsShiftPushed()
         {
-          
-            var state= Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+
+            var state = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
             return state;
         }
 
@@ -464,7 +476,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             _errorPressedKeyboardCollection.Clear();
             _model.RemoveRunErrorStyle();
         }
-        
+
         private void ChangeFocusForShift(bool isFocused)
         {
 

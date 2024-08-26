@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -24,9 +25,10 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private bool _isInit = true;
         private System.Timers.Timer _timer;
         private ITypingTestPageModel _model;
-        private bool _isShiftWasPushedBefore = false;
         private bool _isTestStarted = false;
         private bool _isFirstKeyPushed = false;
+
+        private IEnumerable<Key> _keyWithoutNoneCollection;
 
         private TextBlock _textBlock;
         private Visibility _startButtonVisibility;
@@ -55,6 +57,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         private ImageSource _keyboardIconImageSource;
         private TypingTestPageViewModel()
         {
+            _keyWithoutNoneCollection= Enum.GetValues(typeof(Key)).Cast<Key>().Where(oneKey => oneKey != Key.None);
             _model = new TypingTestPageModel();
             HidePanelVisibility = Visibility.Visible;
             StartButtonVisibility = Visibility.Visible;
@@ -273,7 +276,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
 
 
         }
-        
+
         /// <summary>
         /// Command when user started test and pushed keyboard button
         /// </summary>
@@ -290,7 +293,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
             Key key = (Key)param;
             if (_model.IsFocusCharUppercase())
             {
-                if ((IsShiftPushed() || _isShiftWasPushedBefore) && _model.IsValidPushedButton(key, true))
+                if ((IsShiftPushed()) && _model.IsValidPushedButton(key, true))
                 {
                     if (key.Equals(Key.Space))
                         _model.IncrementWordsTypingCount();
@@ -300,48 +303,45 @@ namespace CourseProjectKeyboardApplication.ViewModel
                 }
                 else
                 {
-                    if (IsShiftPushed())
+                    int pressedKey = _keyWithoutNoneCollection.Count(oneKey => Keyboard.IsKeyDown(oneKey));
+                    if (IsShiftPushed() && pressedKey > 1)
                     {
-                        _isShiftWasPushedBefore = true;
-                        Task.Run(async () =>
-                        {
-                            await Task.Delay(1000);
-                            _isShiftWasPushedBefore = false;
-                        });
-                        return;
+                        _model.SetSymbolRunStyle(false);
+                        _model.IncrementMissclickCount();
                     }
-                    _model.SetSymbolRunStyle(false);
-                    _model.IncrementMissclickCount();
+                   
 
                 }
             }
             else
             {
                 if (IsShiftPushed())
-                {
-                    _isShiftWasPushedBefore = true;
-                    Task.Run(async () =>
+                {                  
+                    int pressedKey = _keyWithoutNoneCollection.Count(oneKey => Keyboard.IsKeyDown(oneKey));
+                    if(pressedKey > 1)
                     {
-                        await Task.Delay(1000);
-                        _isShiftWasPushedBefore = false;
-                    });
-                    
-                }
-                if (_model.IsValidPushedButton(key, false))
-                {
-                    if (key.Equals(Key.Space))
-                        _model.IncrementWordsTypingCount();
-                    _model.IncrementPushedSymbolsCount();
-                    _model.SetSymbolRunStyle(true);
+                        _model.SetSymbolRunStyle(false);
+                        _model.IncrementMissclickCount();
 
+                    }
                 }
                 else
                 {
-                    _model.SetSymbolRunStyle(false);
-                    _model.IncrementMissclickCount();
-                }
+                    if (_model.IsValidPushedButton(key, false))
+                    {
+                        if (key.Equals(Key.Space))
+                            _model.IncrementWordsTypingCount();
+                        _model.IncrementPushedSymbolsCount();
+                        _model.SetSymbolRunStyle(true);
 
+                    }
+                    else
+                    {
+                        _model.SetSymbolRunStyle(false);
+                        _model.IncrementMissclickCount();
+                    }
             }
+        }
 
 
         }
@@ -383,7 +383,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         {
             return _isTestStarted;
         }
-     
+
         private bool CanExecuteStartTestCommand(object param)
         {
             return _model.IsEnglishLanguageSelected();
@@ -395,7 +395,7 @@ namespace CourseProjectKeyboardApplication.ViewModel
         /// <returns></returns>
         private bool IsShiftPushed()
         {
-            return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift); 
+            return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
         }
 
         private void InitStaticContent()

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace CourseProjectKeyboardApplication.Shared.Mediators
 {
@@ -18,8 +19,12 @@ namespace CourseProjectKeyboardApplication.Shared.Mediators
         public static Frame MainFrame
         {
             get { return _mainFrame; }
-            set { _mainFrame = value; }
+            set { 
+                _mainFrame = value;
+                _mainFrame.Navigating += _mainFrame_Navigating;
+            }
         }
+
 
         /// <summary>
         /// Add pages to local collecton of pages
@@ -150,6 +155,14 @@ namespace CourseProjectKeyboardApplication.Shared.Mediators
                 }
             }
             return null;
+        }
+        private  static void _mainFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            // Отключить навигацию назад
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                e.Cancel = true; // Отменить навигацию
+            }
         }
 
     }
