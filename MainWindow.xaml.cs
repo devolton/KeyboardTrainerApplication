@@ -83,7 +83,13 @@ namespace CourseProjectKeyboardApplication
             DbApiClientProvider.Dispose();
             ContentApiClientProvider.Dispose();
             TimerStop();
-            Process.GetCurrentProcess().Kill();
+            foreach(Window mainWindow in Application.Current.Windows)
+            {
+                if(mainWindow is MainWindow)
+                {
+                    mainWindow.Close();
+                }
+            }
 
         }
 

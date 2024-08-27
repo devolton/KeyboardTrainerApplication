@@ -44,20 +44,20 @@ namespace CourseProjectKeyboardApplication.Model
         /// <summary>
         /// Init typing tutor result data
         /// </summary>
-        public void InitData() 
+        public void InitData()
         {
             _misclickCount = TypingTutorResultManager.MisclickCount;
             _typingTutorSpeed = TypingTutorResultManager.TypingTutorSpeed;
-          
-            _resultStr=$"{_typingTutorSpeed} wpm, {_misclickCount} errors!";
+
+            _resultStr = $"{_typingTutorSpeed} wpm, {_misclickCount} errors!";
         }
         /// <summary>
         /// Check is LessTwoErrors condition completed
         /// </summary>
         /// <returns></returns>
-      
+
         public bool IsExecuteLessTwoErrorCondition()
-        {   
+        {
             return _misclickCount <= _LESS_TWO_DELIMITER;
         }
         /// <summary>
@@ -75,15 +75,15 @@ namespace CourseProjectKeyboardApplication.Model
         /// <returns></returns>
         public bool IsExecuteSpeedCondition()
         {
-           
+
             return _typingTutorSpeed >= _SPEED_DELIMITER;
         }
         /// <summary>
         /// Update lessons EducationUsersProgresses object 
         /// </summary>
-        
+
         public bool IsCurrentLessonNotLast()
-        { 
+        {
             return (KeyboardAppEducationProgressController.CurrentLesson is not null) ? EnglishLayoutLessonsService.IsLessonNotLast(KeyboardAppEducationProgressController.CurrentLesson) : true;
         }
         public void UpdateLessonData()
@@ -91,21 +91,26 @@ namespace CourseProjectKeyboardApplication.Model
             bool isLessTwoCompleted = IsExecuteLessTwoErrorCondition();
             bool isWithoutMistakeCompleted = IsExecuteWithoutMisclickCondition();
             bool isSpeedCompleted = IsExecuteSpeedCondition();
-            if(KeyboardAppEducationProgressController.CurrentUserEducationProgress is null)
+            if(!IsCurrentLessonNotLast())
             {
-                KeyboardAppEducationProgressController.CurrentUserEducationProgress=KeyboardAppEducationProgressController.CreateNewEducationUsersProgresses();
+                KeyboardAppEducationProgressController.CurrentUserEducationProgress = EducationUsersProgressService.GetEducationProgressByLessonId(KeyboardAppEducationProgressController.CurrentLesson.Id);
+            }
+            if (KeyboardAppEducationProgressController.CurrentUserEducationProgress is null)
+            {
+                KeyboardAppEducationProgressController.CurrentUserEducationProgress = KeyboardAppEducationProgressController.CreateNewEducationUsersProgresses();
                 KeyboardAppEducationProgressController.ChangeCurrentUserLesson();
 
             }
-            EducationUsersProgressService.UpdateEducationUserProgressLocal(KeyboardAppEducationProgressController.CurrentUserEducationProgress,isLessTwoCompleted, isWithoutMistakeCompleted, isSpeedCompleted);
-            
+            else
+                EducationUsersProgressService.UpdateEducationUserProgressLocal(KeyboardAppEducationProgressController.CurrentUserEducationProgress, isLessTwoCompleted, isWithoutMistakeCompleted, isSpeedCompleted);
 
-           
+
+
         }
         /// <summary>
         /// Set Current EducationUserProgress to next 
         /// </summary>
-        public void SetNextEducationUserProgress() 
+        public void SetNextEducationUserProgress()
         {
             KeyboardAppEducationProgressController.SetNextEducationUserProgeress();
 
